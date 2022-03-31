@@ -15,7 +15,7 @@ const HeaderBox = styled.header`
 const Header = () => {
   return (
     <HeaderBox>
-      <Logo className='logo' />
+      <Logo />
     </HeaderBox>
   );
 };
