@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
+import ModalInput from './ModalInput';
 
-const FormBox = styled.form`
+const FormBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,10 +39,17 @@ const AddButtonBox = styled.button`
 `;
 
 const AddButton = ({ todoLength }) => {
+  const [toggle, setToggle] = useState(false);
+
+  const onToggleHandler = () => {
+    setToggle((prev) => !prev);
+  };
+
   return (
     <FormBox>
       <TodoMessage>총 12개의 할 일이 있습니다.</TodoMessage>
-      <AddButtonBox>새로운 일 +</AddButtonBox>
+      <AddButtonBox onClick={onToggleHandler}>새로운 일 +</AddButtonBox>
+      <ModalInput toggle={toggle} onToggle={onToggleHandler} />
     </FormBox>
   );
 };

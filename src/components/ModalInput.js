@@ -1,9 +1,31 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
 import Wrapper from '../layout/Wrapper';
 import SelectBox from './SelectBox';
 
+const Backdrop = styled.div`
+  ${(props) => {
+    return css`
+      display: ${props.toggle ? 'block' : 'none'};
+    `;
+  }}
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(177, 177, 177, 0.8);
+`;
+
 const ModalInputWapper = styled.div`
-  /* display: none; */
+  ${(props) => {
+    return css`
+      display: ${props.toggle ? 'block' : 'none'};
+    `;
+  }}
+
   position: fixed;
   top: 45%;
   left: 50%;
@@ -57,22 +79,29 @@ const ModalInputButton = styled.button`
 
 const today = new Date();
 
-const ModalInput = () => {
-  return (
-    <ModalInputWapper>
-      <ModalInputTextBox>
-        <h3>To-do</h3>
-        <p>{today.toLocaleDateString()}</p>
-      </ModalInputTextBox>
+const ModalInput = ({ toggle, onToggle }) => {
+  const inputToggleHandler = () => {
+    onToggle(false);
+  };
 
-      <ModalInputForm>
-        <ModalInputBox />
-        <Wrapper>
-          <SelectBox />
-          <ModalInputButton>+</ModalInputButton>
-        </Wrapper>
-      </ModalInputForm>
-    </ModalInputWapper>
+  return (
+    <>
+      <Backdrop toggle={toggle} onClick={inputToggleHandler} />
+      <ModalInputWapper toggle={toggle}>
+        <ModalInputTextBox>
+          <h3>To-do</h3>
+          <p>{today.toLocaleDateString()}</p>
+        </ModalInputTextBox>
+
+        <ModalInputForm>
+          <ModalInputBox />
+          <Wrapper>
+            <SelectBox />
+            <ModalInputButton>+</ModalInputButton>
+          </Wrapper>
+        </ModalInputForm>
+      </ModalInputWapper>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Wrapper from '../layout/Wrapper';
+import styled, { css } from 'styled-components';
+import { useState } from 'react';
 
 import { FaAngleDown } from 'react-icons/fa';
 import { ReactComponent as Logo } from '../assets/Logo.svg';
@@ -7,19 +7,27 @@ import { ReactComponent as Circle } from '../assets/Circle.svg';
 import { ReactComponent as Triangle } from '../assets/Triangle.svg';
 import { ReactComponent as Square } from '../assets/Square.svg';
 
-const SelectBoxWrapper = styled.div`
+const SelectToggle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const SelectBoxWrapper = styled.div`
   position: absolute;
+  bottom: -200px;
+  left: 0;
 `;
 
 const Ul = styled.ul`
   /* visibility: hidden; */
-  /* display: none; */
-  position: relative;
-  top: 100px;
-  right: 70px;
+
+  ${(props) => {
+    return css`
+      display: ${props.toggle ? 'block' : 'none'};
+    `;
+  }}
+
   width: 180px;
   background-color: #fff;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
@@ -35,7 +43,7 @@ const Li = styled.li`
   font-weight: 500;
 
   &:hover {
-    background-color: #a6c6c4;
+    background-color: #ecf0f1;
   }
 
   .circle {
@@ -64,14 +72,20 @@ const LogoStyle = styled(Logo)`
 `;
 
 const SelectBox = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const onToggleHandler = () => {
+    setToggle((preve) => !preve);
+  };
+
   return (
     <>
-      <Wrapper>
+      <SelectToggle onClick={onToggleHandler}>
         <LogoStyle />
         <FaAngleDown />
-      </Wrapper>
+      </SelectToggle>
       <SelectBoxWrapper>
-        <Ul>
+        <Ul toggle={toggle}>
           <Li>
             <Circle className='circle' />
             중요해요
