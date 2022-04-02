@@ -96,7 +96,7 @@ const ModalInput = ({ toggle, onToggle }) => {
         <ModalInputForm>
           <ModalInputBox />
           <Wrapper>
-            <SelectBox />
+            <SelectBox modalToggle={toggle} />
             <ModalInputButton>+</ModalInputButton>
           </Wrapper>
         </ModalInputForm>

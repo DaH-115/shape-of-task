@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { FaAngleDown } from 'react-icons/fa';
 import { ReactComponent as Logo } from '../assets/Logo.svg';
@@ -71,8 +71,14 @@ const LogoStyle = styled(Logo)`
   margin-right: 10px;
 `;
 
-const SelectBox = () => {
+const SelectBox = ({ modalToggle }) => {
   const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    if (!modalToggle) {
+      setToggle(false);
+    }
+  }, [modalToggle]);
 
   const onToggleHandler = () => {
     setToggle((preve) => !preve);
