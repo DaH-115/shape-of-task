@@ -2,12 +2,16 @@ import styled from 'styled-components';
 
 const MainBox = styled.div`
   width: 100%;
-  height: 70vh;
+  height: 100%;
   background-color: pink;
 `;
 
-const Main = ({ children }) => {
-  return <MainBox>{children}</MainBox>;
+const Main = () => {
+  return (
+    <>
+      <MainBox></MainBox>
+    </>
+  );
 };
 
 export default Main;

@@ -3,15 +3,14 @@ import styled, { css } from 'styled-components';
 import ModalInput from './ModalInput';
 
 const FormBox = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   width: 100%;
-  height: 125px;
 `;
 
 const TodoMessage = styled.div`
-  width: 50%;
+  width: 100%;
   font-size: 18px;
   padding: 20px;
   letter-spacing: -0.02em;
@@ -20,11 +19,10 @@ const TodoMessage = styled.div`
 const AddButtonBox = styled.button`
   ${({ theme }) => {
     return css`
-      width: 50%;
-      height: 125px;
+      width: 100%;
       font-size: 24px;
       letter-spacing: -0.04em;
-      padding: 20px;
+      padding: 20px 0 30px 0;
 
       &:hover {
         color: ${theme.colors.orange};

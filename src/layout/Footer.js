@@ -5,14 +5,13 @@ const FooterBox = styled.footer`
   ${({ theme }) => {
     return css`
       width: 100%;
-      height: 75px;
       background-color: ${theme.colors.orange};
     `;
   }}
 `;
 
 const FooterIcons = styled.div`
-  padding: 20px;
+  padding: 25px;
 
   .git-icon {
     width: 30px;
@@ -42,13 +41,15 @@ const FooterIcons = styled.div`
 
 const Footer = () => {
   return (
-    <FooterBox>
-      <FooterIcons>
-        <p className='footer-title'>세모 네모 동그라미 TODO LIST</p>
-        <FaGithub className='git-icon' />
-        <FaHome className='home-icon' />
-      </FooterIcons>
-    </FooterBox>
+    <>
+      <FooterBox>
+        <FooterIcons>
+          <p className='footer-title'>세모 네모 동그라미 TODO LIST</p>
+          <FaGithub className='git-icon' />
+          <FaHome className='home-icon' />
+        </FooterIcons>
+      </FooterBox>
+    </>
   );
 };
 

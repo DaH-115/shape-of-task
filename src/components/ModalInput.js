@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 
-import Wrapper from '../layout/Wrapper';
 import SelectBox from './SelectBox';
 
 const Backdrop = styled.div`
@@ -27,10 +26,10 @@ const ModalInputWapper = styled.div`
   }}
 
   position: fixed;
-  top: 45%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
+  width: 300px;
   height: 500px;
 `;
 
@@ -70,16 +69,21 @@ const ModalInputBox = styled.textarea`
   font-size: 24px;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
 const ModalInputButton = styled.button`
   width: 48px;
   height: 48px;
   font-size: 48px;
-  margin-left: 80px;
+  margin-left: 30px;
 `;
 
-const today = new Date();
-
 const ModalInput = ({ toggle, onToggle }) => {
+  const today = new Date();
+
   const inputToggleHandler = () => {
     onToggle(false);
   };
@@ -95,10 +99,10 @@ const ModalInput = ({ toggle, onToggle }) => {
 
         <ModalInputForm>
           <ModalInputBox />
-          <Wrapper>
+          <ButtonWrapper>
             <SelectBox modalToggle={toggle} />
             <ModalInputButton>+</ModalInputButton>
-          </Wrapper>
+          </ButtonWrapper>
         </ModalInputForm>
       </ModalInputWapper>
     </>
