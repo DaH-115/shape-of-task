@@ -1,15 +1,19 @@
 import styled from 'styled-components';
+import TodoList from '../components/TodoList';
 
 const MainBox = styled.div`
-  width: 100%;
+  width: 80%;
   height: 100%;
-  background-color: pink;
+  /* background-color: pink; */
+  padding-top: 20px;
 `;
 
 const Main = () => {
   return (
     <>
-      <MainBox></MainBox>
+      <MainBox>
+        <TodoList />
+      </MainBox>
     </>
   );
 };

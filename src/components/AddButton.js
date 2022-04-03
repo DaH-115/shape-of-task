@@ -14,6 +14,7 @@ const TodoMessage = styled.div`
   font-size: 18px;
   padding: 20px;
   letter-spacing: -0.02em;
+  box-sizing: border-box;
 `;
 
 const AddButtonBox = styled.button`

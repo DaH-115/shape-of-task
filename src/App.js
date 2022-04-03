@@ -5,27 +5,26 @@ import GlobalStyle from './styles/GlobalStyle';
 import Header from './layout/Header';
 import Main from './layout/Main';
 import Footer from './layout/Footer';
-import Wrapper from './layout/Wrapper';
 import AddButton from './components/AddButton';
 
 const MainContent = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
-  width: 400px;
+  width: 100%;
   height: 90vh;
+  overflow-y: scroll;
 `;
 
 function App() {
   return (
     <ThemeProvider theme={defalutTheme}>
       <GlobalStyle />
-      <Header />
-      <Wrapper>
-        <MainContent>
-          <Main></Main>
-          <AddButton />
-        </MainContent>
-      </Wrapper>
+      <MainContent>
+        <Header />
+        <Main></Main>
+      </MainContent>
+      <AddButton />
       <Footer />
     </ThemeProvider>
   );
