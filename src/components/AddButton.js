@@ -3,9 +3,6 @@ import styled, { css } from 'styled-components';
 import ModalInput from './ModalInput';
 
 const FormBox = styled.div`
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   width: 100%;
 `;
 
@@ -37,7 +34,33 @@ const AddButtonBox = styled.button`
   }}
 `;
 
-const AddButton = ({ todoLength }) => {
+const DUMMY_DATA = [
+  {
+    id: 1,
+    date: '2022.04.05',
+    text: '힛츄윗댓투두투두',
+    figure: 'circle',
+    checked: false,
+  },
+  {
+    id: 2,
+    date: '2022.04.05',
+    text: '두 번째 투두',
+    figure: 'triangle',
+    checked: false,
+  },
+  {
+    id: 3,
+    date: '2022.04.05',
+    text: '세 번째 투두',
+    figure: 'square',
+    checked: true,
+  },
+];
+
+const dataLength = DUMMY_DATA.length;
+
+const AddButton = () => {
   const [toggle, setToggle] = useState(false);
 
   const onToggleHandler = () => {
@@ -46,7 +69,7 @@ const AddButton = ({ todoLength }) => {
 
   return (
     <FormBox>
-      <TodoMessage>총 12개의 할 일이 있습니다.</TodoMessage>
+      <TodoMessage>총 {dataLength}개의 할 일이 있습니다.</TodoMessage>
       <AddButtonBox onClick={onToggleHandler}>새로운 일 +</AddButtonBox>
       <ModalInput toggle={toggle} onToggle={onToggleHandler} />
     </FormBox>

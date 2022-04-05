@@ -4,7 +4,6 @@ import TodoList from '../components/TodoList';
 const MainBox = styled.div`
   width: 80%;
   height: 100%;
-  /* background-color: pink; */
   padding-top: 20px;
 `;
 

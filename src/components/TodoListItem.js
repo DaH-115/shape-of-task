@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 
 import { ReactComponent as Circle } from '../assets/Circle.svg';
 import { ReactComponent as Triangle } from '../assets/Triangle.svg';
@@ -12,7 +13,6 @@ const TodoItemLi = styled.li`
 
 const TodoItemContainer = styled.div`
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   padding: 20px;
 
@@ -34,67 +34,30 @@ const TodoItemContainer = styled.div`
   }
 `;
 
-const TodoListItem = () => {
+const TodoListItem = ({ text, figure }) => {
+  const [checked, setChecked] = useState(false);
+
+  const doneHandler = () => {
+    setChecked((prev) => !prev);
+  };
+
   return (
     <>
-      <TodoItemLi>
+      <TodoItemLi onClick={doneHandler}>
         <TodoItemContainer>
-          <Circle className='circle' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-      <TodoItemLi>
-        <TodoItemContainer>
-          <Triangle className='triangle' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-      <TodoItemLi>
-        <TodoItemContainer>
-          <Square className='square' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-      <TodoItemLi>
-        <TodoItemContainer>
-          <Circle className='circle' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-      <TodoItemLi>
-        <TodoItemContainer>
-          <Triangle className='triangle' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-      <TodoItemLi>
-        <TodoItemContainer>
-          <Square className='square' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-      <TodoItemLi>
-        <TodoItemContainer>
-          <Circle className='circle' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-      <TodoItemLi>
-        <TodoItemContainer>
-          <Triangle className='triangle' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-      <TodoItemLi>
-        <TodoItemContainer>
-          <Square className='square' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-      <TodoItemLi>
-        <TodoItemContainer>
-          <Square className='square' />
-          <p className='content-text'>힛츄윗댓투두투두</p>
+          {figure === 'circle' && (
+            <Circle fill={checked ? '#EE5A24' : '#A6C6C4'} className='circle' />
+          )}
+          {figure === 'triangle' && (
+            <Triangle
+              fill={checked ? '#FFC312' : '#A6C6C4'}
+              className='circle'
+            />
+          )}
+          {figure === 'square' && (
+            <Square fill={checked ? '#5758BB' : '#A6C6C4'} className='circle' />
+          )}
+          <p className='content-text'>{text}</p>
         </TodoItemContainer>
       </TodoItemLi>
     </>

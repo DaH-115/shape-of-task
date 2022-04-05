@@ -20,8 +20,6 @@ const SelectBoxWrapper = styled.div`
 `;
 
 const Ul = styled.ul`
-  /* visibility: hidden; */
-
   ${(props) => {
     return css`
       display: ${props.toggle ? 'block' : 'none'};
@@ -93,15 +91,15 @@ const SelectBox = ({ modalToggle }) => {
       <SelectBoxWrapper>
         <Ul toggle={toggle}>
           <Li>
-            <Circle className='circle' />
+            <Circle fill='#EE5A24' className='circle' />
             중요해요
           </Li>
           <Li>
-            <Triangle className='triangle' />
+            <Triangle fill='#FFC312' className='triangle' />
             기억해 두세요
           </Li>
           <Li>
-            <Square className='square' />
+            <Square fill='#5758BB' className='square' />
             언제든지 하세요
           </Li>
         </Ul>
