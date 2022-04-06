@@ -60,7 +60,7 @@ const DUMMY_DATA = [
 
 const dataLength = DUMMY_DATA.length;
 
-const AddButton = () => {
+const AddButton = ({ addTodo }) => {
   const [toggle, setToggle] = useState(false);
 
   const onToggleHandler = () => {
@@ -71,7 +71,7 @@ const AddButton = () => {
     <FormBox>
       <TodoMessage>총 {dataLength}개의 할 일이 있습니다.</TodoMessage>
       <AddButtonBox onClick={onToggleHandler}>새로운 일 +</AddButtonBox>
-      <ModalInput toggle={toggle} onToggle={onToggleHandler} />
+      <ModalInput toggle={toggle} onToggle={onToggleHandler} onAdd={addTodo} />
     </FormBox>
   );
 };

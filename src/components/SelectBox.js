@@ -14,18 +14,18 @@ const SelectToggle = styled.div`
 `;
 
 const SelectBoxWrapper = styled.div`
-  position: absolute;
-  bottom: -200px;
-  left: 0;
-`;
-
-const Ul = styled.ul`
   ${(props) => {
     return css`
       display: ${props.toggle ? 'block' : 'none'};
     `;
   }}
 
+  position: absolute;
+  bottom: -200px;
+  left: 0;
+`;
+
+const Ul = styled.ul`
   width: 180px;
   background-color: #fff;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
@@ -69,7 +69,7 @@ const LogoStyle = styled(Logo)`
   margin-right: 10px;
 `;
 
-const SelectBox = ({ modalToggle }) => {
+const SelectBox = ({ modalToggle, getFigure }) => {
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
@@ -82,23 +82,28 @@ const SelectBox = ({ modalToggle }) => {
     setToggle((preve) => !preve);
   };
 
+  const getFigureHandler = (event) => {
+    getFigure(event.target.className);
+    setToggle(false);
+  };
+
   return (
     <>
       <SelectToggle onClick={onToggleHandler}>
         <LogoStyle />
         <FaAngleDown />
       </SelectToggle>
-      <SelectBoxWrapper>
-        <Ul toggle={toggle}>
-          <Li>
+      <SelectBoxWrapper toggle={toggle}>
+        <Ul onClick={getFigureHandler}>
+          <Li className='circle'>
             <Circle fill='#EE5A24' className='circle' />
             중요해요
           </Li>
-          <Li>
+          <Li className='triangle'>
             <Triangle fill='#FFC312' className='triangle' />
             기억해 두세요
           </Li>
-          <Li>
+          <Li className='square'>
             <Square fill='#5758BB' className='square' />
             언제든지 하세요
           </Li>

@@ -6,6 +6,7 @@ import Header from './layout/Header';
 import Main from './layout/Main';
 import Footer from './layout/Footer';
 import AddButton from './components/AddButton';
+import { useState } from 'react';
 
 const MainContent = styled.div`
   display: flex;
@@ -17,6 +18,12 @@ const MainContent = styled.div`
 `;
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
+
+  const addTodoHandler = (todoItem) => {
+    setTodoList({ ...todoList, todoItem });
+  };
+
   return (
     <ThemeProvider theme={defalutTheme}>
       <GlobalStyle />
@@ -24,7 +31,7 @@ function App() {
         <Header />
         <Main></Main>
       </MainContent>
-      <AddButton />
+      <AddButton addTodo={addTodoHandler} />
       <Footer />
     </ThemeProvider>
   );

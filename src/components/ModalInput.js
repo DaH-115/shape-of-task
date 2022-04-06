@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import SelectBox from './SelectBox';
@@ -81,11 +82,44 @@ const ModalInputButton = styled.button`
   margin-left: 30px;
 `;
 
-const ModalInput = ({ toggle, onToggle }) => {
+const ModalInput = ({ toggle, onToggle, onAdd }) => {
+  const [text, setText] = useState('');
+  const [figure, setFigure] = useState('');
+
   const today = new Date();
 
   const inputToggleHandler = () => {
     onToggle(false);
+  };
+
+  const onChangeHandler = (event) => {
+    setText(event.target.value);
+  };
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+
+    const newTodoItem = {
+      id: 1,
+      date: today.toLocaleDateString(),
+      text: text,
+      checked: false,
+      figure: figure,
+      done: false,
+    };
+
+    console.log(newTodoItem);
+    // onAdd(newTodoItem);
+  };
+
+  const getFigureHandler = (figure) => {
+    if (figure.includes('circle')) {
+      setFigure('circle');
+    } else if (figure.includes('triangle')) {
+      setFigure('triangle');
+    } else if (figure.includes('square')) {
+      setFigure('square');
+    }
   };
 
   return (
@@ -97,10 +131,10 @@ const ModalInput = ({ toggle, onToggle }) => {
           <p>{today.toLocaleDateString()}</p>
         </ModalInputTextBox>
 
-        <ModalInputForm>
-          <ModalInputBox />
+        <ModalInputForm onSubmit={onSubmitHandler}>
+          <ModalInputBox onChange={onChangeHandler} />
           <ButtonWrapper>
-            <SelectBox modalToggle={toggle} />
+            <SelectBox modalToggle={toggle} getFigure={getFigureHandler} />
             <ModalInputButton>+</ModalInputButton>
           </ButtonWrapper>
         </ModalInputForm>
