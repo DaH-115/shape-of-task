@@ -108,8 +108,8 @@ const ModalInput = ({ toggle, onToggle, onAdd }) => {
       done: false,
     };
 
-    console.log(newTodoItem);
-    // onAdd(newTodoItem);
+    onAdd(newTodoItem);
+    setText('');
   };
 
   const getFigureHandler = (figure) => {
@@ -120,6 +120,8 @@ const ModalInput = ({ toggle, onToggle, onAdd }) => {
     } else if (figure.includes('square')) {
       setFigure('square');
     }
+
+    return;
   };
 
   return (
@@ -132,7 +134,7 @@ const ModalInput = ({ toggle, onToggle, onAdd }) => {
         </ModalInputTextBox>
 
         <ModalInputForm onSubmit={onSubmitHandler}>
-          <ModalInputBox onChange={onChangeHandler} />
+          <ModalInputBox value={text} onChange={onChangeHandler} />
           <ButtonWrapper>
             <SelectBox modalToggle={toggle} getFigure={getFigureHandler} />
             <ModalInputButton>+</ModalInputButton>

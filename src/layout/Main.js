@@ -7,11 +7,11 @@ const MainBox = styled.div`
   padding-top: 20px;
 `;
 
-const Main = () => {
+const Main = ({ todoList }) => {
   return (
     <>
       <MainBox>
-        <TodoList />
+        <TodoList todoList={todoList} />
       </MainBox>
     </>
   );

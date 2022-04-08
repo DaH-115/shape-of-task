@@ -21,17 +21,19 @@ function App() {
   const [todoList, setTodoList] = useState([]);
 
   const addTodoHandler = (todoItem) => {
-    setTodoList({ ...todoList, todoItem });
+    setTodoList([...todoList, todoItem]);
   };
+
+  console.log(todoList);
 
   return (
     <ThemeProvider theme={defalutTheme}>
       <GlobalStyle />
       <MainContent>
         <Header />
-        <Main></Main>
+        <Main todoList={todoList}></Main>
       </MainContent>
-      <AddButton addTodo={addTodoHandler} />
+      <AddButton todoList={todoList} addTodo={addTodoHandler} />
       <Footer />
     </ThemeProvider>
   );
