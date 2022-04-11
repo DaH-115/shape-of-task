@@ -33,18 +33,16 @@ const TodoItemContainer = styled.div`
   }
 `;
 
-const TodoListItem = ({ todoList, toggleTodo, id, text, figure, done }) => {
-  const toggle = (todoList, id) => {
-    const newTodoItme = todoList.map((item) =>
-      item.id === id ? { ...item, done: !item.done } : item
-    );
+const TodoListItem = ({ todoItem, toggleTodo }) => {
+  const { id, text, figure, done } = todoItem;
 
-    toggleTodo(newTodoItme);
+  const toggleTodoHandler = (id) => {
+    toggleTodo(id);
   };
 
   return (
     <>
-      <TodoItemLi onClick={() => toggle(todoList, id)}>
+      <TodoItemLi onClick={() => toggleTodoHandler(id)}>
         <TodoItemContainer>
           {figure === 'circle' && (
             <Circle fill={done ? '#EE5A24' : '#A6C6C4'} className='circle' />

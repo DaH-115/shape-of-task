@@ -24,8 +24,12 @@ function App() {
     setTodoList([...todoList, todoItem]);
   };
 
-  const toggleTodoHandler = (newTodoItem) => {
-    setTodoList(newTodoItem);
+  const toggleTodoHandler = (id) => {
+    const newTodoItme = todoList.map((item) =>
+      item.id === id ? { ...item, done: !item.done } : item
+    );
+
+    setTodoList(newTodoItme);
   };
 
   return (

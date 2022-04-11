@@ -7,11 +7,7 @@ const TodoList = ({ todoList, toggleTodo }) => {
         return (
           <TodoListItem
             key={todoItem.id}
-            id={todoItem.id}
-            text={todoItem.text}
-            figure={todoItem.figure}
-            done={todoItem.done}
-            todoList={todoList}
+            todoItem={todoItem}
             toggleTodo={toggleTodo}
           />
         );
