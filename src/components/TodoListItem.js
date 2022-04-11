@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 
 import { ReactComponent as Circle } from '../assets/Circle.svg';
 import { ReactComponent as Triangle } from '../assets/Triangle.svg';
@@ -34,28 +33,27 @@ const TodoItemContainer = styled.div`
   }
 `;
 
-const TodoListItem = ({ text, figure }) => {
-  const [checked, setChecked] = useState(false);
+const TodoListItem = ({ todoList, toggleTodo, id, text, figure, done }) => {
+  const toggle = (todoList, id) => {
+    const newTodoItme = todoList.map((item) =>
+      item.id === id ? { ...item, done: !item.done } : item
+    );
 
-  const doneHandler = () => {
-    setChecked((prev) => !prev);
+    toggleTodo(newTodoItme);
   };
 
   return (
     <>
-      <TodoItemLi onClick={doneHandler}>
+      <TodoItemLi onClick={() => toggle(todoList, id)}>
         <TodoItemContainer>
           {figure === 'circle' && (
-            <Circle fill={checked ? '#EE5A24' : '#A6C6C4'} className='circle' />
+            <Circle fill={done ? '#EE5A24' : '#A6C6C4'} className='circle' />
           )}
           {figure === 'triangle' && (
-            <Triangle
-              fill={checked ? '#FFC312' : '#A6C6C4'}
-              className='circle'
-            />
+            <Triangle fill={done ? '#FFC312' : '#A6C6C4'} className='circle' />
           )}
           {figure === 'square' && (
-            <Square fill={checked ? '#5758BB' : '#A6C6C4'} className='circle' />
+            <Square fill={done ? '#5758BB' : '#A6C6C4'} className='circle' />
           )}
           <p className='content-text'>{text}</p>
         </TodoItemContainer>

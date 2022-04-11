@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import styled, { css } from 'styled-components';
 
 import SelectBox from './SelectBox';
@@ -100,7 +101,7 @@ const ModalInput = ({ toggle, onToggle, onAdd }) => {
     event.preventDefault();
 
     const newTodoItem = {
-      id: 1,
+      id: uuidv4(),
       date: today.toLocaleDateString(),
       text: text,
       checked: false,

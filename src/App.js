@@ -24,14 +24,16 @@ function App() {
     setTodoList([...todoList, todoItem]);
   };
 
-  console.log(todoList);
+  const toggleTodoHandler = (newTodoItem) => {
+    setTodoList(newTodoItem);
+  };
 
   return (
     <ThemeProvider theme={defalutTheme}>
       <GlobalStyle />
       <MainContent>
         <Header />
-        <Main todoList={todoList}></Main>
+        <Main todoList={todoList} toggleTodo={toggleTodoHandler}></Main>
       </MainContent>
       <AddButton todoList={todoList} addTodo={addTodoHandler} />
       <Footer />
