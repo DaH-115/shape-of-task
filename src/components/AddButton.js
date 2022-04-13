@@ -34,42 +34,22 @@ const AddButtonBox = styled.button`
   }}
 `;
 
-// const DUMMY_DATA = [
-//   {
-//     id: 1,
-//     date: '2022.04.05',
-//     text: '힛츄윗댓투두투두',
-//     figure: 'circle',
-//     checked: false,
-//   },
-//   {
-//     id: 2,
-//     date: '2022.04.05',
-//     text: '두 번째 투두',
-//     figure: 'triangle',
-//     checked: false,
-//   },
-//   {
-//     id: 3,
-//     date: '2022.04.05',
-//     text: '세 번째 투두',
-//     figure: 'square',
-//     checked: true,
-//   },
-// ];
-
-const AddButton = ({ todoList, addTodo }) => {
-  const [toggle, setToggle] = useState(false);
+const AddButton = ({ todoList, onAddTodo }) => {
+  const [modalToggle, setModalToggle] = useState(false);
 
   const onToggleHandler = () => {
-    setToggle((prev) => !prev);
+    setModalToggle((prev) => !prev);
   };
 
   return (
     <FormBox>
       <TodoMessage>총 {todoList.length}개의 할 일이 있습니다.</TodoMessage>
       <AddButtonBox onClick={onToggleHandler}>새로운 일 +</AddButtonBox>
-      <ModalInput toggle={toggle} onToggle={onToggleHandler} onAdd={addTodo} />
+      <ModalInput
+        modalToggle={modalToggle}
+        onToggle={onToggleHandler}
+        onAddTodo={onAddTodo}
+      />
     </FormBox>
   );
 };

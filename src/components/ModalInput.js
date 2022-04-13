@@ -7,7 +7,7 @@ import SelectBox from './SelectBox';
 const Backdrop = styled.div`
   ${(props) => {
     return css`
-      display: ${props.toggle ? 'block' : 'none'};
+      display: ${props.modalToggle ? 'block' : 'none'};
     `;
   }}
 
@@ -23,7 +23,7 @@ const Backdrop = styled.div`
 const ModalInputWapper = styled.div`
   ${(props) => {
     return css`
-      display: ${props.toggle ? 'block' : 'none'};
+      display: ${props.modalToggle ? 'block' : 'none'};
     `;
   }}
 
@@ -83,10 +83,9 @@ const ModalInputButton = styled.button`
   margin-left: 30px;
 `;
 
-const ModalInput = ({ toggle, onToggle, onAdd }) => {
+const ModalInput = ({ modalToggle, onToggle, onAddTodo }) => {
   const [text, setText] = useState('');
   const [figure, setFigure] = useState('');
-
   const today = new Date();
 
   const inputToggleHandler = () => {
@@ -109,7 +108,7 @@ const ModalInput = ({ toggle, onToggle, onAdd }) => {
       done: false,
     };
 
-    onAdd(newTodoItem);
+    onAddTodo(newTodoItem);
     setText('');
   };
 
@@ -127,8 +126,8 @@ const ModalInput = ({ toggle, onToggle, onAdd }) => {
 
   return (
     <>
-      <Backdrop toggle={toggle} onClick={inputToggleHandler} />
-      <ModalInputWapper toggle={toggle}>
+      <Backdrop modalToggle={modalToggle} onClick={inputToggleHandler} />
+      <ModalInputWapper modalToggle={modalToggle}>
         <ModalInputTextBox>
           <h3>To-do</h3>
           <p>{today.toLocaleDateString()}</p>
@@ -137,7 +136,7 @@ const ModalInput = ({ toggle, onToggle, onAdd }) => {
         <ModalInputForm onSubmit={onSubmitHandler}>
           <ModalInputBox value={text} onChange={onChangeHandler} />
           <ButtonWrapper>
-            <SelectBox modalToggle={toggle} getFigure={getFigureHandler} />
+            <SelectBox modalToggle={modalToggle} getFigure={getFigureHandler} />
             <ModalInputButton>+</ModalInputButton>
           </ButtonWrapper>
         </ModalInputForm>

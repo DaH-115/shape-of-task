@@ -33,16 +33,16 @@ const TodoItemContainer = styled.div`
   }
 `;
 
-const TodoListItem = ({ todoItem, toggleTodo }) => {
+const TodoListItem = ({ todoItem, onToggleTodo }) => {
   const { id, text, figure, done } = todoItem;
 
-  const toggleTodoHandler = (id) => {
-    toggleTodo(id);
+  const onToggleTodoHandler = (id) => {
+    onToggleTodo(id);
   };
 
   return (
     <>
-      <TodoItemLi onClick={() => toggleTodoHandler(id)}>
+      <TodoItemLi onClick={() => onToggleTodoHandler(id)}>
         <TodoItemContainer>
           {figure === 'circle' && (
             <Circle fill={done ? '#EE5A24' : '#A6C6C4'} className='circle' />

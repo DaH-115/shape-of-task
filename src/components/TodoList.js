@@ -1,6 +1,6 @@
 import TodoListItem from './TodoListItem';
 
-const TodoList = ({ todoList, toggleTodo }) => {
+const TodoList = ({ todoList, onToggleTodo }) => {
   return (
     <ul>
       {todoList.map((todoItem) => {
@@ -8,7 +8,7 @@ const TodoList = ({ todoList, toggleTodo }) => {
           <TodoListItem
             key={todoItem.id}
             todoItem={todoItem}
-            toggleTodo={toggleTodo}
+            onToggleTodo={onToggleTodo}
           />
         );
       })}

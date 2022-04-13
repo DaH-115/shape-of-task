@@ -20,11 +20,11 @@ const MainContent = styled.div`
 function App() {
   const [todoList, setTodoList] = useState([]);
 
-  const addTodoHandler = (todoItem) => {
-    setTodoList([...todoList, todoItem]);
+  const onAddTodoHandler = (todoItem) => {
+    setTodoList((prevTodoList) => [...prevTodoList, todoItem]);
   };
 
-  const toggleTodoHandler = (id) => {
+  const onToggleTodoHandler = (id) => {
     const newTodoItme = todoList.map((item) =>
       item.id === id ? { ...item, done: !item.done } : item
     );
@@ -37,9 +37,9 @@ function App() {
       <GlobalStyle />
       <MainContent>
         <Header />
-        <Main todoList={todoList} toggleTodo={toggleTodoHandler}></Main>
+        <Main todoList={todoList} onToggleTodo={onToggleTodoHandler}></Main>
       </MainContent>
-      <AddButton todoList={todoList} addTodo={addTodoHandler} />
+      <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
       <Footer />
     </ThemeProvider>
   );
