@@ -41,22 +41,20 @@ const TodoListItem = ({ todoItem, onToggleTodo }) => {
   };
 
   return (
-    <>
-      <TodoItemLi onClick={() => onToggleTodoHandler(id)}>
-        <TodoItemContainer>
-          {figure === 'circle' && (
-            <Circle fill={done ? '#EE5A24' : '#A6C6C4'} className='circle' />
-          )}
-          {figure === 'triangle' && (
-            <Triangle fill={done ? '#FFC312' : '#A6C6C4'} className='circle' />
-          )}
-          {figure === 'square' && (
-            <Square fill={done ? '#5758BB' : '#A6C6C4'} className='circle' />
-          )}
-          <p className='content-text'>{text}</p>
-        </TodoItemContainer>
-      </TodoItemLi>
-    </>
+    <TodoItemLi onClick={() => onToggleTodoHandler(id)}>
+      <TodoItemContainer>
+        {figure === 'circle' && (
+          <Circle fill={done ? '#EE5A24' : '#A6C6C4'} className='circle' />
+        )}
+        {figure === 'triangle' && (
+          <Triangle fill={done ? '#FFC312' : '#A6C6C4'} className='circle' />
+        )}
+        {figure === 'square' && (
+          <Square fill={done ? '#5758BB' : '#A6C6C4'} className='circle' />
+        )}
+        <p className='content-text'>{text}</p>
+      </TodoItemContainer>
+    </TodoItemLi>
   );
 };
 

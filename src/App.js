@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { defalutTheme } from './styles/theme';
@@ -6,9 +7,10 @@ import Header from './layout/Header';
 import Main from './layout/Main';
 import Footer from './layout/Footer';
 import AddButton from './components/AddButton';
-import { useState } from 'react';
+import TodoListPage from './assets/pages/TodoListPage';
+import FigureListPage from './assets/pages/FigureListPage';
 
-const MainContent = styled.div`
+const LayoutContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -35,10 +37,16 @@ function App() {
   return (
     <ThemeProvider theme={defalutTheme}>
       <GlobalStyle />
-      <MainContent>
+      <LayoutContainer>
         <Header />
-        <Main todoList={todoList} onToggleTodo={onToggleTodoHandler}></Main>
-      </MainContent>
+        <Main>
+          <TodoListPage
+            todoList={todoList}
+            onToggleTodo={onToggleTodoHandler}
+          />
+          <FigureListPage todoList={todoList} />
+        </Main>
+      </LayoutContainer>
       <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
       <Footer />
     </ThemeProvider>

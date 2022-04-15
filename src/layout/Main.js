@@ -1,20 +1,13 @@
 import styled from 'styled-components';
-import TodoList from '../components/TodoList';
 
-const MainBox = styled.div`
+const MainBox = styled.main`
   width: 80%;
   height: 100%;
   padding-top: 20px;
 `;
 
-const Main = ({ todoList, onToggleTodo }) => {
-  return (
-    <>
-      <MainBox>
-        <TodoList todoList={todoList} onToggleTodo={onToggleTodo} />
-      </MainBox>
-    </>
-  );
+const Main = ({ children }) => {
+  return <MainBox>{children}</MainBox>;
 };
 
 export default Main;
