@@ -1,5 +1,5 @@
 const FigureListItem = ({ figure }) => {
-  return;
+  return <li>{figure}</li>;
 };
 
 export default FigureListItem;

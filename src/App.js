@@ -40,10 +40,10 @@ function App() {
       <LayoutContainer>
         <Header />
         <Main>
-          <TodoListPage
+          {/* <TodoListPage
             todoList={todoList}
             onToggleTodo={onToggleTodoHandler}
-          />
+          /> */}
           <FigureListPage todoList={todoList} />
         </Main>
       </LayoutContainer>
