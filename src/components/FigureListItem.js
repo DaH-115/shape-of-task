@@ -7,7 +7,9 @@ const FigureListItem = ({ figure, done }) => {
     <li>
       {figure === 'circle' && done ? <Circle fill='#EE5A24' /> : null}
       {figure === 'triangle' && done ? <Triangle fill='#FFC312' /> : null}
-      {figure === 'square' && done ? <Square fill='#5758BB' /> : null}
+      {figure === 'square' && done ? (
+        <Square fill='#5758BB' style={{ margin: '8px' }} />
+      ) : null}
     </li>
   );
 };
