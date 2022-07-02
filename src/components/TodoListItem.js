@@ -13,7 +13,8 @@ const TodoItemLi = styled.li`
 const TodoItemContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
+  flex-wrap: wrap;
 
   &:hover {
     background-color: #ecf0f1;
@@ -30,6 +31,7 @@ const TodoItemContainer = styled.div`
   .content-text {
     font-size: 24px;
     line-height: 28px;
+    word-break: break-all;
   }
 
   .content-text.done {
