@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { Routes, Route } from 'react-router-dom';
 
 import { defalutTheme } from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
@@ -32,6 +33,7 @@ function App() {
     );
 
     setTodoList(newTodoItme);
+    console.log(todoList);
   };
 
   return (
@@ -40,11 +42,21 @@ function App() {
       <LayoutContainer>
         <Header />
         <Main>
-          {/* <TodoListPage
-            todoList={todoList}
-            onToggleTodo={onToggleTodoHandler}
-          /> */}
-          <FigureListPage todoList={todoList} />
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <TodoListPage
+                  todoList={todoList}
+                  onToggleTodo={onToggleTodoHandler}
+                />
+              }
+            />
+            <Route
+              path='/figure-list'
+              element={<FigureListPage todoList={todoList} />}
+            />
+          </Routes>
         </Main>
       </LayoutContainer>
       <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
