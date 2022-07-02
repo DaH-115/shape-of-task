@@ -102,9 +102,9 @@ const ModalInput = ({ modalToggle, onToggle, onAddTodo }) => {
     const newTodoItem = {
       id: uuidv4(),
       date: today.toLocaleDateString(),
-      text: text,
+      text,
       checked: false,
-      figure: figure,
+      figure,
       done: false,
     };
 

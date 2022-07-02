@@ -31,9 +31,14 @@ const TodoItemContainer = styled.div`
     font-size: 24px;
     line-height: 28px;
   }
+
+  .content-text.done {
+    color: #a6c6c4;
+    text-decoration: line-through;
+  }
 `;
 
-const TodoListItem = ({ todoItem, onToggleTodo }) => {
+const TodoListItem = ({ todoItem, onToggleTodo, theme }) => {
   const { id, text, figure, done } = todoItem;
 
   const onToggleTodoHandler = (id) => {
@@ -52,7 +57,7 @@ const TodoListItem = ({ todoItem, onToggleTodo }) => {
         {figure === 'square' && (
           <Square fill={done ? '#5758BB' : '#A6C6C4'} className='circle' />
         )}
-        <p className='content-text'>{text}</p>
+        <p className={`content-text ${done && 'done'}`}>{text}</p>
       </TodoItemContainer>
     </TodoItemLi>
   );

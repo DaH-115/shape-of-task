@@ -14,7 +14,13 @@ const FigureList = ({ todoList }) => {
   return (
     <UlWrapper>
       {todoList.map((todoItem) => {
-        return <FigureListItem key={todoItem.id} figure={todoItem.figure} />;
+        return (
+          <FigureListItem
+            key={todoItem.id}
+            figure={todoItem.figure}
+            done={todoItem.done}
+          />
+        );
       })}
     </UlWrapper>
   );
