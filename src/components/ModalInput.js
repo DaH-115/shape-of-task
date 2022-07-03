@@ -99,6 +99,10 @@ const ModalInput = ({ modalToggle, onToggle, onAddTodo }) => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
+    if (!figure) {
+      return alert('도형을 선택해 주세요!');
+    }
+
     const newTodoItem = {
       id: uuidv4(),
       date: today.toLocaleDateString(),
