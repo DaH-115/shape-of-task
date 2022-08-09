@@ -93,14 +93,15 @@ const ModalInput = ({ modalToggle, onToggle, onAddTodo }) => {
   };
 
   const onChangeHandler = (event) => {
-    setText(event.target.value);
+    const text = event.target.value;
+    setText(text.replace(/^\s+|\s+$/gm, ''));
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
-    if (!figure) {
-      return alert('도형을 선택해 주세요!');
+    if (!text || !figure) {
+      return alert('텍스트와 도형을 채워주세요!');
     }
 
     const newTodoItem = {
@@ -114,6 +115,7 @@ const ModalInput = ({ modalToggle, onToggle, onAddTodo }) => {
 
     onAddTodo(newTodoItem);
     setText('');
+    setFigure('');
   };
 
   const getFigureHandler = (figure) => {
