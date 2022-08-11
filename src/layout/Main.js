@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 const MainBox = styled.main`
-  height: 60vh;
+  width: 100%;
+  height: 63vh;
   padding-top: 20px;
+
+  /* scrollbar */
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */

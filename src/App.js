@@ -6,6 +6,8 @@ import { defalutTheme } from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './layout/Header';
 import Main from './layout/Main';
+import FlexWrapper from './layout/FlexWrapper';
+import Wrapper from './layout/Wrapper';
 import Footer from './layout/Footer';
 import AddButton from './components/AddButton';
 import TodoListPage from './assets/pages/TodoListPage';
@@ -30,24 +32,32 @@ function App() {
     <ThemeProvider theme={defalutTheme}>
       <GlobalStyle />
       <Header />
-      <Main>
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <TodoListPage
-                todoList={todoList}
-                onToggleTodo={onToggleTodoHandler}
+      <FlexWrapper>
+        <Wrapper>
+          <Main>
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  <TodoListPage
+                    todoList={todoList}
+                    onToggleTodo={onToggleTodoHandler}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path='/figure-list'
-            element={<FigureListPage todoList={todoList} />}
-          />
-        </Routes>
-      </Main>
-      <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
+              <Route
+                path='/figure-list'
+                element={<FigureListPage todoList={todoList} />}
+              />
+            </Routes>
+          </Main>
+          <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
+        </Wrapper>
+        <Main>
+          <FigureListPage todoList={todoList} />
+        </Main>
+      </FlexWrapper>
+
       <Footer />
     </ThemeProvider>
   );
