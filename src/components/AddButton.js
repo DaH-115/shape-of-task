@@ -21,6 +21,7 @@ const AddButtonBox = styled.button`
       font-size: 24px;
       letter-spacing: -0.04em;
       padding: 20px 0 30px 0;
+      background: #fff;
 
       &:hover {
         color: ${theme.colors.orange};

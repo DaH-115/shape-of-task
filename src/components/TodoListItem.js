@@ -6,11 +6,10 @@ import { ReactComponent as Square } from '../assets/Square.svg';
 
 const TodoItemLi = styled.li`
   width: 100%;
-  background-color: #fff;
   border-bottom: 3px solid #ecf0f1;
 `;
 
-const TodoItemContainer = styled.div`
+const TodoItemWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;
@@ -49,7 +48,7 @@ const TodoListItem = ({ todoItem, onToggleTodo, theme }) => {
 
   return (
     <TodoItemLi onClick={() => onToggleTodoHandler(id)}>
-      <TodoItemContainer>
+      <TodoItemWrapper>
         {figure === 'circle' && (
           <Circle fill={done ? '#EE5A24' : '#A6C6C4'} className='circle' />
         )}
@@ -60,7 +59,7 @@ const TodoListItem = ({ todoItem, onToggleTodo, theme }) => {
           <Square fill={done ? '#5758BB' : '#A6C6C4'} className='circle' />
         )}
         <p className={`content-text ${done && 'done'}`}>{text}</p>
-      </TodoItemContainer>
+      </TodoItemWrapper>
     </TodoItemLi>
   );
 };

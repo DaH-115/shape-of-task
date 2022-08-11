@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-
 import FigureListItem from './FigureListItem';
 
 const UlWrapper = styled.ul`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+  padding-left: 20px;
   width: 100%;
 `;
 
