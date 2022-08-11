@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
@@ -11,6 +11,14 @@ const HeaderBox = styled.header`
   justify-content: center;
   align-items: center;
   z-index: 999;
+
+  ${({ theme }) => {
+    return css`
+      ${theme.device.desktop} {
+        pointer-events: none;
+      } ;
+    `;
+  }}
 `;
 
 const Header = () => {

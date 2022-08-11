@@ -53,7 +53,7 @@ function App() {
           </Main>
           <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
         </Wrapper>
-        <Main>
+        <Main display='PC'>
           <FigureListPage todoList={todoList} />
         </Main>
       </FlexWrapper>

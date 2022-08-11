@@ -7,13 +7,13 @@ const colors = {
 const size = {
   mobile: '425px',
   tablet: '768px',
-  desktop: '1440px',
+  desktop: '1024px',
 };
 
 const device = {
-  modile: `@media only screen and (max-width: ${size.mobile})`,
-  tablet: `@media only screen and (max-width: ${size.tablet})`,
-  desktop: `@media only screen and (max-width: ${size.desktop})`,
+  modile: `@media all and (max-width: ${size.mobile})`,
+  tablet: `@media all and (min-width: ${size.mobile})`,
+  desktop: `@media all and (min-width: ${size.desktop})`,
 };
 
 export const defalutTheme = {
