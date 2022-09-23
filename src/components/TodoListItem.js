@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { ReactComponent as Circle } from '../assets/Circle.svg';
 import { ReactComponent as Triangle } from '../assets/Triangle.svg';
@@ -7,6 +7,19 @@ import { ReactComponent as Square } from '../assets/Square.svg';
 const TodoItemLi = styled.li`
   width: 100%;
   border-bottom: 3px solid #ecf0f1;
+
+  &:hover {
+    background-color: #ecf0f1;
+  }
+
+  ${({ theme }) => {
+    return css`
+      ${theme.device.desktop} {
+        width: 100%;
+        height: 200px;
+      } ;
+    `;
+  }}
 `;
 
 const TodoItemWrapper = styled.div`
@@ -15,8 +28,8 @@ const TodoItemWrapper = styled.div`
   padding: 10px;
   flex-wrap: wrap;
 
-  &:hover {
-    background-color: #ecf0f1;
+  .todo-date {
+    display: none;
   }
 
   .circle,
@@ -37,10 +50,41 @@ const TodoItemWrapper = styled.div`
     color: #a6c6c4;
     text-decoration: line-through;
   }
+
+  ${({ theme }) => {
+    return css`
+      ${theme.device.desktop} {
+        display: block;
+        padding: 20px;
+
+        .content-text {
+          width: 100%;
+          height: 100px;
+          max-height: 100px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+
+          /* scrollbar */
+          overflow-y: scroll;
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+          &::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera*/
+          }
+        }
+
+        .todo-date {
+          display: block;
+          font-weight: bold;
+          color: #a6c6c4;
+        }
+      } ;
+    `;
+  }}
 `;
 
-const TodoListItem = ({ todoItem, onToggleTodo, theme }) => {
-  const { id, text, figure, done } = todoItem;
+const TodoListItem = ({ todoItem, onToggleTodo }) => {
+  const { id, text, figure, done, date } = todoItem;
 
   const onToggleTodoHandler = (id) => {
     onToggleTodo(id);
@@ -59,6 +103,7 @@ const TodoListItem = ({ todoItem, onToggleTodo, theme }) => {
           <Square fill={done ? '#5758BB' : '#A6C6C4'} className='circle' />
         )}
         <p className={`content-text ${done && 'done'}`}>{text}</p>
+        <p className='todo-date'>{date}</p>
       </TodoItemWrapper>
     </TodoItemLi>
   );
