@@ -45,10 +45,11 @@ const Li = styled.li`
   }
 
   .circle {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin-right: 12px;
     margin-left: -40px;
+    margin-bottom: 5px;
   }
 
   .triangle {
@@ -56,12 +57,14 @@ const Li = styled.li`
     height: 40px;
     margin-right: 12px;
     margin-left: -13px;
+    margin-bottom: 5px;
   }
 
   .square {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin-right: 12px;
+    margin-bottom: 5px;
   }
 `;
 

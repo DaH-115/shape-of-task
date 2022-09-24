@@ -4,8 +4,7 @@ import FigureListItem from './FigureListItem';
 const UlWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  padding-left: 20px;
-  width: 100%;
+  justify-content: center;
 `;
 
 const FigureList = ({ todoList }) => {

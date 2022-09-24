@@ -5,7 +5,6 @@ const FooterBox = styled.footer`
   ${({ theme }) => {
     return css`
       width: 100%;
-      min-width: 425px;
       background-color: ${theme.colors.orange};
     `;
   }}

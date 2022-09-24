@@ -1,15 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const FlexDiv = styled.div`
   display: flex;
-
-  ${({ theme }) => {
-    return css`
-      ${theme.device.modile} {
-        min-width: 425px;
-      }
-    `;
-  }}
+  width: 100%;
+  min-width: 300px;
 `;
 
 const FlexWrapper = ({ children }) => {
