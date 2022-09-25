@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const MainBox = styled.main`
   ${(props) => {
     return css`
-      display: ${props.display === 'PC' ? 'none' : 'block'};
+      display: ${props.display === 'desktop' ? 'none' : 'block'};
     `;
   }}
 
