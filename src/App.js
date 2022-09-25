@@ -12,9 +12,16 @@ import Footer from './layout/Footer';
 import AddButton from './components/AddButton';
 import TodoListPage from './assets/pages/TodoListPage';
 import FigureListPage from './assets/pages/FigureListPage';
+import { useEffect } from 'react';
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(
+    JSON.parse(localStorage.getItem('todoList')) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  }, [todoList]);
 
   const onAddTodoHandler = (todoItem) => {
     setTodoList((prevTodoList) => [...prevTodoList, todoItem]);
@@ -25,6 +32,7 @@ function App() {
       item.id === id ? { ...item, done: !item.done } : item
     );
 
+    console.log(newTodoItme);
     setTodoList(newTodoItme);
   };
 
@@ -53,7 +61,7 @@ function App() {
           </Main>
           <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
         </Wrapper>
-        <Main display='PC'>
+        <Main display='desktop'>
           <FigureListPage todoList={todoList} />
         </Main>
       </FlexWrapper>
