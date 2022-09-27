@@ -1,29 +1,51 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import SelectBox from './SelectBox';
+import { useEffect } from 'react';
 
 const Backdrop = styled.div`
   ${(props) => {
     return css`
-      display: ${props.modalToggle ? 'block' : 'none'};
+      visibility: ${props.modalToggle ? 'visible' : 'hidden'};
+      animation: ${props.modalToggle ? fadeIn : fadeOut} 0.4s ease-out;
+      transition: visibility 0.4s ease-out;
     `;
   }}
 
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   background-color: rgba(177, 177, 177, 0.8);
 `;
 
+const fadeIn = keyframes`
+  from{
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from{
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
 const ModalInputWapper = styled.div`
   ${(props) => {
     return css`
-      display: ${props.modalToggle ? 'block' : 'none'};
+      visibility: ${props.modalToggle ? 'visible' : 'hidden'};
+      animation: ${props.modalToggle ? fadeIn : fadeOut} 0.4s ease-out;
+      transition: visibility 0.4s ease-out;
     `;
   }}
 
@@ -83,14 +105,27 @@ const ModalInputButton = styled.button`
   margin-left: 30px;
 `;
 
-const ModalInput = ({ modalToggle, onToggle, onAddTodo }) => {
+const ModalInput = ({ visible, onAddTodo, onClose }) => {
   const [text, setText] = useState('');
   const [figure, setFigure] = useState('');
+  const [animate, setAnimate] = useState(false);
   const today = new Date();
 
-  const inputToggleHandler = () => {
-    onToggle(false);
-  };
+  useEffect(() => {
+    let timeout;
+
+    if (!visible) {
+      timeout = setTimeout(() => {
+        setAnimate(true);
+      }, 400);
+    }
+
+    setAnimate(false);
+
+    return () => clearTimeout(timeout);
+  }, [visible]);
+
+  if (animate && !visible) return null;
 
   const onChangeHandler = (event) => {
     const text = event.target.value;
@@ -132,8 +167,8 @@ const ModalInput = ({ modalToggle, onToggle, onAddTodo }) => {
 
   return (
     <>
-      <Backdrop modalToggle={modalToggle} onClick={inputToggleHandler} />
-      <ModalInputWapper modalToggle={modalToggle}>
+      <Backdrop modalToggle={visible} onClick={onClose} />
+      <ModalInputWapper modalToggle={visible}>
         <ModalInputTextBox>
           <h3>To-do</h3>
           <p>{today.toLocaleDateString()}</p>
@@ -142,7 +177,7 @@ const ModalInput = ({ modalToggle, onToggle, onAddTodo }) => {
         <ModalInputForm onSubmit={onSubmitHandler}>
           <ModalInputBox value={text} onChange={onChangeHandler} />
           <ButtonWrapper>
-            <SelectBox modalToggle={modalToggle} getFigure={getFigureHandler} />
+            <SelectBox modalToggle={visible} getFigure={getFigureHandler} />
             <ModalInputButton>+</ModalInputButton>
           </ButtonWrapper>
         </ModalInputForm>

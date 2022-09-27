@@ -36,20 +36,28 @@ const AddButtonBox = styled.button`
 `;
 
 const AddButton = ({ todoList, onAddTodo }) => {
-  const [modalToggle, setModalToggle] = useState(false);
+  // const [modalToggle, setModalToggle] = useState(false);
 
-  const onToggleHandler = () => {
-    setModalToggle((prev) => !prev);
+  // const onToggleHandler = () => {
+  //   setModalToggle((prev) => !prev);
+  // };
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setIsOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsOpen(false);
   };
 
   return (
     <FormBox>
       <TodoMessage>총 {todoList.length}개의 할 일이 있습니다.</TodoMessage>
-      <AddButtonBox onClick={onToggleHandler}>새로운 일 +</AddButtonBox>
+      <AddButtonBox onClick={handleModalOpen}>새로운 일 +</AddButtonBox>
       <ModalInput
-        modalToggle={modalToggle}
-        onToggle={onToggleHandler}
+        visible={isOpen}
         onAddTodo={onAddTodo}
+        onClose={handleModalClose}
       />
     </FormBox>
   );
