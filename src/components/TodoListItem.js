@@ -40,6 +40,7 @@ const TodoItemWrapper = styled.div`
     font-size: 24px;
     line-height: 28px;
     word-break: break-all;
+    margin-top: 6px;
   }
 
   .content-text.done {

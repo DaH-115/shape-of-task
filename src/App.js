@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ import Footer from './layout/Footer';
 import AddButton from './components/AddButton';
 import TodoListPage from './assets/pages/TodoListPage';
 import FigureListPage from './assets/pages/FigureListPage';
-import { useEffect } from 'react';
+import Message from './components/Message';
 
 function App() {
   const [todoList, setTodoList] = useState(
@@ -41,6 +41,10 @@ function App() {
     setTodoList(newTodoList);
   };
 
+  // 빈 값일 때 메세지를 보여줌
+  const todoArr = todoList.map((item) => item.done);
+  const arrCheck = todoArr.find((item) => item === true);
+
   return (
     <ThemeProvider theme={defalutTheme}>
       <GlobalStyle />
@@ -52,26 +56,44 @@ function App() {
               <Route
                 path='/'
                 element={
-                  <TodoListPage
-                    todoList={todoList}
-                    onToggleTodo={onToggleTodoHandler}
-                    onRemoveTodo={onRemoveTodoHandler}
-                  />
+                  !todoList.length ? (
+                    <Message>
+                      할 일을 정리해 보세요.
+                      <br />
+                      하지만 가끔은 여유도 중요하죠.
+                    </Message>
+                  ) : (
+                    <TodoListPage
+                      todoList={todoList}
+                      onToggleTodo={onToggleTodoHandler}
+                      onRemoveTodo={onRemoveTodoHandler}
+                    />
+                  )
                 }
               />
               <Route
                 path='/figure-list'
-                element={<FigureListPage todoList={todoList} />}
+                element={
+                  arrCheck === undefined ? (
+                    <Message>가끔은 여백도 괜찮아요.</Message>
+                  ) : (
+                    <FigureListPage todoList={todoList} />
+                  )
+                }
               />
             </Routes>
           </Main>
           <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
         </Wrapper>
+        {/* DESKTOP SIZE */}
         <Main display='desktop'>
-          <FigureListPage todoList={todoList} />
+          {arrCheck === undefined ? (
+            <Message>가끔은 여백도 괜찮아요.</Message>
+          ) : (
+            <FigureListPage todoList={todoList} />
+          )}
         </Main>
       </FlexWrapper>
-
       <Footer />
     </ThemeProvider>
   );
