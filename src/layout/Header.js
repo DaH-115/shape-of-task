@@ -38,6 +38,11 @@ const MoveToFL = styled.button`
   font-size: 14px;
   letter-spacing: -0.02em;
 
+  &:active {
+    color: #fff;
+    background-color: #ee5a24;
+  }
+
   ${({ theme }) => {
     return css`
       ${theme.device.desktop} {
