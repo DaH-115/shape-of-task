@@ -36,11 +36,6 @@ const AddButtonBox = styled.button`
 `;
 
 const AddButton = ({ todoList, onAddTodo }) => {
-  // const [modalToggle, setModalToggle] = useState(false);
-
-  // const onToggleHandler = () => {
-  //   setModalToggle((prev) => !prev);
-  // };
   const [isOpen, setIsOpen] = useState(false);
 
   const handleModalOpen = () => {

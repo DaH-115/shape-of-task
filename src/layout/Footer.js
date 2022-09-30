@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 import { FaGithub, FaHome } from 'react-icons/fa';
 
 const FooterBox = styled.footer`
+  width: 100%;
+
   ${({ theme }) => {
     return css`
       width: 100%;
@@ -33,7 +35,6 @@ const FooterIcons = styled.div`
     margin-bottom: 15px;
     font-weight: 600;
     font-size: 14px;
-    line-height: 21px;
     letter-spacing: -0.02em;
     color: #fff;
   }

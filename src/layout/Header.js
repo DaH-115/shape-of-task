@@ -8,9 +8,17 @@ const HeaderBox = styled.header`
   padding: 15px 0 15px 0;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   z-index: 999;
+
+  .logo {
+    margin-left: 20px;
+  }
+
+  .btn {
+    margin-right: 20px;
+  }
 
   ${({ theme }) => {
     return css`
@@ -21,11 +29,30 @@ const HeaderBox = styled.header`
   }}
 `;
 
+const MoveToFL = styled.button`
+  width: 100%;
+  border: 1px solid #a6c6c4;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+
+  ${({ theme }) => {
+    return css`
+      ${theme.device.desktop} {
+        display: none;
+      } ;
+    `;
+  }}
+`;
+
 const Header = () => {
   return (
     <HeaderBox>
-      <Link to='/figure-list'>
-        <Logo />
+      <Logo className='logo' />
+      <Link className='btn' to='/figure-list'>
+        <MoveToFL>도형 보기</MoveToFL>
       </Link>
     </HeaderBox>
   );
