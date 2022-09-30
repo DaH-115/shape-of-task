@@ -32,8 +32,13 @@ function App() {
       item.id === id ? { ...item, done: !item.done } : item
     );
 
-    console.log(newTodoItme);
     setTodoList(newTodoItme);
+  };
+
+  const onRemoveTodoHandler = (id) => {
+    const newTodoList = todoList.filter((item) => item.id !== id);
+
+    setTodoList(newTodoList);
   };
 
   return (
@@ -50,6 +55,7 @@ function App() {
                   <TodoListPage
                     todoList={todoList}
                     onToggleTodo={onToggleTodoHandler}
+                    onRemoveTodo={onRemoveTodoHandler}
                   />
                 }
               />

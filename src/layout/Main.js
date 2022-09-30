@@ -8,8 +8,7 @@ const MainBox = styled.main`
   }}
 
   width: 100%;
-  height: 63vh;
-  padding-top: 20px;
+  height: 64vh;
 
   /* scrollbar */
   overflow-y: scroll;

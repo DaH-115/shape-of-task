@@ -1,6 +1,6 @@
 import TodoListItem from './TodoListItem';
 
-const TodoList = ({ todoList, onToggleTodo }) => {
+const TodoList = ({ todoList, onToggleTodo, onRemoveTodo }) => {
   return (
     <ul>
       {todoList.map((todoItem) => {
@@ -9,6 +9,7 @@ const TodoList = ({ todoList, onToggleTodo }) => {
             key={todoItem.id}
             todoItem={todoItem}
             onToggleTodo={onToggleTodo}
+            onRemoveTodo={onRemoveTodo}
           />
         );
       })}
