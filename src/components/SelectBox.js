@@ -1,11 +1,29 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { useState, useEffect } from 'react';
-
 import { FaAngleDown } from 'react-icons/fa';
+
 import { ReactComponent as Logo } from '../assets/Logo.svg';
 import { ReactComponent as Circle } from '../assets/Circle.svg';
 import { ReactComponent as Triangle } from '../assets/Triangle.svg';
 import { ReactComponent as Square } from '../assets/Square.svg';
+
+const fadeIn = keyframes`
+  from{
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from{
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
 
 const SelectToggle = styled.div`
   display: flex;
@@ -16,12 +34,14 @@ const SelectToggle = styled.div`
 const SelectBoxWrapper = styled.div`
   ${(props) => {
     return css`
-      display: ${props.toggle ? 'block' : 'none'};
+      visibility: ${props.toggle ? 'visible' : 'hidden'};
+      animation: ${props.toggle ? fadeIn : fadeOut} 0.4s ease-in-out;
+      transition: visibility 0.4s ease-in-out;
     `;
   }}
 
   position: absolute;
-  bottom: -200px;
+  bottom: -180px;
   left: 0;
 `;
 
