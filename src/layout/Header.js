@@ -50,7 +50,9 @@ const MoveToFL = styled.button`
 const Header = () => {
   return (
     <HeaderBox>
-      <Logo className='logo' />
+      <Link className='logo' to='/'>
+        <Logo />
+      </Link>
       <Link className='btn' to='/figure-list'>
         <MoveToFL>도형 보기</MoveToFL>
       </Link>
