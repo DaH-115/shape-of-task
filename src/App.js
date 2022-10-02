@@ -18,6 +18,7 @@ function App() {
   const [todoList, setTodoList] = useState(
     JSON.parse(localStorage.getItem('todoList')) || []
   );
+  const [capture, setCapture] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
@@ -48,7 +49,7 @@ function App() {
   return (
     <ThemeProvider theme={defalutTheme}>
       <GlobalStyle />
-      <Header />
+      <Header onCapture={setCapture} />
       <FlexWrapper>
         <Wrapper>
           <Main>
@@ -77,7 +78,7 @@ function App() {
                   arrCheck === undefined ? (
                     <Message>가끔은 여백도 괜찮아요.</Message>
                   ) : (
-                    <FigureListPage todoList={todoList} />
+                    <FigureListPage todoList={todoList} onCapture={capture} />
                   )
                 }
               />

@@ -3,6 +3,7 @@ import { FaGithub, FaHome } from 'react-icons/fa';
 
 const FooterBox = styled.footer`
   width: 100%;
+  min-width: 300px;
 
   ${({ theme }) => {
     return css`
