@@ -44,8 +44,8 @@ const ModalInputWapper = styled.div`
   ${(props) => {
     return css`
       visibility: ${props.modalToggle ? 'visible' : 'hidden'};
-      animation: ${props.modalToggle ? fadeIn : fadeOut} 0.4s ease-out;
-      transition: visibility 0.4s ease-out;
+      animation: ${props.modalToggle ? fadeIn : fadeOut} 0.4s ease-in-out;
+      transition: visibility 0.4s ease-in-out;
     `;
   }}
 

@@ -25,7 +25,7 @@ const fadeOut = keyframes`
   }
 `;
 
-const SelectToggle = styled.div`
+const SelectToggleWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,10 +112,10 @@ const SelectBox = ({ modalToggle, getFigure }) => {
 
   return (
     <>
-      <SelectToggle onClick={onToggleHandler}>
+      <SelectToggleWrapper onClick={onToggleHandler}>
         <LogoStyle />
         <FaAngleDown />
-      </SelectToggle>
+      </SelectToggleWrapper>
       <SelectBoxWrapper toggle={toggle}>
         <Ul onClick={getFigureHandler}>
           <Li className='circle'>
