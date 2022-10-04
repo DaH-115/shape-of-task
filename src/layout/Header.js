@@ -1,10 +1,8 @@
 import styled, { css } from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { debounce } from 'lodash';
+import useResize from '../hook/useResize';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
-import { useEffect } from 'react';
-import { useState } from 'react';
 
 const HeaderBox = styled.header`
   width: 100%;
@@ -58,19 +56,7 @@ const Button = styled.button`
 const Header = ({ onCapture }) => {
   const location = useLocation();
   const pathname = location.pathname;
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const resizeHandler = debounce(() => {
-    setWindowWidth(window.innerWidth);
-  }, 100);
-
-  useEffect(() => {
-    window.addEventListener('resize', resizeHandler);
-
-    return () => {
-      window.removeEventListener('resize', resizeHandler);
-    };
-  }, [resizeHandler]);
+  const windowWidth = useResize();
 
   const onCaptureHandler = () => {
     onCapture(true);

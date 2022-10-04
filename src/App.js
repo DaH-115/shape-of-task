@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { defalutTheme } from './styles/theme';
-import { debounce } from 'lodash';
+import useResize from './hook/useResize';
 
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './layout/Header';
@@ -20,19 +20,7 @@ function App() {
     JSON.parse(localStorage.getItem('todoList')) || []
   );
   const [capture, setCapture] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const resizeHandler = debounce(() => {
-    setWindowWidth(window.innerWidth);
-  }, 100);
-
-  useEffect(() => {
-    window.addEventListener('resize', resizeHandler);
-
-    return () => {
-      window.removeEventListener('resize', resizeHandler);
-    };
-  }, [resizeHandler]);
+  const windowWidth = useResize();
 
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
