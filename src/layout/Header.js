@@ -1,7 +1,10 @@
 import styled, { css } from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
+import { debounce } from 'lodash';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const HeaderBox = styled.header`
   width: 100%;
@@ -15,19 +18,18 @@ const HeaderBox = styled.header`
 
   .logo {
     margin-left: 20px;
+    ${({ theme }) => {
+      return css`
+        ${theme.device.desktop} {
+          pointer-events: none;
+        } ;
+      `;
+    }}
   }
 
   .btn {
     margin-right: 20px;
   }
-
-  ${({ theme }) => {
-    return css`
-      ${theme.device.desktop} {
-        /* pointer-events: none; */
-      } ;
-    `;
-  }}
 `;
 
 const Button = styled.button`
@@ -56,6 +58,19 @@ const Button = styled.button`
 const Header = ({ onCapture }) => {
   const location = useLocation();
   const pathname = location.pathname;
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const resizeHandler = debounce(() => {
+    setWindowWidth(window.innerWidth);
+  }, 100);
+
+  useEffect(() => {
+    window.addEventListener('resize', resizeHandler);
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+    };
+  }, [resizeHandler]);
 
   const onCaptureHandler = () => {
     onCapture(true);
@@ -66,7 +81,7 @@ const Header = ({ onCapture }) => {
       <Link className='logo' to='/'>
         <Logo />
       </Link>
-      {pathname === '/figure-list' ? (
+      {pathname === '/figure-list' || windowWidth >= 1024 ? (
         <Button onClick={onCaptureHandler}>이미지로 보기</Button>
       ) : (
         <Link className='btn' to='/figure-list'>

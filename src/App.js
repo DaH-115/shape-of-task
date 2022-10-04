@@ -95,7 +95,11 @@ function App() {
           {arrCheck === undefined ? (
             <Message>가끔은 여백도 괜찮아요.</Message>
           ) : (
-            <FigureListPage todoList={todoList} />
+            <FigureListPage
+              todoList={todoList}
+              capture={capture}
+              onCapture={setCapture}
+            />
           )}
         </Main>
       </FlexWrapper>
