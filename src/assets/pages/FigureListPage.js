@@ -1,9 +1,9 @@
 import FigureList from '../../components/FigureList';
 
-const FigureListPage = ({ todoList, onCapture }) => {
+const FigureListPage = ({ todoList, capture, onCapture }) => {
   return (
     <>
-      <FigureList todoList={todoList} onCapture={onCapture} />
+      <FigureList todoList={todoList} capture={capture} onCapture={onCapture} />
     </>
   );
 };

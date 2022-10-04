@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 
 import FigureListItem from './FigureListItem';
+import Modal from './Modal';
 
 const UlWrapper = styled.ul`
   display: flex;
@@ -10,13 +11,17 @@ const UlWrapper = styled.ul`
   justify-content: center;
 `;
 
-const FigureList = ({ todoList, onCapture }) => {
+const ImgContainer = styled.img`
+  width: 100%;
+`;
+
+const FigureList = ({ todoList, capture, onCapture }) => {
   const ref = useRef();
   const [img, setImg] = useState();
 
   useEffect(() => {
-    if (onCapture) {
-      const figureList = ref.current;
+    const figureList = ref.current;
+    if (capture) {
       figureList.style.width = '400px';
       figureList.style.hight = '700px';
       figureList.style.paddingBottom = '30px';
@@ -26,11 +31,21 @@ const FigureList = ({ todoList, onCapture }) => {
         setImg(imageUrl);
       });
     }
-  }, [onCapture]);
+
+    figureList.style.width = 'auto';
+    figureList.style.hight = 'auto';
+    figureList.style.paddingBottom = 'auto';
+  }, [capture]);
+
+  const handleModalClose = () => {
+    onCapture(false);
+  };
 
   return (
     <>
-      {img && <img src={img} alt='img' />}
+      <Modal visible={capture} onClose={handleModalClose}>
+        {img && <ImgContainer src={img} alt='img' />}
+      </Modal>
       <UlWrapper ref={ref}>
         {todoList.map((todoItem) => {
           return (

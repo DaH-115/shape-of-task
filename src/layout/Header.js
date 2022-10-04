@@ -24,14 +24,13 @@ const HeaderBox = styled.header`
   ${({ theme }) => {
     return css`
       ${theme.device.desktop} {
-        pointer-events: none;
+        /* pointer-events: none; */
       } ;
     `;
   }}
 `;
 
 const Button = styled.button`
-  /* width: 100%; */
   border: 1px solid #a6c6c4;
   border-radius: 20px;
   padding: 10px 15px 10px 15px;
@@ -48,7 +47,7 @@ const Button = styled.button`
   ${({ theme }) => {
     return css`
       ${theme.device.desktop} {
-        display: none;
+        /* display: none; */
       } ;
     `;
   }}

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { ThemeProvider } from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
-
+import { ThemeProvider } from 'styled-components';
 import { defalutTheme } from './styles/theme';
+
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './layout/Header';
 import Main from './layout/Main';
@@ -42,7 +42,7 @@ function App() {
     setTodoList(newTodoList);
   };
 
-  // 빈 값일 때 메세지를 보여줌
+  // ✔️ 투두가 존재하지 않을 때 메세지를 보여줍니다.
   const todoArr = todoList.map((item) => item.done);
   const arrCheck = todoArr.find((item) => item === true);
 
@@ -78,7 +78,11 @@ function App() {
                   arrCheck === undefined ? (
                     <Message>가끔은 여백도 괜찮아요.</Message>
                   ) : (
-                    <FigureListPage todoList={todoList} onCapture={capture} />
+                    <FigureListPage
+                      todoList={todoList}
+                      capture={capture}
+                      onCapture={setCapture}
+                    />
                   )
                 }
               />
