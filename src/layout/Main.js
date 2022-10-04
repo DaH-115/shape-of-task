@@ -1,12 +1,6 @@
 import styled, { css } from 'styled-components';
 
 const MainBox = styled.main`
-  ${(props) => {
-    return css`
-      display: ${props.display === 'desktop' ? 'none' : 'block'};
-    `;
-  }}
-
   width: 100%;
   height: 64vh;
 
@@ -23,16 +17,12 @@ const MainBox = styled.main`
       ${theme.device.modile} {
         min-width: ${theme.size.modile};
       }
-
-      ${theme.device.desktop} {
-        display: block;
-      } ;
     `;
   }}
 `;
 
-const Main = ({ children, display }) => {
-  return <MainBox display={display}>{children}</MainBox>;
+const Main = ({ children }) => {
+  return <MainBox>{children}</MainBox>;
 };
 
 export default Main;

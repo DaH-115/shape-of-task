@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { defalutTheme } from './styles/theme';
+import { debounce } from 'lodash';
 
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './layout/Header';
@@ -19,6 +20,19 @@ function App() {
     JSON.parse(localStorage.getItem('todoList')) || []
   );
   const [capture, setCapture] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const resizeHandler = debounce(() => {
+    setWindowWidth(window.innerWidth);
+  }, 100);
+
+  useEffect(() => {
+    window.addEventListener('resize', resizeHandler);
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+    };
+  }, [resizeHandler]);
 
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
@@ -91,17 +105,19 @@ function App() {
           <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
         </Wrapper>
         {/* DESKTOP SIZE */}
-        <Main display='desktop'>
-          {arrCheck === undefined ? (
-            <Message>가끔은 여백도 괜찮아요.</Message>
-          ) : (
-            <FigureListPage
-              todoList={todoList}
-              capture={capture}
-              onCapture={setCapture}
-            />
-          )}
-        </Main>
+        {windowWidth >= 1024 && (
+          <Main>
+            {arrCheck === undefined ? (
+              <Message>가끔은 여백도 괜찮아요.</Message>
+            ) : (
+              <FigureListPage
+                todoList={todoList}
+                capture={capture}
+                onCapture={setCapture}
+              />
+            )}
+          </Main>
+        )}
       </FlexWrapper>
       <Footer />
     </ThemeProvider>
