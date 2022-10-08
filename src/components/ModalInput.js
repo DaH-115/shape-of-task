@@ -25,7 +25,7 @@ const ModalInputTextBox = styled.div`
 
 const ModalInputForm = styled.form`
   width: 100%;
-  /* height: 100%; */
+  height: 100%;
   background-color: #fff;
   padding-top: 50px;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
@@ -43,15 +43,14 @@ const ModalInputBox = styled.textarea`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 10px 0 10px 0;
+  justify-content: space-between;
+  padding: 20px;
 `;
 
 const ModalInputButton = styled.button`
   width: 48px;
   height: 48px;
   font-size: 48px;
-  margin-left: 30px;
 `;
 
 const ModalInput = ({ visible, onAddTodo, onClose }) => {
@@ -78,7 +77,7 @@ const ModalInput = ({ visible, onAddTodo, onClose }) => {
 
   const onChangeHandler = (event) => {
     const text = event.target.value;
-    setText(text.replace(/^\s+|\s+$/gm, ''));
+    setText(text);
   };
 
   const onSubmitHandler = (event) => {
@@ -91,7 +90,7 @@ const ModalInput = ({ visible, onAddTodo, onClose }) => {
     const newTodoItem = {
       id: uuidv4(),
       date: today.toLocaleDateString(),
-      text,
+      text: text.replace(/^\s+|\s+$/gm, ''),
       checked: false,
       figure,
       done: false,
