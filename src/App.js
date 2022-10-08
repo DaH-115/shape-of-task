@@ -11,9 +11,10 @@ import FlexWrapper from './layout/FlexWrapper';
 import Wrapper from './layout/Wrapper';
 import Footer from './layout/Footer';
 import AddButton from './components/AddButton';
-import TodoListPage from './assets/pages/TodoListPage';
-import FigureListPage from './assets/pages/FigureListPage';
+import TodoListPage from './pages/TodoListPage';
+import FigureListPage from './pages/FigureListPage';
 import Message from './components/Message';
+import MetaTags from './MetaTags';
 
 function App() {
   const [todoList, setTodoList] = useState(
@@ -50,6 +51,7 @@ function App() {
 
   return (
     <ThemeProvider theme={defalutTheme}>
+      <MetaTags titleText='main' />
       <GlobalStyle />
       <Header onCapture={setCapture} />
       <FlexWrapper>
