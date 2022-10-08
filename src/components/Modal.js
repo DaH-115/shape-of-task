@@ -1,23 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
-import { useEffect } from 'react';
-
 const Backdrop = styled.div`
-  ${(props) => {
+  ${({ modalToggle }) => {
     return css`
-      visibility: ${props.modalToggle ? 'visible' : 'hidden'};
-      animation: ${props.modalToggle ? fadeIn : fadeOut} 0.4s ease-in-out;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(177, 177, 177, 0.8);
+
+      visibility: ${modalToggle ? 'visible' : 'hidden'};
+      animation: ${modalToggle ? fadeIn : fadeOut} 0.4s ease-in-out;
       transition: visibility 0.4s ease-in-out;
     `;
   }}
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(177, 177, 177, 0.8);
 `;
 
 const fadeIn = keyframes`
@@ -39,27 +37,29 @@ const fadeOut = keyframes`
 `;
 
 const ModalWapper = styled.div`
-  ${(props) => {
+  ${({ theme, modalToggle }) => {
     return css`
-      visibility: ${props.modalToggle ? 'visible' : 'hidden'};
-      animation: ${props.modalToggle ? fadeIn : fadeOut} 0.4s ease-in-out;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      width: 100%;
+
+      visibility: ${modalToggle ? 'visible' : 'hidden'};
+      animation: ${modalToggle ? fadeIn : fadeOut} 0.4s ease-in-out;
       transition: visibility 0.4s ease-in-out;
 
-      ${props.theme.device.desktop} {
-        width: 30%;
-        height: 80vh;
-      } ;
+      ${theme.device.desktop} {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+      }
     `;
   }}
-
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
 `;
 
-const TEST_MODAL = ({ children, visible, onClose }) => {
+const Modal = ({ children, visible, onClose }) => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -86,4 +86,4 @@ const TEST_MODAL = ({ children, visible, onClose }) => {
   );
 };
 
-export default TEST_MODAL;
+export default Modal;

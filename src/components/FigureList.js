@@ -44,7 +44,7 @@ const FigureList = ({ todoList, capture, onCapture }) => {
   return (
     <>
       <Modal visible={capture} onClose={handleModalClose}>
-        {img && <ImgContainer src={img} alt='img' />}
+        {img && <ImgContainer src={img} alt='Figure List Image' />}
       </Modal>
       <UlWrapper ref={ref}>
         {todoList.map((todoItem) => {

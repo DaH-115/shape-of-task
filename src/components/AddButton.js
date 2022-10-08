@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
+
 import ModalInput from './ModalInput';
 
 const TodoMessage = styled.div`
-  width: 100%;
   font-size: 18px;
   padding: 20px;
   letter-spacing: -0.02em;
-  border-bottom: 1px solid #a6c6c4;
-  box-sizing: border-box;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 `;
 
 const AddButtonBox = styled.button`

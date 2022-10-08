@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const MainBox = styled.main`
   width: 100%;
-  height: 64vh;
+  height: 65vh;
 
   /* scrollbar */
   overflow-y: scroll;
