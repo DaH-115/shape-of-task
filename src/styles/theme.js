@@ -2,6 +2,8 @@ const colors = {
   orange: '#EE5A24',
   blue: '#5758BB',
   yellow: '#FFC312',
+  grey: '#a6c6c4',
+  light_grey: '#ecf0f1',
 };
 
 const size = {
