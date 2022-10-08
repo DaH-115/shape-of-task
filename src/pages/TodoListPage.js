@@ -1,4 +1,4 @@
-import TodoList from '../../components/TodoList';
+import TodoList from '../components/TodoList';
 
 const TodoListPage = ({ todoList, onToggleTodo, onRemoveTodo }) => {
   return (

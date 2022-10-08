@@ -1,4 +1,4 @@
-import FigureList from '../../components/FigureList';
+import FigureList from '../components/FigureList';
 
 const FigureListPage = ({ todoList, capture, onCapture }) => {
   return (
