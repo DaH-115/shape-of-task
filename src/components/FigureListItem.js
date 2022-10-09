@@ -1,13 +1,13 @@
-import { ReactComponent as Circle } from '../assets/Circle.svg';
-import { ReactComponent as Triangle } from '../assets/Triangle.svg';
-import { ReactComponent as Square } from '../assets/Square.svg';
+import StyledCircle from '../assets/Circle';
+import StyledSquare from '../assets/Square';
+import StyledTriangle from '../assets/Triangle';
 
 const FigureListItem = ({ figure, done }) => {
   return (
     <li>
-      {figure === 'circle' && done ? <Circle fill='#EE5A24' /> : null}
-      {figure === 'triangle' && done ? <Triangle fill='#FFC312' /> : null}
-      {figure === 'square' && done ? <Square fill='#5758BB' /> : null}
+      {figure === 'circle' && done && <StyledCircle done={done} />}
+      {figure === 'triangle' && done && <StyledTriangle done={done} />}
+      {figure === 'square' && done && <StyledSquare done={done} />}
     </li>
   );
 };

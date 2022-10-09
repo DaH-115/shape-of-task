@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import { ReactComponent as Circle } from '../assets/Circle.svg';
-import { ReactComponent as Triangle } from '../assets/Triangle.svg';
-import { ReactComponent as Square } from '../assets/Square.svg';
+import StyledTriangle from '../assets/Triangle';
+import StyledSquare from '../assets/Square';
+import StyledCircle from '../assets/Circle';
 
 const TodoItemLi = styled.li`
   display: flex;
@@ -28,14 +28,6 @@ const TodoItemWrapper = styled.div`
         display: none;
         font-weight: bold;
         color: ${theme.colors.grey};
-      }
-
-      .circle,
-      .triangle,
-      .square {
-        width: 40px;
-        height: 40px;
-        margin-right: 20px;
       }
 
       .content-text {
@@ -120,15 +112,9 @@ const TodoListItem = ({ todoItem, onToggleTodo, onRemoveTodo }) => {
     <>
       <TodoItemLi>
         <TodoItemWrapper onClick={() => onToggleTodoHandler(id)}>
-          {figure === 'circle' && (
-            <Circle fill={done ? '#EE5A24' : '#A6C6C4'} className='circle' />
-          )}
-          {figure === 'triangle' && (
-            <Triangle fill={done ? '#FFC312' : '#A6C6C4'} className='circle' />
-          )}
-          {figure === 'square' && (
-            <Square fill={done ? '#5758BB' : '#A6C6C4'} className='circle' />
-          )}
+          {figure === 'circle' && <StyledCircle done={done} size='small' />}
+          {figure === 'triangle' && <StyledTriangle done={done} size='small' />}
+          {figure === 'square' && <StyledSquare done={done} size='small' />}
           <p className={`content-text ${done && 'done'}`}>{text}</p>
           <p className='todo-date'>{date}</p>
         </TodoItemWrapper>
