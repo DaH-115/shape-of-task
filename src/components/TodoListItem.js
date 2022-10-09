@@ -94,9 +94,15 @@ const TodoListItem = ({ todoItem, onToggleTodo, onRemoveTodo }) => {
     <>
       <TodoItemLi>
         <TodoItemWrapper onClick={() => onToggleTodoHandler(id)}>
-          {figure === 'circle' && <StyledCircle done={done} size='small' />}
-          {figure === 'triangle' && <StyledTriangle done={done} size='small' />}
-          {figure === 'square' && <StyledSquare done={done} size='small' />}
+          {figure === 'circle' && (
+            <StyledCircle done={done.toString()} size='small' />
+          )}
+          {figure === 'triangle' && (
+            <StyledTriangle done={done.toString()} size='small' />
+          )}
+          {figure === 'square' && (
+            <StyledSquare done={done.toString()} size='small' />
+          )}
           <p className={`content-text ${done && 'done'}`}>{text}</p>
           <p className='todo-date'>{date}</p>
         </TodoItemWrapper>

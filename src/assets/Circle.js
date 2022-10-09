@@ -5,7 +5,7 @@ import { ReactComponent as Circle } from '../assets/Circle.svg';
 const StyledFigure = styled(Circle)`
   ${({ theme, done, size }) => {
     return css`
-      fill: ${done === true ? theme.colors.orange : theme.colors.grey};
+      fill: ${done === 'true' ? theme.colors.orange : theme.colors.grey};
       width: ${size === 'small' ? '50px' : 'auto'};
       height: ${size === 'small' ? '50px' : 'auto'};
     `;

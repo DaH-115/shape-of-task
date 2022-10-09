@@ -5,7 +5,7 @@ import { ReactComponent as Triangle } from '../assets/Triangle.svg';
 const StyledFigure = styled(Triangle)`
   ${({ theme, done, size }) => {
     return css`
-      fill: ${done === true ? theme.colors.yellow : theme.colors.grey};
+      fill: ${done === 'true' ? theme.colors.yellow : theme.colors.grey};
       width: ${size === 'small' ? '50px' : 'auto'};
       height: ${size === 'small' ? '50px' : 'auto'};
     `;
