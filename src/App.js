@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { defalutTheme } from './styles/theme';
 import useResize from './hook/useResize';
@@ -21,7 +21,12 @@ function App() {
     JSON.parse(localStorage.getItem('todoList')) || []
   );
   const [capture, setCapture] = useState(false);
+  const navigate = useNavigate();
   const windowWidth = useResize();
+
+  useEffect(() => {
+    windowWidth >= 1024 && navigate('/');
+  }, [navigate, windowWidth]);
 
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
