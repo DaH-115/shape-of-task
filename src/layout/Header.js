@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import useResize from '../hook/useResize';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
+import Button from '../components/Button';
 
 const HeaderBox = styled.header`
   width: 100%;
@@ -28,29 +29,6 @@ const HeaderBox = styled.header`
   .btn {
     margin-right: 20px;
   }
-`;
-
-const Button = styled.button`
-  border: 1px solid #a6c6c4;
-  border-radius: 20px;
-  padding: 10px 15px 10px 15px;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: -0.02em;
-  margin-right: 10px;
-
-  &:active {
-    color: #fff;
-    background-color: #ee5a24;
-  }
-
-  ${({ theme }) => {
-    return css`
-      ${theme.device.desktop} {
-        /* display: none; */
-      } ;
-    `;
-  }}
 `;
 
 const Header = ({ onCapture }) => {

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import StyledTriangle from '../assets/Triangle';
 import StyledSquare from '../assets/Square';
 import StyledCircle from '../assets/Circle';
+import { StyledButton } from './Button';
 
 const TodoItemLi = styled.li`
   display: flex;
@@ -72,29 +73,10 @@ const TodoItemWrapper = styled.div`
   }}
 `;
 
-const MoveToFL = styled.button`
-  ${({ theme }) => {
-    return css`
-      width: 100%;
-      color: ${theme.colors.grey};
-      background-color: #fff;
-      border: 1px solid ${theme.colors.grey};
-      border-radius: 20px;
-      padding: 10px;
-      font-weight: 600;
-      font-size: 14px;
-      letter-spacing: -0.02em;
-
-      &:active {
-        color: #fff;
-        background-color: ${theme.colors.orange};
-      }
-
-      ${theme.device.desktop} {
-        display: block;
-      } ;
-    `;
-  }}
+const RemoveBtn = styled(StyledButton)`
+  width: 100%;
+  margin: 0;
+  color: ${({ theme }) => theme.colors.grey};
 `;
 
 const TodoListItem = ({ todoItem, onToggleTodo, onRemoveTodo }) => {
@@ -119,7 +101,7 @@ const TodoListItem = ({ todoItem, onToggleTodo, onRemoveTodo }) => {
           <p className='todo-date'>{date}</p>
         </TodoItemWrapper>
         {done && (
-          <MoveToFL onClick={() => onRemoveTodoHandler(id)}>지우기</MoveToFL>
+          <RemoveBtn onClick={() => onRemoveTodoHandler(id)}>지우기</RemoveBtn>
         )}
       </TodoItemLi>
     </>
