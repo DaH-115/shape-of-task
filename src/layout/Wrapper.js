@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const WrapperDiv = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
 `;
 
 const Wrapper = ({ children }) => {

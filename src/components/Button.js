@@ -8,7 +8,6 @@ export const StyledButton = styled.button`
   font-weight: 600;
   font-size: 14px;
   letter-spacing: -0.02em;
-  margin-right: 10px;
 
   &:active {
     color: #fff;
