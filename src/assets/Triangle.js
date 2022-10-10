@@ -3,17 +3,17 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as Triangle } from '../assets/Triangle.svg';
 
 const StyledFigure = styled(Triangle)`
-  ${({ theme, done, size }) => {
+  ${({ theme, size }) => {
     return css`
-      fill: ${done === 'true' ? theme.colors.yellow : theme.colors.grey};
+      fill: ${theme.colors.yellow};
       width: ${size === 'small' ? '50px' : 'auto'};
       height: ${size === 'small' ? '50px' : 'auto'};
     `;
   }}
 `;
 
-const StyledTriangle = ({ done, size }) => {
-  return <StyledFigure done={done} size={size} />;
+const StyledTriangle = ({ size }) => {
+  return <StyledFigure size={size} />;
 };
 
 export default StyledTriangle;

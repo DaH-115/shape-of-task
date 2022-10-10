@@ -1,16 +1,11 @@
 import styled, { css, keyframes } from 'styled-components';
 import { useState, useEffect } from 'react';
-import {
-  FaAngleDown,
-  FaAngleLeft,
-  FaAngleRight,
-  FaAngleUp,
-} from 'react-icons/fa';
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
-import { ReactComponent as Circle } from '../assets/Circle.svg';
-import { ReactComponent as Triangle } from '../assets/Triangle.svg';
-import { ReactComponent as Square } from '../assets/Square.svg';
+import StyledCircle from '../assets/Circle';
+import StyledTriangle from '../assets/Triangle';
+import StyledSquare from '../assets/Square';
 
 const fadeSlideIn = keyframes`
   from {
@@ -65,7 +60,7 @@ const Ul = styled.ul`
 const Li = styled.li`
   width: 100%;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   padding: 12px;
   font-weight: 500;
@@ -74,26 +69,18 @@ const Li = styled.li`
   &:hover {
     background-color: ${({ theme }) => theme.colors.light_grey};
   }
-
-  .circle,
-  .triangle,
-  .square {
-    width: 40px;
-    height: 40px;
-    margin-right: 12px;
-    margin-bottom: 5px;
-  }
-
-  .circle {
-    margin-left: -40px;
-  }
-
-  .triangle {
-    margin-left: -13px;
-  }
 `;
 
 const LogoStyle = styled(Logo)`
+  margin-right: 6px;
+`;
+
+const FigureStyleBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
   margin-right: 6px;
 `;
 
@@ -123,16 +110,22 @@ const SelectBox = ({ modalToggle, getFigure }) => {
       </SelectToggleWrapper>
       <SelectBoxWrapper toggle={toggle}>
         <Ul onClick={getFigureHandler}>
-          <Li className='circle'>
-            <Circle fill='#EE5A24' className='circle' />
+          <Li>
+            <FigureStyleBox>
+              <StyledCircle size='small' />
+            </FigureStyleBox>
             중요해요
           </Li>
-          <Li className='triangle'>
-            <Triangle fill='#FFC312' className='triangle' />
+          <Li>
+            <FigureStyleBox>
+              <StyledTriangle size='small' />
+            </FigureStyleBox>
             기억해 두세요
           </Li>
-          <Li className='square'>
-            <Square fill='#5758BB' className='square' />
+          <Li>
+            <FigureStyleBox>
+              <StyledSquare size='small' />
+            </FigureStyleBox>
             언제든지 하세요
           </Li>
         </Ul>

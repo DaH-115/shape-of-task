@@ -5,11 +5,9 @@ import StyledTriangle from '../assets/Triangle';
 const FigureListItem = ({ figure, done }) => {
   return (
     <li>
-      {figure === 'circle' && done && <StyledCircle done={done.toString()} />}
-      {figure === 'triangle' && done && (
-        <StyledTriangle done={done.toString()} />
-      )}
-      {figure === 'square' && done && <StyledSquare done={done.toString()} />}
+      {figure === 'circle' && done && <StyledCircle />}
+      {figure === 'triangle' && done && <StyledTriangle />}
+      {figure === 'square' && done && <StyledSquare />}
     </li>
   );
 };
