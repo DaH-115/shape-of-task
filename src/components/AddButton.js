@@ -32,6 +32,7 @@ const AddButtonBox = styled(StyledButton)`
 
 const AddButton = ({ todoList, onAddTodo }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const restTodo = todoList.filter((todo) => todo.done === false);
 
   const handleModalOpen = () => {
     setIsOpen(true);
@@ -42,7 +43,7 @@ const AddButton = ({ todoList, onAddTodo }) => {
 
   return (
     <>
-      <TodoMessage>총 {todoList.length}개의 할 일이 있습니다.</TodoMessage>
+      <TodoMessage>총 {restTodo.length}개의 할 일이 있습니다.</TodoMessage>
       <FlexWrapper>
         <AddButtonBox onClick={handleModalOpen}>새로운 일 +</AddButtonBox>
         <ModalInput
