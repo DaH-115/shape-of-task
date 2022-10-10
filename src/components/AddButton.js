@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import FlexWrapper from '../layout/FlexWrapper';
+import { StyledButton } from './StyledButton';
 
 import ModalInput from './ModalInput';
 
@@ -7,28 +9,25 @@ const TodoMessage = styled.div`
   font-size: 18px;
   padding: 20px;
   letter-spacing: -0.02em;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 `;
 
-const AddButtonBox = styled.button`
-  ${({ theme }) => {
-    return css`
-      width: 100%;
-      font-size: 24px;
-      letter-spacing: -0.04em;
-      padding: 20px 0 30px 0;
-      background: #fff;
+const AddButtonBox = styled(StyledButton)`
+  width: 90%;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: #fff;
+  font-weight: 400;
+  border-radius: 40px;
 
-      &:hover {
-        color: ${theme.colors.orange};
-      }
+  &:hover {
+    color: ${({ theme }) => theme.colors.orange};
+  }
 
-      &:active {
-        color: #fff;
-        background-color: ${theme.colors.orange};
-      }
-    `;
-  }}
+  &:active {
+    color: #fff;
+  }
 `;
 
 const AddButton = ({ todoList, onAddTodo }) => {
@@ -44,12 +43,14 @@ const AddButton = ({ todoList, onAddTodo }) => {
   return (
     <>
       <TodoMessage>총 {todoList.length}개의 할 일이 있습니다.</TodoMessage>
-      <AddButtonBox onClick={handleModalOpen}>새로운 일 +</AddButtonBox>
-      <ModalInput
-        visible={isOpen}
-        onAddTodo={onAddTodo}
-        onClose={handleModalClose}
-      />
+      <FlexWrapper>
+        <AddButtonBox onClick={handleModalOpen}>새로운 일 +</AddButtonBox>
+        <ModalInput
+          visible={isOpen}
+          onAddTodo={onAddTodo}
+          onClose={handleModalClose}
+        />
+      </FlexWrapper>
     </>
   );
 };

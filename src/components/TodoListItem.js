@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import StyledTriangle from '../assets/Triangle';
 import StyledSquare from '../assets/Square';
 import StyledCircle from '../assets/Circle';
-import { StyledButton } from './Button';
+import { StyledButton } from './StyledButton';
 
 const TodoItemLi = styled.li`
   display: flex;

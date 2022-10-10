@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import useResize from '../hook/useResize';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
-import Button from '../components/Button';
+import { StyledButton } from '../components/StyledButton';
 
 const HeaderBox = styled.header`
   width: auto;
@@ -35,15 +35,15 @@ const Header = ({ onCapture }) => {
       <div>
         {windowWidth >= 1024 || (
           <Link to='/' className='goToTodo'>
-            <Button onClick={onCaptureHandler}>할 일 보기</Button>
+            <StyledButton>할 일 보기</StyledButton>
           </Link>
         )}
 
         {pathname === '/figure-list' || windowWidth >= 1024 ? (
-          <Button onClick={onCaptureHandler}>이미지로 보기</Button>
+          <StyledButton onClick={onCaptureHandler}>이미지로 보기</StyledButton>
         ) : (
           <Link to='/figure-list'>
-            <Button>도형 보기</Button>
+            <StyledButton>도형 보기</StyledButton>
           </Link>
         )}
       </div>

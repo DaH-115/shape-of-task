@@ -14,9 +14,3 @@ export const StyledButton = styled.button`
     background-color: ${({ theme }) => theme.colors.orange};
   }
 `;
-
-const Button = ({ children }) => {
-  return <StyledButton>{children}</StyledButton>;
-};
-
-export default Button;
