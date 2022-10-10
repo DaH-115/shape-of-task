@@ -9,8 +9,13 @@ export const StyledButton = styled.button`
   font-size: 14px;
   letter-spacing: -0.02em;
 
+  &:hover {
+    color: ${({ theme }) => theme.colors.orange};
+  }
+
   &:active {
     color: #fff;
     background-color: ${({ theme }) => theme.colors.orange};
+    transition: background-color 0.2s ease-in-out;
   }
 `;

@@ -62,7 +62,7 @@ const TodoItemWrapper = styled.div`
           width: 100%;
           height: 100px;
           max-height: 100px;
-          margin: 10px 0 5px 0;
+          margin: 10px 0 15px 5px;
         }
 
         .todo-date {
