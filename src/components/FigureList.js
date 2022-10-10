@@ -22,8 +22,6 @@ const FigureList = ({ todoList, capture, onCapture }) => {
   useEffect(() => {
     const figureList = ref.current;
     if (capture) {
-      figureList.style.width = '400px';
-      figureList.style.hight = '700px';
       figureList.style.paddingBottom = '30px';
 
       html2canvas(figureList).then((canvas) => {
@@ -32,8 +30,6 @@ const FigureList = ({ todoList, capture, onCapture }) => {
       });
     }
 
-    figureList.style.width = 'auto';
-    figureList.style.hight = 'auto';
     figureList.style.paddingBottom = 'auto';
   }, [capture]);
 
