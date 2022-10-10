@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../store/todoListSlice';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
@@ -12,7 +14,7 @@ const ModalInputTextBox = styled.div`
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #a6c6c4;
+  color: ${({ theme }) => theme.colors.grey};
 
   h3 {
     margin-right: 8px;
@@ -53,10 +55,11 @@ const ModalInputButton = styled.button`
   font-size: 48px;
 `;
 
-const ModalInput = ({ visible, onAddTodo, onClose }) => {
+const ModalInput = ({ visible, onClose }) => {
   const [text, setText] = useState('');
   const [figure, setFigure] = useState('');
   const [animate, setAnimate] = useState(false);
+  const dispach = useDispatch();
   const today = new Date();
 
   useEffect(() => {
@@ -96,7 +99,7 @@ const ModalInput = ({ visible, onAddTodo, onClose }) => {
       done: false,
     };
 
-    onAddTodo(newTodoItem);
+    dispach(addTodo(newTodoItem));
     setText('');
     setFigure('');
   };

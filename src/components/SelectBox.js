@@ -110,21 +110,21 @@ const SelectBox = ({ modalToggle, getFigure }) => {
       </SelectToggleWrapper>
       <SelectBoxWrapper toggle={toggle}>
         <Ul onClick={getFigureHandler}>
-          <Li>
+          <Li className='circle'>
             <FigureStyleBox>
               <StyledCircle size='small' />
             </FigureStyleBox>
             중요해요
           </Li>
-          <Li>
+          <Li className='triangle'>
             <FigureStyleBox>
               <StyledTriangle size='small' />
             </FigureStyleBox>
             기억해 두세요
           </Li>
-          <Li>
+          <Li className='triangle'>
             <FigureStyleBox>
-              <StyledSquare size='small' />
+              <StyledSquare size='small' className='square' />
             </FigureStyleBox>
             언제든지 하세요
           </Li>

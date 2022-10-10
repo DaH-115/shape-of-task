@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+import { removeTodo, toggleTodo } from '../store/todoListSlice';
 import styled, { css } from 'styled-components';
 
 import StyledTriangle from '../assets/Triangle';
@@ -79,15 +81,16 @@ const RemoveBtn = styled(StyledButton)`
   color: ${({ theme }) => theme.colors.grey};
 `;
 
-const TodoListItem = ({ todoItem, onToggleTodo, onRemoveTodo }) => {
+const TodoListItem = ({ todoItem }) => {
   const { id, text, figure, done, date } = todoItem;
+  const dispach = useDispatch();
 
   const onToggleTodoHandler = (id) => {
-    onToggleTodo(id);
+    dispach(toggleTodo(id));
   };
 
   const onRemoveTodoHandler = (id) => {
-    onRemoveTodo(id);
+    dispach(removeTodo(id));
   };
 
   return (
