@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { defalutTheme } from './styles/theme';
@@ -17,13 +18,14 @@ import Message from './components/Message';
 import MetaTags from './MetaTags';
 
 function App() {
-  const [todoList, setTodoList] = useState(
-    JSON.parse(localStorage.getItem('todoList')) || []
-  );
+  const todoList = useSelector((state) => state.todoList.value);
+  // TEST
+  console.log(todoList);
   const [capture, setCapture] = useState(false);
   const navigate = useNavigate();
   const windowWidth = useResize();
 
+  // 🚨 App 컴포넌트 렌더링 두 번 유발 함수 🚨
   useEffect(() => {
     windowWidth >= 1024 && navigate('/');
   }, [navigate, windowWidth]);
@@ -31,24 +33,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
   }, [todoList]);
-
-  const onAddTodoHandler = (todoItem) => {
-    setTodoList((prevTodoList) => [...prevTodoList, todoItem]);
-  };
-
-  const onToggleTodoHandler = (id) => {
-    const newTodoItme = todoList.map((item) =>
-      item.id === id ? { ...item, done: !item.done } : item
-    );
-
-    setTodoList(newTodoItme);
-  };
-
-  const onRemoveTodoHandler = (id) => {
-    const newTodoList = todoList.filter((item) => item.id !== id);
-
-    setTodoList(newTodoList);
-  };
 
   // ✔️ 투두가 존재하지 않을 때 메세지를 보여줍니다.
   const todoArr = todoList.map((item) => item.done);
@@ -73,11 +57,7 @@ function App() {
                       하지만 가끔은 여유도 중요하죠.
                     </Message>
                   ) : (
-                    <TodoListPage
-                      todoList={todoList}
-                      onToggleTodo={onToggleTodoHandler}
-                      onRemoveTodo={onRemoveTodoHandler}
-                    />
+                    <TodoListPage todoList={todoList} />
                   )
                 }
               />
@@ -97,7 +77,7 @@ function App() {
               />
             </Routes>
           </Main>
-          <AddButton todoList={todoList} onAddTodo={onAddTodoHandler} />
+          <AddButton todoList={todoList} />
         </Wrapper>
         {/* DESKTOP SIZE */}
         {windowWidth >= 1024 && (
