@@ -1,6 +1,11 @@
 import styled, { css, keyframes } from 'styled-components';
 import { useState, useEffect } from 'react';
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import {
+  FaAngleDown,
+  FaAngleLeft,
+  FaAngleRight,
+  FaAngleUp,
+} from 'react-icons/fa';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
 import { ReactComponent as Circle } from '../assets/Circle.svg';
@@ -9,12 +14,12 @@ import { ReactComponent as Square } from '../assets/Square.svg';
 
 const fadeSlideIn = keyframes`
   from {
-    transform: translateX(-100%);
+    transform: translateY(10%);
     opacity: 0;
     pointer-events: none;
   }
   to {
-    transform: translateX(0%);
+    transform: translateY(0%);
     opacity: 1;
     pointer-events: none;
   }
@@ -22,11 +27,11 @@ const fadeSlideIn = keyframes`
 
 const fadeSlideOut = keyframes`
   from {
-      transform: translate(0%);
+      transform: translateY(0%);
       opacity: 1;
   }
   to {
-      transform: translateX(-100%);
+      transform: translateY(10%);
       opacity: 0;
   }
 `;
@@ -41,8 +46,8 @@ const SelectBoxWrapper = styled.div`
   ${(props) => {
     return css`
       position: absolute;
-      bottom: 20px;
-      left: 170px;
+      bottom: 80px;
+      left: 0;
 
       visibility: ${props.toggle ? 'visible' : 'hidden'};
       animation: ${props.toggle ? fadeSlideIn : fadeSlideOut} 0.4s ease-in-out;
@@ -70,27 +75,21 @@ const Li = styled.li`
     background-color: ${({ theme }) => theme.colors.light_grey};
   }
 
-  .circle {
-    width: 40px;
-    height: 40px;
-    margin-right: 12px;
-    margin-left: -40px;
-    margin-bottom: 5px;
-  }
-
-  .triangle {
-    width: 40px;
-    height: 40px;
-    margin-right: 12px;
-    margin-left: -13px;
-    margin-bottom: 5px;
-  }
-
+  .circle,
+  .triangle,
   .square {
     width: 40px;
     height: 40px;
     margin-right: 12px;
     margin-bottom: 5px;
+  }
+
+  .circle {
+    margin-left: -40px;
+  }
+
+  .triangle {
+    margin-left: -13px;
   }
 `;
 
@@ -120,7 +119,7 @@ const SelectBox = ({ modalToggle, getFigure }) => {
     <>
       <SelectToggleWrapper onClick={onToggleHandler}>
         <LogoStyle />
-        {toggle ? <FaAngleLeft /> : <FaAngleRight />}
+        {toggle ? <FaAngleDown /> : <FaAngleUp />}
       </SelectToggleWrapper>
       <SelectBoxWrapper toggle={toggle}>
         <Ul onClick={getFigureHandler}>
