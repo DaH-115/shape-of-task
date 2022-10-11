@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { defalutTheme } from './styles/theme';
-import useResize from './hook/useResize';
+import { debounce } from 'lodash';
 
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './layout/Header';
@@ -20,13 +20,22 @@ import MetaTags from './MetaTags';
 function App() {
   const todoList = useSelector((state) => state.todoList.value);
   const [capture, setCapture] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
-  const windowWidth = useResize();
   const desktopSize = 1024;
 
   useEffect(() => {
+    const resizeHandler = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', debounce(resizeHandler, 200));
     windowWidth >= desktopSize && navigate('/');
-  }, [navigate, windowWidth]);
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+    };
+  }, [windowWidth, navigate]);
 
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
@@ -40,7 +49,11 @@ function App() {
     <ThemeProvider theme={defalutTheme}>
       <MetaTags titleText='main' />
       <GlobalStyle />
-      <Header onCapture={setCapture} />
+      <Header
+        onCapture={setCapture}
+        windowWidth={windowWidth}
+        viewSize={desktopSize}
+      />
       <FlexWrapper>
         <Wrapper>
           <Main>
@@ -78,7 +91,6 @@ function App() {
           <AddButton todoList={todoList} />
         </Wrapper>
         {/* DESKTOP SIZE */}
-
         {windowWidth >= desktopSize && (
           <Main>
             {arrCheck === undefined ? (
