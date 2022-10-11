@@ -15,7 +15,7 @@ const ImgContainer = styled.img`
   width: 100%;
 `;
 
-const FigureListPage = ({ todoList, capture, onCapture }) => {
+const FigureListPage = ({ todoList, capture, onClose }) => {
   const ref = useRef();
   const [img, setImg] = useState();
 
@@ -34,14 +34,17 @@ const FigureListPage = ({ todoList, capture, onCapture }) => {
   }, [capture]);
 
   const handleModalClose = () => {
-    onCapture(false);
+    onClose(false);
   };
 
   return (
     <>
-      <Modal visible={capture} onClose={handleModalClose}>
-        {img && <ImgContainer src={img} alt='Figure List Image' />}
-      </Modal>
+      {capture && img && (
+        <Modal isOpen={capture} onClose={handleModalClose}>
+          <ImgContainer src={img} alt='Figure List Image' />
+        </Modal>
+      )}
+
       <UlWrapper ref={ref}>
         {todoList.map((todoItem) => {
           return (

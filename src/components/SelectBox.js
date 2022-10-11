@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import { useState, useEffect } from 'react';
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
 import StyledCircle from '../assets/Circle';
 import StyledTriangle from '../assets/Triangle';
 import StyledSquare from '../assets/Square';
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 const fadeSlideIn = keyframes`
   from {
@@ -84,14 +84,8 @@ const FigureStyleBox = styled.div`
   margin-right: 6px;
 `;
 
-const SelectBox = ({ modalToggle, getFigure }) => {
+const SelectBox = ({ getFigure }) => {
   const [toggle, setToggle] = useState(false);
-
-  useEffect(() => {
-    if (!modalToggle) {
-      setToggle(false);
-    }
-  }, [modalToggle]);
 
   const onToggleHandler = () => {
     setToggle((preve) => !preve);

@@ -19,15 +19,13 @@ import MetaTags from './MetaTags';
 
 function App() {
   const todoList = useSelector((state) => state.todoList.value);
-  // TEST
-  console.log(todoList);
   const [capture, setCapture] = useState(false);
   const navigate = useNavigate();
   const windowWidth = useResize();
+  const desktopSize = 1024;
 
-  // 🚨 App 컴포넌트 렌더링 두 번 유발 함수 🚨
   useEffect(() => {
-    windowWidth >= 1024 && navigate('/');
+    windowWidth >= desktopSize && navigate('/');
   }, [navigate, windowWidth]);
 
   useEffect(() => {
@@ -70,7 +68,7 @@ function App() {
                     <FigureListPage
                       todoList={todoList}
                       capture={capture}
-                      onCapture={setCapture}
+                      onClose={setCapture}
                     />
                   )
                 }
@@ -80,7 +78,8 @@ function App() {
           <AddButton todoList={todoList} />
         </Wrapper>
         {/* DESKTOP SIZE */}
-        {windowWidth >= 1024 && (
+
+        {windowWidth >= desktopSize && (
           <Main>
             {arrCheck === undefined ? (
               <Message>가끔은 여백도 괜찮아요.</Message>
@@ -88,7 +87,7 @@ function App() {
               <FigureListPage
                 todoList={todoList}
                 capture={capture}
-                onCapture={setCapture}
+                onClose={setCapture}
               />
             )}
           </Main>

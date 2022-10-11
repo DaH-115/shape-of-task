@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../store/todoListSlice';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
 import SelectBox from './SelectBox';
-import Modal from './Modal';
 
 const ModalInputTextBox = styled.div`
   position: absolute;
@@ -50,33 +49,28 @@ const ButtonWrapper = styled.div`
 `;
 
 const ModalInputButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 48px;
   height: 48px;
   font-size: 48px;
+  border-radius: 50%;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.light_grey};
+  }
+
+  &:active {
+    color: ${({ theme }) => theme.colors.orange};
+  }
 `;
 
-const ModalInput = ({ visible, onClose }) => {
+const ModalInput = () => {
   const [text, setText] = useState('');
   const [figure, setFigure] = useState('');
-  const [animate, setAnimate] = useState(false);
   const dispach = useDispatch();
   const today = new Date();
-
-  useEffect(() => {
-    let timeout;
-
-    if (!visible) {
-      timeout = setTimeout(() => {
-        setAnimate(true);
-      }, 400);
-    }
-
-    setAnimate(false);
-
-    return () => clearTimeout(timeout);
-  }, [visible]);
-
-  if (animate && !visible) return null;
 
   const onChangeHandler = (event) => {
     const text = event.target.value;
@@ -117,20 +111,19 @@ const ModalInput = ({ visible, onClose }) => {
   };
 
   return (
-    <Modal visible={visible} onClose={onClose}>
+    <>
       <ModalInputTextBox>
         <h3>To-do</h3>
         <p>{today.toLocaleDateString()}</p>
       </ModalInputTextBox>
-
       <ModalInputForm onSubmit={onSubmitHandler}>
         <ModalInputBox value={text} onChange={onChangeHandler} />
         <ButtonWrapper>
-          <SelectBox modalToggle={visible} getFigure={getFigureHandler} />
+          <SelectBox getFigure={getFigureHandler} />
           <ModalInputButton>+</ModalInputButton>
         </ButtonWrapper>
       </ModalInputForm>
-    </Modal>
+    </>
   );
 };
 

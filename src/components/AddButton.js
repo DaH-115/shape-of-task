@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FlexWrapper from '../layout/FlexWrapper';
 import { StyledButton } from './StyledButton';
 
+import Modal from './Modal';
 import ModalInput from './ModalInput';
 
 const TodoMessage = styled.div`
@@ -30,13 +31,14 @@ const AddButtonBox = styled(StyledButton)`
   }
 `;
 
-const AddButton = ({ todoList, onAddTodo }) => {
+const AddButton = ({ todoList }) => {
   const [isOpen, setIsOpen] = useState(false);
   const restTodo = todoList.filter((todo) => todo.done === false);
 
   const handleModalOpen = () => {
     setIsOpen(true);
   };
+
   const handleModalClose = () => {
     setIsOpen(false);
   };
@@ -46,11 +48,9 @@ const AddButton = ({ todoList, onAddTodo }) => {
       <TodoMessage>총 {restTodo.length}개의 할 일이 있습니다.</TodoMessage>
       <FlexWrapper>
         <AddButtonBox onClick={handleModalOpen}>새로운 일 +</AddButtonBox>
-        <ModalInput
-          visible={isOpen}
-          onAddTodo={onAddTodo}
-          onClose={handleModalClose}
-        />
+        <Modal isOpen={isOpen} onClose={handleModalClose}>
+          <ModalInput />
+        </Modal>
       </FlexWrapper>
     </>
   );

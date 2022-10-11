@@ -59,13 +59,13 @@ const ModalWapper = styled.div`
   }}
 `;
 
-const Modal = ({ children, visible, onClose }) => {
+const Modal = ({ children, isOpen, onClose }) => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     let timeout;
 
-    if (!visible) {
+    if (!isOpen) {
       timeout = setTimeout(() => {
         setAnimate(true);
       }, 400);
@@ -74,14 +74,14 @@ const Modal = ({ children, visible, onClose }) => {
     setAnimate(false);
 
     return () => clearTimeout(timeout);
-  }, [visible]);
+  }, [isOpen]);
 
-  if (animate && !visible) return null;
+  if (animate && !isOpen) return null;
 
   return (
     <>
-      <Backdrop modalToggle={visible} onClick={onClose} />
-      <ModalWapper modalToggle={visible}>{children}</ModalWapper>
+      <Backdrop modalToggle={isOpen} onClick={onClose} />
+      <ModalWapper modalToggle={isOpen}>{children}</ModalWapper>
     </>
   );
 };
