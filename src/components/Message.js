@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const MessageBox = styled.div`
   text-align: center;
-  color: #a6c6c4;
+  color: ${({ theme }) => theme.colors.grey};
   font-weight: 400;
   font-size: 24px;
   letter-spacing: -0.02em;

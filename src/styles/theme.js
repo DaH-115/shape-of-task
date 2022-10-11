@@ -7,7 +7,7 @@ const colors = {
 };
 
 const size = {
-  mobile: '425px',
+  mobile: '375px',
   tablet: '768px',
   desktop: '1024px',
 };
