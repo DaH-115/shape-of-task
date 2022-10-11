@@ -7,13 +7,12 @@ import { StyledButton } from '../components/StyledButton';
 
 const HeaderBox = styled.header`
   width: auto;
-  min-width: 300px;
+  min-width: ${({ theme }) => theme.size.mobile};
   padding: 15px 20px 15px 20px;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 999;
 
   .goToTodo {
     margin-right: 6px;
@@ -26,7 +25,7 @@ const Header = ({ onCapture }) => {
   const windowWidth = useResize();
 
   const onCaptureHandler = () => {
-    onCapture(true);
+    onCapture((prev) => !prev);
   };
 
   return (

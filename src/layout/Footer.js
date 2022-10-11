@@ -3,7 +3,7 @@ import { FaGithub, FaHome } from 'react-icons/fa';
 
 const FooterBox = styled.footer`
   width: 100%;
-  min-width: 300px;
+  min-width: ${({ theme }) => theme.size.mobile};
 
   ${({ theme }) => {
     return css`
