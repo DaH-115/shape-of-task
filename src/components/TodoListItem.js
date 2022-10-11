@@ -17,6 +17,10 @@ const TodoItemLi = styled.li`
   &:hover {
     background-color: ${({ theme }) => theme.colors.light_grey};
   }
+
+  ${({ theme }) => theme.device.desktop} {
+    padding: 20px 40px 20px 40px;
+  }
 `;
 
 const TodoItemWrapper = styled.div`
@@ -39,6 +43,7 @@ const TodoItemWrapper = styled.div`
         line-height: 28px;
         word-break: break-all;
         margin-top: 6px;
+        margin-left: 6px;
 
         width: 100%;
         max-height: 150px;
