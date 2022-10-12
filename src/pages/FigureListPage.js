@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 
@@ -15,13 +15,14 @@ const ImgContainer = styled.img`
   width: 100%;
 `;
 
-const FigureListPage = ({ todoList, capture, onClose }) => {
+const FigureListPage = ({ todoList }) => {
   const ref = useRef();
   const [img, setImg] = useState();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const figureList = ref.current;
-    if (capture) {
+    if (isOpen) {
       figureList.style.paddingBottom = '30px';
 
       html2canvas(figureList).then((canvas) => {
@@ -31,21 +32,24 @@ const FigureListPage = ({ todoList, capture, onClose }) => {
     }
 
     figureList.style.paddingBottom = 'auto';
-  }, [capture]);
+  }, [isOpen]);
 
-  const handleModalClose = () => {
-    onClose(false);
-  };
+  const handleModalOpen = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+
+  const handleModalClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   return (
     <>
-      {capture && img && (
-        <Modal isOpen={capture} onClose={handleModalClose}>
+      {img && (
+        <Modal isOpen={isOpen} onClose={handleModalClose}>
           <ImgContainer src={img} alt='Figure List Image' />
         </Modal>
       )}
-
-      <UlWrapper ref={ref}>
+      <UlWrapper ref={ref} onClick={handleModalOpen}>
         {todoList.map((todoItem) => {
           return (
             <FigureListItem

@@ -19,13 +19,9 @@ const HeaderBox = styled.header`
   }
 `;
 
-const Header = ({ onCapture, windowWidth, viewSize }) => {
+const Header = ({ windowWidth, viewSize }) => {
   const location = useLocation();
   const pathname = location.pathname;
-
-  const onCaptureHandler = () => {
-    onCapture((prev) => !prev);
-  };
 
   return (
     <HeaderBox>
@@ -36,10 +32,7 @@ const Header = ({ onCapture, windowWidth, viewSize }) => {
             <StyledButton>할 일 보기</StyledButton>
           </Link>
         )}
-
-        {pathname === '/figure-list' || windowWidth >= viewSize ? (
-          <StyledButton onClick={onCaptureHandler}>이미지로 보기</StyledButton>
-        ) : (
+        {pathname === '/figure-list' || windowWidth >= viewSize ? undefined : (
           <Link to='/figure-list'>
             <StyledButton>도형 보기</StyledButton>
           </Link>
