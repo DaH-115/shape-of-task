@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import FlexWrapper from '../layout/FlexWrapper';
 import { StyledButton } from './StyledButton';
@@ -35,13 +35,13 @@ const AddButton = ({ todoList }) => {
   const [isOpen, setIsOpen] = useState(false);
   const restTodo = todoList.filter((todo) => todo.done === false);
 
-  const handleModalOpen = () => {
+  const handleModalOpen = useCallback(() => {
     setIsOpen(true);
-  };
+  }, []);
 
-  const handleModalClose = () => {
+  const handleModalClose = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../store/todoListSlice';
 import { v4 as uuidv4 } from 'uuid';
@@ -98,7 +98,7 @@ const ModalInput = () => {
     setFigure('');
   };
 
-  const getFigureHandler = (figure) => {
+  const getFigureHandler = useCallback((figure) => {
     if (figure.includes('circle')) {
       setFigure('circle');
     } else if (figure.includes('triangle')) {
@@ -108,7 +108,11 @@ const ModalInput = () => {
     }
 
     return;
-  };
+  }, []);
+
+  const memoSelectBox = useMemo(() => {
+    return <SelectBox getFigure={getFigureHandler} />;
+  }, [getFigureHandler]);
 
   return (
     <>
@@ -119,7 +123,7 @@ const ModalInput = () => {
       <ModalInputForm onSubmit={onSubmitHandler}>
         <ModalInputBox value={text} onChange={onChangeHandler} />
         <ButtonWrapper>
-          <SelectBox getFigure={getFigureHandler} />
+          {memoSelectBox}
           <ModalInputButton>+</ModalInputButton>
         </ButtonWrapper>
       </ModalInputForm>

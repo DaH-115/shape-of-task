@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -19,7 +19,6 @@ import MetaTags from './MetaTags';
 
 function App() {
   const todoList = useSelector((state) => state.todoList.value);
-  const [capture, setCapture] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
   const desktopSize = 1024;
@@ -45,15 +44,15 @@ function App() {
   const todoArr = todoList.map((item) => item.done);
   const arrCheck = todoArr.find((item) => item === true);
 
+  const memoAddButton = useMemo(() => {
+    return <AddButton todoList={todoList} />;
+  }, [todoList]);
+
   return (
     <ThemeProvider theme={defalutTheme}>
       <MetaTags titleText='main' />
       <GlobalStyle />
-      <Header
-        onCapture={setCapture}
-        windowWidth={windowWidth}
-        viewSize={desktopSize}
-      />
+      <Header windowWidth={windowWidth} viewSize={desktopSize} />
       <FlexWrapper>
         <Wrapper>
           <Main>
@@ -78,17 +77,13 @@ function App() {
                   arrCheck === undefined ? (
                     <Message>가끔은 여백도 괜찮아요.</Message>
                   ) : (
-                    <FigureListPage
-                      todoList={todoList}
-                      capture={capture}
-                      onClose={setCapture}
-                    />
+                    <FigureListPage todoList={todoList} />
                   )
                 }
               />
             </Routes>
           </Main>
-          <AddButton todoList={todoList} />
+          {memoAddButton}
         </Wrapper>
         {/* DESKTOP SIZE */}
         {windowWidth >= desktopSize && (
@@ -96,11 +91,7 @@ function App() {
             {arrCheck === undefined ? (
               <Message>가끔은 여백도 괜찮아요.</Message>
             ) : (
-              <FigureListPage
-                todoList={todoList}
-                capture={capture}
-                onClose={setCapture}
-              />
+              <FigureListPage todoList={todoList} />
             )}
           </Main>
         )}
