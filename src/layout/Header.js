@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
 import { StyledButton } from '../components/StyledButton';
+import { useDispatch } from 'react-redux';
+import { isOpen } from '../store/captureSlice';
 
 const HeaderBox = styled.header`
   width: 100%;
@@ -22,6 +24,11 @@ const HeaderBox = styled.header`
 const Header = ({ windowWidth, viewSize }) => {
   const location = useLocation();
   const pathname = location.pathname;
+  const dispatch = useDispatch();
+
+  const handleModalOpen = () => {
+    dispatch(isOpen(true));
+  };
 
   return (
     <HeaderBox>
@@ -32,7 +39,9 @@ const Header = ({ windowWidth, viewSize }) => {
             <StyledButton>할 일 보기</StyledButton>
           </Link>
         )}
-        {pathname === '/figure-list' || windowWidth >= viewSize ? undefined : (
+        {pathname === '/figure-list' || windowWidth >= viewSize ? (
+          <StyledButton onClick={handleModalOpen}>이미지로 보기</StyledButton>
+        ) : (
           <Link to='/figure-list'>
             <StyledButton>도형 보기</StyledButton>
           </Link>

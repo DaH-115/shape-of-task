@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { isClose } from '../store/captureSlice';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 
@@ -18,11 +20,12 @@ const ImgContainer = styled.img`
 const FigureListPage = ({ todoList }) => {
   const ref = useRef();
   const [img, setImg] = useState();
-  const [isOpen, setIsOpen] = useState(false);
+  const capture = useSelector((state) => state.capture.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const figureList = ref.current;
-    if (isOpen) {
+    if (capture) {
       figureList.style.paddingBottom = '30px';
 
       html2canvas(figureList).then((canvas) => {
@@ -32,24 +35,20 @@ const FigureListPage = ({ todoList }) => {
     }
 
     figureList.style.paddingBottom = 'auto';
-  }, [isOpen]);
-
-  const handleModalOpen = useCallback(() => {
-    setIsOpen(true);
-  }, []);
+  }, [capture]);
 
   const handleModalClose = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+    dispatch(isClose(false));
+  }, [dispatch]);
 
   return (
     <>
       {img && (
-        <Modal isOpen={isOpen} onClose={handleModalClose}>
+        <Modal isOpen={capture} onClose={handleModalClose}>
           <ImgContainer src={img} alt='Figure List Image' />
         </Modal>
       )}
-      <UlWrapper ref={ref} onClick={handleModalOpen}>
+      <UlWrapper ref={ref}>
         {todoList.map((todoItem) => {
           return (
             <FigureListItem
