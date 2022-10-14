@@ -7,8 +7,8 @@ import { debounce } from 'lodash';
 
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './layout/Header';
-import Main from './layout/Main';
-import FlexWrapper from './layout/FlexWrapper';
+import { Main, FigureListMain } from './layout/Main';
+import { FlexWrapper } from './layout/FlexWrapper';
 import Wrapper from './layout/Wrapper';
 import Footer from './layout/Footer';
 import AddButton from './components/AddButton';
@@ -87,13 +87,15 @@ function App() {
         </Wrapper>
         {/* DESKTOP SIZE */}
         {windowWidth >= desktopSize && (
-          <Main>
-            {arrCheck === undefined ? (
-              <Message>가끔은 여백도 괜찮아요.</Message>
-            ) : (
-              <FigureListPage todoList={todoList} />
-            )}
-          </Main>
+          <Wrapper>
+            <FigureListMain>
+              {arrCheck === undefined ? (
+                <Message>가끔은 여백도 괜찮아요.</Message>
+              ) : (
+                <FigureListPage todoList={todoList} />
+              )}
+            </FigureListMain>
+          </Wrapper>
         )}
       </FlexWrapper>
       <Footer />

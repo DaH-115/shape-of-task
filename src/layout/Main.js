@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const MainBox = styled.main`
+export const Main = styled.main`
   width: 100%;
   height: 65vh;
 
@@ -21,8 +21,6 @@ const MainBox = styled.main`
   }}
 `;
 
-const Main = ({ children }) => {
-  return <MainBox>{children}</MainBox>;
-};
-
-export default Main;
+export const FigureListMain = styled(Main)`
+  height: 80vh;
+`;

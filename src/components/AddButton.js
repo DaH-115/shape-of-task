@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import FlexWrapper from '../layout/FlexWrapper';
-import { StyledButton } from './StyledButton';
 
+import { FlexWrapper } from '../layout/FlexWrapper';
+import { StyledButton } from './StyledButton';
 import Modal from './Modal';
 import ModalInput from './ModalInput';
 
