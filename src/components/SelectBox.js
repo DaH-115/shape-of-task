@@ -116,9 +116,9 @@ const SelectBox = ({ getFigure }) => {
             </FigureStyleBox>
             기억해 두세요
           </Li>
-          <Li className='triangle'>
+          <Li className='square'>
             <FigureStyleBox>
-              <StyledSquare size='small' className='square' />
+              <StyledSquare size='small' />
             </FigureStyleBox>
             언제든지 하세요
           </Li>
