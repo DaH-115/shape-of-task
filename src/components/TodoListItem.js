@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeTodo, toggleTodo } from '../store/todoListSlice';
 import styled, { css } from 'styled-components';
@@ -5,7 +6,8 @@ import styled, { css } from 'styled-components';
 import StyledTriangle from '../assets/Triangle';
 import StyledSquare from '../assets/Square';
 import StyledCircle from '../assets/Circle';
-import { StyledButton } from './StyledButton';
+import StyledButton from '../styles/StyledButton';
+import Notification from '../layout/Notification';
 
 const TodoItemLi = styled.li`
   display: flex;
@@ -16,6 +18,7 @@ const TodoItemLi = styled.li`
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.light_grey};
+    transition: background-color 0.3s ease-in-out;
   }
 
   ${({ theme }) => theme.device.desktop} {
@@ -88,10 +91,25 @@ const RemoveBtn = styled(StyledButton)`
 
 const TodoListItem = ({ todoItem }) => {
   const { id, text, figure, done, date } = todoItem;
+  const [toggle, setToggle] = useState(false);
   const dispach = useDispatch();
+
+  useEffect(() => {
+    let timeout;
+
+    if (done && toggle) {
+      timeout = setTimeout(() => setToggle(false), 1000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [toggle, done]);
 
   const onToggleTodoHandler = (id) => {
     dispach(toggleTodo(id));
+
+    if (!done) {
+      setToggle(true);
+    }
   };
 
   const onRemoveTodoHandler = (id) => {
@@ -100,6 +118,7 @@ const TodoListItem = ({ todoItem }) => {
 
   return (
     <>
+      <Notification toggle={toggle} figure={figure} done={done} />
       <TodoItemLi>
         <TodoItemWrapper onClick={() => onToggleTodoHandler(id)}>
           {figure === 'circle' && <StyledCircle size='small' />}

@@ -14,7 +14,7 @@ const fadeSlideIn = keyframes`
     pointer-events: none;
   }
   to {
-    transform: translateY(0%);
+    transform: translateY(0);
     opacity: 1;
     pointer-events: none;
   }
@@ -22,7 +22,7 @@ const fadeSlideIn = keyframes`
 
 const fadeSlideOut = keyframes`
   from {
-      transform: translateY(0%);
+      transform: translateY(0);
       opacity: 1;
   }
   to {
@@ -60,7 +60,6 @@ const Ul = styled.ul`
 const Li = styled.li`
   width: 100%;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   padding: 12px;
   font-weight: 500;
