@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
-import { StyledButton } from '../components/StyledButton';
+import StyledButton from '../styles/StyledButton';
 import { useDispatch } from 'react-redux';
 import { isOpen } from '../store/captureSlice';
 

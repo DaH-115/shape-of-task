@@ -66,9 +66,7 @@ const Modal = ({ children, isOpen, onClose }) => {
     let timeout;
 
     if (!isOpen) {
-      timeout = setTimeout(() => {
-        setAnimate(true);
-      }, 400);
+      timeout = setTimeout(() => setAnimate(true), 400);
     }
 
     setAnimate(false);

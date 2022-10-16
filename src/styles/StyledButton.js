@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledButton = styled.button`
+const StyledButton = styled.button`
   background-color: #fff;
   border: 1px solid ${({ theme }) => theme.colors.grey};
   border-radius: 20px;
@@ -11,6 +11,7 @@ export const StyledButton = styled.button`
 
   &:hover {
     color: ${({ theme }) => theme.colors.orange};
+    transition: color 0.2s ease-in-out;
   }
 
   &:active {
@@ -19,3 +20,5 @@ export const StyledButton = styled.button`
     transition: background-color 0.2s ease-in-out;
   }
 `;
+
+export default StyledButton;

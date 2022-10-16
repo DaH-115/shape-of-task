@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { FlexWrapper } from '../layout/FlexWrapper';
-import { StyledButton } from './StyledButton';
-import Modal from './Modal';
+import FlexWrapper from '../styles/FlexWrapper';
+import StyledButton from '../styles/StyledButton';
+import Modal from '../layout/Modal';
 import ModalInput from './ModalInput';
 
 const TodoMessage = styled.div`
@@ -21,14 +21,6 @@ const AddButtonBox = styled(StyledButton)`
   background: #fff;
   font-weight: 400;
   border-radius: 40px;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.orange};
-  }
-
-  &:active {
-    color: #fff;
-  }
 `;
 
 const AddButton = ({ todoList }) => {

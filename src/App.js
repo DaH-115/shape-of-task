@@ -8,13 +8,13 @@ import { debounce } from 'lodash';
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './layout/Header';
 import { Main, FigureListMain } from './layout/Main';
-import { FlexWrapper } from './layout/FlexWrapper';
-import Wrapper from './layout/Wrapper';
+import FlexWrapper from './styles/FlexWrapper';
+import Wrapper from './styles/Wrapper';
 import Footer from './layout/Footer';
 import AddButton from './components/AddButton';
 import TodoListPage from './pages/TodoListPage';
 import FigureListPage from './pages/FigureListPage';
-import Message from './components/Message';
+import Message from './layout/Message';
 import MetaTags from './MetaTags';
 
 function App() {

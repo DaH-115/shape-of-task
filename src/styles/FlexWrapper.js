@@ -1,8 +1,11 @@
 import styled from 'styled-components';
+import Wrapper from './Wrapper';
 
-export const FlexWrapper = styled.div`
+const FlexWrapper = styled(Wrapper)`
   display: flex;
   justify-content: center;
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
 `;
+
+export default FlexWrapper;

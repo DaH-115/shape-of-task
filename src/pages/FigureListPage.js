@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 
 import FigureListItem from '../components/FigureListItem';
-import Modal from '../components/Modal';
-import { StyledButton } from '../components/StyledButton';
+import Modal from '../layout/Modal';
+import StyledButton from '../styles/StyledButton';
 
 const UlWrapper = styled.ul`
   display: flex;
