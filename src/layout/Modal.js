@@ -42,8 +42,8 @@ const ModalWapper = styled.div`
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -60%);
-      width: 100%;
+      transform: translate(-50%, -50%);
+      width: 80%;
 
       visibility: ${modalToggle ? 'visible' : 'hidden'};
       animation: ${modalToggle ? fadeIn : fadeOut} 0.4s ease-in-out;
@@ -53,7 +53,7 @@ const ModalWapper = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 450px;
+        width: 50%;
       }
     `;
   }}

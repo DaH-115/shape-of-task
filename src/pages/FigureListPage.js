@@ -12,6 +12,7 @@ const UlWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 40px;
 `;
 
 const ImgModal = styled.div`
@@ -42,16 +43,19 @@ const ImgModal = styled.div`
       border-bottom: 2px solid ${({ theme }) => theme.colors.light_grey};
     }
   }
-
-  img {
-    width: 100%;
-    height: 100%;
-    margin-top: 12px;
-  }
 `;
 
 const Button = styled(StyledButton)`
   float: right;
+`;
+
+const Div = styled.div`
+  width: 100%;
+  margin-top: 12px;
+
+  img {
+    width: 100%;
+  }
 `;
 
 const FigureListPage = () => {
@@ -65,6 +69,7 @@ const FigureListPage = () => {
     const figureList = ref.current;
     if (capture) {
       figureList.style.paddingBottom = '30px';
+      figureList.style.paddingTop = '30px';
 
       html2canvas(figureList).then((canvas) => {
         const imageUrl = canvas.toDataURL('image/jpg');
@@ -73,6 +78,7 @@ const FigureListPage = () => {
     }
 
     figureList.style.paddingBottom = 'auto';
+    figureList.style.paddingTop = 'auto';
   }, [capture]);
 
   const handleModalClose = useCallback(() => {
@@ -86,7 +92,9 @@ const FigureListPage = () => {
           <ImgModal>
             <h1>이미지로 보기</h1>
             <p>오늘도 다채로운 하루를 보내셨네요!🥳</p>
-            <img src={img} alt='square, triangle, circle Figure List' />
+            <Div>
+              <img src={img} alt='square, triangle, circle Figure List' />
+            </Div>
             <Button onClick={handleModalClose}>닫기</Button>
           </ImgModal>
         </Modal>
