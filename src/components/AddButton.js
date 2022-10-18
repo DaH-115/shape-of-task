@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import FlexWrapper from '../styles/FlexWrapper';
@@ -23,7 +24,8 @@ const AddButtonBox = styled(StyledButton)`
   border-radius: 40px;
 `;
 
-const AddButton = ({ todoList }) => {
+const AddButton = () => {
+  const todoList = useSelector((state) => state.todoList.value);
   const [isOpen, setIsOpen] = useState(false);
   const restTodo = todoList.filter((todo) => todo.done === false);
 

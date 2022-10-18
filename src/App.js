@@ -45,8 +45,8 @@ function App() {
   const arrCheck = todoArr.find((item) => item === true);
 
   const memoAddButton = useMemo(() => {
-    return <AddButton todoList={todoList} />;
-  }, [todoList]);
+    return <AddButton />;
+  }, []);
 
   return (
     <ThemeProvider theme={defalutTheme}>
@@ -61,13 +61,9 @@ function App() {
                 path='/'
                 element={
                   !todoList.length ? (
-                    <Message>
-                      할 일을 정리해 보세요.
-                      <br />
-                      하지만 가끔은 여유도 중요하죠.
-                    </Message>
+                    <Message>할 일을 정리해 보세요.😊</Message>
                   ) : (
-                    <TodoListPage todoList={todoList} />
+                    <TodoListPage />
                   )
                 }
               />
@@ -75,9 +71,9 @@ function App() {
                 path='/figure-list'
                 element={
                   arrCheck === undefined ? (
-                    <Message>가끔은 여백도 괜찮아요.</Message>
+                    <Message>가끔은 여백도 괜찮아요.😌</Message>
                   ) : (
-                    <FigureListPage todoList={todoList} />
+                    <FigureListPage />
                   )
                 }
               />
@@ -87,15 +83,13 @@ function App() {
         </Wrapper>
         {/* DESKTOP SIZE */}
         {windowWidth >= desktopSize && (
-          <Wrapper>
-            <FigureListMain>
-              {arrCheck === undefined ? (
-                <Message>가끔은 여백도 괜찮아요.</Message>
-              ) : (
-                <FigureListPage todoList={todoList} />
-              )}
-            </FigureListMain>
-          </Wrapper>
+          <FigureListMain>
+            {arrCheck === undefined ? (
+              <Message>가끔은 여백도 괜찮아요.😌</Message>
+            ) : (
+              <FigureListPage />
+            )}
+          </FigureListMain>
         )}
       </FlexWrapper>
       <Footer />
