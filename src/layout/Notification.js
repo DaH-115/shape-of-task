@@ -23,7 +23,7 @@ const fadeSlideOut = keyframes`
   }
 `;
 
-const TestMessage = styled.div`
+const NoteMessage = styled.div`
   ${(props) => {
     return css`
       position: fixed;
@@ -50,7 +50,7 @@ const Notification = ({ toggle, figure, done }) => {
 
   return (
     <PortalModal>
-      <TestMessage toggle={toggle}>
+      <NoteMessage toggle={toggle}>
         {`${
           figure === 'circle'
             ? '동그라미'
@@ -60,7 +60,7 @@ const Notification = ({ toggle, figure, done }) => {
             ? '네모'
             : '도형이'
         }가 추가되었습니다! 🤗`}
-      </TestMessage>
+      </NoteMessage>
     </PortalModal>
   );
 };

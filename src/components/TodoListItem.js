@@ -14,11 +14,17 @@ const TodoItemLi = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 10px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 30px;
+  margin-bottom: 12px;
+  box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.light_grey};
     transition: background-color 0.3s ease-in-out;
+    transform: translateY(-20px);
+    transition: transform 0.2s ease-in-out;
   }
 
   ${({ theme }) => theme.device.desktop} {
@@ -32,7 +38,7 @@ const TodoItemWrapper = styled.div`
       display: flex;
       align-items: center;
       width: 100%;
-      padding-bottom: 20px;
+      padding-bottom: 10px;
 
       .todo-date {
         display: none;
@@ -42,10 +48,10 @@ const TodoItemWrapper = styled.div`
 
       .content-text {
         width: 100%;
-        font-size: 24px;
+        font-size: 22px;
         line-height: 28px;
         word-break: break-all;
-        margin-top: 6px;
+        margin-top: 10px;
         margin-left: 6px;
 
         width: 100%;
@@ -77,6 +83,8 @@ const TodoItemWrapper = styled.div`
 
         .todo-date {
           display: block;
+          border-top: 2px solid ${({ theme }) => theme.colors.light_grey};
+          padding-top: 10px;
         }
       } ;
     `;
@@ -85,7 +93,7 @@ const TodoItemWrapper = styled.div`
 
 const RemoveBtn = styled(StyledButton)`
   width: 100%;
-  margin: 0;
+  margin-top: 20px;
   color: ${({ theme }) => theme.colors.grey};
 `;
 
@@ -98,7 +106,11 @@ const TodoListItem = ({ todoItem }) => {
     let timeout;
 
     if (done && toggle) {
-      timeout = setTimeout(() => setToggle(false), 1000);
+      timeout = setTimeout(() => setToggle(false), 1500);
+    }
+
+    if (!done && toggle) {
+      setToggle(false);
     }
 
     return () => clearTimeout(timeout);

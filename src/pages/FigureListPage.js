@@ -19,6 +19,7 @@ const ImgModal = styled.div`
   height: 100%;
   background-color: #fff;
   padding: 20px;
+  box-sizing: border-box;
 
   &::after {
     content: ' ';
@@ -37,8 +38,8 @@ const ImgModal = styled.div`
     &::after {
       content: ' ';
       display: block;
-      margin-top: 18px;
-      border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+      margin-top: 10px;
+      border-bottom: 2px solid ${({ theme }) => theme.colors.light_grey};
     }
   }
 
@@ -50,13 +51,13 @@ const ImgModal = styled.div`
 `;
 
 const Button = styled(StyledButton)`
-  width: 20%;
   float: right;
 `;
 
-const FigureListPage = ({ todoList }) => {
+const FigureListPage = () => {
   const ref = useRef();
   const [img, setImg] = useState();
+  const todoList = useSelector((state) => state.todoList.value);
   const capture = useSelector((state) => state.capture.value);
   const dispatch = useDispatch();
 
@@ -84,7 +85,7 @@ const FigureListPage = ({ todoList }) => {
         <Modal isOpen={capture} onClose={handleModalClose}>
           <ImgModal>
             <h1>이미지로 보기</h1>
-            <p>오늘도 다채로운 하루를 보내셨네요!</p>
+            <p>오늘도 다채로운 하루를 보내셨네요!🥳</p>
             <img src={img} alt='square, triangle, circle Figure List' />
             <Button onClick={handleModalClose}>닫기</Button>
           </ImgModal>

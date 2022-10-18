@@ -22,5 +22,5 @@ export const Main = styled.main`
 `;
 
 export const FigureListMain = styled(Main)`
-  height: 80vh;
+  height: auto;
 `;

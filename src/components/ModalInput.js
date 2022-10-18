@@ -5,11 +5,12 @@ import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
 import SelectBox from './SelectBox';
+import StyledButton from '../styles/StyledButton';
 
 const ModalInputTextBox = styled.div`
   position: absolute;
   display: flex;
-  padding: 20px 15px 10px 20px;
+  padding: 20px 0 20px 30px;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -28,7 +29,8 @@ const ModalInputForm = styled.form`
   width: 100%;
   height: 100%;
   background-color: #fff;
-  padding-top: 50px;
+  padding: 50px 30px 10px 30px;
+  box-sizing: border-box;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
 `;
 
@@ -36,34 +38,20 @@ const ModalInputBox = styled.textarea`
   font-family: 'Pretendard';
   width: 100%;
   height: 430px;
-  box-sizing: border-box;
-  padding-left: 20px;
-  padding-right: 20px;
   font-size: 24px;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 2px solid ${({ theme }) => theme.colors.light_grey};
 `;
 
-const ModalInputButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  font-size: 48px;
-  border-radius: 50%;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.light_grey};
-  }
-
-  &:active {
-    color: ${({ theme }) => theme.colors.orange};
-  }
+const Button = styled(StyledButton)`
+  width: 80px;
+  height: 40px;
 `;
 
 const ModalInput = () => {
@@ -124,7 +112,7 @@ const ModalInput = () => {
         <ModalInputBox value={text} onChange={onChangeHandler} />
         <ButtonWrapper>
           {memoSelectBox}
-          <ModalInputButton>+</ModalInputButton>
+          <Button>등록</Button>
         </ButtonWrapper>
       </ModalInputForm>
     </>

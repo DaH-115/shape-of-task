@@ -33,7 +33,6 @@ const fadeSlideOut = keyframes`
 
 const SelectToggleWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
 `;
 
@@ -71,6 +70,7 @@ const Li = styled.li`
 `;
 
 const LogoStyle = styled(Logo)`
+  width: 50%;
   margin-right: 6px;
 `;
 
