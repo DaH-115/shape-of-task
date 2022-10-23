@@ -68,17 +68,11 @@ const FigureListPage = () => {
   useEffect(() => {
     const figureList = ref.current;
     if (capture) {
-      figureList.style.paddingBottom = '30px';
-      figureList.style.paddingTop = '30px';
-
       html2canvas(figureList).then((canvas) => {
         const imageUrl = canvas.toDataURL('image/jpg');
         setImg(imageUrl);
       });
     }
-
-    figureList.style.paddingBottom = 'auto';
-    figureList.style.paddingTop = 'auto';
   }, [capture]);
 
   const handleModalClose = useCallback(() => {

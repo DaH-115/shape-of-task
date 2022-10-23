@@ -14,21 +14,21 @@ const TodoItemLi = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 20px;
   background-color: #fff;
   box-sizing: border-box;
-  border-radius: 30px;
+  border-radius: 15px;
   margin-bottom: 12px;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
 
-  &:hover {
-    transition: background-color 0.3s ease-in-out;
-    transform: translateY(-20px);
-    transition: transform 0.2s ease-in-out;
-  }
-
   ${({ theme }) => theme.device.desktop} {
-    padding: 20px 40px 20px 40px;
+    padding: 30px 30px 20px 30px;
+
+    &:hover {
+      transition: background-color 0.3s ease-in-out;
+      transform: translateY(-20px);
+      transition: transform 0.2s ease-in-out;
+    }
   }
 `;
 
@@ -38,7 +38,6 @@ const TodoItemWrapper = styled.div`
       display: flex;
       align-items: center;
       width: 100%;
-      padding-bottom: 10px;
 
       .todo-date {
         display: none;
@@ -48,11 +47,10 @@ const TodoItemWrapper = styled.div`
 
       .content-text {
         width: 100%;
-        font-size: 22px;
+        font-size: 18px;
         line-height: 28px;
         word-break: break-all;
-        margin-top: 10px;
-        margin-left: 6px;
+        margin-left: 12px;
 
         width: 100%;
         max-height: 150px;
