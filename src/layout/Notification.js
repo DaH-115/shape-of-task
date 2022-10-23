@@ -44,10 +44,6 @@ const NoteMessage = styled.div`
 `;
 
 const Notification = ({ toggle, figure, done }) => {
-  if (!done && !toggle) {
-    return null;
-  }
-
   return (
     <PortalModal>
       <NoteMessage toggle={toggle}>

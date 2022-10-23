@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 const Backdrop = styled.div`
@@ -60,22 +59,6 @@ const ModalWapper = styled.div`
 `;
 
 const Modal = ({ children, isOpen, onClose }) => {
-  const [animate, setAnimate] = useState(false);
-
-  useEffect(() => {
-    let timeout;
-
-    if (!isOpen) {
-      timeout = setTimeout(() => setAnimate(true), 400);
-    }
-
-    setAnimate(false);
-
-    return () => clearTimeout(timeout);
-  }, [isOpen]);
-
-  if (animate && !isOpen) return null;
-
   return (
     <>
       <Backdrop modalToggle={isOpen} onClick={onClose} />
