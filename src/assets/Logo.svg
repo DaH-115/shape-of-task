@@ -1,4 +1,16 @@
-<svg width="150" height="50" viewBox="0 0 150 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg role="img"
+  aria-labelledby="title desc"
+  width="150" 
+  height="50" 
+  viewBox="0 0 150 50" 
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg">
+
+  <title id="title">세모 네모 동그라미 투두 리스트(TSC TODO LIST)</title>
+  <desc id="desc">
+    세모 네모 동그라미 투두 리스트, 세모동의 로고입니다.
+  </desc>
+
 <path d="M26.9172 0L53.8344 50H0L26.9172 0Z" fill="#FFC312"/>
 <rect x="53.8344" width="47.8528" height="50" fill="#5758BB"/>
 <ellipse cx="125.844" cy="25" rx="24.1564" ry="25" fill="#EE5A24"/>

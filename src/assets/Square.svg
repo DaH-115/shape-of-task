@@ -1,3 +1,15 @@
-<svg width="104" height="104" viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg role="img"
+  aria-labelledby="title desc"
+  width="104" 
+  height="104" 
+  viewBox="0 0 104 104" 
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg">
+
+  <title id="title">네모(Triangle)</title>
+  <desc id="desc">
+    우선순위 기억해 두세요라는 의미를 가진 네모(Triangle)입니다.
+  </desc>
+
 <rect x="0.5" y="0.5" width="103" height="103" fill="#5758BB" stroke="#5758BB"/>
 </svg>
