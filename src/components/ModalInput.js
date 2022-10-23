@@ -10,7 +10,7 @@ import StyledButton from '../styles/StyledButton';
 const ModalInputTextBox = styled.div`
   position: absolute;
   display: flex;
-  padding: 20px 0 20px 30px;
+  padding: 40px 0 20px 30px;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -23,6 +23,10 @@ const ModalInputTextBox = styled.div`
   p {
     padding-top: 3px;
   }
+`;
+
+const ModalInputLabel = styled.label`
+  visibility: hidden;
 `;
 
 const ModalInputForm = styled.form`
@@ -108,7 +112,8 @@ const ModalInput = () => {
         <h3>To-do</h3>
         <p>{today.toLocaleDateString()}</p>
       </ModalInputTextBox>
-      <ModalInputForm onSubmit={onSubmitHandler}>
+      <ModalInputLabel htmlFor='todoTextInput'>Todo Text</ModalInputLabel>
+      <ModalInputForm id='todoTextInput' onSubmit={onSubmitHandler}>
         <ModalInputBox value={text} onChange={onChangeHandler} />
         <ButtonWrapper>
           {memoSelectBox}

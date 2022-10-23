@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../assets/Logo.svg';
 
 const StyledFigure = styled(Logo)`
   width: auto;
-  height: 40px;
+  height: 30px;
 `;
 
 const StyledLogo = () => {
