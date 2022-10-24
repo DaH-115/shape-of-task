@@ -11,7 +11,7 @@
     세모 네모 동그라미 투두 리스트, 세모동의 로고입니다.
   </desc>
 
-<path d="M26.9172 0L53.8344 50H0L26.9172 0Z" fill="#FFC312"/>
-<rect x="53.8344" width="47.8528" height="50" fill="#5758BB"/>
-<ellipse cx="125.844" cy="25" rx="24.1564" ry="25" fill="#EE5A24"/>
+<path d="M26.9172 0L53.8344 50H0L26.9172 0Z" fill="#ecf0f1"/>
+<rect x="53.8344" width="47.8528" height="50" fill="#ecf0f1"/>
+<ellipse cx="125.844" cy="25" rx="24.1564" ry="25" fill="#ecf0f1"/>
 </svg>

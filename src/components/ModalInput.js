@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../store/todoListSlice';
 import { v4 as uuidv4 } from 'uuid';
@@ -58,7 +58,7 @@ const Button = styled(StyledButton)`
   height: 40px;
 `;
 
-const ModalInput = () => {
+const ModalInput = ({ isOpen }) => {
   const [text, setText] = useState('');
   const [figure, setFigure] = useState('');
   const dispach = useDispatch();
@@ -102,21 +102,17 @@ const ModalInput = () => {
     return;
   }, []);
 
-  const memoSelectBox = useMemo(() => {
-    return <SelectBox getFigure={getFigureHandler} />;
-  }, [getFigureHandler]);
-
   return (
     <>
       <ModalInputTextBox>
         <h3>To-do</h3>
         <p>{today.toLocaleDateString()}</p>
       </ModalInputTextBox>
-      <ModalInputLabel htmlFor='todoTextInput'>Todo Text</ModalInputLabel>
+      <ModalInputLabel htmlFor='todoTextInput'>Todo Input</ModalInputLabel>
       <ModalInputForm id='todoTextInput' onSubmit={onSubmitHandler}>
         <ModalInputBox value={text} onChange={onChangeHandler} />
         <ButtonWrapper>
-          {memoSelectBox}
+          <SelectBox getFigure={getFigureHandler} isOpen={isOpen} />
           <Button>등록</Button>
         </ButtonWrapper>
       </ModalInputForm>
