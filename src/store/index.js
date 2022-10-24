@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import captureSlice from './captureSlice';
+import modalSlice from './modalSlice';
 import todoListSlice from './todoListSlice';
 
 const rootReducers = combineReducers({
   todoList: todoListSlice.reducer,
-  capture: captureSlice.reducer,
+  modal: modalSlice.reducer,
 });
 
 const store = configureStore({

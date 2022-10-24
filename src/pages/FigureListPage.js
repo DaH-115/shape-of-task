@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { isClose } from '../store/captureSlice';
+import { captureIsClose } from '../store/modalSlice';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 
 import FigureListItem from '../components/FigureListItem';
+import PortalModal from '../components/PortalModal';
 import Modal from '../layout/Modal';
 import StyledButton from '../styles/StyledButton';
 
@@ -62,36 +63,38 @@ const FigureListPage = () => {
   const ref = useRef();
   const [img, setImg] = useState();
   const todoList = useSelector((state) => state.todoList.value);
-  const capture = useSelector((state) => state.capture.value);
+  const captureModal = useSelector((state) => state.modal.captureState);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const figureList = ref.current;
-    if (capture) {
+    if (captureModal) {
       html2canvas(figureList).then((canvas) => {
         const imageUrl = canvas.toDataURL('image/jpg');
         setImg(imageUrl);
       });
     }
-  }, [capture]);
+  }, [captureModal]);
 
-  const handleModalClose = useCallback(() => {
-    dispatch(isClose(false));
+  const modalCloseHandler = useCallback(() => {
+    dispatch(captureIsClose(false));
   }, [dispatch]);
 
   return (
     <>
       {img && (
-        <Modal isOpen={capture} onClose={handleModalClose}>
-          <ImgModal>
-            <h1>이미지로 보기</h1>
-            <p>오늘도 다채로운 하루를 보내셨네요!🥳</p>
-            <Div>
-              <img src={img} alt='square, triangle, circle Figure List' />
-            </Div>
-            <Button onClick={handleModalClose}>닫기</Button>
-          </ImgModal>
-        </Modal>
+        <PortalModal>
+          <Modal isOpen={captureModal} onClose={modalCloseHandler}>
+            <ImgModal>
+              <h1>이미지로 보기</h1>
+              <p>오늘도 다채로운 하루를 보내셨네요!🥳</p>
+              <Div>
+                <img src={img} alt='square, triangle, circle Figure List' />
+              </Div>
+              <Button onClick={modalCloseHandler}>닫기</Button>
+            </ImgModal>
+          </Modal>
+        </PortalModal>
       )}
       <UlWrapper ref={ref}>
         {todoList.map((todoItem) => {

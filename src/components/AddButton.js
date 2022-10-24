@@ -1,11 +1,13 @@
-import { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import FlexWrapper from '../styles/FlexWrapper';
 import StyledButton from '../styles/StyledButton';
 import Modal from '../layout/Modal';
 import ModalInput from './ModalInput';
+import PortalModal from './PortalModal';
+import { modalIsClose, modalIsOpen } from '../store/modalSlice';
 
 const TodoMessage = styled.div`
   font-size: 18px;
@@ -25,26 +27,29 @@ const AddButtonBox = styled(StyledButton)`
 `;
 
 const AddButton = () => {
+  const dispatch = useDispatch();
   const todoList = useSelector((state) => state.todoList.value);
-  const [isOpen, setIsOpen] = useState(false);
+  const modalState = useSelector((state) => state.modal.modalState);
   const restTodo = todoList.filter((todo) => todo.done === false);
 
-  const handleModalOpen = useCallback(() => {
-    setIsOpen(true);
-  }, []);
+  const modalOpenHandler = () => {
+    dispatch(modalIsOpen(true));
+  };
 
-  const handleModalClose = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+  const modalCloseHandler = useCallback(() => {
+    dispatch(modalIsClose(false));
+  }, [dispatch]);
 
   return (
     <>
       <TodoMessage>총 {restTodo.length}개의 할 일이 있습니다.</TodoMessage>
       <FlexWrapper>
-        <AddButtonBox onClick={handleModalOpen}>새로운 일 +</AddButtonBox>
-        <Modal isOpen={isOpen} onClose={handleModalClose}>
-          <ModalInput />
-        </Modal>
+        <AddButtonBox onClick={modalOpenHandler}>새로운 일 +</AddButtonBox>
+        <PortalModal>
+          <Modal isOpen={modalState} onClose={modalCloseHandler}>
+            <ModalInput isOpen={modalState} />
+          </Modal>
+        </PortalModal>
       </FlexWrapper>
     </>
   );
