@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 import { ReactComponent as Logo } from '../assets/Logo.svg';
@@ -83,8 +83,12 @@ const FigureStyleBox = styled.div`
   margin-right: 6px;
 `;
 
-const SelectBox = ({ getFigure }) => {
+const SelectBox = ({ getFigure, isOpen }) => {
   const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) setToggle(false);
+  }, [isOpen]);
 
   const onToggleHandler = () => {
     setToggle((preve) => !preve);

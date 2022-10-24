@@ -76,7 +76,6 @@ const TodoItemWrapper = styled.div`
           width: 100%;
           height: 100px;
           max-height: 100px;
-          margin: 10px 0 15px 5px;
         }
 
         .todo-date {
@@ -104,7 +103,7 @@ const TodoListItem = ({ todoItem }) => {
     let timeout;
 
     if (done && toggle) {
-      timeout = setTimeout(() => setToggle(false), 1500);
+      timeout = setTimeout(() => setToggle(false), 1200);
     }
 
     if (!done && toggle) {
@@ -128,7 +127,7 @@ const TodoListItem = ({ todoItem }) => {
 
   return (
     <>
-      <Notification toggle={toggle} figure={figure} done={done} />
+      <Notification toggle={toggle} figure={figure} />
       <TodoItemLi>
         <TodoItemWrapper onClick={() => onToggleTodoHandler(id)}>
           {figure === 'circle' && <StyledCircle size='small' />}
