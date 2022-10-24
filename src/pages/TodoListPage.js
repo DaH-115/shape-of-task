@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import TodoListItem from '../components/TodoListItem';
@@ -20,6 +21,10 @@ const Ul = styled.ul`
 
 const TodoListPage = () => {
   const todoList = useSelector((state) => state.todoList.value);
+
+  useEffect(() => {
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  }, [todoList]);
 
   return (
     <Ul>

@@ -20,7 +20,3 @@ export const Main = styled.main`
     `;
   }}
 `;
-
-export const FigureListMain = styled(Main)`
-  height: auto;
-`;
