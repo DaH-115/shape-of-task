@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import useGetwindowWidth from '../hooks/useGetwindowWidth';
 
 import StyledLogo from '../assets/Logo';
 import StyledButton from '../styles/StyledButton';
-import { useDispatch } from 'react-redux';
-import { isOpen } from '../store/captureSlice';
+import { captureIsOpen } from '../store/modalSlice';
 
 const HeaderBox = styled.header`
   display: flex;
@@ -27,26 +28,27 @@ const Div = styled.div`
   margin-left: 20px;
 `;
 
-const Header = ({ windowWidth, viewSize }) => {
+const Header = () => {
+  const dispatch = useDispatch();
+  const { windowWidth, desktopSize } = useGetwindowWidth();
   const location = useLocation();
   const pathname = location.pathname;
-  const dispatch = useDispatch();
 
-  const handleModalOpen = () => {
-    dispatch(isOpen(true));
+  const modalOpenHandle = () => {
+    dispatch(captureIsOpen(true));
   };
 
   return (
     <HeaderBox>
       <StyledLogo />
       <Div>
-        {windowWidth >= viewSize || (
+        {windowWidth >= desktopSize || (
           <Link to='/' className='goToTodo'>
             <StyledButton>할 일</StyledButton>
           </Link>
         )}
-        {pathname === '/figure-list' || windowWidth >= viewSize ? (
-          <StyledButton onClick={handleModalOpen}>이미지</StyledButton>
+        {pathname === '/figure-list' || windowWidth >= desktopSize ? (
+          <StyledButton onClick={modalOpenHandle}>이미지</StyledButton>
         ) : (
           <Link to='/figure-list'>
             <StyledButton>도형</StyledButton>
