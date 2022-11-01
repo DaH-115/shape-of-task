@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
-import { ReactComponent as Logo } from '../assets/Logo.svg';
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import StyledCircle from '../assets/Circle';
 import StyledTriangle from '../assets/Triangle';
 import StyledSquare from '../assets/Square';
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import LogoFigures from './LogoFigures';
+import StyledButton from '../styles/StyledButton';
 
 const fadeSlideIn = keyframes`
   from {
@@ -31,9 +32,18 @@ const fadeSlideOut = keyframes`
   }
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 2px solid ${({ theme }) => theme.colors.light_grey};
+`;
+
 const SelectToggleWrapper = styled.div`
   display: flex;
   align-items: center;
+  width: 40%;
 `;
 
 const SelectBoxWrapper = styled.div`
@@ -69,11 +79,6 @@ const Li = styled.li`
   }
 `;
 
-const LogoStyle = styled(Logo)`
-  width: 50%;
-  margin-right: 6px;
-`;
-
 const FigureStyleBox = styled.div`
   display: flex;
   justify-content: center;
@@ -83,11 +88,18 @@ const FigureStyleBox = styled.div`
   margin-right: 6px;
 `;
 
-const SelectBox = ({ getFigure, isOpen }) => {
+const Button = styled(StyledButton)`
+  width: 80px;
+  height: 40px;
+`;
+
+const SelectBox = ({ getFigure, isOpen, figurecolor }) => {
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
-    if (!isOpen) setToggle(false);
+    if (!isOpen) {
+      setToggle(false);
+    }
   }, [isOpen]);
 
   const onToggleHandler = () => {
@@ -101,27 +113,30 @@ const SelectBox = ({ getFigure, isOpen }) => {
 
   return (
     <>
-      <SelectToggleWrapper onClick={onToggleHandler}>
-        <LogoStyle />
-        {toggle ? <FaAngleDown /> : <FaAngleUp />}
-      </SelectToggleWrapper>
+      <ButtonWrapper>
+        <SelectToggleWrapper onClick={onToggleHandler}>
+          <LogoFigures figurecolor={figurecolor} />
+          <div>{toggle ? <FaAngleDown /> : <FaAngleUp />}</div>
+        </SelectToggleWrapper>
+        <Button>등록</Button>
+      </ButtonWrapper>
       <SelectBoxWrapper toggle={toggle}>
         <Ul onClick={getFigureHandler}>
           <Li className='circle'>
             <FigureStyleBox>
-              <StyledCircle size='small' />
+              <StyledCircle size='small' figurecolor='circle' />
             </FigureStyleBox>
             중요해요
           </Li>
           <Li className='triangle'>
             <FigureStyleBox>
-              <StyledTriangle size='small' />
+              <StyledTriangle size='small' figurecolor='triangle' />
             </FigureStyleBox>
             기억해 두세요
           </Li>
           <Li className='square'>
             <FigureStyleBox>
-              <StyledSquare size='small' />
+              <StyledSquare size='small' figurecolor='square' />
             </FigureStyleBox>
             언제든지 하세요
           </Li>

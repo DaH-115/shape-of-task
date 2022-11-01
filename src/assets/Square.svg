@@ -11,5 +11,5 @@
     우선순위 기억해 두세요라는 의미를 가진 네모(Triangle)입니다.
   </desc>
 
-<rect x="0.5" y="0.5" width="103" height="103" fill="#5758BB" stroke="#5758BB"/>
+<rect x="0.5" y="0.5" width="103" height="103" fill="current"/>
 </svg>

@@ -76,6 +76,7 @@ const TodoItemWrapper = styled.div`
           width: 100%;
           height: 100px;
           max-height: 100px;
+          margin-left: 0;
         }
 
         .todo-date {
@@ -130,9 +131,15 @@ const TodoListItem = ({ todoItem }) => {
       <Notification toggle={toggle} figure={figure} />
       <TodoItemLi>
         <TodoItemWrapper onClick={() => onToggleTodoHandler(id)}>
-          {figure === 'circle' && <StyledCircle size='small' />}
-          {figure === 'triangle' && <StyledTriangle size='small' />}
-          {figure === 'square' && <StyledSquare size='small' />}
+          {figure === 'circle' && (
+            <StyledCircle size='small' figurecolor='circle' />
+          )}
+          {figure === 'triangle' && (
+            <StyledTriangle size='small' figurecolor='triangle' />
+          )}
+          {figure === 'square' && (
+            <StyledSquare size='small' figurecolor='square' />
+          )}
           <p className={`content-text ${done && 'done'}`}>{text}</p>
           <p className='todo-date'>{date}</p>
         </TodoItemWrapper>

@@ -3,17 +3,19 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as Circle } from '../assets/Circle.svg';
 
 const StyledFigure = styled(Circle)`
-  ${({ theme, size }) => {
+  ${({ theme, size, figurecolor }) => {
     return css`
-      fill: ${theme.colors.orange};
+      fill: ${figurecolor === 'circle'
+        ? theme.colors.orange
+        : theme.colors.light_grey};
       width: ${size === 'small' ? '35px' : 'auto'};
       height: ${size === 'small' ? '35px' : 'auto'};
     `;
   }}
 `;
 
-const StyledCircle = ({ size }) => {
-  return <StyledFigure size={size} />;
+const StyledCircle = ({ size, figurecolor }) => {
+  return <StyledFigure size={size} figurecolor={figurecolor} />;
 };
 
 export default StyledCircle;

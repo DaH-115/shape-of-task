@@ -18,9 +18,11 @@ const Li = styled.li`
 const FigureListItem = ({ figure, done }) => {
   return (
     <Li>
-      {figure === 'circle' && done && <StyledCircle />}
-      {figure === 'triangle' && done && <StyledTriangle />}
-      {figure === 'square' && done && <StyledSquare />}
+      {figure === 'circle' && done && <StyledCircle figurecolor='circle' />}
+      {figure === 'triangle' && done && (
+        <StyledTriangle figurecolor='triangle' />
+      )}
+      {figure === 'square' && done && <StyledSquare figurecolor='square' />}
     </Li>
   );
 };

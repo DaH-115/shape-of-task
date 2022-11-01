@@ -3,17 +3,19 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as Square } from '../assets/Square.svg';
 
 const StyledFigure = styled(Square)`
-  ${({ theme, size }) => {
+  ${({ theme, size, figurecolor }) => {
     return css`
-      fill: ${theme.colors.blue};
+      fill: ${figurecolor === 'square'
+        ? theme.colors.blue
+        : theme.colors.light_grey};
       width: ${size === 'small' ? '30px' : 'auto'};
       height: ${size === 'small' ? '30px' : 'auto'};
     `;
   }}
 `;
 
-const StyledSquare = ({ size }) => {
-  return <StyledFigure size={size} />;
+const StyledSquare = ({ size, figurecolor }) => {
+  return <StyledFigure size={size} figurecolor={figurecolor} />;
 };
 
 export default StyledSquare;
