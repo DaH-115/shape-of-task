@@ -39,9 +39,9 @@ const ModalWapper = styled.div`
   ${({ theme, modalToggle }) => {
     return css`
       position: fixed;
-      top: 50%;
+      top: 40%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -40%);
       width: 80%;
 
       visibility: ${modalToggle ? 'visible' : 'hidden'};
@@ -49,9 +49,9 @@ const ModalWapper = styled.div`
       transition: visibility 0.4s ease-in-out;
 
       ${theme.device.desktop} {
-        top: 50%;
+        top: 40%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -40%);
         width: 50%;
       }
     `;

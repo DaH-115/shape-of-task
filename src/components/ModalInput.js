@@ -1,11 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../store/todoListSlice';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
 import SelectBox from './SelectBox';
-import StyledButton from '../styles/StyledButton';
 
 const ModalInputTextBox = styled.div`
   position: absolute;
@@ -33,7 +32,7 @@ const ModalInputForm = styled.form`
   width: 100%;
   height: 100%;
   background-color: #fff;
-  padding: 50px 30px 10px 30px;
+  padding: 60px 30px 14px 30px;
   box-sizing: border-box;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
 `;
@@ -42,26 +41,16 @@ const ModalInputBox = styled.textarea`
   font-family: 'Pretendard';
   width: 100%;
   height: 430px;
-  font-size: 24px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
+  font-size: 20px;
   border-top: 2px solid ${({ theme }) => theme.colors.light_grey};
-`;
-
-const Button = styled(StyledButton)`
-  width: 80px;
-  height: 40px;
+  padding-top: 20px;
 `;
 
 const ModalInput = ({ isOpen }) => {
   const [text, setText] = useState('');
   const [figure, setFigure] = useState('');
   const dispach = useDispatch();
+  const textareaRef = useRef();
   const today = new Date();
 
   const onChangeHandler = (event) => {
@@ -73,7 +62,9 @@ const ModalInput = ({ isOpen }) => {
     event.preventDefault();
 
     if (!text || !figure) {
-      return alert('텍스트와 도형을 채워주세요!');
+      alert('텍스트와 도형을 채워주세요!');
+      textareaRef.current.focus();
+      return;
     }
 
     const newTodoItem = {
@@ -110,11 +101,16 @@ const ModalInput = ({ isOpen }) => {
       </ModalInputTextBox>
       <ModalInputLabel htmlFor='todoTextInput'>Todo Input</ModalInputLabel>
       <ModalInputForm id='todoTextInput' onSubmit={onSubmitHandler}>
-        <ModalInputBox value={text} onChange={onChangeHandler} />
-        <ButtonWrapper>
-          <SelectBox getFigure={getFigureHandler} isOpen={isOpen} />
-          <Button>등록</Button>
-        </ButtonWrapper>
+        <ModalInputBox
+          value={text}
+          onChange={onChangeHandler}
+          ref={textareaRef}
+        />
+        <SelectBox
+          getFigure={getFigureHandler}
+          figurecolor={figure}
+          isOpen={isOpen}
+        />
       </ModalInputForm>
     </>
   );
