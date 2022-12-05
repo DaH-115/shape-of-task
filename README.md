@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# 세모동 TODO LIST
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ✨ 오늘 내가 할 일은 ‘세모-네모-동그라미’
 
-## Available Scripts
+할 일을 세모, 네모, 동그라미로 우선 순위를 매겨 리스트 및 이미지로 만들 수 있는 앱 입니다. <br/>
+사용자가 할 일을 완료하면 TO-DO를 작성할 때 지정했던 도형 이미지가 쌓여 직접 <br/>
+눈으로 자신이 모두 일을 끝냈을 때 오늘 하루가 얼마나 다양하고 다채로웠는지 눈으로 직접 경험할 수 있었으면 했어요! 😊
 
-In the project directory, you can run:
+# 📝 사용한 기술
 
-### `npm start`
+✔️ React
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+✔️ Redux-toolkit
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+✔️ React-router
 
-### `npm test`
+✔️ Styled-components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+✔️ localStorage로 저장하고 html2canvas 라이브러리를 사용하여 이미지로 만들었습니다.
 
-### `npm run build`
+# 🗺️ 사용 방법
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 투두를 입력할 <새로운 일> 버튼을 누르면 모달창이 뜹니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 할 일을 입력하고 우선 순위에 따라 도형을 선택한 뒤(내용과 도형 둘 중 하나라도 입력하지 않으면 경고창이 뜹니다.)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 일을 완료(클릭)하면 선택한 도형이 추가되었다는 알림창이 뜨고 도형 페이지에 선택한 도형이 추가됩니다.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 오른쪽 상단 이미지 버튼을 누르면 자신이 만든 도형들을 이미지로 만들 수 있습니다.
