@@ -1,20 +1,29 @@
-import styled, { css, keyframes } from 'styled-components';
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+
+const Modal = ({ children, isOpen, onClose }) => {
+  return (
+    <>
+      <Backdrop modalToggle={isOpen} onClick={onClose} />
+      <ModalWapper modalToggle={isOpen}>{children}</ModalWapper>
+    </>
+  );
+};
+
+export default React.memo(Modal);
 
 const Backdrop = styled.div`
-  ${({ modalToggle }) => {
-    return css`
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(177, 177, 177, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(177, 177, 177, 0.8);
 
-      visibility: ${modalToggle ? 'visible' : 'hidden'};
-      animation: ${modalToggle ? fadeIn : fadeOut} 0.4s ease-in-out;
-      transition: visibility 0.4s ease-in-out;
-    `;
-  }}
+  visibility: ${({ modalToggle }) => (modalToggle ? 'visible' : 'hidden')};
+  animation: ${({ modalToggle }) => (modalToggle ? fadeIn : fadeOut)} 0.4s
+    ease-in-out;
+  transition: visibility 0.4s ease-in-out;
 `;
 
 const fadeIn = keyframes`
@@ -36,35 +45,21 @@ const fadeOut = keyframes`
 `;
 
 const ModalWapper = styled.div`
-  ${({ theme, modalToggle }) => {
-    return css`
-      position: fixed;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -40%);
-      width: 80%;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  width: 80%;
 
-      visibility: ${modalToggle ? 'visible' : 'hidden'};
-      animation: ${modalToggle ? fadeIn : fadeOut} 0.4s ease-in-out;
-      transition: visibility 0.4s ease-in-out;
+  visibility: ${({ modalToggle }) => (modalToggle ? 'visible' : 'hidden')};
+  animation: ${({ modalToggle }) => (modalToggle ? fadeIn : fadeOut)} 0.4s
+    ease-in-out;
+  transition: visibility 0.4s ease-in-out;
 
-      ${theme.device.desktop} {
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -40%);
-        width: 50%;
-      }
-    `;
-  }}
+  ${({ theme }) => theme.device.desktop} {
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    width: 50%;
+  }
 `;
-
-const Modal = ({ children, isOpen, onClose }) => {
-  return (
-    <>
-      <Backdrop modalToggle={isOpen} onClick={onClose} />
-      <ModalWapper modalToggle={isOpen}>{children}</ModalWapper>
-    </>
-  );
-};
-
-export default Modal;

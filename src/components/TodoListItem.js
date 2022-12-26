@@ -6,8 +6,72 @@ import styled, { css } from 'styled-components';
 import StyledTriangle from '../assets/Triangle';
 import StyledSquare from '../assets/Square';
 import StyledCircle from '../assets/Circle';
-import StyledButton from '../styles/StyledButton';
+import StyledBtn from '../styles/StyledBtn';
 import Notification from '../layout/Notification';
+
+const TodoListItem = ({ todoItem }) => {
+  const { id, text, figure, done, date } = todoItem;
+  const [toggle, setToggle] = useState(false);
+  const dispach = useDispatch();
+
+  useEffect(() => {
+    let timeout;
+
+    if (done && toggle) {
+      timeout = setTimeout(() => setToggle(false), 1200);
+    }
+
+    if (!done && toggle) {
+      setToggle(false);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [toggle, done]);
+
+  const onToggleTodoHandler = useCallback(
+    (id) => {
+      dispach(toggleTodo(id));
+
+      if (!done) {
+        setToggle(true);
+      }
+    },
+    [dispach, done]
+  );
+
+  const onRemoveTodoHandler = useCallback(
+    (id) => {
+      dispach(removeTodo(id));
+    },
+    [dispach]
+  );
+
+  return (
+    <>
+      <Notification toggle={toggle} figure={figure} />
+      <TodoItemLi>
+        <TodoItemWrapper onClick={() => onToggleTodoHandler(id)}>
+          {figure === 'circle' && (
+            <StyledCircle size='small' figurecolor='circle' />
+          )}
+          {figure === 'triangle' && (
+            <StyledTriangle size='small' figurecolor='triangle' />
+          )}
+          {figure === 'square' && (
+            <StyledSquare size='small' figurecolor='square' />
+          )}
+          <p className={`content-text ${done && 'done'}`}>{text}</p>
+          <p className='todo-date'>{date}</p>
+        </TodoItemWrapper>
+        {done && (
+          <RemoveBtn onClick={() => onRemoveTodoHandler(id)}>지우기</RemoveBtn>
+        )}
+      </TodoItemLi>
+    </>
+  );
+};
+
+export default React.memo(TodoListItem);
 
 const TodoItemLi = styled.li`
   display: flex;
@@ -16,7 +80,6 @@ const TodoItemLi = styled.li`
   justify-content: center;
   padding: 20px;
   background-color: #fff;
-  box-sizing: border-box;
   border-radius: 15px;
   margin-bottom: 12px;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
@@ -88,72 +151,8 @@ const TodoItemWrapper = styled.div`
   }}
 `;
 
-const RemoveBtn = styled(StyledButton)`
+const RemoveBtn = styled(StyledBtn)`
   width: 100%;
   margin-top: 20px;
   color: ${({ theme }) => theme.colors.gray};
 `;
-
-const TodoListItem = ({ todoItem }) => {
-  const { id, text, figure, done, date } = todoItem;
-  const [toggle, setToggle] = useState(false);
-  const dispach = useDispatch();
-
-  useEffect(() => {
-    let timeout;
-
-    if (done && toggle) {
-      timeout = setTimeout(() => setToggle(false), 1200);
-    }
-
-    if (!done && toggle) {
-      setToggle(false);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [toggle, done]);
-
-  const onToggleTodoHandler = useCallback(
-    (id) => {
-      dispach(toggleTodo(id));
-
-      if (!done) {
-        setToggle(true);
-      }
-    },
-    [dispach, done]
-  );
-
-  const onRemoveTodoHandler = useCallback(
-    (id) => {
-      dispach(removeTodo(id));
-    },
-    [dispach]
-  );
-
-  return (
-    <>
-      <Notification toggle={toggle} figure={figure} />
-      <TodoItemLi>
-        <TodoItemWrapper onClick={() => onToggleTodoHandler(id)}>
-          {figure === 'circle' && (
-            <StyledCircle size='small' figurecolor='circle' />
-          )}
-          {figure === 'triangle' && (
-            <StyledTriangle size='small' figurecolor='triangle' />
-          )}
-          {figure === 'square' && (
-            <StyledSquare size='small' figurecolor='square' />
-          )}
-          <p className={`content-text ${done && 'done'}`}>{text}</p>
-          <p className='todo-date'>{date}</p>
-        </TodoItemWrapper>
-        {done && (
-          <RemoveBtn onClick={() => onRemoveTodoHandler(id)}>지우기</RemoveBtn>
-        )}
-      </TodoItemLi>
-    </>
-  );
-};
-
-export default React.memo(TodoListItem);
