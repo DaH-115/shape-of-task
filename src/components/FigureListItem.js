@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import StyledCircle from '../assets/Circle';
 import StyledSquare from '../assets/Square';
@@ -27,4 +28,4 @@ const FigureListItem = ({ figure, done }) => {
   );
 };
 
-export default FigureListItem;
+export default React.memo(FigureListItem);

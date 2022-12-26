@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
@@ -106,14 +106,17 @@ const SelectBox = ({ getFigure, isOpen, figurecolor }) => {
     }
   }, [isOpen]);
 
-  const onToggleHandler = () => {
+  const onToggleHandler = useCallback(() => {
     setToggle((preve) => !preve);
-  };
+  }, []);
 
-  const getFigureHandler = (event) => {
-    getFigure(event.target.className);
-    setToggle(false);
-  };
+  const getFigureHandler = useCallback(
+    (event) => {
+      getFigure(event.target.className);
+      setToggle(false);
+    },
+    [getFigure]
+  );
 
   return (
     <>

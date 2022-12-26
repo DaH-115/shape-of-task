@@ -40,9 +40,9 @@ const AddButton = () => {
   const modalState = useSelector((state) => state.modal.modalState);
   const restTodo = todoList.filter((todo) => todo.done === false);
 
-  const modalOpenHandler = () => {
+  const modalOpenHandler = useCallback(() => {
     dispatch(modalIsOpen(true));
-  };
+  }, [dispatch]);
 
   const modalCloseHandler = useCallback(() => {
     dispatch(modalIsClose(false));

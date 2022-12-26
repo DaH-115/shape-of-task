@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../store/todoListSlice';
 import { v4 as uuidv4 } from 'uuid';
@@ -50,35 +50,38 @@ const ModalInput = ({ isOpen }) => {
   const [figure, setFigure] = useState('');
   const dispach = useDispatch();
   const textareaRef = useRef();
-  const today = new Date();
+  const today = useMemo(() => new Date(), []);
 
-  const onChangeHandler = (event) => {
+  const onChangeHandler = useCallback((event) => {
     const text = event.target.value;
     setText(text);
-  };
+  }, []);
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
+  const onSubmitHandler = useCallback(
+    (event) => {
+      event.preventDefault();
 
-    if (!text || !figure) {
-      alert('텍스트와 도형을 채워주세요!');
-      textareaRef.current.focus();
-      return;
-    }
+      if (!text || !figure) {
+        alert('텍스트와 도형을 채워주세요!');
+        textareaRef.current.focus();
+        return;
+      }
 
-    const newTodoItem = {
-      id: uuidv4(),
-      date: today.toLocaleDateString(),
-      text: text.replace(/^\s+|\s+$/gm, ''),
-      checked: false,
-      figure,
-      done: false,
-    };
+      const newTodoItem = {
+        id: uuidv4(),
+        date: today.toLocaleDateString(),
+        text,
+        checked: false,
+        figure,
+        done: false,
+      };
 
-    dispach(addTodo(newTodoItem));
-    setText('');
-    setFigure('');
-  };
+      dispach(addTodo(newTodoItem));
+      setText('');
+      setFigure('');
+    },
+    [dispach, figure, text, today]
+  );
 
   const getFigureHandler = useCallback((figure) => {
     if (figure.includes('circle')) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeTodo, toggleTodo } from '../store/todoListSlice';
 import styled, { css } from 'styled-components';
@@ -36,24 +36,23 @@ const TodoItemWrapper = styled.div`
   ${({ theme }) => {
     return css`
       display: flex;
-      align-items: center;
       width: 100%;
 
       .todo-date {
         display: none;
-        font-weight: bold;
+        font-weight: 700;
         color: ${theme.colors.gray};
       }
 
       .content-text {
         width: 100%;
+        max-height: 150px;
         font-size: 24px;
         line-height: 28px;
         word-break: break-all;
         margin-left: 12px;
 
-        width: 100%;
-        max-height: 150px;
+        white-space: pre-line;
 
         /* scrollbar */
         overflow-y: scroll;
@@ -114,17 +113,23 @@ const TodoListItem = ({ todoItem }) => {
     return () => clearTimeout(timeout);
   }, [toggle, done]);
 
-  const onToggleTodoHandler = (id) => {
-    dispach(toggleTodo(id));
+  const onToggleTodoHandler = useCallback(
+    (id) => {
+      dispach(toggleTodo(id));
 
-    if (!done) {
-      setToggle(true);
-    }
-  };
+      if (!done) {
+        setToggle(true);
+      }
+    },
+    [dispach, done]
+  );
 
-  const onRemoveTodoHandler = (id) => {
-    dispach(removeTodo(id));
-  };
+  const onRemoveTodoHandler = useCallback(
+    (id) => {
+      dispach(removeTodo(id));
+    },
+    [dispach]
+  );
 
   return (
     <>
@@ -151,4 +156,4 @@ const TodoListItem = ({ todoItem }) => {
   );
 };
 
-export default TodoListItem;
+export default React.memo(TodoListItem);

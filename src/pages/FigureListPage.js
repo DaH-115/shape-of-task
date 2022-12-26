@@ -98,15 +98,13 @@ const FigureListPage = () => {
         </PortalModal>
       ) : null}
       <UlWrapper ref={ref}>
-        {todoList.map((todoItem) => {
-          return (
-            <FigureListItem
-              key={todoItem.id}
-              figure={todoItem.figure}
-              done={todoItem.done}
-            />
-          );
-        })}
+        {todoList.map((todoItem) => (
+          <FigureListItem
+            key={todoItem.id}
+            figure={todoItem.figure}
+            done={todoItem.done}
+          />
+        ))}
       </UlWrapper>
     </>
   );
