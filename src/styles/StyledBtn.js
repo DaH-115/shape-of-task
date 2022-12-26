@@ -10,14 +10,18 @@ const StyledBtn = styled.button`
 
   &:hover {
     color: ${({ theme }) => theme.colors.orange};
-    transition: color 0.2s ease-in-out;
-    border-color: #fff;
+    border-color: ${({ theme }) => theme.colors.orange};
+    transition: color 0.1s ease-in-out;
   }
 
   &:active {
     color: #fff;
     background-color: ${({ theme }) => theme.colors.orange};
     transition: background-color 0.2s ease-in-out;
+  }
+
+  &:disabled {
+    pointer-events: none;
   }
 `;
 

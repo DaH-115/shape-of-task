@@ -101,11 +101,7 @@ const ButtonWrapper = styled.div`
 const SelectToggleWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 40%;
-
-  ${({ theme }) => theme.device.desktop} {
-    width: 20%;
-  }
+  width: 120px;
 `;
 
 const SelectBoxWrapper = styled.div`

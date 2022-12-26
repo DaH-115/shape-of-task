@@ -51,8 +51,6 @@ const ModalInput = ({ isOpen }) => {
     } else if (figure.includes('square')) {
       setFigure('square');
     }
-
-    return;
   }, []);
 
   return (
@@ -84,7 +82,7 @@ const ModalInputTextBox = styled.div`
   position: absolute;
   display: flex;
   padding: 40px 0 20px 30px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.gray};
 
@@ -93,7 +91,7 @@ const ModalInputTextBox = styled.div`
   }
 
   p {
-    padding-top: 3px;
+    padding-top: 4px;
   }
 `;
 

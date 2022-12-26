@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
       'Helvetica Neue', sans-serif;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.1rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
