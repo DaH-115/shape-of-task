@@ -34,14 +34,15 @@ const ImgModal = styled.div`
   }
 
   p {
-    color: ${({ theme }) => theme.colors.grey};
+    font-size: 18px;
+    color: ${({ theme }) => theme.colors.gray};
     margin-top: 6px;
 
     &::after {
       content: ' ';
       display: block;
       margin-top: 10px;
-      border-bottom: 2px solid ${({ theme }) => theme.colors.light_grey};
+      border-bottom: 2px solid ${({ theme }) => theme.colors.light_gray};
     }
   }
 `;
@@ -68,13 +69,13 @@ const FigureListPage = () => {
 
   useEffect(() => {
     const figureList = ref.current;
-    if (captureModal) {
+    if (!img) {
       html2canvas(figureList).then((canvas) => {
         const imageUrl = canvas.toDataURL('image/jpg');
         setImg(imageUrl);
       });
     }
-  }, [captureModal]);
+  }, [img]);
 
   const modalCloseHandler = useCallback(() => {
     dispatch(captureIsClose(false));
@@ -82,7 +83,7 @@ const FigureListPage = () => {
 
   return (
     <>
-      {img && (
+      {img ? (
         <PortalModal>
           <Modal isOpen={captureModal} onClose={modalCloseHandler}>
             <ImgModal>
@@ -95,7 +96,7 @@ const FigureListPage = () => {
             </ImgModal>
           </Modal>
         </PortalModal>
-      )}
+      ) : null}
       <UlWrapper ref={ref}>
         {todoList.map((todoItem) => {
           return (

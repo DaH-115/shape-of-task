@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetwindowWidth from '../hooks/useGetwindowWidth';
+import useArrCheck from '../hooks/useArrCheck';
 
 import StyledLogo from '../assets/Logo';
 import StyledButton from '../styles/StyledButton';
@@ -32,6 +33,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { windowWidth, desktopSize } = useGetwindowWidth();
   const location = useLocation();
+  const arrCheck = useArrCheck();
   const pathname = location.pathname;
 
   const modalOpenHandle = () => {
@@ -48,7 +50,9 @@ const Header = () => {
           </Link>
         )}
         {pathname === '/figure-list' || windowWidth >= desktopSize ? (
-          <StyledButton onClick={modalOpenHandle}>이미지</StyledButton>
+          <StyledButton onClick={modalOpenHandle} disabled={!arrCheck}>
+            이미지
+          </StyledButton>
         ) : (
           <Link to='/figure-list'>
             <StyledButton>도형</StyledButton>

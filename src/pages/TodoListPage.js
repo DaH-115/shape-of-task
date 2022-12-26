@@ -6,7 +6,7 @@ import TodoListItem from '../components/TodoListItem';
 const Ul = styled.ul`
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.light_grey};
+  background-color: ${({ theme }) => theme.colors.light_gray};
   padding: 20px;
   box-sizing: border-box;
 

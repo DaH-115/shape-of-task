@@ -37,13 +37,17 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-top: 14px;
-  border-top: 2px solid ${({ theme }) => theme.colors.light_grey};
+  border-top: 2px solid ${({ theme }) => theme.colors.light_gray};
 `;
 
 const SelectToggleWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 40%;
+
+  ${({ theme }) => theme.device.desktop} {
+    width: 20%;
+  }
 `;
 
 const SelectBoxWrapper = styled.div`
@@ -61,7 +65,7 @@ const SelectBoxWrapper = styled.div`
 `;
 
 const Ul = styled.ul`
-  width: 180px;
+  width: 200px;
   background-color: #fff;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
 `;
@@ -71,11 +75,12 @@ const Li = styled.li`
   display: flex;
   align-items: center;
   padding: 12px;
+  font-size: 18px;
   font-weight: 500;
   box-sizing: border-box;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.light_grey};
+    background-color: ${({ theme }) => theme.colors.light_gray};
   }
 `;
 
@@ -90,7 +95,6 @@ const FigureStyleBox = styled.div`
 
 const Button = styled(StyledButton)`
   width: 80px;
-  height: 40px;
 `;
 
 const SelectBox = ({ getFigure, isOpen, figurecolor }) => {

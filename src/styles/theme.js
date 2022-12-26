@@ -1,9 +1,10 @@
 const colors = {
+  black: '#141414',
   orange: '#EE5A24',
   blue: '#5758BB',
   yellow: '#FFC312',
-  grey: '#a6c6c4',
-  light_grey: '#ecf0f1',
+  gray: '#a6c6c4',
+  light_gray: '#ecf0f1',
 };
 
 const size = {
@@ -14,7 +15,7 @@ const size = {
 
 const device = {
   modile: `@media all and (max-width: ${size.mobile})`,
-  tablet: `@media all and (min-width: ${size.mobile})`,
+  tablet: `@media all and (min-width: ${size.tablet})`,
   desktop: `@media all and (min-width: ${size.desktop})`,
 };
 

@@ -7,7 +7,7 @@ const StyledFigure = styled(Triangle)`
     return css`
       fill: ${figurecolor === 'triangle'
         ? theme.colors.yellow
-        : theme.colors.light_grey};
+        : theme.colors.light_gray};
       width: ${size === 'small' ? '35px' : 'auto'};
       height: ${size === 'small' ? '35px' : 'auto'};
     `;

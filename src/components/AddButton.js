@@ -10,20 +10,28 @@ import PortalModal from './PortalModal';
 import { modalIsClose, modalIsOpen } from '../store/modalSlice';
 
 const TodoMessage = styled.div`
-  font-size: 18px;
+  font-size: 24px;
   padding: 20px;
-  letter-spacing: -0.02em;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 24px;
+  }
 `;
 
 const AddButtonBox = styled(StyledButton)`
   width: 90%;
-  font-size: 24px;
-  letter-spacing: -0.04em;
+  font-size: 36px;
   padding: 20px;
   margin-bottom: 20px;
+  color: ${({ theme }) => theme.colors.black};
   background: #fff;
   font-weight: 400;
   border-radius: 40px;
+  border: 3px solid ${({ theme }) => theme.colors.gray};
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 24px;
+  }
 `;
 
 const AddButton = () => {

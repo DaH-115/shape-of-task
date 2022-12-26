@@ -3,16 +3,16 @@ import styled from 'styled-components';
 const StyledButton = styled.button`
   width: auto;
   background-color: #fff;
-  border: 1px solid ${({ theme }) => theme.colors.grey};
-  border-radius: 20px;
+  border: 2px solid ${({ theme }) => theme.colors.gray};
+  border-radius: 24px;
   padding: 10px 20px 10px 20px;
   font-weight: 600;
-  font-size: 14px;
-  letter-spacing: -0.02em;
+  font-size: 18px;
 
   &:hover {
     color: ${({ theme }) => theme.colors.orange};
     transition: color 0.2s ease-in-out;
+    border-color: #fff;
   }
 
   &:active {

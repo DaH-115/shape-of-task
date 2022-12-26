@@ -33,10 +33,9 @@ const FooterIcons = styled.div`
 
   .footer-title {
     display: blcok;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     font-weight: 600;
-    font-size: 14px;
-    letter-spacing: -0.02em;
+    font-size: 18px;
     color: #fff;
   }
 `;

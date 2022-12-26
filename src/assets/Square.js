@@ -7,7 +7,7 @@ const StyledFigure = styled(Square)`
     return css`
       fill: ${figurecolor === 'square'
         ? theme.colors.blue
-        : theme.colors.light_grey};
+        : theme.colors.light_gray};
       width: ${size === 'small' ? '30px' : 'auto'};
       height: ${size === 'small' ? '30px' : 'auto'};
     `;

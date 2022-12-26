@@ -5,12 +5,14 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
   }
-
+  
   body {
+    color: #141414;
     box-sizing: border-box;
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
       'Helvetica Neue', sans-serif;
+    letter-spacing: -0.06em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

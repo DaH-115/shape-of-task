@@ -42,12 +42,12 @@ const TodoItemWrapper = styled.div`
       .todo-date {
         display: none;
         font-weight: bold;
-        color: ${theme.colors.grey};
+        color: ${theme.colors.gray};
       }
 
       .content-text {
         width: 100%;
-        font-size: 18px;
+        font-size: 24px;
         line-height: 28px;
         word-break: break-all;
         margin-left: 12px;
@@ -65,7 +65,7 @@ const TodoItemWrapper = styled.div`
       }
 
       .content-text.done {
-        color: ${theme.colors.grey};
+        color: ${theme.colors.gray};
         text-decoration: line-through;
       }
 
@@ -81,7 +81,7 @@ const TodoItemWrapper = styled.div`
 
         .todo-date {
           display: block;
-          border-top: 2px solid ${({ theme }) => theme.colors.light_grey};
+          border-top: 2px solid ${({ theme }) => theme.colors.light_gray};
           padding-top: 10px;
         }
       } ;
@@ -92,7 +92,7 @@ const TodoItemWrapper = styled.div`
 const RemoveBtn = styled(StyledButton)`
   width: 100%;
   margin-top: 20px;
-  color: ${({ theme }) => theme.colors.grey};
+  color: ${({ theme }) => theme.colors.gray};
 `;
 
 const TodoListItem = ({ todoItem }) => {

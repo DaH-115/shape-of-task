@@ -10,10 +10,9 @@ const ModalInputTextBox = styled.div`
   position: absolute;
   display: flex;
   padding: 40px 0 20px 30px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: ${({ theme }) => theme.colors.grey};
+  color: ${({ theme }) => theme.colors.gray};
 
   h3 {
     margin-right: 8px;
@@ -41,8 +40,8 @@ const ModalInputBox = styled.textarea`
   font-family: 'Pretendard';
   width: 100%;
   height: 430px;
-  font-size: 20px;
-  border-top: 2px solid ${({ theme }) => theme.colors.light_grey};
+  font-size: 24px;
+  border-top: 2px solid ${({ theme }) => theme.colors.light_gray};
   padding-top: 20px;
 `;
 

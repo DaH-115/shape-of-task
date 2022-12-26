@@ -7,7 +7,7 @@ const StyledFigure = styled(Circle)`
     return css`
       fill: ${figurecolor === 'circle'
         ? theme.colors.orange
-        : theme.colors.light_grey};
+        : theme.colors.light_gray};
       width: ${size === 'small' ? '35px' : 'auto'};
       height: ${size === 'small' ? '35px' : 'auto'};
     `;

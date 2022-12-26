@@ -33,6 +33,7 @@ const NoteMessage = styled.div`
       height: auto;
       box-sizing: border-box;
       padding: 25px;
+      font-size: 24px;
       text-align: center;
       box-shadow: 0px 0px 20px rgba(223, 74, 11, 0.5);
       visibility: ${props.toggle ? 'visible' : 'hidden'};
