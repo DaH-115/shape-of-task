@@ -1,28 +1,25 @@
 import { ThemeProvider } from 'styled-components';
 import { defalutTheme } from './styles/theme';
 
+import MetaTags from './MetaTags';
+import Header from './layout/Header';
+import Footer from './layout/Footer';
 import AddButton from './components/AddButton';
 import FigureListMain from './components/FigureListMain';
 import GlobalStyle from './styles/GlobalStyle';
 import FlexWrapper from './styles/FlexWrapper';
 import Wrapper from './styles/Wrapper';
-import RoutesFC from './routes/Routes';
-import Header from './layout/Header';
-import { Main } from './layout/Main';
-import Footer from './layout/Footer';
-import MetaTags from './MetaTags';
+import MainRoutes from './routes/Routes';
 
 function App() {
   return (
     <ThemeProvider theme={defalutTheme}>
-      <MetaTags titleText='main' />
+      <MetaTags />
       <GlobalStyle />
       <Header />
       <FlexWrapper>
         <Wrapper>
-          <Main>
-            <RoutesFC />
-          </Main>
+          <MainRoutes />
           <AddButton />
         </Wrapper>
         {/* DESKTOP SIZE ONLY */}
