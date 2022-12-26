@@ -2,13 +2,9 @@ import styled from 'styled-components';
 import useArrCheck from '../hooks/useArrCheck';
 import useGetwindowWidth from '../hooks/useGetwindowWidth';
 
-import { Main } from '../layout/Main';
-import Message from '../layout/Message';
+import Main from '../layout/Main';
+import MessageBox from '../layout/MessageBox';
 import FigureListPage from '../pages/FigureListPage';
-
-export const FigureListWrapper = styled(Main)`
-  height: auto;
-`;
 
 const FigureListMain = () => {
   const { windowWidth, desktopSize } = useGetwindowWidth();
@@ -19,7 +15,7 @@ const FigureListMain = () => {
       {windowWidth >= desktopSize && (
         <FigureListWrapper>
           {arrCheck === undefined ? (
-            <Message>가끔은 여백도 괜찮아요.😌</Message>
+            <MessageBox messgae='가끔은 여백도 괜찮아요.😌' />
           ) : (
             <FigureListPage />
           )}
@@ -30,3 +26,7 @@ const FigureListMain = () => {
 };
 
 export default FigureListMain;
+
+const FigureListWrapper = styled(Main)`
+  height: auto;
+`;

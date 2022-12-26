@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
-
 import { ReactComponent as Circle } from '../assets/Circle.svg';
+
+const StyledCircle = ({ size, figurecolor }) => {
+  return <StyledFigure size={size} figurecolor={figurecolor} />;
+};
+
+export default StyledCircle;
 
 const StyledFigure = styled(Circle)`
   ${({ theme, size, figurecolor }) => {
@@ -13,9 +18,3 @@ const StyledFigure = styled(Circle)`
     `;
   }}
 `;
-
-const StyledCircle = ({ size, figurecolor }) => {
-  return <StyledFigure size={size} figurecolor={figurecolor} />;
-};
-
-export default StyledCircle;

@@ -7,7 +7,61 @@ import html2canvas from 'html2canvas';
 import FigureListItem from '../components/FigureListItem';
 import PortalModal from '../components/PortalModal';
 import Modal from '../layout/Modal';
-import StyledButton from '../styles/StyledButton';
+import StyledBtn from '../styles/StyledBtn';
+
+const FigureListPage = () => {
+  const ref = useRef();
+  const [img, setImg] = useState();
+  const todoList = useSelector((state) => state.todoList.value);
+  const captureModal = useSelector((state) => state.modal.captureState);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const figureList = ref.current;
+    const getListImg = async () => {
+      const figureListImg = await html2canvas(figureList);
+      setImg(figureListImg.toDataURL('image/jpg'));
+    };
+
+    if (!img) {
+      getListImg();
+    }
+  }, [img]);
+
+  const modalCloseHandler = useCallback(() => {
+    dispatch(captureIsClose(false));
+  }, [dispatch]);
+
+  return (
+    <>
+      {img ? (
+        <PortalModal>
+          <Modal isOpen={captureModal} onClose={modalCloseHandler}>
+            <ImgModal>
+              <h1>이미지로 보기</h1>
+              <p>오늘도 다채로운 하루를 보내셨네요!🥳</p>
+              <ImageBox>
+                <img src={img} alt='square, triangle, circle Figure List' />
+              </ImageBox>
+              <CloseBtn onClick={modalCloseHandler}>닫기</CloseBtn>
+            </ImgModal>
+          </Modal>
+        </PortalModal>
+      ) : null}
+      <UlWrapper ref={ref}>
+        {todoList.map((todoItem) => (
+          <FigureListItem
+            key={todoItem.id}
+            figure={todoItem.figure}
+            done={todoItem.done}
+          />
+        ))}
+      </UlWrapper>
+    </>
+  );
+};
+
+export default FigureListPage;
 
 const UlWrapper = styled.ul`
   display: flex;
@@ -21,7 +75,6 @@ const ImgModal = styled.div`
   height: 100%;
   background-color: #fff;
   padding: 20px;
-  box-sizing: border-box;
 
   &::after {
     content: ' ';
@@ -47,11 +100,11 @@ const ImgModal = styled.div`
   }
 `;
 
-const Button = styled(StyledButton)`
+const CloseBtn = styled(StyledBtn)`
   float: right;
 `;
 
-const Div = styled.div`
+const ImageBox = styled.div`
   width: 100%;
   margin-top: 12px;
 
@@ -59,55 +112,3 @@ const Div = styled.div`
     width: 100%;
   }
 `;
-
-const FigureListPage = () => {
-  const ref = useRef();
-  const [img, setImg] = useState();
-  const todoList = useSelector((state) => state.todoList.value);
-  const captureModal = useSelector((state) => state.modal.captureState);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const figureList = ref.current;
-    if (!img) {
-      html2canvas(figureList).then((canvas) => {
-        const imageUrl = canvas.toDataURL('image/jpg');
-        setImg(imageUrl);
-      });
-    }
-  }, [img]);
-
-  const modalCloseHandler = useCallback(() => {
-    dispatch(captureIsClose(false));
-  }, [dispatch]);
-
-  return (
-    <>
-      {img ? (
-        <PortalModal>
-          <Modal isOpen={captureModal} onClose={modalCloseHandler}>
-            <ImgModal>
-              <h1>이미지로 보기</h1>
-              <p>오늘도 다채로운 하루를 보내셨네요!🥳</p>
-              <Div>
-                <img src={img} alt='square, triangle, circle Figure List' />
-              </Div>
-              <Button onClick={modalCloseHandler}>닫기</Button>
-            </ImgModal>
-          </Modal>
-        </PortalModal>
-      ) : null}
-      <UlWrapper ref={ref}>
-        {todoList.map((todoItem) => (
-          <FigureListItem
-            key={todoItem.id}
-            figure={todoItem.figure}
-            done={todoItem.done}
-          />
-        ))}
-      </UlWrapper>
-    </>
-  );
-};
-
-export default FigureListPage;

@@ -3,12 +3,6 @@ import StyledCircle from '../assets/Circle';
 import StyledSquare from '../assets/Square';
 import StyledTriangle from '../assets/Triangle';
 
-const LogoWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  margin-right: 6px;
-`;
-
 const LogoFigures = ({ figurecolor }) => {
   return (
     <LogoWrapper>
@@ -20,3 +14,9 @@ const LogoFigures = ({ figurecolor }) => {
 };
 
 export default LogoFigures;
+
+const LogoWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  margin-right: 6px;
+`;

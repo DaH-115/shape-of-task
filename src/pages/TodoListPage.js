@@ -7,7 +7,6 @@ const Ul = styled.ul`
   height: 100%;
   background-color: ${({ theme }) => theme.colors.light_gray};
   padding: 20px;
-  box-sizing: border-box;
 
   /* scrollbar */
   overflow-y: scroll;

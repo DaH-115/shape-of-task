@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-export const Main = styled.main`
+const Main = styled.main`
   width: 100%;
   height: 65vh;
 
@@ -12,11 +12,9 @@ export const Main = styled.main`
     display: none; /* Chrome, Safari, Opera*/
   }
 
-  ${({ theme }) => {
-    return css`
-      ${theme.device.modile} {
-        min-width: ${theme.size.modile};
-      }
-    `;
-  }}
+  ${({ theme }) => theme.device.modile} {
+    min-width: ${({ theme }) => theme.size.modile};
+  }
 `;
+
+export default Main;

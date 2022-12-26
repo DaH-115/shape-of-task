@@ -4,7 +4,21 @@ import StyledCircle from '../assets/Circle';
 import StyledSquare from '../assets/Square';
 import StyledTriangle from '../assets/Triangle';
 
-const Li = styled.li`
+const FigureListItem = ({ figure, done }) => {
+  return (
+    <FigureListLi>
+      {figure === 'circle' && done && <StyledCircle figurecolor='circle' />}
+      {figure === 'triangle' && done && (
+        <StyledTriangle figurecolor='triangle' />
+      )}
+      {figure === 'square' && done && <StyledSquare figurecolor='square' />}
+    </FigureListLi>
+  );
+};
+
+export default React.memo(FigureListItem);
+
+const FigureListLi = styled.li`
   padding: 8px;
 
   ${({ theme }) => theme.device.desktop} {
@@ -15,17 +29,3 @@ const Li = styled.li`
     }
   }
 `;
-
-const FigureListItem = ({ figure, done }) => {
-  return (
-    <Li>
-      {figure === 'circle' && done && <StyledCircle figurecolor='circle' />}
-      {figure === 'triangle' && done && (
-        <StyledTriangle figurecolor='triangle' />
-      )}
-      {figure === 'square' && done && <StyledSquare figurecolor='square' />}
-    </Li>
-  );
-};
-
-export default React.memo(FigureListItem);

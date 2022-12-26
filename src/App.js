@@ -4,7 +4,7 @@ import { defalutTheme } from './styles/theme';
 import MetaTags from './MetaTags';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
-import AddButton from './components/AddButton';
+import AddBtn from './components/AddBtn';
 import FigureListMain from './components/FigureListMain';
 import GlobalStyle from './styles/GlobalStyle';
 import FlexWrapper from './styles/FlexWrapper';
@@ -20,7 +20,7 @@ function App() {
       <FlexWrapper>
         <Wrapper>
           <MainRoutes />
-          <AddButton />
+          <AddBtn />
         </Wrapper>
         {/* DESKTOP SIZE ONLY */}
         <FigureListMain />

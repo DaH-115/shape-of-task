@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
-
 import { ReactComponent as Triangle } from '../assets/Triangle.svg';
+
+const StyledTriangle = ({ size, figurecolor }) => {
+  return <StyledFigure size={size} figurecolor={figurecolor} />;
+};
+
+export default StyledTriangle;
 
 const StyledFigure = styled(Triangle)`
   ${({ theme, size, figurecolor }) => {
@@ -13,9 +18,3 @@ const StyledFigure = styled(Triangle)`
     `;
   }}
 `;
-
-const StyledTriangle = ({ size, figurecolor }) => {
-  return <StyledFigure size={size} figurecolor={figurecolor} />;
-};
-
-export default StyledTriangle;

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
-  width: auto;
+const StyledBtn = styled.button`
   background-color: #fff;
   border: 2px solid ${({ theme }) => theme.colors.gray};
   border-radius: 24px;
@@ -22,4 +21,4 @@ const StyledButton = styled.button`
   }
 `;
 
-export default StyledButton;
+export default StyledBtn;

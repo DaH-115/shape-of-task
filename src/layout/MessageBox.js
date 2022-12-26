@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-const MessageBox = styled.div`
+const MessageBox = ({ messgae }) => {
+  return <Message>{messgae}</Message>;
+};
+
+export default MessageBox;
+
+const Message = styled.p`
   text-align: center;
   color: ${({ theme }) => theme.colors.gray};
   font-weight: 400;
@@ -11,9 +17,3 @@ const MessageBox = styled.div`
     font-size: 24px;
   }
 `;
-
-const Message = ({ children }) => {
-  return <MessageBox>{children}</MessageBox>;
-};
-
-export default Message;
