@@ -3,49 +3,55 @@ import { FaGithub, FaHome } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <FooterBox>
-      <FooterIconWrapper>
+    <FooterWrapper>
+      <FooterTextWrapper>
         <FooterTitle className='footer-title'>
           세모 네모 동그라미 TODO LIST
         </FooterTitle>
+        <Copyright>{'ⓒkwak_dahyeon 2023'}</Copyright>
         <FaGithub className='git-icon' />
         <FaHome className='home-icon' />
-      </FooterIconWrapper>
-    </FooterBox>
+      </FooterTextWrapper>
+    </FooterWrapper>
   );
 };
 
 export default Footer;
 
-const FooterBox = styled.footer`
+const FooterWrapper = styled.footer`
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
   background-color: ${({ theme }) => theme.colors.orange};
 `;
 
-const FooterTitle = styled.p`
-  display: blcok;
-  margin-bottom: 14px;
-  font-weight: 600;
-  font-size: 18px;
-  color: #fff;
-  cursor: none;
-`;
-
-const FooterIconWrapper = styled.div`
+const FooterTextWrapper = styled.div`
   padding: 25px;
-  cursor: pointer;
 
   .git-icon {
     width: 30px;
     height: 30px;
     color: #fff;
     margin-right: 12px;
+    cursor: pointer;
   }
 
   .home-icon {
     width: 30px;
     height: 30px;
     color: #fff;
+    cursor: pointer;
   }
+`;
+
+const FooterTitle = styled.p`
+  display: blcok;
+  font-weight: 700;
+  font-size: 18px;
+  color: ${({ theme }) => theme.colors.light_gray};
+`;
+
+const Copyright = styled.p`
+  font-size: 18px;
+  color: ${({ theme }) => theme.colors.light_gray};
+  margin-bottom: 14px;
 `;

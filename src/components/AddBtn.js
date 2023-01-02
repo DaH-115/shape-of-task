@@ -25,7 +25,11 @@ const AddBtn = () => {
 
   return (
     <>
-      <TodoMessage>{`총 ${restTodo.length}개의 할 일이 있습니다.`}</TodoMessage>
+      <TodoMessage>
+        {restTodo.length
+          ? `총 ${restTodo.length}개의 할 일이 있습니다.`
+          : '할 일이 없습니다.'}
+      </TodoMessage>
       <FlexWrapper>
         <AddBtnBox onClick={modalOpenHandler}>{'새로운 일 +'}</AddBtnBox>
         <PortalModal>
@@ -43,24 +47,26 @@ export default AddBtn;
 const TodoMessage = styled.div`
   font-size: 24px;
   padding: 20px;
-
-  ${({ theme }) => theme.device.tablet} {
-    font-size: 24px;
-  }
 `;
 
 const AddBtnBox = styled(StyledBtn)`
   width: 90%;
   font-size: 36px;
   padding: 20px;
-  margin-bottom: 20px;
-  color: ${({ theme }) => theme.colors.black};
-  background: #fff;
-  font-weight: 400;
+  color: ${({ theme }) => theme.colors.light_gray};
+  background-color: ${({ theme }) => theme.colors.orange};
   border-radius: 40px;
-  border: 3px solid ${({ theme }) => theme.colors.gray};
+  border: none;
+  margin-bottom: 20px;
+
+  &:hover,
+  &:active {
+    color: #fff;
+    border-color: ${({ theme }) => theme.colors.orange};
+    transition: color 0.1s ease-in-out;
+  }
 
   ${({ theme }) => theme.device.tablet} {
-    font-size: 24px;
+    font-size: 28px;
   }
 `;
