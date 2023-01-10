@@ -68,7 +68,7 @@ const ModalInput = ({ isOpen }) => {
         />
         <SelectBox
           getFigure={getFigureHandler}
-          figurecolor={figure}
+          figure={figure}
           isOpen={isOpen}
         />
       </ModalInputForm>

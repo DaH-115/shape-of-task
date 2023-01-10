@@ -1,14 +1,12 @@
 import styled from 'styled-components';
-import StyledCircle from '../assets/Circle';
-import StyledSquare from '../assets/Square';
-import StyledTriangle from '../assets/Triangle';
+import { StyledCircle, StyledSquare, StyledTriangle } from './FigureStyles';
 
-const LogoFigures = ({ figurecolor }) => {
+const LogoFigures = ({ figure }) => {
   return (
     <LogoWrapper>
-      <StyledTriangle figurecolor={figurecolor} />
-      <StyledSquare figurecolor={figurecolor} />
-      <StyledCircle figurecolor={figurecolor} />
+      <StyledCircle figureColor={figure} />
+      <StyledSquare figureColor={figure} />
+      <StyledTriangle figureColor={figure} />
     </LogoWrapper>
   );
 };

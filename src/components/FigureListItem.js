@@ -1,18 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import StyledCircle from '../assets/Circle';
-import StyledSquare from '../assets/Square';
-import StyledTriangle from '../assets/Triangle';
+import StyledFigure from './StyledFigure';
 
 const FigureListItem = ({ figure, done }) => {
   return (
-    <FigureListLi>
-      {figure === 'circle' && done && <StyledCircle figurecolor='circle' />}
-      {figure === 'triangle' && done && (
-        <StyledTriangle figurecolor='triangle' />
-      )}
-      {figure === 'square' && done && <StyledSquare figurecolor='square' />}
-    </FigureListLi>
+    <FigureListLi>{done && <StyledFigure figure={figure} />}</FigureListLi>
   );
 };
 

@@ -3,9 +3,7 @@ import { useDispatch } from 'react-redux';
 import { removeTodo, toggleTodo } from '../store/todoListSlice';
 import styled, { css } from 'styled-components';
 
-import StyledTriangle from '../assets/Triangle';
-import StyledSquare from '../assets/Square';
-import StyledCircle from '../assets/Circle';
+import StyledFigure from './StyledFigure';
 import StyledBtn from '../styles/StyledBtn';
 import Notification from '../layout/Notification';
 
@@ -51,15 +49,7 @@ const TodoListItem = ({ todoItem }) => {
       <Notification toggle={toggle} figure={figure} />
       <TodoItemLi>
         <TodoItemWrapper onClick={() => onToggleTodoHandler(id)}>
-          {figure === 'circle' && (
-            <StyledCircle size='small' figurecolor='circle' />
-          )}
-          {figure === 'triangle' && (
-            <StyledTriangle size='small' figurecolor='triangle' />
-          )}
-          {figure === 'square' && (
-            <StyledSquare size='small' figurecolor='square' />
-          )}
+          <StyledFigure size='small' figure={figure} />
           <p className={`content-text ${done && 'done'}`}>{text}</p>
           <p className='todo-date'>{date}</p>
         </TodoItemWrapper>

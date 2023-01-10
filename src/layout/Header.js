@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import useGetwindowWidth from '../hooks/useGetwindowWidth';
 import useArrCheck from '../hooks/useArrCheck';
 
-import StyledLogo from '../assets/Logo';
+import StyledLogo from '../components/StyledLogo';
 import StyledBtn from '../styles/StyledBtn';
 import { captureIsOpen } from '../store/modalSlice';
 

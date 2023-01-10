@@ -34,7 +34,7 @@ const FigureListPage = () => {
 
   return (
     <>
-      {img ? (
+      {img && (
         <PortalModal>
           <Modal isOpen={captureModal} onClose={modalCloseHandler}>
             <ImgModal>
@@ -47,7 +47,7 @@ const FigureListPage = () => {
             </ImgModal>
           </Modal>
         </PortalModal>
-      ) : null}
+      )}
       <UlWrapper ref={ref}>
         {todoList.map((todoItem) => (
           <FigureListItem

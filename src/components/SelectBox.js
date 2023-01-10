@@ -2,13 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import StyledCircle from '../assets/Circle';
-import StyledTriangle from '../assets/Triangle';
-import StyledSquare from '../assets/Square';
 import LogoFigures from './LogoFigures';
 import StyledBtn from '../styles/StyledBtn';
+import StyledFigure from './StyledFigure';
 
-const SelectBox = ({ getFigure, isOpen, figurecolor }) => {
+const SelectBox = ({ getFigure, isOpen, figure }) => {
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
@@ -33,7 +31,7 @@ const SelectBox = ({ getFigure, isOpen, figurecolor }) => {
     <>
       <ButtonWrapper>
         <SelectToggleWrapper onClick={onToggleHandler}>
-          <LogoFigures figurecolor={figurecolor} />
+          <LogoFigures figure={figure} />
           <div>{toggle ? <FaAngleDown /> : <FaAngleUp />}</div>
         </SelectToggleWrapper>
         <SubmitBtn>등록</SubmitBtn>
@@ -42,19 +40,19 @@ const SelectBox = ({ getFigure, isOpen, figurecolor }) => {
         <SelectBoxUl onClick={getFigureHandler}>
           <SelectBoxLi className='circle'>
             <FigureStyleBox>
-              <StyledCircle size='small' figurecolor='circle' />
+              <StyledFigure size='small' figure='circle' />
             </FigureStyleBox>
             중요해요
           </SelectBoxLi>
           <SelectBoxLi className='triangle'>
             <FigureStyleBox>
-              <StyledTriangle size='small' figurecolor='triangle' />
+              <StyledFigure size='small' figure='triangle' />
             </FigureStyleBox>
             기억해 두세요
           </SelectBoxLi>
           <SelectBoxLi className='square'>
             <FigureStyleBox>
-              <StyledSquare size='small' figurecolor='square' />
+              <StyledFigure size='small' figure='square' />
             </FigureStyleBox>
             언제든지 하세요
           </SelectBoxLi>
