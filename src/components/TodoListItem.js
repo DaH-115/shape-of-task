@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeTodo, toggleTodo } from '../store/todoListSlice';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import StyledFigure from './StyledFigure';
 import StyledBtn from '../styles/StyledBtn';
 import Notification from '../layout/Notification';
 
-const TodoListItem = ({ todoItem }) => {
-  const { id, text, figure, done, date } = todoItem;
+const TodoListItem = ({ id, text, figure, done, date }) => {
   const [toggle, setToggle] = useState(false);
   const dispach = useDispatch();
 
@@ -86,59 +85,56 @@ const TodoItemLi = styled.li`
 `;
 
 const TodoItemWrapper = styled.div`
-  ${({ theme }) => {
-    return css`
-      display: flex;
+  display: flex;
+  width: 100%;
+
+  .todo-date {
+    display: none;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.gray};
+  }
+
+  .content-text {
+    width: 100%;
+    max-height: 150px;
+    font-size: 24px;
+    line-height: 28px;
+    word-break: break-all;
+    margin-top: 4px;
+    margin-left: 12px;
+
+    white-space: pre-line;
+
+    /* scrollbar */
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+    }
+  }
+
+  .content-text.done {
+    color: ${({ theme }) => theme.colors.gray};
+    text-decoration: line-through;
+  }
+
+  ${({ theme }) => theme.device.desktop} {
+    display: block;
+
+    .todo-date {
+      display: block;
+      border-top: 2px solid ${({ theme }) => theme.colors.light_gray};
+      padding-top: 10px;
+    }
+
+    .content-text {
       width: 100%;
-
-      .todo-date {
-        display: none;
-        font-weight: 700;
-        color: ${theme.colors.gray};
-      }
-
-      .content-text {
-        width: 100%;
-        max-height: 150px;
-        font-size: 24px;
-        line-height: 28px;
-        word-break: break-all;
-        margin-left: 12px;
-
-        white-space: pre-line;
-
-        /* scrollbar */
-        overflow-y: scroll;
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
-        &::-webkit-scrollbar {
-          display: none; /* Chrome, Safari, Opera*/
-        }
-      }
-
-      .content-text.done {
-        color: ${theme.colors.gray};
-        text-decoration: line-through;
-      }
-
-      ${theme.device.desktop} {
-        display: block;
-
-        .content-text {
-          width: 100%;
-          height: 100px;
-          max-height: 100px;
-          margin-left: 0;
-        }
-
-        .todo-date {
-          display: block;
-          border-top: 2px solid ${({ theme }) => theme.colors.light_gray};
-          padding-top: 10px;
-        }
-      } ;
-    `;
-  }}
+      height: 100px;
+      max-height: 100px;
+      margin-left: 4px;
+    }
+  }
 `;
 
 const RemoveBtn = styled(StyledBtn)`
