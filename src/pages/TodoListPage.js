@@ -1,8 +1,34 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import TodoListItem from '../components/TodoListItem';
+import MessageBox from '../layout/MessageBox';
 
-const Ul = styled.ul`
+const TodoListPage = () => {
+  const todoList = useSelector((state) => state.todoList.value);
+
+  return (
+    <TodoListUl>
+      {!todoList.length ? (
+        <MessageBox messgae='할 일을 정리해 보세요.😊' />
+      ) : (
+        todoList.map((todoItem) => (
+          <TodoListItem
+            key={todoItem.id}
+            id={todoItem.id}
+            text={todoItem.text}
+            figure={todoItem.figure}
+            done={todoItem.done}
+            date={todoItem.date}
+          />
+        ))
+      )}
+    </TodoListUl>
+  );
+};
+
+export default TodoListPage;
+
+const TodoListUl = styled.ul`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.light_gray};
@@ -16,17 +42,3 @@ const Ul = styled.ul`
     display: none; /* Chrome, Safari, Opera*/
   }
 `;
-
-const TodoListPage = () => {
-  const todoList = useSelector((state) => state.todoList.value);
-
-  return (
-    <Ul>
-      {todoList.map((todoItem) => (
-        <TodoListItem key={todoItem.id} todoItem={todoItem} />
-      ))}
-    </Ul>
-  );
-};
-
-export default TodoListPage;

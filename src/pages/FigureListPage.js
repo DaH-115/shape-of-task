@@ -3,18 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { captureIsClose } from '../store/modalSlice';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
+import useArrCheck from '../hooks/useArrCheck';
 
+import Modal from '../layout/Modal';
 import FigureListItem from '../components/FigureListItem';
 import PortalModal from '../components/PortalModal';
-import Modal from '../layout/Modal';
 import StyledBtn from '../styles/StyledBtn';
+import MessageBox from '../layout/MessageBox';
 
 const FigureListPage = () => {
   const ref = useRef();
+  const dispatch = useDispatch();
   const [img, setImg] = useState();
   const todoList = useSelector((state) => state.todoList.value);
   const captureModal = useSelector((state) => state.modal.captureState);
-  const dispatch = useDispatch();
+  const arrCheck = useArrCheck();
 
   useEffect(() => {
     const figureList = ref.current;
@@ -49,13 +52,17 @@ const FigureListPage = () => {
         </PortalModal>
       )}
       <UlWrapper ref={ref}>
-        {todoList.map((todoItem) => (
-          <FigureListItem
-            key={todoItem.id}
-            figure={todoItem.figure}
-            done={todoItem.done}
-          />
-        ))}
+        {arrCheck === undefined ? (
+          <MessageBox messgae='가끔은 여백도 괜찮아요.😌' />
+        ) : (
+          todoList.map((todoItem) => (
+            <FigureListItem
+              key={todoItem.id}
+              figure={todoItem.figure}
+              done={todoItem.done}
+            />
+          ))
+        )}
       </UlWrapper>
     </>
   );
