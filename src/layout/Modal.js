@@ -12,20 +12,7 @@ const Modal = ({ children, isOpen, onClose }) => {
 
 export default React.memo(Modal);
 
-const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(177, 177, 177, 0.8);
-
-  visibility: ${({ modalToggle }) => (modalToggle ? 'visible' : 'hidden')};
-  animation: ${({ modalToggle }) => (modalToggle ? fadeIn : fadeOut)} 0.4s
-    ease-in-out;
-  transition: visibility 0.4s ease-in-out;
-`;
-
+// *animation setting
 const fadeIn = keyframes`
   from{
     opacity: 0;
@@ -42,6 +29,21 @@ const fadeOut = keyframes`
   to {
     opacity: 0;
   }
+`;
+// animation setting*
+
+const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(177, 177, 177, 0.8);
+
+  visibility: ${({ modalToggle }) => (modalToggle ? 'visible' : 'hidden')};
+  animation: ${({ modalToggle }) => (modalToggle ? fadeIn : fadeOut)} 0.4s
+    ease-in-out;
+  transition: visibility 0.4s ease-in-out;
 `;
 
 const ModalWapper = styled.div`

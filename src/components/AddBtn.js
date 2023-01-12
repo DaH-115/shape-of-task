@@ -53,8 +53,8 @@ const AddBtnBox = styled(StyledBtn)`
   width: 90%;
   font-size: 36px;
   padding: 20px;
-  color: ${({ theme }) => theme.colors.light_gray};
-  background-color: ${({ theme }) => theme.colors.orange};
+  color: ${({ theme }) => theme.commonColors.light_gray};
+  background-color: ${({ theme }) => theme.colors.circle};
   border-radius: 40px;
   border: none;
   margin-bottom: 20px;
@@ -62,7 +62,7 @@ const AddBtnBox = styled(StyledBtn)`
   &:hover,
   &:active {
     color: #fff;
-    border-color: ${({ theme }) => theme.colors.orange};
+    border-color: ${({ theme }) => theme.colors.circle};
     transition: color 0.1s ease-in-out;
   }
 

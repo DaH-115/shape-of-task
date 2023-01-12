@@ -31,7 +31,7 @@ export default TodoListPage;
 const TodoListUl = styled.ul`
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.light_gray};
+  background-color: ${({ theme }) => theme.commonColors.light_gray};
   padding: 20px;
 
   /* scrollbar */

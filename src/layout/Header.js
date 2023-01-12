@@ -1,13 +1,14 @@
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetwindowWidth from '../hooks/useGetwindowWidth';
 import useArrCheck from '../hooks/useArrCheck';
-
-import StyledLogo from '../components/StyledLogo';
-import StyledBtn from '../styles/StyledBtn';
 import { captureIsOpen } from '../store/modalSlice';
+
+import StyledBtn from '../styles/StyledBtn';
+import StyledLogo from '../components/StyledLogo';
+import SlideMenu from '../components/SlideMenu';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,17 @@ const Header = () => {
   const location = useLocation();
   const arrCheck = useArrCheck();
   const pathname = location.pathname;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const slideMenuOpenHandler = useCallback(() => {
+    setIsOpen((prev) => !prev);
+
+    if (!isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isOpen]);
 
   const modalOpenHandle = useCallback(() => {
     dispatch(captureIsOpen(true));
@@ -25,7 +37,7 @@ const Header = () => {
       <StyledLogo />
       <MenueWrapper>
         {windowWidth >= desktopSize || (
-          <Link to='/' className='goToTodo'>
+          <Link to='/'>
             <StyledBtn>할 일</StyledBtn>
           </Link>
         )}
@@ -38,7 +50,9 @@ const Header = () => {
             <StyledBtn>도형</StyledBtn>
           </Link>
         )}
+        <StyledBtn onClick={slideMenuOpenHandler}>설정</StyledBtn>
       </MenueWrapper>
+      <SlideMenu isOpen={isOpen} slideMenuHandler={slideMenuOpenHandler} />
     </HeaderWrapper>
   );
 };
@@ -52,16 +66,11 @@ const HeaderWrapper = styled.header`
 
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
-  padding: 15px 20px 15px 20px;
+  padding: 15px 20px;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.2);
   background-color: #fff;
-
-  .goToTodo {
-    margin-right: 6px;
-  }
 `;
 
 const MenueWrapper = styled.div`
   display: flex;
-  margin-left: 20px;
 `;

@@ -1,12 +1,3 @@
-const colors = {
-  black: '#141414',
-  orange: '#EE5A24',
-  blue: '#5758BB',
-  yellow: '#FFC312',
-  gray: '#a6c6c4',
-  light_gray: '#ecf0f1',
-};
-
 const size = {
   mobile: '375px',
   tablet: '768px',
@@ -20,7 +11,6 @@ const device = {
 };
 
 export const defalutTheme = {
-  colors,
   size,
   device,
 };

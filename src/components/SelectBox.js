@@ -64,6 +64,7 @@ const SelectBox = ({ getFigure, isOpen, figure }) => {
 
 export default React.memo(SelectBox);
 
+// *animation setting
 const fadeSlideIn = keyframes`
   from {
     transform: translateY(10%);
@@ -87,13 +88,14 @@ const fadeSlideOut = keyframes`
       opacity: 0;
   }
 `;
+// animation setting*
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 14px;
-  border-top: 2px solid ${({ theme }) => theme.colors.light_gray};
+  border-top: 2px solid ${({ theme }) => theme.commonColors.light_gray};
 `;
 
 const SelectToggleWrapper = styled.div`
@@ -128,7 +130,7 @@ const SelectBoxLi = styled.li`
   font-weight: 500;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.light_gray};
+    background-color: ${({ theme }) => theme.commonColors.light_gray};
   }
 `;
 

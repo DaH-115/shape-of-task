@@ -84,7 +84,7 @@ const ModalInputTextBox = styled.div`
   padding: 40px 0 20px 30px;
   font-size: 20px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.commonColors.gray};
 
   h3 {
     margin-right: 8px;
@@ -112,6 +112,6 @@ const ModalInputBox = styled.textarea`
   width: 100%;
   height: 430px;
   font-size: 24px;
-  border-top: 2px solid ${({ theme }) => theme.colors.light_gray};
+  border-top: 2px solid ${({ theme }) => theme.commonColors.light_gray};
   padding-top: 20px;
 `;

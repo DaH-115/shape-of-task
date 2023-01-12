@@ -95,14 +95,14 @@ const ImgModal = styled.div`
 
   p {
     font-size: 18px;
-    color: ${({ theme }) => theme.colors.gray};
+    color: ${({ theme }) => theme.commonColors.gray};
     margin-top: 6px;
 
     &::after {
       content: ' ';
       display: block;
       margin-top: 10px;
-      border-bottom: 2px solid ${({ theme }) => theme.colors.light_gray};
+      border-bottom: 2px solid ${({ theme }) => theme.commonColors.light_gray};
     }
   }
 `;
