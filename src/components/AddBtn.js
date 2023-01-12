@@ -7,7 +7,6 @@ import FlexWrapper from '../styles/FlexWrapper';
 import StyledBtn from '../styles/StyledBtn';
 import Modal from '../layout/Modal';
 import ModalInput from './ModalInput';
-import PortalModal from './PortalModal';
 
 const AddBtn = () => {
   const dispatch = useDispatch();
@@ -32,11 +31,10 @@ const AddBtn = () => {
       </TodoMessage>
       <FlexWrapper>
         <AddBtnBox onClick={modalOpenHandler}>{'새로운 일 +'}</AddBtnBox>
-        <PortalModal>
-          <Modal isOpen={modalState} onClose={modalCloseHandler}>
-            <ModalInput isOpen={modalState} />
-          </Modal>
-        </PortalModal>
+
+        <Modal isOpen={modalState} onClose={modalCloseHandler}>
+          <ModalInput isOpen={modalState} />
+        </Modal>
       </FlexWrapper>
     </>
   );

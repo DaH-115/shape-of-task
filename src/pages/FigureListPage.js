@@ -7,7 +7,6 @@ import useArrCheck from '../hooks/useArrCheck';
 
 import Modal from '../layout/Modal';
 import FigureListItem from '../components/FigureListItem';
-import PortalModal from '../components/PortalModal';
 import StyledBtn from '../styles/StyledBtn';
 import MessageBox from '../layout/MessageBox';
 
@@ -17,19 +16,16 @@ const FigureListPage = () => {
   const [img, setImg] = useState();
   const todoList = useSelector((state) => state.todoList.value);
   const captureModal = useSelector((state) => state.modal.captureState);
+  const paletteName = useSelector((state) => state.themeChange.paletteName);
   const arrCheck = useArrCheck();
 
   useEffect(() => {
     const figureList = ref.current;
-    const getListImg = async () => {
+    (async () => {
       const figureListImg = await html2canvas(figureList);
       setImg(figureListImg.toDataURL('image/jpg'));
-    };
-
-    if (!img) {
-      getListImg();
-    }
-  }, [img]);
+    })();
+  }, [todoList, paletteName]);
 
   const modalCloseHandler = useCallback(() => {
     dispatch(captureIsClose(false));
@@ -38,18 +34,16 @@ const FigureListPage = () => {
   return (
     <>
       {img && (
-        <PortalModal>
-          <Modal isOpen={captureModal} onClose={modalCloseHandler}>
-            <ImgModal>
-              <h1>이미지로 보기</h1>
-              <p>오늘도 다채로운 하루를 보내셨네요!🥳</p>
-              <ImageBox>
-                <img src={img} alt='square, triangle, circle Figure List' />
-              </ImageBox>
-              <CloseBtn onClick={modalCloseHandler}>닫기</CloseBtn>
-            </ImgModal>
-          </Modal>
-        </PortalModal>
+        <Modal isOpen={captureModal} onClose={modalCloseHandler}>
+          <ImgModal>
+            <h1>이미지로 보기</h1>
+            <p>오늘도 다채로운 하루를 보내셨네요!🥳</p>
+            <ImageBox>
+              <img src={img} alt='square, triangle, circle Figure List' />
+            </ImageBox>
+            <CloseBtn onClick={modalCloseHandler}>닫기</CloseBtn>
+          </ImgModal>
+        </Modal>
       )}
       <UlWrapper ref={ref}>
         {arrCheck === undefined ? (

@@ -71,13 +71,19 @@ const SlideMenuWrapper = styled.div`
   height: 100vh;
   background-color: ${({ theme }) => theme.commonColors.light_gray};
   box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.5);
-  padding: 24px;
-  padding-top: 40px;
+  padding: 40px 38px;
 
+  /* scrollbar */
   overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 
   ${({ theme }) => theme.device.desktop} {
     width: 50vw;
+    padding: 48px 68px;
   }
 `;
 

@@ -31,7 +31,8 @@ export default ColorPalette;
 const ColorPaletteWrapper = styled.div`
   width: 100%;
   margin-top: 24px;
-  padding: 10px 20px;
+  padding: 20px;
+  padding-top: 10px;
   border-radius: 20px;
   background-color: #fff;
   border: 4px solid
@@ -59,5 +60,9 @@ const ColorBox = styled.div`
   border-radius: 20px;
   background-color: ${({ themecolor }) => themecolor};
 
-  margin: 10px;
+  margin-right: 20px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;

@@ -29,4 +29,5 @@ export default FigureListMain;
 
 const FigureListWrapper = styled(Main)`
   height: auto;
+  padding: 20px;
 `;

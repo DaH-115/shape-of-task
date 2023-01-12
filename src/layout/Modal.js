@@ -1,12 +1,13 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import PortalModal from '../components/PortalModal';
 
 const Modal = ({ children, isOpen, onClose }) => {
   return (
-    <>
+    <PortalModal>
       <Backdrop modalToggle={isOpen} onClick={onClose} />
       <ModalWapper modalToggle={isOpen}>{children}</ModalWapper>
-    </>
+    </PortalModal>
   );
 };
 

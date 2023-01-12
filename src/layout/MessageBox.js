@@ -11,5 +11,5 @@ const Message = styled.p`
   color: ${({ theme }) => theme.commonColors.gray};
   font-weight: 400;
   font-size: 32px;
-  margin-top: 40px;
+  margin-top: 20px;
 `;
