@@ -21,11 +21,11 @@ export default Footer;
 const FooterWrapper = styled.footer`
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
-  background-color: ${({ theme }) => theme.colors.circle};
+  background-color: ${({ theme }) => theme.colors.triangle};
 `;
 
 const FooterTextWrapper = styled.div`
-  padding: 25px;
+  padding: 30px;
 
   .git-icon {
     width: 30px;
@@ -44,7 +44,6 @@ const FooterTextWrapper = styled.div`
 `;
 
 const FooterTitle = styled.p`
-  display: blcok;
   font-weight: 700;
   font-size: 18px;
   color: ${({ theme }) => theme.commonColors.light_gray};

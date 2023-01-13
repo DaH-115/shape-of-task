@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const StyledBtn = styled.button`
   width: auto;
+  min-width: 85px;
   height: 100%;
 
   background-color: #fff;
@@ -13,14 +14,14 @@ const StyledBtn = styled.button`
   font-size: 18px;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.circle};
-    border-color: ${({ theme }) => theme.colors.circle};
+    color: ${({ theme }) => theme.colors.triangle};
+    border-color: ${({ theme }) => theme.colors.triangle};
     transition: color 0.1s ease-in-out;
   }
 
   &:active {
     color: #fff;
-    background-color: ${({ theme }) => theme.colors.circle};
+    background-color: ${({ theme }) => theme.colors.triangle};
     transition: background-color 0.2s ease-in-out;
   }
 

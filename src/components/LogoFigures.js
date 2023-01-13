@@ -4,9 +4,9 @@ import { StyledCircle, StyledSquare, StyledTriangle } from './FigureStyles';
 const LogoFigures = ({ figure }) => {
   return (
     <LogoWrapper>
-      <StyledCircle figurecolor={figure} />
-      <StyledSquare figurecolor={figure} />
       <StyledTriangle figurecolor={figure} />
+      <StyledSquare figurecolor={figure} />
+      <StyledCircle figurecolor={figure} />
     </LogoWrapper>
   );
 };

@@ -70,7 +70,7 @@ const TodoItemLi = styled.li`
   padding: 20px;
   background-color: #fff;
   border-radius: 15px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
 
   ${({ theme }) => theme.device.desktop} {

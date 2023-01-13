@@ -13,14 +13,16 @@ const ColorPalette = ({ colorPalette, name, paletteName, isSelected }) => {
   return (
     <ColorPaletteWrapper
       onClick={onThemeChangeHandler}
-      themecolor={colorPalette.circle}
+      themecolor={colorPalette.triangle}
       isSelected={isSelected}
     >
-      <ColorPaletteTitle>{paletteName}</ColorPaletteTitle>
+      <ColorPaletteTitle isSelected={isSelected}>
+        {paletteName}
+      </ColorPaletteTitle>
       <ColorBoxWrapper>
-        <ColorBox themecolor={colorPalette.circle} />
         <ColorBox themecolor={colorPalette.triangle} />
         <ColorBox themecolor={colorPalette.square} />
+        <ColorBox themecolor={colorPalette.circle} />
       </ColorBoxWrapper>
     </ColorPaletteWrapper>
   );
@@ -40,12 +42,18 @@ const ColorPaletteWrapper = styled.div`
       isSelected ? themecolor : theme.commonColors.gray};
 
   cursor: pointer;
+
+  ${({ theme }) => theme.device.tablet} {
+    border-width: 3px;
+  }
 `;
 
 const ColorPaletteTitle = styled.p`
   font-size: 24px;
   margin-bottom: 10px;
-  font-weight: 700;
+  /* font-weight: 700; */
+  color: ${({ theme, isSelected }) =>
+    isSelected ? theme.commonColors.black : theme.commonColors.gray};
 `;
 
 const ColorBoxWrapper = styled.div`
@@ -55,12 +63,12 @@ const ColorBoxWrapper = styled.div`
 `;
 
 const ColorBox = styled.div`
-  width: 100%;
-  height: 80px;
-  border-radius: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 20%;
   background-color: ${({ themecolor }) => themecolor};
 
-  margin-right: 20px;
+  margin-right: 10px;
 
   &:last-child {
     margin-right: 0;

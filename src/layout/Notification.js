@@ -21,6 +21,7 @@ const Notification = ({ toggle, figure }) => {
 
 export default Notification;
 
+// *animation setting
 const fadeSlideIn = keyframes`
   from {
     transform: translateY(-40px);
@@ -42,6 +43,7 @@ const fadeSlideOut = keyframes`
       opacity: 0;
   }
 `;
+// animation setting*
 
 const NoteMessage = styled.div`
   position: fixed;

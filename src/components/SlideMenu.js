@@ -15,7 +15,9 @@ const SlideMenu = ({ isOpen, slideMenuHandler }) => {
         <SlideMenuTitle>설정</SlideMenuTitle>
         <StyledBtn onClick={slideMenuHandler}>닫기</StyledBtn>
       </SlideMenuHeader>
-      <SlideMenuDesc>{'도형의 색을 변경할 수 있습니다.'}</SlideMenuDesc>
+      <SlideMenuDesc>
+        {'도형을 원하는 색으로 변경할 수 있습니다.'}
+      </SlideMenuDesc>
       {themeColorPalette.map((item, index) => (
         <ColorPalette
           key={index}
@@ -51,7 +53,7 @@ const fadeSlideOut = keyframes`
       opacity: 1;
   }
   to {
-      transform: translateX(100vw);
+      transform: translateX(100%);
       opacity: 0;
   }
 `;
@@ -67,10 +69,10 @@ const SlideMenuWrapper = styled.div`
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
 
-  width: 95vw;
+  width: 90%;
   height: 100vh;
   background-color: ${({ theme }) => theme.commonColors.light_gray};
-  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.3);
   padding: 40px 38px;
 
   /* scrollbar */
@@ -81,9 +83,9 @@ const SlideMenuWrapper = styled.div`
     display: none; /* Chrome, Safari, Opera*/
   }
 
-  ${({ theme }) => theme.device.desktop} {
-    width: 50vw;
-    padding: 48px 68px;
+  ${({ theme }) => theme.device.tablet} {
+    width: 30%;
+    padding: 24px 44px;
   }
 `;
 
@@ -93,7 +95,7 @@ const SlideMenuHeader = styled.div`
 `;
 
 const SlideMenuTitle = styled.p`
-  font-size: 48px;
+  font-size: 42px;
   font-weight: 700;
 `;
 

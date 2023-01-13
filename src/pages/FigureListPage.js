@@ -37,7 +37,7 @@ const FigureListPage = () => {
         <Modal isOpen={captureModal} onClose={modalCloseHandler}>
           <ImgModal>
             <h1>이미지로 보기</h1>
-            <p>오늘도 다채로운 하루를 보내셨네요!🥳</p>
+            <p>다채로운 하루를 저장해 보세요!🥳</p>
             <ImageBox>
               <img src={img} alt='square, triangle, circle Figure List' />
             </ImageBox>

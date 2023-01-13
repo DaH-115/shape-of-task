@@ -38,21 +38,21 @@ const SelectBox = ({ getFigure, isOpen, figure }) => {
       </ButtonWrapper>
       <SelectBoxWrapper toggle={toggle}>
         <SelectBoxUl onClick={getFigureHandler}>
-          <SelectBoxLi className='circle'>
-            <FigureStyleBox>
-              <StyledFigure size='small' figure='circle' />
-            </FigureStyleBox>
-            중요해요
-          </SelectBoxLi>
           <SelectBoxLi className='triangle'>
             <FigureStyleBox>
               <StyledFigure size='small' figure='triangle' />
             </FigureStyleBox>
-            기억해 두세요
+            중요해요
           </SelectBoxLi>
           <SelectBoxLi className='square'>
             <FigureStyleBox>
               <StyledFigure size='small' figure='square' />
+            </FigureStyleBox>
+            기억해 두세요
+          </SelectBoxLi>
+          <SelectBoxLi className='circle'>
+            <FigureStyleBox>
+              <StyledFigure size='small' figure='circle' />
             </FigureStyleBox>
             언제든지 하세요
           </SelectBoxLi>

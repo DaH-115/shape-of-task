@@ -4,7 +4,13 @@ import StyledFigure from './StyledFigure';
 
 const FigureListItem = ({ figure, done }) => {
   return (
-    <FigureListLi>{done && <StyledFigure figure={figure} />}</FigureListLi>
+    <>
+      {done && (
+        <FigureListLi>
+          <StyledFigure figure={figure} />
+        </FigureListLi>
+      )}
+    </>
   );
 };
 
