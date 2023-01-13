@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -57,7 +57,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
 
 const HeaderWrapper = styled.header`
   display: flex;
