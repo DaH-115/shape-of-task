@@ -26,31 +26,28 @@ const FooterWrapper = styled.footer`
 
 const FooterTextWrapper = styled.div`
   padding: 30px;
+  color: ${({ theme }) => theme.colors.circle};
 
-  .git-icon {
-    width: 30px;
-    height: 30px;
-    color: #fff;
-    margin-right: 12px;
-    cursor: pointer;
-  }
-
+  .git-icon,
   .home-icon {
     width: 30px;
     height: 30px;
-    color: #fff;
     cursor: pointer;
+  }
+
+  .git-icon {
+    margin-right: 12px;
   }
 `;
 
 const FooterTitle = styled.p`
   font-weight: 700;
   font-size: 18px;
-  color: ${({ theme }) => theme.commonColors.light_gray};
+  color: ${({ theme }) => theme.colors.circle};
 `;
 
 const Copyright = styled.p`
   font-size: 18px;
-  color: ${({ theme }) => theme.commonColors.light_gray};
+  color: ${({ theme }) => theme.colors.circle};
   margin-bottom: 14px;
 `;
