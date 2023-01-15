@@ -10,24 +10,27 @@ const SlideMenu = ({ isOpen, slideMenuHandler }) => {
   const paletteName = useSelector((state) => state.themeChange.paletteName);
 
   return (
-    <SlideMenuWrapper isOpen={isOpen}>
-      <SlideMenuHeader>
-        <SlideMenuTitle>설정</SlideMenuTitle>
-        <StyledBtn onClick={slideMenuHandler}>닫기</StyledBtn>
-      </SlideMenuHeader>
-      <SlideMenuDesc>
-        {'도형을 원하는 색으로 변경할 수 있습니다.'}
-      </SlideMenuDesc>
-      {themeColorPalette.map((item, index) => (
-        <ColorPalette
-          key={index}
-          name={item.name}
-          colorPalette={item}
-          paletteName={item.paletteName}
-          isSelected={paletteName === item.name}
-        />
-      ))}
-    </SlideMenuWrapper>
+    <>
+      <Backdrop isOpen={isOpen} onClick={slideMenuHandler} />
+      <SlideMenuWrapper isOpen={isOpen}>
+        <SlideMenuHeader>
+          <SlideMenuTitle>설정</SlideMenuTitle>
+          <StyledBtn onClick={slideMenuHandler}>닫기</StyledBtn>
+        </SlideMenuHeader>
+        <SlideMenuDesc>
+          {'도형을 원하는 색으로 변경할 수 있습니다.'}
+        </SlideMenuDesc>
+        {themeColorPalette.map((item, index) => (
+          <ColorPalette
+            key={index}
+            name={item.name}
+            colorPalette={item}
+            paletteName={item.paletteName}
+            isSelected={paletteName === item.name}
+          />
+        ))}
+      </SlideMenuWrapper>
+    </>
   );
 };
 
@@ -84,7 +87,7 @@ const SlideMenuWrapper = styled.div`
   }
 
   ${({ theme }) => theme.device.tablet} {
-    width: 30%;
+    width: 40%;
     padding: 24px 44px;
   }
 `;
@@ -102,4 +105,13 @@ const SlideMenuTitle = styled.p`
 const SlideMenuDesc = styled.p`
   font-size: 22px;
   margin-top: 8px;
+`;
+
+const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 `;

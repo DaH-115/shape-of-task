@@ -52,7 +52,7 @@ const ModalWapper = styled.div`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -40%);
-  width: 80%;
+  width: 90%;
 
   visibility: ${({ modalToggle }) => (modalToggle ? 'visible' : 'hidden')};
   animation: ${({ modalToggle }) => (modalToggle ? fadeIn : fadeOut)} 0.4s
