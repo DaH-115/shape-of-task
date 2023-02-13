@@ -10,38 +10,6 @@ const MetaTags = () => {
       <title>
         세모 네모 동그라미 TODO LIST | {pathname === '/' ? '메인' : '도형 보기'}
       </title>
-      <meta
-        name='description'
-        content='세모 네모 동그라미로 나의 일상을 가득 채워보세요!'
-      />
-      <meta
-        name='keywords'
-        content='todo,todolist,투두,투두리스트,세모,네모,동그라미,triangle,square,circle'
-      />
-
-      <meta property='og:type' content='website' />
-      <meta property='og:locale' content='ko_KR' />
-      <meta property='og:image:width' content='1200' />
-      <meta property='og:image:height' content='630' />
-      <meta property='og:url' content='https://tsc-todo-list.vercel.app' />
-      <meta property='og:title' content='세모 네모 동그라미 TODO LIST' />
-      <meta property='og:image' content='%PUBLIC_URL%/images/og-card.png' />
-      <meta
-        property='og:description'
-        content='세모 네모 동그라미로 나의 일상을 가득 채워보세요!'
-      />
-      <meta property='og:site_name' content='세모 네모 동그라미 TODO LIST' />
-
-      {/* Twitter Card */}
-      <meta name='twitter:card' content='summary' />
-      <meta name='twitter:title' content='세모 네모 동그라미 TODO LIST' />
-      <meta
-        name='twitter:description'
-        content='세모 네모 동그라미로 나의 일상을 가득 채워보세요!'
-      />
-      <meta name='twitter:image' content='%PUBLIC_URL%/images/og-card.png' />
-
-      <link rel='canonical' href='https://tsc-todo-list.vercel.app' />
     </Helmet>
   );
 };
