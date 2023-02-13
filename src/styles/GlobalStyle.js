@@ -25,6 +25,10 @@ const GlobalStyle = createGlobalStyle`
     letter-spacing: -0.1rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
 
   a {
