@@ -5,6 +5,7 @@ const StyledBtn = styled.button`
   min-width: 85px;
   height: 100%;
 
+  color: ${({ theme }) => theme.commonColors.black};
   background-color: #fff;
   border: 2px solid ${({ theme }) => theme.commonColors.gray};
   border-radius: 24px;
@@ -26,6 +27,7 @@ const StyledBtn = styled.button`
   }
 
   &:disabled {
+    color: ${({ theme }) => theme.commonColors.gray};
     pointer-events: none;
   }
 `;
