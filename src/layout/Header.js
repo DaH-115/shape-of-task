@@ -50,7 +50,9 @@ const Header = () => {
             <StyledBtn>도형</StyledBtn>
           </Link>
         )}
-        <StyledBtn onClick={slideMenuOpenHandler}>설정</StyledBtn>
+        {pathname === '/figure-list' || windowWidth >= desktopSize || (
+          <StyledBtn onClick={slideMenuOpenHandler}>설정</StyledBtn>
+        )}
       </MenueWrapper>
       <SlideMenu isOpen={isOpen} slideMenuHandler={slideMenuOpenHandler} />
     </HeaderWrapper>

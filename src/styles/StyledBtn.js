@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const StyledBtn = styled.button`
   width: auto;
-  min-width: 85px;
   height: 100%;
 
   color: ${({ theme }) => theme.commonColors.black};
