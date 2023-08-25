@@ -1,7 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import modalSlice from './modalSlice';
-import themeChangeSlice from './themeChangeSlice';
-import todoListSlice from './todoListSlice';
+
+import todoListSlice from 'store/todoListSlice';
+import themeChangeSlice from 'store/themeChangeSlice';
+import modalSlice from 'store/modalSlice';
 
 const rootReducers = combineReducers({
   todoList: todoListSlice.reducer,
@@ -12,5 +13,8 @@ const rootReducers = combineReducers({
 const store = configureStore({
   reducer: rootReducers,
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

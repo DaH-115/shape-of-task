@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { StyledCircle, StyledSquare, StyledTriangle } from './FigureStyles';
 
-const LogoFigures = ({ figure }) => {
+const LogoFigures = ({ figure }: { figure: string }) => {
   return (
     <LogoWrapper>
       <StyledTriangle figurecolor={figure} />

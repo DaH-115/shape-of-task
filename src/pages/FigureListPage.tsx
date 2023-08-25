@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { captureIsClose } from '../store/modalSlice';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
@@ -8,15 +7,16 @@ import useArrCheck from '../hooks/useArrCheck';
 import Modal from '../layout/Modal';
 import FigureListItem from '../components/FigureListItem';
 import StyledBtn from '../styles/StyledBtn';
-import MessageBox from '../layout/MessageBox';
+import MessageBox from '../layout/InfoMessage';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 const FigureListPage = () => {
   const ref = useRef();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [img, setImg] = useState();
-  const todoList = useSelector((state) => state.todoList.value);
-  const captureModal = useSelector((state) => state.modal.captureState);
-  const paletteName = useSelector((state) => state.themeChange.paletteName);
+  const todoList = useAppSelector((state) => state.todoList.value);
+  const captureModal = useAppSelector((state) => state.modal.captureState);
+  const paletteName = useAppSelector((state) => state.themeChange.paletteName);
   const arrCheck = useArrCheck();
 
   useEffect(() => {

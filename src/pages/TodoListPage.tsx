@@ -1,17 +1,25 @@
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import TodoListItem from '../components/TodoListItem';
-import MessageBox from '../layout/MessageBox';
+import { useAppSelector } from 'store/hooks';
+import TodoListItem from 'components/TodoListItem';
+import InfoMessage from 'layout/InfoMessage';
+
+export interface TodoProps {
+  id: string;
+  text: string;
+  figure: string;
+  done: boolean;
+  date: string;
+}
 
 const TodoListPage = () => {
-  const todoList = useSelector((state) => state.todoList.value);
+  const todoList = useAppSelector((state) => state.todoList.value);
 
   return (
-    <TodoListUl>
+    <TodoList>
       {!todoList.length ? (
-        <MessageBox messgae='할 일을 정리해 보세요.😊' />
+        <InfoMessage message='할 일을 정리해 보세요' />
       ) : (
-        todoList.map((todoItem) => (
+        todoList.map((todoItem: TodoProps) => (
           <TodoListItem
             key={todoItem.id}
             id={todoItem.id}
@@ -22,17 +30,17 @@ const TodoListPage = () => {
           />
         ))
       )}
-    </TodoListUl>
+    </TodoList>
   );
 };
 
 export default TodoListPage;
 
-const TodoListUl = styled.ul`
+const TodoList = styled.ul`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.commonColors.light_gray};
-  padding: 20px;
+  padding: 1rem;
 
   /* scrollbar */
   overflow-y: scroll;

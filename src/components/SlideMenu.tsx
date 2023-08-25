@@ -1,25 +1,28 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'store/hooks';
 import styled, { keyframes } from 'styled-components';
-import StyledBtn from '../styles/StyledBtn';
-import ColorPalette from './ColorPalette';
+import StyledBtn from 'styles/StyledBtn';
+import { themeColorPalette } from 'styles/theme-color';
 
-import { themeColorPalette } from '../styles/theme-color';
+import ColorPalette from 'components/ColorPalette';
 
-const SlideMenu = ({ isOpen, slideMenuHandler }) => {
-  const paletteName = useSelector((state) => state.themeChange.paletteName);
+interface SlideMenuProps {
+  isOpen: boolean;
+  slideMenuHandler: () => void;
+}
+
+const SlideMenu = ({ isOpen, slideMenuHandler }: SlideMenuProps) => {
+  const paletteName = useAppSelector((state) => state.themeChange.paletteName);
 
   return (
     <>
       <Backdrop isOpen={isOpen} onClick={slideMenuHandler} />
       <SlideMenuWrapper isOpen={isOpen}>
         <SlideMenuHeader>
-          <SlideMenuTitle>설정</SlideMenuTitle>
-          <StyledBtn onClick={slideMenuHandler}>닫기</StyledBtn>
+          <SlideMenuTitle>{'설정'}</SlideMenuTitle>
+          <StyledBtn onClick={slideMenuHandler}>{'닫기'}</StyledBtn>
         </SlideMenuHeader>
-        <SlideMenuDesc>
-          {'도형을 원하는 색으로 변경할 수 있습니다.'}
-        </SlideMenuDesc>
+        <SlideMenuDesc>{'원하는 색을 골라 보세요'}</SlideMenuDesc>
         {themeColorPalette.map((item, index) => (
           <ColorPalette
             key={index}
@@ -36,7 +39,7 @@ const SlideMenu = ({ isOpen, slideMenuHandler }) => {
 
 export default React.memo(SlideMenu);
 
-// *animation setting
+// Animation Setting
 const fadeSlideIn = keyframes`
   from {
     transform: translateX(100vw);
@@ -60,9 +63,8 @@ const fadeSlideOut = keyframes`
       opacity: 0;
   }
 `;
-// animation setting*
 
-const SlideMenuWrapper = styled.div`
+const SlideMenuWrapper = styled.div<{ isOpen: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
@@ -72,11 +74,11 @@ const SlideMenuWrapper = styled.div`
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
 
-  width: 90%;
+  width: 100%;
   height: 100vh;
-  background-color: ${({ theme }) => theme.commonColors.light_gray};
-  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.3);
-  padding: 40px 38px;
+  background-color: #fff;
+  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
 
   /* scrollbar */
   overflow-y: scroll;
@@ -88,7 +90,7 @@ const SlideMenuWrapper = styled.div`
 
   ${({ theme }) => theme.device.tablet} {
     width: 40%;
-    padding: 24px 44px;
+    padding: 1rem 2rem;
   }
 `;
 
@@ -98,19 +100,20 @@ const SlideMenuHeader = styled.div`
 `;
 
 const SlideMenuTitle = styled.p`
-  font-size: 42px;
+  font-size: 2rem;
   font-weight: 700;
 `;
 
 const SlideMenuDesc = styled.p`
-  font-size: 22px;
-  margin-top: 8px;
+  color: ${({ theme }) => theme.commonColors.black};
+  margin-top: 0.5rem;
 `;
 
-const Backdrop = styled.div`
+const Backdrop = styled.div<{ isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
+
   width: 100%;
   height: 100%;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};

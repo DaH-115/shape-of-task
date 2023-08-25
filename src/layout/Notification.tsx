@@ -1,27 +1,31 @@
 import styled, { keyframes } from 'styled-components';
 import PortalModal from '../components/PortalModal';
 
-const Notification = ({ toggle, figure }) => {
+interface NotificationProps {
+  toggle: boolean;
+  figure: string;
+}
+
+const Notification = ({ toggle, figure }: NotificationProps) => {
+  const message =
+    figure === 'circle'
+      ? '동그라미가 추가되었습니다'
+      : figure === 'triangle'
+      ? '세모가 추가되었습니다'
+      : figure === 'square'
+      ? '네모가 추가되었습니다'
+      : '도형이 추가되었습니다';
+
   return (
     <PortalModal>
-      <NoteMessage toggle={toggle}>
-        {`도형 메뉴에 ${
-          figure === 'circle'
-            ? '동그라미'
-            : figure === 'triangle'
-            ? '세모'
-            : figure === 'square'
-            ? '네모'
-            : '도형이'
-        }가 추가되었습니다! 🤗`}
-      </NoteMessage>
+      <NoteMessage toggle={toggle}>{`도형 메뉴에 ${message}`}</NoteMessage>
     </PortalModal>
   );
 };
 
 export default Notification;
 
-// *animation setting
+// Animation Setting
 const fadeSlideIn = keyframes`
   from {
     transform: translateY(-40px);
@@ -43,9 +47,8 @@ const fadeSlideOut = keyframes`
       opacity: 0;
   }
 `;
-// animation setting*
 
-const NoteMessage = styled.div`
+const NoteMessage = styled.div<{ toggle: boolean }>`
   position: fixed;
   top: 0;
   left: 0;

@@ -3,7 +3,12 @@ import { ReactComponent as Circle } from '../assets/Circle.svg';
 import { ReactComponent as Square } from '../assets/Square.svg';
 import { ReactComponent as Triangle } from '../assets/Triangle.svg';
 
-export const StyledCircle = styled(Circle)`
+interface FigureStyledPorps {
+  figurecolor: string;
+  size?: string;
+}
+
+export const StyledCircle = styled(Circle)<FigureStyledPorps>`
   fill: ${({ theme, figurecolor }) =>
     figurecolor === 'circle'
       ? theme.colors.circle
@@ -12,7 +17,7 @@ export const StyledCircle = styled(Circle)`
   height: ${({ size }) => (size === 'small' ? '35px' : 'auto')};
 `;
 
-export const StyledSquare = styled(Square)`
+export const StyledSquare = styled(Square)<FigureStyledPorps>`
   fill: ${({ theme, figurecolor }) =>
     figurecolor === 'square'
       ? theme.colors.square
@@ -21,7 +26,7 @@ export const StyledSquare = styled(Square)`
   height: ${({ size }) => (size === 'small' ? '30px' : 'auto')};
 `;
 
-export const StyledTriangle = styled(Triangle)`
+export const StyledTriangle = styled(Triangle)<FigureStyledPorps>`
   fill: ${({ theme, figurecolor }) =>
     figurecolor === 'triangle'
       ? theme.colors.triangle

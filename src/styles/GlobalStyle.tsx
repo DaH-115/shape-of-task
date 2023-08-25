@@ -1,23 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
-
-  html {
-    /* scrollbar */
-    overflow: scroll;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera*/
-    }
-  }
+  ${reset}
 
   * {
     margin: 0;
     box-sizing: border-box;
   }
-  
-  body {
+
+  html {
+    font-size: 20px;
     color: #141414;
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
@@ -29,6 +22,16 @@ const GlobalStyle = createGlobalStyle`
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+  }
+  
+  body {
+     /* scrollbar */
+     overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+    }
   }
 
   a {
@@ -55,7 +58,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    padding: 0;
+    background: inherit; 
+    border:none; 
+    box-shadow:none; 
+    border-radius:0; 
+    padding:0; 
+    overflow:visible; 
+    cursor:pointer;
   }
 
   ul,

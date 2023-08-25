@@ -3,7 +3,7 @@ import { ReactComponent as Logo } from '../assets/Logo.svg';
 
 const StyledLogo = styled(Logo)`
   width: auto;
-  height: 30px;
+  height: 1.5rem;
 `;
 
 export default StyledLogo;

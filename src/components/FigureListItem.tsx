@@ -1,13 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import StyledFigure from './StyledFigure';
+import StyledFigures from './StyledFigures';
 
-const FigureListItem = ({ figure, done }) => {
+const FigureListItem = ({
+  figure,
+  done,
+}: {
+  figure: string;
+  done: boolean;
+}) => {
   return (
     <>
       {done && (
         <FigureListLi>
-          <StyledFigure figure={figure} />
+          <StyledFigures figurecolor={figure} />
         </FigureListLi>
       )}
     </>

@@ -3,7 +3,7 @@ import useArrCheck from '../hooks/useArrCheck';
 import useGetwindowWidth from '../hooks/useGetwindowWidth';
 
 import Main from '../layout/Main';
-import MessageBox from '../layout/MessageBox';
+import MessageBox from '../layout/InfoMessage';
 import FigureListPage from '../pages/FigureListPage';
 
 const FigureListMain = () => {

@@ -1,6 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface initialStateProps {
+  modalState: boolean;
+  captureState: boolean;
+}
+
+const initialState: initialStateProps = {
   modalState: false,
   captureState: false,
 };
@@ -9,16 +14,16 @@ const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    modalIsOpen: (state, action) => {
+    modalIsOpen: (state, action: PayloadAction<boolean>) => {
       state.modalState = action.payload;
     },
-    modalIsClose: (state, action) => {
+    modalIsClose: (state, action: PayloadAction<boolean>) => {
       state.modalState = action.payload;
     },
-    captureIsOpen: (state, action) => {
+    captureIsOpen: (state, action: PayloadAction<boolean>) => {
       state.captureState = action.payload;
     },
-    captureIsClose: (state, action) => {
+    captureIsClose: (state, action: PayloadAction<boolean>) => {
       state.captureState = action.payload;
     },
   },
