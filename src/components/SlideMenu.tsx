@@ -7,17 +7,17 @@ import { themeColorPalette } from 'styles/theme-color';
 import ColorPalette from 'components/ColorPalette';
 
 interface SlideMenuProps {
-  isOpen: boolean;
+  isopen: string;
   slideMenuHandler: () => void;
 }
 
-const SlideMenu = ({ isOpen, slideMenuHandler }: SlideMenuProps) => {
+const SlideMenu = ({ isopen, slideMenuHandler }: SlideMenuProps) => {
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
 
   return (
     <>
-      <Backdrop isOpen={isOpen} onClick={slideMenuHandler} />
-      <SlideMenuWrapper isOpen={isOpen}>
+      <Backdrop $isopen={isopen} onClick={slideMenuHandler} />
+      <SlideMenuWrapper $isopen={isopen}>
         <SlideMenuHeader>
           <SlideMenuTitle>{'설정'}</SlideMenuTitle>
           <StyledBtn onClick={slideMenuHandler}>{'닫기'}</StyledBtn>
@@ -29,7 +29,7 @@ const SlideMenu = ({ isOpen, slideMenuHandler }: SlideMenuProps) => {
             name={item.name}
             colorPalette={item}
             paletteName={item.paletteName}
-            isSelected={paletteName === item.name}
+            isselected={paletteName === item.name ? 'true' : 'false'}
           />
         ))}
       </SlideMenuWrapper>
@@ -64,14 +64,15 @@ const fadeSlideOut = keyframes`
   }
 `;
 
-const SlideMenuWrapper = styled.div<{ isOpen: boolean }>`
+const SlideMenuWrapper = styled.div<{ $isopen: string }>`
   position: fixed;
   top: 0;
   right: 0;
 
-  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
-  animation: ${({ isOpen }) => (isOpen ? fadeSlideIn : fadeSlideOut)} 0.4s
-    ease-in-out;
+  visibility: ${({ $isopen }) => ($isopen === 'true' ? 'visible' : 'hidden')};
+  animation: ${({ $isopen }) =>
+      $isopen === 'true' ? fadeSlideIn : fadeSlideOut}
+    0.4s ease-in-out;
   transition: visibility 0.4s ease-in-out;
 
   width: 100%;
@@ -109,12 +110,12 @@ const SlideMenuDesc = styled.p`
   margin-top: 0.5rem;
 `;
 
-const Backdrop = styled.div<{ isOpen: boolean }>`
+const Backdrop = styled.div<{ $isopen: string }>`
   position: fixed;
   top: 0;
   left: 0;
 
   width: 100%;
   height: 100%;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  display: ${({ $isopen }) => ($isopen === 'true' ? 'block' : 'none')};
 `;

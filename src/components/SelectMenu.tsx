@@ -3,17 +3,16 @@ import styled, { keyframes } from 'styled-components';
 import StyledFigures from 'components/StyledFigures';
 
 interface SelectMenuProps {
-  isToggle: boolean;
+  istoggle: boolean;
   getToggle: () => void;
   getFigure: (figureName: any) => void;
 }
 
-const SelectMenu = ({ isToggle, getToggle, getFigure }: SelectMenuProps) => {
+const SelectMenu = ({ istoggle, getToggle, getFigure }: SelectMenuProps) => {
   const getFigureHandler = useCallback(
     (event: React.MouseEvent<HTMLUListElement>) => {
       const figureItem = event.target as HTMLElement;
       const figureName = figureItem.getAttribute('data-figure');
-      console.log(figureName);
 
       if (figureName) {
         getFigure(figureName);
@@ -24,7 +23,7 @@ const SelectMenu = ({ isToggle, getToggle, getFigure }: SelectMenuProps) => {
   );
 
   return (
-    <SelectMenuWrapper isToggle={isToggle}>
+    <SelectMenuWrapper $istoggle={istoggle}>
       <SelectMenuList onClick={getFigureHandler}>
         <SelectMenuItem>
           <StyledFigures size='small' figurecolor='triangle' />
@@ -70,13 +69,13 @@ const fadeSlideOut = keyframes`
   }
 `;
 
-const SelectMenuWrapper = styled.div<{ isToggle: boolean }>`
+const SelectMenuWrapper = styled.div<{ $istoggle: boolean }>`
   position: absolute;
   bottom: 4rem;
   left: 0;
 
-  visibility: ${({ isToggle }) => (isToggle ? 'visible' : 'hidden')};
-  animation: ${({ isToggle }) => (isToggle ? fadeSlideIn : fadeSlideOut)} 0.4s
+  visibility: ${({ $istoggle }) => ($istoggle ? 'visible' : 'hidden')};
+  animation: ${({ $istoggle }) => ($istoggle ? fadeSlideIn : fadeSlideOut)} 0.4s
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
 `;

@@ -8,14 +8,14 @@ interface ColorPaletteProps {
   colorPalette: ColorTypes;
   name: string;
   paletteName: string;
-  isSelected: boolean;
+  isselected: string;
 }
 
 const ColorPalette = ({
   colorPalette,
   name,
   paletteName,
-  isSelected,
+  isselected,
 }: ColorPaletteProps) => {
   const dispatch = useAppDispatch();
 
@@ -25,18 +25,18 @@ const ColorPalette = ({
 
   return (
     <>
-      <ColorPaletteTitle isSelected={isSelected}>
+      <ColorPaletteTitle $isselected={isselected}>
         {paletteName}
       </ColorPaletteTitle>
       <ColorPaletteWrapper
         onClick={onThemeChangeHandler}
-        themecolor={colorPalette.triangle}
-        isSelected={isSelected}
+        $themecolor={colorPalette.triangle}
+        $isselected={isselected}
       >
         <PaletteWrapper>
-          <Palette themecolor={colorPalette.triangle} />
-          <Palette themecolor={colorPalette.square} />
-          <Palette themecolor={colorPalette.circle} />
+          <Palette $themecolor={colorPalette.triangle} />
+          <Palette $themecolor={colorPalette.square} />
+          <Palette $themecolor={colorPalette.circle} />
         </PaletteWrapper>
       </ColorPaletteWrapper>
     </>
@@ -46,16 +46,16 @@ const ColorPalette = ({
 export default ColorPalette;
 
 const ColorPaletteWrapper = styled.div<{
-  themecolor: string;
-  isSelected: boolean;
+  $themecolor: string;
+  $isselected: string;
 }>`
   width: 100%;
   padding: 1rem;
   border-radius: 1rem;
   background-color: #fff;
   border: 0.1rem solid
-    ${({ theme, themecolor, isSelected }) =>
-      isSelected ? themecolor : theme.commonColors.gray};
+    ${({ theme, $themecolor, $isselected }) =>
+      $isselected === 'true' ? $themecolor : theme.commonColors.gray};
   cursor: pointer;
 
   ${({ theme }) => theme.device.tablet} {
@@ -63,10 +63,12 @@ const ColorPaletteWrapper = styled.div<{
   }
 `;
 
-const ColorPaletteTitle = styled.p<{ isSelected: boolean }>`
+const ColorPaletteTitle = styled.p<{ $isselected: string }>`
   font-size: 1rem;
-  color: ${({ theme, isSelected }) =>
-    isSelected ? theme.commonColors.black : theme.commonColors.gray};
+  color: ${({ theme, $isselected }) =>
+    $isselected === 'true'
+      ? theme.commonColors.black
+      : theme.commonColors.gray};
   margin: 1rem 0 0.4rem 0;
 `;
 
@@ -76,11 +78,11 @@ const PaletteWrapper = styled.div`
   width: 100%;
 `;
 
-const Palette = styled.div<{ themecolor: string }>`
+const Palette = styled.div<{ $themecolor: string }>`
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: ${({ themecolor }) => themecolor};
+  background-color: ${({ $themecolor }) => $themecolor};
 
   margin-right: 1rem;
 

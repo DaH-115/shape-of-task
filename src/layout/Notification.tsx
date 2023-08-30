@@ -18,7 +18,7 @@ const Notification = ({ toggle, figure }: NotificationProps) => {
 
   return (
     <PortalModal>
-      <NoteMessage toggle={toggle}>{`도형 메뉴에 ${message}`}</NoteMessage>
+      <NoteMessage $toggle={toggle}>{`도형 메뉴에 ${message}`}</NoteMessage>
     </PortalModal>
   );
 };
@@ -48,7 +48,7 @@ const fadeSlideOut = keyframes`
   }
 `;
 
-const NoteMessage = styled.div<{ toggle: boolean }>`
+const NoteMessage = styled.div<{ $toggle: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -62,8 +62,8 @@ const NoteMessage = styled.div<{ toggle: boolean }>`
   backdrop-filter: blur(10px);
   box-shadow: 0px 0px 20px rgba(223, 74, 11, 0.5);
 
-  visibility: ${({ toggle }) => (toggle ? 'visible' : 'hidden')};
-  animation: ${({ toggle }) => (toggle ? fadeSlideIn : fadeSlideOut)} 0.4s
+  visibility: ${({ $toggle }) => ($toggle ? 'visible' : 'hidden')};
+  animation: ${({ $toggle }) => ($toggle ? fadeSlideIn : fadeSlideOut)} 0.4s
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
 `;
