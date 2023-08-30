@@ -12,7 +12,7 @@ import Footer from 'layout/Footer';
 
 const App = () => {
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
-  const todoList = useAppSelector((state) => state.todoList.value);
+  const todoList = useAppSelector((state) => state.todoList.todoList);
   const restTodo = todoList.filter(
     (todo: { done: boolean }) => todo.done === false
   );

@@ -1,34 +1,32 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface initialStateProps {
-  modalState: boolean;
-  captureState: boolean;
+  inputState: boolean;
+  editState: boolean;
 }
 
 const initialState: initialStateProps = {
-  modalState: false,
-  captureState: false,
+  inputState: false,
+  editState: false,
 };
 
 const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    modalIsOpen: (state, action: PayloadAction<boolean>) => {
-      state.modalState = action.payload;
+    modalIsOpen: (state) => {
+      state.inputState = true;
     },
-    modalIsClose: (state, action: PayloadAction<boolean>) => {
-      state.modalState = action.payload;
+    editModalIsOpen: (state) => {
+      state.editState = true;
     },
-    captureIsOpen: (state, action: PayloadAction<boolean>) => {
-      state.captureState = action.payload;
-    },
-    captureIsClose: (state, action: PayloadAction<boolean>) => {
-      state.captureState = action.payload;
+    modalIsClose: (state) => {
+      state.inputState = false;
+      state.editState = false;
     },
   },
 });
 
 export default modalSlice;
-export const { captureIsOpen, captureIsClose, modalIsOpen, modalIsClose } =
+export const { modalIsOpen, modalIsClose, editModalIsOpen } =
   modalSlice.actions;

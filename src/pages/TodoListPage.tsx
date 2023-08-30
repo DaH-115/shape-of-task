@@ -12,7 +12,7 @@ export interface TodoProps {
 }
 
 const TodoListPage = () => {
-  const todoList = useAppSelector((state) => state.todoList.value);
+  const todoList = useAppSelector((state) => state.todoList.todoList);
 
   return (
     <TodoList>
