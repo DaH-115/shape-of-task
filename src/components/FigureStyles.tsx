@@ -13,8 +13,6 @@ export const StyledCircle = styled(Circle)<FigureStyledPorps>`
     figurecolor === 'circle'
       ? theme.colors.circle
       : theme.commonColors.light_gray};
-  width: ${({ size }) => (size === 'small' ? '35px' : 'auto')};
-  height: ${({ size }) => (size === 'small' ? '35px' : 'auto')};
 `;
 
 export const StyledSquare = styled(Square)<FigureStyledPorps>`
@@ -22,8 +20,6 @@ export const StyledSquare = styled(Square)<FigureStyledPorps>`
     figurecolor === 'square'
       ? theme.colors.square
       : theme.commonColors.light_gray};
-  width: ${({ size }) => (size === 'small' ? '30px' : 'auto')};
-  height: ${({ size }) => (size === 'small' ? '30px' : 'auto')};
 `;
 
 export const StyledTriangle = styled(Triangle)<FigureStyledPorps>`
@@ -31,6 +27,4 @@ export const StyledTriangle = styled(Triangle)<FigureStyledPorps>`
     figurecolor === 'triangle'
       ? theme.colors.triangle
       : theme.commonColors.light_gray};
-  width: ${({ size }) => (size === 'small' ? '35px' : 'auto')};
-  height: ${({ size }) => (size === 'small' ? '35px' : 'auto')};
 `;

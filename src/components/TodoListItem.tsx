@@ -54,7 +54,7 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
   return (
     <>
       <Notification toggle={isToggle} figure={figure} />
-      <TodoItem>
+      <TodoItemWrapper>
         <TodoItemContent onClick={() => onToggleTodoHandler(id)}>
           <StyledFigures figurecolor={figure} size='small' />
           <ContentText $done={done}>{text}</ContentText>
@@ -73,7 +73,7 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
           </RemoveBtn>
         </BtnWrapper>
         <ModalInput />
-      </TodoItem>
+      </TodoItemWrapper>
     </>
   );
 };
@@ -81,24 +81,23 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
 export default React.memo(TodoListItem);
 
 const TodoDate = styled.p`
-  display: none;
-  font-weight: 700;
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.commonColors.gray};
 
-  ${({ theme }) => theme.device.desktop} {
-    display: block;
-    padding-top: 0.5rem;
-    border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
-  }
+  font-size: 0.8rem;
+  padding-top: 0.2rem;
+  border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
 `;
 
 const ContentText = styled.p<{ $done: boolean }>`
   width: 100%;
-  max-height: 12rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 2rem;
   word-break: break-all;
-  margin-left: 0.6rem;
+
+  margin-left: 0.2rem;
+  padding: 1rem;
+  padding-left: 0;
 
   color: ${({ theme, $done }) =>
     $done ? theme.commonColors.gray : theme.commonColors.black};
@@ -109,7 +108,7 @@ const ContentText = styled.p<{ $done: boolean }>`
     width: 100%;
     height: 5rem;
     max-height: 5rem;
-    margin-left: 0.2rem;
+    font-size: 1rem;
   }
 
   /* scrollbar */
@@ -121,49 +120,59 @@ const ContentText = styled.p<{ $done: boolean }>`
   }
 `;
 
-const TodoItem = styled.li`
+const TodoItemWrapper = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+
   background-color: #fff;
   border-radius: 0.8rem;
+  padding: 1rem;
   margin-bottom: 0.8rem;
+
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
 
   ${({ theme }) => theme.device.desktop} {
-    padding: 1rem;
-
-    &:hover {
-      transition: background-color 0.3s ease-in-out;
-      transform: translateY(-2rem);
-      transition: transform 0.2s ease-in-out;
-    }
+    padding: 0.8rem;
   }
 `;
 
 const TodoItemContent = styled.div`
-  display: flex;
   width: 100%;
+`;
 
-  ${({ theme }) => theme.device.desktop} {
-    display: block;
+const BtnWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin-top: 0.5rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    margin-top: 0.2rem;
   }
 `;
 
 const RemoveBtn = styled(StyledBtn)`
   width: 100%;
   color: ${({ theme }) => theme.commonColors.gray};
+  font-size: 0.9rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    width: auto;
+    font-size: 0.8rem;
+  }
 `;
 
 const EditBtn = styled(StyledBtn)`
   width: 100%;
+  margin-left: 0.2rem;
   color: ${({ theme }) => theme.commonColors.gray};
-`;
+  font-size: 0.9rem;
 
-const BtnWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  margin-top: 1rem;
+  ${({ theme }) => theme.device.tablet} {
+    width: auto;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+  }
 `;

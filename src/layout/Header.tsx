@@ -20,8 +20,13 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <StyledLogo />
+      <a href='/'>
+        <StyledLogo />
+      </a>
       <MenueWrapper>
+        <a href='/figure-list'>
+          <FigureListBtn>{'완료 리스트'}</FigureListBtn>
+        </a>
         <StyledBtn onClick={slideMenuOpenHandler}>{'설정'}</StyledBtn>
       </MenueWrapper>
       <SlideMenu isopen={isOpen} slideMenuHandler={slideMenuOpenHandler} />
@@ -49,4 +54,12 @@ const HeaderWrapper = styled.header`
 
 const MenueWrapper = styled.div`
   display: flex;
+`;
+
+const FigureListBtn = styled(StyledBtn)`
+  margin-right: 0.3rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    display: none;
+  }
 `;

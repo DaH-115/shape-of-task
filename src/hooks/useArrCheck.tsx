@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'store/hooks';
 
-// ✔️ 완료된 투두가 존재하지 않을 때 메세지를 보여줍니다.
 const useArrCheck = () => {
-  const todoList = useSelector((state) => state.todoList.value);
-  const todoArr = todoList.map((item) => item.done);
-  const arrCheck = todoArr.find((item) => item === true);
+  const todoList = useAppSelector((state) => state.todoList.todoList);
+  const todoArr = todoList.map((item: { done: boolean }) => item.done);
+  const arrCheck = todoArr.find((item: boolean) => item === true);
 
   return arrCheck;
 };

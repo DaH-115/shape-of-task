@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 interface initialStateProps {
   inputState: boolean;
   editState: boolean;
+  captureState: boolean;
 }
 
 const initialState: initialStateProps = {
   inputState: false,
   editState: false,
+  captureState: false,
 };
 
 const modalSlice = createSlice({
@@ -20,6 +22,9 @@ const modalSlice = createSlice({
     editModalIsOpen: (state) => {
       state.editState = true;
     },
+    captureModalIsOpen: (state) => {
+      state.editState = true;
+    },
     modalIsClose: (state) => {
       state.inputState = false;
       state.editState = false;
@@ -28,5 +33,9 @@ const modalSlice = createSlice({
 });
 
 export default modalSlice;
-export const { modalIsOpen, modalIsClose, editModalIsOpen } =
-  modalSlice.actions;
+export const {
+  modalIsOpen,
+  modalIsClose,
+  editModalIsOpen,
+  captureModalIsOpen,
+} = modalSlice.actions;

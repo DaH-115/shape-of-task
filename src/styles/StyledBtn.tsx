@@ -5,10 +5,10 @@ const StyledBtn = styled.button`
   background-color: #fff;
   border: 0.1rem solid ${({ theme }) => theme.commonColors.gray};
 
-  border-radius: 1.2rem;
-  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  padding: 0.4rem 0.8rem;
 
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 700;
 
   &:hover {

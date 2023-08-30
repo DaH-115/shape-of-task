@@ -11,7 +11,7 @@ interface FigureProps {
   size?: string;
 }
 
-const StyledFigures = ({ size, figurecolor }: FigureProps) => {
+const StyledFigures = ({ figurecolor, size }: FigureProps) => {
   return (
     <FigureStyleWrapper>
       {figurecolor === 'circle' && (

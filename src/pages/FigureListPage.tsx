@@ -1,55 +1,58 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { captureIsClose } from '../store/modalSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { modalIsClose } from 'store/modalSlice';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
-import useArrCheck from '../hooks/useArrCheck';
+import useArrCheck from 'hooks/useArrCheck';
 
-import Modal from '../layout/Modal';
-import FigureListItem from '../components/FigureListItem';
-import StyledBtn from '../styles/StyledBtn';
-import MessageBox from '../layout/InfoMessage';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
+import Modal from 'layout/Modal';
+import FigureListItem from 'components/FigureListItem';
+import StyledBtn from 'styles/StyledBtn';
+import MessageBox from 'layout/InfoMessage';
 
 const FigureListPage = () => {
-  const ref = useRef();
+  const figureListRef = useRef<HTMLUListElement>(null);
   const dispatch = useAppDispatch();
-  const [img, setImg] = useState();
-  const todoList = useAppSelector((state) => state.todoList.value);
-  const captureModal = useAppSelector((state) => state.modal.captureState);
+  const todoList = useAppSelector((state) => state.todoList.todoList);
+  const isCaptureState = useAppSelector((state) => state.modal.captureState);
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
+  const [isCapturedImg, setIsCapturedImg] = useState<string>('');
   const arrCheck = useArrCheck();
 
   useEffect(() => {
-    const figureList = ref.current;
+    const figureList = figureListRef.current!;
     (async () => {
       const figureListImg = await html2canvas(figureList);
-      setImg(figureListImg.toDataURL('image/jpg'));
+      setIsCapturedImg(figureListImg.toDataURL('image/jpg'));
     })();
   }, [todoList, paletteName]);
 
-  const modalCloseHandler = useCallback(() => {
-    dispatch(captureIsClose(false));
+  const onModalCloseHandler = useCallback(() => {
+    dispatch(modalIsClose());
   }, [dispatch]);
 
   return (
-    <>
-      {img && (
-        <Modal isOpen={captureModal} onClose={modalCloseHandler}>
-          <ImgModal>
-            <h1>이미지로 보기</h1>
-            <p>다채로운 하루를 저장해 보세요!🥳</p>
-            <ImageBox>
-              <img src={img} alt='square, triangle, circle Figure List' />
-            </ImageBox>
-            <CloseBtn onClick={modalCloseHandler}>닫기</CloseBtn>
-          </ImgModal>
+    <FigureListWrapper>
+      {isCapturedImg && (
+        <Modal modalState={isCaptureState}>
+          <CapturedImgModal>
+            <h1>{'이미지로 보기'}</h1>
+            <p>{'다채로운 하루를 저장해 보세요!'}</p>
+            <ImageWrapper>
+              <img
+                src={isCapturedImg}
+                alt='square, triangle, circle Figure List'
+              />
+            </ImageWrapper>
+            <CloseBtn onClick={onModalCloseHandler}>{'닫기'}</CloseBtn>
+          </CapturedImgModal>
         </Modal>
       )}
-      <UlWrapper ref={ref}>
+      <FigureList ref={figureListRef}>
         {arrCheck === undefined ? (
-          <MessageBox messgae='가끔은 여백도 괜찮아요.😌' />
+          <MessageBox message='가끔은 여백도 괜찮아요' />
         ) : (
-          todoList.map((todoItem) => (
+          todoList.map((todoItem: any) => (
             <FigureListItem
               key={todoItem.id}
               figure={todoItem.figure}
@@ -57,25 +60,29 @@ const FigureListPage = () => {
             />
           ))
         )}
-      </UlWrapper>
-    </>
+      </FigureList>
+    </FigureListWrapper>
   );
 };
 
 export default FigureListPage;
 
-const UlWrapper = styled.ul`
+const FigureListWrapper = styled.main`
+  flex: 1;
+  padding: 1rem;
+`;
+
+const FigureList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 40px;
 `;
 
-const ImgModal = styled.div`
+const CapturedImgModal = styled.div`
   width: 100%;
   height: 100%;
   background-color: #fff;
-  padding: 20px;
+  padding: 1rem;
 
   &::after {
     content: ' ';
@@ -84,19 +91,20 @@ const ImgModal = styled.div`
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 2rem;
   }
 
   p {
-    font-size: 18px;
+    font-size: 1rem;
     color: ${({ theme }) => theme.commonColors.gray};
-    margin-top: 6px;
+    margin-top: 0.3rem;
 
     &::after {
       content: ' ';
       display: block;
-      margin-top: 10px;
-      border-bottom: 2px solid ${({ theme }) => theme.commonColors.light_gray};
+      margin-top: 0.5rem;
+      border-bottom: 0.1rem solid
+        ${({ theme }) => theme.commonColors.light_gray};
     }
   }
 `;
@@ -105,9 +113,9 @@ const CloseBtn = styled(StyledBtn)`
   float: right;
 `;
 
-const ImageBox = styled.div`
+const ImageWrapper = styled.div`
   width: 100%;
-  margin-top: 12px;
+  margin-top: 0.6rem;
 
   img {
     width: 100%;

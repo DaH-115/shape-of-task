@@ -48,6 +48,6 @@ const TodoAddBtn = styled.button`
   }
 
   ${({ theme }) => theme.device.tablet} {
-    font-size: 1.5rem;
+    font-size: 0.9rem;
   }
 `;

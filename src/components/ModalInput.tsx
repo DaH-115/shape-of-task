@@ -147,7 +147,6 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
   border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
 `;
 
@@ -159,4 +158,8 @@ const SelectToggleWrapper = styled.div`
 
 const SubmitBtn = styled(StyledBtn)`
   font-size: 1rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 0.8rem;
+  }
 `;

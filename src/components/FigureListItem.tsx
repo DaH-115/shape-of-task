@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import StyledFigures from './StyledFigures';
+import StyledFigures from 'components/StyledFigures';
 
-const FigureListItem = ({
-  figure,
-  done,
-}: {
+interface FigureListItemProps {
   figure: string;
   done: boolean;
-}) => {
+}
+
+const FigureListItem = ({ figure, done }: FigureListItemProps) => {
   return (
     <>
       {done && (
@@ -23,12 +22,12 @@ const FigureListItem = ({
 export default React.memo(FigureListItem);
 
 const FigureListLi = styled.li`
-  padding: 8px;
+  padding: 0.4rem;
 
   ${({ theme }) => theme.device.desktop} {
     &:hover {
       transition: background-color 0.3s ease-in-out;
-      transform: translateY(-10px);
+      transform: translateY(-0.5rem);
       transition: transform 0.2s ease-in-out;
     }
   }
