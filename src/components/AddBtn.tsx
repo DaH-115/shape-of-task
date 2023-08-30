@@ -1,29 +1,21 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { modalIsClose, modalIsOpen } from 'store/modalSlice';
+import { useAppDispatch } from 'store/hooks';
+import { modalIsOpen } from 'store/modalSlice';
 
-import Modal from 'layout/Modal';
 import ModalInput from 'components/ModalInput';
 
 const AddBtn = () => {
   const dispatch = useAppDispatch();
-  const modalState = useAppSelector((state) => state.modal.modalState);
 
-  const modalOpenHandler = useCallback(() => {
-    dispatch(modalIsOpen(true));
-  }, [dispatch]);
-
-  const modalCloseHandler = useCallback(() => {
-    dispatch(modalIsClose(false));
+  const onModalOpenHandler = useCallback(() => {
+    dispatch(modalIsOpen());
   }, [dispatch]);
 
   return (
     <AddBtnWrapper>
-      <TodoAddBtn onClick={modalOpenHandler}>{'할 일 추가하기'}</TodoAddBtn>
-      <Modal isOpen={modalState} onClose={modalCloseHandler}>
-        <ModalInput />
-      </Modal>
+      <TodoAddBtn onClick={onModalOpenHandler}>{'할 일 추가하기'}</TodoAddBtn>
+      <ModalInput />
     </AddBtnWrapper>
   );
 };

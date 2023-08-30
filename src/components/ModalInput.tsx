@@ -1,10 +1,11 @@
 import React, { useState, useCallback, useRef, useMemo } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { useAppDispatch } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { addTodo } from 'store/todoListSlice';
 
 import StyledBtn from 'styles/StyledBtn';
+import Modal from 'layout/Modal';
 import LogoFigures from 'components/LogoFigures';
 import SelectMenu from 'components/SelectMenu';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
@@ -23,6 +24,7 @@ const ModalInput = () => {
   const [toggle, setToggle] = useState<boolean>(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
+  const isInputState = useAppSelector((state) => state.modal.inputState);
   const today = useMemo(() => new Date(), []);
 
   const onChangeHandler = useCallback(
@@ -58,45 +60,49 @@ const ModalInput = () => {
     [dispatch, figure, text, today]
   );
 
-  const getFigureHandler = useCallback((figureName: string) => {
-    setFigure(figureName);
-  }, []);
-
   const onToggleHandler = useCallback(() => {
     setToggle((preve) => !preve);
   }, []);
 
+  const getFigureHandler = useCallback((figureName: string) => {
+    setFigure(figureName);
+  }, []);
+
   return (
-    <ModalInputWrapper>
-      <ModalInputHeader>
-        <h1>{'To-do'}</h1>
-        <p>{today.toLocaleDateString()}</p>
-      </ModalInputHeader>
+    <Modal modalState={isInputState}>
+      <ModalInputWrapper>
+        <ModalInputHeader>
+          <h1>{'To-do'}</h1>
+          <p>{today.toLocaleDateString()}</p>
+        </ModalInputHeader>
 
-      <ModalInputLabel htmlFor='todoTextInput'>{'Todo Input'}</ModalInputLabel>
+        <ModalInputLabel htmlFor='todoTextInput'>
+          {'Todo Input'}
+        </ModalInputLabel>
 
-      <ModalInputForm id='todoTextInput' onSubmit={onSubmitHandler}>
-        <ModalTextarea
-          value={text}
-          onChange={onChangeHandler}
-          ref={textareaRef}
-        />
+        <ModalInputForm id='todoTextInput' onSubmit={onSubmitHandler}>
+          <ModalTextarea
+            value={text}
+            onChange={onChangeHandler}
+            ref={textareaRef}
+          />
 
-        <SelectMenu
-          isToggle={toggle}
-          getToggle={onToggleHandler}
-          getFigure={getFigureHandler}
-        />
+          <SelectMenu
+            istoggle={toggle}
+            getToggle={onToggleHandler}
+            getFigure={getFigureHandler}
+          />
 
-        <ButtonWrapper>
-          <SelectToggleWrapper onClick={onToggleHandler}>
-            <LogoFigures figure={figure} />
-            <div>{toggle ? <FaAngleDown /> : <FaAngleUp />}</div>
-          </SelectToggleWrapper>
-          <SubmitBtn>{'등록'}</SubmitBtn>
-        </ButtonWrapper>
-      </ModalInputForm>
-    </ModalInputWrapper>
+          <ButtonWrapper>
+            <SelectToggleWrapper onClick={onToggleHandler}>
+              <LogoFigures figure={figure} />
+              <div>{toggle ? <FaAngleDown /> : <FaAngleUp />}</div>
+            </SelectToggleWrapper>
+            <SubmitBtn>{'등록'}</SubmitBtn>
+          </ButtonWrapper>
+        </ModalInputForm>
+      </ModalInputWrapper>
+    </Modal>
   );
 };
 
