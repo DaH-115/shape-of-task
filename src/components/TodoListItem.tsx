@@ -1,63 +1,78 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { removeTodo, toggleTodo } from 'store/todoListSlice';
+import { editModalIsOpen } from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
 import { TodoProps } from 'pages/TodoListPage';
 
-import StyledFigures from 'components/StyledFigures';
 import StyledBtn from 'styles/StyledBtn';
 import Notification from 'layout/Notification';
+import StyledFigures from 'components/StyledFigures';
+import ModalInput from 'components/ModalInput';
+import EditInputModal from 'components/EditInputModal';
 
 const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
-  const [toggle, setToggle] = useState<boolean>(false);
-  const dispach = useAppDispatch();
+  const [isToggle, setIsToggle] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 
-    if (done && toggle) {
-      timeout = setTimeout(() => setToggle(false), 1200);
+    if (done && isToggle) {
+      timeout = setTimeout(() => setIsToggle(false), 1200);
     }
 
-    if (!done && toggle) {
-      setToggle(false);
+    if (!done && isToggle) {
+      setIsToggle(false);
     }
 
     return () => clearTimeout(timeout);
-  }, [toggle, done]);
+  }, [isToggle, done]);
 
   const onToggleTodoHandler = useCallback(
     (id: string) => {
-      dispach(toggleTodo(id));
+      dispatch(toggleTodo(id));
 
       if (!done) {
-        setToggle(true);
+        setIsToggle(true);
       }
     },
-    [dispach, done]
+    [dispatch, done]
   );
 
   const onRemoveTodoHandler = useCallback(
     (id: string) => {
-      dispach(removeTodo(id));
+      dispatch(removeTodo(id));
     },
-    [dispach]
+    [dispatch]
   );
+
+  const onModalOpenHandler = useCallback(() => {
+    dispatch(editModalIsOpen());
+  }, [dispatch]);
 
   return (
     <>
-      <Notification toggle={toggle} figure={figure} />
+      <Notification toggle={isToggle} figure={figure} />
       <TodoItem>
         <TodoItemContent onClick={() => onToggleTodoHandler(id)}>
           <StyledFigures figurecolor={figure} size='small' />
-          <ContentText done={done}>{text}</ContentText>
+          <ContentText $done={done}>{text}</ContentText>
           <TodoDate>{date}</TodoDate>
         </TodoItemContent>
-        {done && (
+
+        <BtnWrapper>
+          <EditBtn onClick={onModalOpenHandler}>{'수정하기'}</EditBtn>
+          <EditInputModal
+            contentId={id}
+            contentText={text}
+            contentFigure={figure}
+          />
           <RemoveBtn onClick={() => onRemoveTodoHandler(id)}>
             {'지우기'}
           </RemoveBtn>
-        )}
+        </BtnWrapper>
+        <ModalInput />
       </TodoItem>
     </>
   );
@@ -77,7 +92,7 @@ const TodoDate = styled.p`
   }
 `;
 
-const ContentText = styled.p<{ done: boolean }>`
+const ContentText = styled.p<{ $done: boolean }>`
   width: 100%;
   max-height: 12rem;
   font-size: 1.5rem;
@@ -85,9 +100,9 @@ const ContentText = styled.p<{ done: boolean }>`
   word-break: break-all;
   margin-left: 0.6rem;
 
-  color: ${({ theme, done }) =>
-    done ? theme.commonColors.gray : theme.commonColors.black};
-  text-decoration: ${({ done }) => (done ? 'line-through' : 'none')};
+  color: ${({ theme, $done }) =>
+    $done ? theme.commonColors.gray : theme.commonColors.black};
+  text-decoration: ${({ $done }) => ($done ? 'line-through' : 'none')};
   white-space: pre-line;
 
   ${({ theme }) => theme.device.desktop} {
@@ -139,6 +154,16 @@ const TodoItemContent = styled.div`
 
 const RemoveBtn = styled(StyledBtn)`
   width: 100%;
-  margin-top: 1rem;
   color: ${({ theme }) => theme.commonColors.gray};
+`;
+
+const EditBtn = styled(StyledBtn)`
+  width: 100%;
+  color: ${({ theme }) => theme.commonColors.gray};
+`;
+
+const BtnWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
 `;
