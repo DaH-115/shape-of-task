@@ -23,11 +23,12 @@ const modalSlice = createSlice({
       state.editState = true;
     },
     captureModalIsOpen: (state) => {
-      state.editState = true;
+      state.captureState = true;
     },
     modalIsClose: (state) => {
       state.inputState = false;
       state.editState = false;
+      state.captureState = false;
     },
   },
 });

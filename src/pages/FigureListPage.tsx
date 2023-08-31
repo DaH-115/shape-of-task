@@ -1,123 +1,131 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { modalIsClose } from 'store/modalSlice';
+import React, { useRef, useCallback } from 'react';
 import styled from 'styled-components';
-import html2canvas from 'html2canvas';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import FigureListItem from 'components/FigureListItem';
+import CaptureImgModal from 'components/CaptureImgModal';
+import StyledBtn from 'styles/StyledBtn';
+import { captureModalIsOpen } from 'store/modalSlice';
 import useArrCheck from 'hooks/useArrCheck';
 
-import Modal from 'layout/Modal';
-import FigureListItem from 'components/FigureListItem';
-import StyledBtn from 'styles/StyledBtn';
-import MessageBox from 'layout/InfoMessage';
-
 const FigureListPage = () => {
-  const figureListRef = useRef<HTMLUListElement>(null);
   const dispatch = useAppDispatch();
+  const figureListRef = useRef<HTMLUListElement>(null);
+  const figureList = figureListRef.current!;
   const todoList = useAppSelector((state) => state.todoList.todoList);
-  const isCaptureState = useAppSelector((state) => state.modal.captureState);
-  const paletteName = useAppSelector((state) => state.themeChange.paletteName);
-  const [isCapturedImg, setIsCapturedImg] = useState<string>('');
   const arrCheck = useArrCheck();
 
-  useEffect(() => {
-    const figureList = figureListRef.current!;
-    (async () => {
-      const figureListImg = await html2canvas(figureList);
-      setIsCapturedImg(figureListImg.toDataURL('image/jpg'));
-    })();
-  }, [todoList, paletteName]);
-
-  const onModalCloseHandler = useCallback(() => {
-    dispatch(modalIsClose());
+  const onCaptureModalOpen = useCallback(() => {
+    dispatch(captureModalIsOpen());
   }, [dispatch]);
 
   return (
     <FigureListWrapper>
-      {isCapturedImg && (
-        <Modal modalState={isCaptureState}>
-          <CapturedImgModal>
-            <h1>{'이미지로 보기'}</h1>
-            <p>{'다채로운 하루를 저장해 보세요!'}</p>
-            <ImageWrapper>
-              <img
-                src={isCapturedImg}
-                alt='square, triangle, circle Figure List'
+      {figureList && <CaptureImgModal captureList={figureList} />}
+      <Wrapper>
+        <FigureListHeader>
+          <FigureListTitle>{'완료된 일'}</FigureListTitle>
+          <FigureListDesc>
+            {'도형으로 확인하고'}
+            <br />
+            {'나만의 이미지로 만들어 보세요'}
+          </FigureListDesc>
+        </FigureListHeader>
+        <FigureList ref={figureListRef}>
+          {todoList &&
+            todoList.map((todoItem: any) => (
+              <FigureListItem
+                key={todoItem.id}
+                figure={todoItem.figure}
+                done={todoItem.done}
               />
-            </ImageWrapper>
-            <CloseBtn onClick={onModalCloseHandler}>{'닫기'}</CloseBtn>
-          </CapturedImgModal>
-        </Modal>
-      )}
-      <FigureList ref={figureListRef}>
-        {arrCheck === undefined ? (
-          <MessageBox message='가끔은 여백도 괜찮아요' />
-        ) : (
-          todoList.map((todoItem: any) => (
-            <FigureListItem
-              key={todoItem.id}
-              figure={todoItem.figure}
-              done={todoItem.done}
-            />
-          ))
-        )}
-      </FigureList>
+            ))}
+        </FigureList>
+      </Wrapper>
+      <ButtonWrapper>
+        <CaptureBtn
+          onClick={onCaptureModalOpen}
+          disabled={arrCheck ? false : true}
+        >
+          {'이미지로 만들기'}
+        </CaptureBtn>
+      </ButtonWrapper>
     </FigureListWrapper>
   );
 };
 
 export default FigureListPage;
 
-const FigureListWrapper = styled.main`
+const FigureListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 2rem 3rem;
+  background-color: ${({ theme }) => theme.commonColors.light_gray};
+`;
+
+const Wrapper = styled.div`
   flex: 1;
+
   padding: 1rem;
+  background-color: #fff;
+  border-radius: 1rem;
+
+  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
+`;
+
+const FigureListHeader = styled.div`
+  padding: 0.5rem;
+`;
+
+const FigureListTitle = styled.h1`
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+`;
+
+const FigureListDesc = styled.p`
+  font-size: 1rem;
+  line-height: 1.2rem;
+  color: ${({ theme }) => theme.commonColors.gray};
+  margin-bottom: 0.8rem;
 `;
 
 const FigureList = styled.ul`
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
+  padding: 2rem 1rem;
 `;
 
-const CapturedImgModal = styled.div`
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 1.4rem;
+`;
+
+const CaptureBtn = styled(StyledBtn)`
   width: 100%;
-  height: 100%;
-  background-color: #fff;
-  padding: 1rem;
+  color: #fff;
+  background-color: ${({ theme }) => theme.colors.triangle};
+  border-color: ${({ theme }) => theme.colors.triangle};
+  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
 
-  &::after {
-    content: ' ';
-    display: block;
-    clear: both;
+  &:hover,
+  &:active {
+    color: ${({ theme }) => theme.colors.triangle};
+    background-color: #fff;
+    transition: all 0.4s ease-in-out;
   }
 
-  h1 {
-    font-size: 2rem;
+  ${({ theme }) => theme.device.tablet} {
+    width: auto;
   }
 
-  p {
-    font-size: 1rem;
+  &:disabled {
     color: ${({ theme }) => theme.commonColors.gray};
-    margin-top: 0.3rem;
-
-    &::after {
-      content: ' ';
-      display: block;
-      margin-top: 0.5rem;
-      border-bottom: 0.1rem solid
-        ${({ theme }) => theme.commonColors.light_gray};
-    }
-  }
-`;
-
-const CloseBtn = styled(StyledBtn)`
-  float: right;
-`;
-
-const ImageWrapper = styled.div`
-  width: 100%;
-  margin-top: 0.6rem;
-
-  img {
-    width: 100%;
+    background-color: #fff;
   }
 `;
