@@ -1,5 +1,12 @@
-import React, { useCallback, useMemo, useState, useRef } from 'react';
+import React, {
+  useCallback,
+  useMemo,
+  useState,
+  useRef,
+  useEffect,
+} from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { modalIsClose } from 'store/modalSlice';
 import { updateTodo } from 'store/todoListSlice';
 import { styled } from 'styled-components';
 import StyledBtn from 'styles/StyledBtn';
@@ -9,12 +16,6 @@ import SelectMenu from 'components/SelectMenu';
 import LogoFigures from 'components/LogoFigures';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
-interface EditInputProps {
-  contentId: string;
-  contentText: string;
-  contentFigure: string;
-}
-
 interface EditTodoItem {
   id: string;
   date: string;
@@ -22,18 +23,25 @@ interface EditTodoItem {
   figure: string;
 }
 
-const EditInputModal = ({
-  contentId,
-  contentText,
-  contentFigure,
-}: EditInputProps) => {
-  const [editText, setEditText] = useState<string>(contentText);
-  const [editFigure, setEditFigure] = useState<string>(contentFigure);
-  const [toggle, setToggle] = useState<boolean>(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+const EditInputModal = () => {
   const dispatch = useAppDispatch();
   const isEditState = useAppSelector((state) => state.modal.editState);
+  const isEditTodo = useAppSelector((state) => state.todoList.editTodo);
+
+  const [editTodoId, setEditTodoId] = useState<string>('');
+  const [editText, setEditText] = useState<string>('');
+  const [editFigure, setEditFigure] = useState<string>('');
+  const [toggle, setToggle] = useState<boolean>(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const today = useMemo(() => new Date(), []);
+
+  useEffect(() => {
+    if (isEditTodo) {
+      setEditTodoId(isEditTodo[0].id);
+      setEditText(isEditTodo[0].text);
+      setEditFigure(isEditTodo[0].figure);
+    }
+  }, [isEditTodo]);
 
   const onChangeHandler = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -54,15 +62,16 @@ const EditInputModal = ({
       }
 
       const editTodoItem: EditTodoItem = {
-        id: contentId,
+        id: editTodoId,
         date: today.toLocaleDateString(),
         text: editText,
         figure: editFigure,
       };
 
       dispatch(updateTodo(editTodoItem));
+      dispatch(modalIsClose());
     },
-    [dispatch, contentId, editText, editFigure, today]
+    [dispatch, editTodoId, editText, editFigure, today]
   );
 
   const onToggleHandler = useCallback(() => {
@@ -123,6 +132,7 @@ const ModalInputWrapper = styled.div`
   border-radius: 1rem;
 
   padding: 1rem;
+  padding-bottom: 0;
 `;
 
 const ModalInputHeader = styled.div`
@@ -151,7 +161,7 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
+
   border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
 `;
 

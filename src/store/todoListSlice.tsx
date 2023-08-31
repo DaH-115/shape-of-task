@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface initialStateProps {
   todoList: any;
+  editTodo: any;
 }
 
 const storedValue = localStorage.getItem('todoList');
@@ -9,6 +10,7 @@ const parsedValue = storedValue ? JSON.parse(storedValue) : [];
 
 const initialState: initialStateProps = {
   todoList: parsedValue,
+  editTodo: [{ id: '', text: '', figure: '' }],
 };
 
 const todoListSlice = createSlice({
@@ -18,6 +20,11 @@ const todoListSlice = createSlice({
     addTodo: (state, action: PayloadAction<any>) => {
       state.todoList = [...state.todoList, action.payload];
       localStorage.setItem('todoList', JSON.stringify(state.todoList));
+    },
+    addEditTodo: (state, action) => {
+      state.editTodo = state.todoList.filter(
+        (item: any) => item.id === action.payload
+      );
     },
     updateTodo: (state, action) => {
       const { id, date, text, figure } = action.payload;
@@ -46,5 +53,5 @@ const todoListSlice = createSlice({
 });
 
 export default todoListSlice;
-export const { addTodo, updateTodo, removeTodo, toggleTodo } =
+export const { addTodo, updateTodo, removeTodo, toggleTodo, addEditTodo } =
   todoListSlice.actions;
