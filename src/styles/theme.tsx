@@ -1,3 +1,5 @@
+import { commonColors } from 'styles/theme-colors';
+
 const size = {
   mobile: '375px',
   tablet: '768px',
@@ -13,4 +15,5 @@ const device = {
 export const defalutTheme = {
   size,
   device,
+  commonColors,
 };

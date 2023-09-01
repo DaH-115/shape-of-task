@@ -1,35 +1,34 @@
 import { ThemeProvider, styled } from 'styled-components';
-import { defalutTheme } from 'styles/theme';
-import GlobalStyle from 'styles/GlobalStyle';
 import Routes from 'routes/Routes';
-import { commonColors, themeColors } from 'styles/theme-color';
+import GlobalStyle from 'styles/GlobalStyle';
+import { defalutTheme } from 'styles/theme';
+import { themeColors } from 'styles/theme-colors';
 import { useAppSelector } from 'store/hooks';
 
 import MetaTags from 'MetaTags';
-import AddBtn from 'components/AddBtn';
+import FigureListPage from 'pages/FigureListPage';
 import Header from 'layout/Header';
 import Footer from 'layout/Footer';
-import FigureListPage from 'pages/FigureListPage';
+import AddBtn from 'components/AddBtn';
 
 const App = () => {
-  const paletteName = useAppSelector((state) => state.themeChange.paletteName);
   const todoList = useAppSelector((state) => state.todoList.todoList);
+  const paletteName = useAppSelector((state) => state.themeChange.paletteName);
   const restTodo = todoList.filter(
     (todo: { done: boolean }) => todo.done === false
   );
 
+  const theme = {
+    ...defalutTheme,
+    colors: themeColors[paletteName],
+  };
+
   return (
-    <ThemeProvider
-      theme={{
-        ...defalutTheme,
-        commonColors,
-        colors: themeColors[paletteName],
-      }}
-    >
+    <ThemeProvider theme={theme}>
       <MetaTags />
       <GlobalStyle />
       <AllWrapper>
-        <Wrapper>
+        <MainContentWrapper>
           <Header />
           <MainContent>
             <Routes />
@@ -40,10 +39,10 @@ const App = () => {
               : '할 일이 없습니다'}
           </TodoCountMessage>
           <AddBtn />
-        </Wrapper>
-        <RWrapper>
+        </MainContentWrapper>
+        <FigureListView>
           <FigureListPage />
-        </RWrapper>
+        </FigureListView>
       </AllWrapper>
       <Footer />
     </ThemeProvider>
@@ -52,38 +51,39 @@ const App = () => {
 
 export default App;
 
-const AllWrapper = styled.div`
+const AllWrapper = styled.main`
   display: flex;
   height: 100vh;
 `;
 
-const RWrapper = styled.div`
+const FigureListView = styled.div`
   display: none;
+  width: 100%;
+  height: 100%;
 
   ${({ theme }) => theme.device.tablet} {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100vh;
   }
 `;
 
-const Wrapper = styled.div`
+const MainContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100vh;
 `;
 
-const MainContent = styled.main`
+const MainContent = styled.div`
   flex: 1;
-  width: 100%;
   overflow: auto;
 `;
 
 const TodoCountMessage = styled.div`
   font-size: 1.2rem;
-  padding: 1rem;
+  padding: 0.8rem 1rem;
+  border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
+  border-bottom: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
 
   ${({ theme }) => theme.device.tablet} {
     font-size: 0.9rem;
