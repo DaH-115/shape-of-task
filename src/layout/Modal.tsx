@@ -1,5 +1,6 @@
 import React, { ReactNode, useCallback } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { fadeIn, fadeOut } from 'styles/animation-setting';
 import { modalIsClose } from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
 import PortalModal from 'components/PortalModal';
@@ -25,25 +26,6 @@ const Modal = ({ children, modalState }: ModalProps) => {
 };
 
 export default React.memo(Modal);
-
-// Animation Setting
-const fadeIn = keyframes`
-  from{
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-const fadeOut = keyframes`
-  from{
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-`;
 
 const Backdrop = styled.div<{ $modaltoggle: boolean }>`
   position: fixed;

@@ -1,8 +1,9 @@
 import React from 'react';
-import { useAppSelector } from 'store/hooks';
 import styled, { keyframes } from 'styled-components';
+import { themeColorPalette } from 'styles/theme-colors';
 import StyledBtn from 'styles/StyledBtn';
-import { themeColorPalette } from 'styles/theme-color';
+import { fadeIn, fadeOut } from 'styles/animation-setting';
+import { useAppSelector } from 'store/hooks';
 
 import ColorPalette from 'components/ColorPalette';
 
@@ -22,13 +23,11 @@ const SlideMenu = ({ isopen, slideMenuHandler }: SlideMenuProps) => {
           <SlideMenuTitle>{'설정'}</SlideMenuTitle>
           <StyledBtn onClick={slideMenuHandler}>{'닫기'}</StyledBtn>
         </SlideMenuHeader>
-        <SlideMenuDesc>{'원하는 색을 골라 보세요'}</SlideMenuDesc>
+        <SlideMenuDesc>{'원하는 색을 적용해 보세요'}</SlideMenuDesc>
         {themeColorPalette.map((item, index) => (
           <ColorPalette
             key={index}
             name={item.name}
-            colorPalette={item}
-            paletteName={item.paletteName}
             isselected={paletteName === item.name ? 'true' : 'false'}
           />
         ))}
@@ -42,7 +41,7 @@ export default React.memo(SlideMenu);
 // Animation Setting
 const fadeSlideIn = keyframes`
   from {
-    transform: translateX(100vw);
+    transform: translateX(100%);
     opacity: 0;
     pointer-events: none;
   }
@@ -78,7 +77,7 @@ const SlideMenuWrapper = styled.div<{ $isopen: string }>`
   width: 100%;
   height: 100vh;
   background-color: #fff;
-  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
   padding: 1rem 2rem;
 
   /* scrollbar */
@@ -117,5 +116,10 @@ const Backdrop = styled.div<{ $isopen: string }>`
 
   width: 100%;
   height: 100%;
-  display: ${({ $isopen }) => ($isopen === 'true' ? 'block' : 'none')};
+  background-color: rgba(177, 177, 177, 0.8);
+
+  visibility: ${({ $isopen }) => ($isopen === 'true' ? 'visible' : 'hidden')};
+  animation: ${({ $isopen }) => ($isopen === 'true' ? fadeIn : fadeOut)} 0.4s
+    ease-in-out;
+  transition: visibility 0.4s ease-in-out;
 `;

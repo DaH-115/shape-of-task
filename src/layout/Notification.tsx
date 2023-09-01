@@ -1,5 +1,7 @@
-import styled, { keyframes } from 'styled-components';
-import PortalModal from '../components/PortalModal';
+import React from 'react';
+import styled from 'styled-components';
+import { fadeSlideIn, fadeSlideOut } from 'styles/animation-setting';
+import PortalModal from 'components/PortalModal';
 
 interface NotificationProps {
   toggle: boolean;
@@ -18,52 +20,59 @@ const Notification = ({ toggle, figure }: NotificationProps) => {
 
   return (
     <PortalModal>
-      <NoteMessage $toggle={toggle}>{`도형 메뉴에 ${message}`}</NoteMessage>
+      <NoteWrapper $toggle={toggle}>
+        <MessageWrapper>
+          <NoteName>{'알림'}</NoteName>
+          <NoteText>{`할 일 끝! ${message}`}</NoteText>
+        </MessageWrapper>
+      </NoteWrapper>
     </PortalModal>
   );
 };
 
-export default Notification;
+export default React.memo(Notification);
 
-// Animation Setting
-const fadeSlideIn = keyframes`
-  from {
-    transform: translateY(-40px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
-
-const fadeSlideOut = keyframes`
-  from {
-      transform: translateY(0);
-      opacity: 1;
-  }
-  to {
-      transform: translateY(-40px);
-      opacity: 0;
-  }
-`;
-
-const NoteMessage = styled.div<{ $toggle: boolean }>`
+const NoteWrapper = styled.div<{ $toggle: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
 
   width: 100%;
-  padding: 25px;
-  font-size: 24px;
-  text-align: center;
-
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  box-shadow: 0px 0px 20px rgba(223, 74, 11, 0.5);
+  min-width: ${({ theme }) => theme.size.mobile};
+  padding: 1rem;
 
   visibility: ${({ $toggle }) => ($toggle ? 'visible' : 'hidden')};
   animation: ${({ $toggle }) => ($toggle ? fadeSlideIn : fadeSlideOut)} 0.4s
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
+
+  ${({ theme }) => theme.device.tablet} {
+    width: 50%;
+  }
+`;
+
+const MessageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 1rem 0.5rem;
+
+  background-color: #fff;
+  border: 0.1rem solid ${({ theme }) => theme.colors.important};
+
+  border-radius: 1.5rem;
+
+  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
+`;
+
+const NoteText = styled.p`
+  flex: 1;
+`;
+
+const NoteName = styled.p`
+  font-size: 1rem;
+  font-weight: 700;
+  margin-left: 0.5rem;
 `;
