@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 
 const PortalModal = ({ children }: { children: ReactNode }) => {
@@ -11,4 +11,4 @@ const PortalModal = ({ children }: { children: ReactNode }) => {
   return ReactDOM.createPortal(children, portalRoot);
 };
 
-export default PortalModal;
+export default React.memo(PortalModal);

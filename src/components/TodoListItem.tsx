@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useMemo, useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { removeTodo, toggleTodo } from 'store/todoListSlice';
+import { addEditTodo, removeTodo, toggleTodo } from 'store/todoListSlice';
 import { editModalIsOpen } from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
 import { TodoProps } from 'pages/TodoListPage';
@@ -8,18 +8,28 @@ import { TodoProps } from 'pages/TodoListPage';
 import StyledBtn from 'styles/StyledBtn';
 import Notification from 'layout/Notification';
 import StyledFigures from 'components/StyledFigures';
-import ModalInput from 'components/ModalInput';
-import EditInputModal from 'components/EditInputModal';
 
 const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
   const [isToggle, setIsToggle] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const isImportance = () => {
+    switch (figure) {
+      case 'circle':
+        return '언제든지 하세요';
+      case 'triangle':
+        return '중요해요';
+      case 'square':
+        return '기억해 두세요';
+      default:
+        return '';
+    }
+  };
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 
     if (done && isToggle) {
-      timeout = setTimeout(() => setIsToggle(false), 1200);
+      timeout = setTimeout(() => setIsToggle(false), 1500);
     }
 
     if (!done && isToggle) {
@@ -49,30 +59,28 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
 
   const onModalOpenHandler = useCallback(() => {
     dispatch(editModalIsOpen());
-  }, [dispatch]);
+    dispatch(addEditTodo(id));
+  }, [dispatch, id]);
 
   return (
     <>
       <Notification toggle={isToggle} figure={figure} />
       <TodoItemWrapper>
         <TodoItemContent onClick={() => onToggleTodoHandler(id)}>
-          <StyledFigures figurecolor={figure} size='small' />
+          <StyledFigures figurecolor={figure} />
           <ContentText $done={done}>{text}</ContentText>
-          <TodoDate>{date}</TodoDate>
+          <ContentBottom>
+            <TodoDate>{date}</TodoDate>
+            <FigureDesc>{isImportance}</FigureDesc>
+          </ContentBottom>
         </TodoItemContent>
 
         <BtnWrapper>
           <EditBtn onClick={onModalOpenHandler}>{'수정하기'}</EditBtn>
-          <EditInputModal
-            contentId={id}
-            contentText={text}
-            contentFigure={figure}
-          />
           <RemoveBtn onClick={() => onRemoveTodoHandler(id)}>
             {'지우기'}
           </RemoveBtn>
         </BtnWrapper>
-        <ModalInput />
       </TodoItemWrapper>
     </>
   );
@@ -80,13 +88,26 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
 
 export default React.memo(TodoListItem);
 
-const TodoDate = styled.p`
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.commonColors.gray};
+const TodoItemWrapper = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  font-size: 0.8rem;
-  padding-top: 0.2rem;
-  border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+
+  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
+
+  ${({ theme }) => theme.device.desktop} {
+    padding: 1.4rem 1rem;
+  }
+`;
+
+const TodoItemContent = styled.div`
+  width: 100%;
 `;
 
 const ContentText = styled.p<{ $done: boolean }>`
@@ -96,8 +117,7 @@ const ContentText = styled.p<{ $done: boolean }>`
   word-break: break-all;
 
   margin-left: 0.2rem;
-  padding: 1rem;
-  padding-left: 0;
+  padding: 0.5rem 1rem 2rem 0;
 
   color: ${({ theme, $done }) =>
     $done ? theme.commonColors.gray : theme.commonColors.black};
@@ -120,26 +140,23 @@ const ContentText = styled.p<{ $done: boolean }>`
   }
 `;
 
-const TodoItemWrapper = styled.li`
+const ContentBottom = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  background-color: #fff;
-  border-radius: 0.8rem;
-  padding: 1rem;
-  margin-bottom: 0.8rem;
-
-  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
-
-  ${({ theme }) => theme.device.desktop} {
-    padding: 0.8rem;
-  }
+  width: 100%;
+  padding-top: 0.2rem;
+  border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
 `;
 
-const TodoItemContent = styled.div`
-  width: 100%;
+const TodoDate = styled.p`
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.commonColors.gray};
+  margin-right: 0.3rem;
+  font-size: 0.8rem;
+`;
+
+const FigureDesc = styled.p`
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.commonColors.gray};
 `;
 
 const BtnWrapper = styled.div`

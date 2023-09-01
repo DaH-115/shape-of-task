@@ -127,7 +127,6 @@ const ModalInputWrapper = styled.div`
   height: 100%;
 
   background-color: #fff;
-  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
   border-radius: 1rem;
 
   padding: 1rem;

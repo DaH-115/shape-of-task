@@ -14,7 +14,7 @@ const Modal = ({ children, modalState }: ModalProps) => {
   const dispatch = useAppDispatch();
 
   const onModalCloseHandler = useCallback(() => {
-    return dispatch(modalIsClose());
+    dispatch(modalIsClose());
   }, [dispatch]);
 
   return (
@@ -34,7 +34,7 @@ const Backdrop = styled.div<{ $modaltoggle: boolean }>`
 
   width: 100%;
   height: 100%;
-  background-color: rgba(177, 177, 177, 0.8);
+  background-color: rgba(177, 177, 177, 0.5);
 
   visibility: ${({ $modaltoggle }) => ($modaltoggle ? 'visible' : 'hidden')};
   animation: ${({ $modaltoggle }) => ($modaltoggle ? fadeIn : fadeOut)} 0.4s
@@ -44,21 +44,18 @@ const Backdrop = styled.div<{ $modaltoggle: boolean }>`
 
 const ModalWapper = styled.div<{ $modaltoggle: boolean }>`
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -40%);
+  transform: translate(-50%, -50%);
 
-  width: 90%;
+  width: 80%;
 
+  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.3);
   visibility: ${({ $modaltoggle }) => ($modaltoggle ? 'visible' : 'hidden')};
   animation: ${({ $modaltoggle }) => ($modaltoggle ? fadeIn : fadeOut)} 0.4s
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
 
   ${({ theme }) => theme.device.desktop} {
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -40%);
-    width: 50%;
   }
 `;
