@@ -79,7 +79,6 @@ const ModalInput = () => {
         <ModalInputLabel htmlFor='todoTextInput'>
           {'Todo Input'}
         </ModalInputLabel>
-
         <ModalInputForm id='todoTextInput' onSubmit={onSubmitHandler}>
           <ModalTextarea
             value={text}

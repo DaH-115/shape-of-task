@@ -101,13 +101,13 @@ const CloseBtn = styled(StyledBtn)`
 const CaptureBtn = styled(StyledBtn)`
   width: 100%;
   color: #fff;
-  background-color: ${({ theme }) => theme.colors.triangle};
-  border-color: ${({ theme }) => theme.colors.triangle};
+  background-color: ${({ theme }) => theme.colors.important};
+  border-color: ${({ theme }) => theme.colors.important};
   margin-right: 0.3rem;
 
   &:hover,
   &:active {
-    color: ${({ theme }) => theme.colors.triangle};
+    color: ${({ theme }) => theme.colors.important};
     background-color: #fff;
     transition: all 0.4s ease-in-out;
   }

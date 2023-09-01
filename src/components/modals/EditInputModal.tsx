@@ -90,11 +90,10 @@ const EditInputModal = () => {
           <p>{today.toLocaleDateString()}</p>
         </ModalInputHeader>
 
-        <ModalInputLabel htmlFor='todoTextInput'>
-          {'Todo Input'}
+        <ModalInputLabel htmlFor='todoEditTextInput'>
+          {'Todo Edit Input'}
         </ModalInputLabel>
-
-        <ModalInputForm id='todoTextInput' onSubmit={onSubmitHandler}>
+        <ModalInputForm id='todoEditTextInput' onSubmit={onSubmitHandler}>
           <ModalTextarea
             value={editText}
             onChange={onChangeHandler}
