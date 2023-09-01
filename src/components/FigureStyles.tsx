@@ -11,20 +11,20 @@ interface FigureStyledPorps {
 export const StyledCircle = styled(Circle)<FigureStyledPorps>`
   fill: ${({ theme, figurecolor }) =>
     figurecolor === 'circle'
-      ? theme.colors.circle
+      ? theme.colors.anytime
       : theme.commonColors.light_gray};
 `;
 
 export const StyledSquare = styled(Square)<FigureStyledPorps>`
   fill: ${({ theme, figurecolor }) =>
     figurecolor === 'square'
-      ? theme.colors.square
+      ? theme.colors.remember
       : theme.commonColors.light_gray};
 `;
 
 export const StyledTriangle = styled(Triangle)<FigureStyledPorps>`
   fill: ${({ theme, figurecolor }) =>
     figurecolor === 'triangle'
-      ? theme.colors.triangle
+      ? theme.colors.important
       : theme.commonColors.light_gray};
 `;

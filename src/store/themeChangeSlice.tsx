@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  paletteName: localStorage.getItem('themeName') || 'originalColor',
+  paletteName: localStorage.getItem('themeName') || 'originalColors',
 };
 
 const themeChangeSlice = createSlice({

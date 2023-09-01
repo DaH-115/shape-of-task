@@ -12,16 +12,16 @@ const StyledBtn = styled.button`
   font-weight: 700;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.triangle};
-    border-color: ${({ theme }) => theme.colors.triangle};
+    color: ${({ theme }) => theme.colors.important};
+    border-color: ${({ theme }) => theme.colors.important};
     transition: color 0.1s ease-in-out;
   }
 
   &:active {
     color: #fff;
-    background-color: ${({ theme }) => theme.colors.triangle};
+    background-color: ${({ theme }) => theme.colors.important};
     transition: background-color 0.2s ease-in-out;
-    border: 0.1rem solid ${({ theme }) => theme.colors.triangle};
+    border: 0.1rem solid ${({ theme }) => theme.colors.important};
   }
 
   &:disabled {

@@ -36,7 +36,7 @@ const FooterWrapper = styled.footer`
   min-width: ${({ theme }) => theme.size.mobile};
   padding: 2rem 1rem;
   color: #fff;
-  background-color: ${({ theme }) => theme.colors.triangle};
+  background-color: ${({ theme }) => theme.colors.important};
 `;
 
 const FooterTitle = styled.p`

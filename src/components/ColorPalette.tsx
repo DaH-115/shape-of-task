@@ -2,22 +2,16 @@ import { useCallback } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from 'store/hooks';
 import { themeChange } from 'store/themeChangeSlice';
-import { ColorTypes } from 'styles/theme-color';
+import { themeColors } from 'styles/theme-colors';
 
 interface ColorPaletteProps {
-  colorPalette: ColorTypes;
   name: string;
-  paletteName: string;
   isselected: string;
 }
 
-const ColorPalette = ({
-  colorPalette,
-  name,
-  paletteName,
-  isselected,
-}: ColorPaletteProps) => {
+const ColorPalette = ({ name, isselected }: ColorPaletteProps) => {
   const dispatch = useAppDispatch();
+  const { paletteName, important, remember, anytime } = themeColors[name] || {};
 
   const onThemeChangeHandler = useCallback(() => {
     dispatch(themeChange(name));
@@ -30,13 +24,13 @@ const ColorPalette = ({
       </ColorPaletteTitle>
       <ColorPaletteWrapper
         onClick={onThemeChangeHandler}
-        $themecolor={colorPalette.triangle}
+        $themecolor={important}
         $isselected={isselected}
       >
         <PaletteWrapper>
-          <Palette $themecolor={colorPalette.triangle} />
-          <Palette $themecolor={colorPalette.square} />
-          <Palette $themecolor={colorPalette.circle} />
+          <Palette $themecolor={important} />
+          <Palette $themecolor={remember} />
+          <Palette $themecolor={anytime} />
         </PaletteWrapper>
       </ColorPaletteWrapper>
     </>
@@ -64,7 +58,7 @@ const ColorPaletteWrapper = styled.div<{
 `;
 
 const ColorPaletteTitle = styled.p<{ $isselected: string }>`
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: ${({ theme, $isselected }) =>
     $isselected === 'true'
       ? theme.commonColors.black
