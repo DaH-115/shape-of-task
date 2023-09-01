@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "@types/lodash": "^4.14.197",
     "@types/react-dom": "^18.2.7",
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^9.0.2",
