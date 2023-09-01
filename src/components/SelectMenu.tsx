@@ -26,15 +26,15 @@ const SelectMenu = ({ istoggle, getToggle, getFigure }: SelectMenuProps) => {
     <SelectMenuWrapper $istoggle={istoggle}>
       <SelectMenuList onClick={getFigureHandler}>
         <SelectMenuItem>
-          <StyledFigures size='small' figurecolor='triangle' />
+          <StyledFigures figurecolor='triangle' />
           <FigureDesc data-figure='triangle'>{'중요해요'}</FigureDesc>
         </SelectMenuItem>
         <SelectMenuItem>
-          <StyledFigures size='small' figurecolor='square' />
+          <StyledFigures figurecolor='square' />
           <FigureDesc data-figure='square'>{'기억해 두세요'}</FigureDesc>
         </SelectMenuItem>
         <SelectMenuItem>
-          <StyledFigures size='small' figurecolor='circle' />
+          <StyledFigures figurecolor='circle' />
           <FigureDesc data-figure='circle'>{'언제든지 하세요'}</FigureDesc>
         </SelectMenuItem>
       </SelectMenuList>
@@ -81,22 +81,18 @@ const SelectMenuWrapper = styled.div<{ $istoggle: boolean }>`
 `;
 
 const SelectMenuList = styled.ul`
-  width: 10rem;
   border: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
   border-radius: 1rem;
 
   background-color: #fff;
-  box-shadow: 0px 5px 40px rgba(177, 177, 177, 0.25);
+  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
 `;
 
 const SelectMenuItem = styled.li`
-  width: 100%;
   display: flex;
   align-items: center;
 
-  font-size: 1rem;
-  padding: 0.8rem;
-  padding-right: 0;
+  padding: 0 1rem;
 
   &:hover,
   &:active {
@@ -105,8 +101,9 @@ const SelectMenuItem = styled.li`
 `;
 
 const FigureDesc = styled.p`
-  margin-left: 0.3rem;
+  flex: 1;
 
-  padding: 1rem;
-  padding-left: 0;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  padding-right: 0;
 `;

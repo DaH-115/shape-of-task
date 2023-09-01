@@ -23,12 +23,4 @@ export default React.memo(FigureListItem);
 
 const FigureListLi = styled.li`
   padding: 0.4rem;
-
-  ${({ theme }) => theme.device.desktop} {
-    &:hover {
-      transition: background-color 0.3s ease-in-out;
-      transform: translateY(-0.5rem);
-      transition: transform 0.2s ease-in-out;
-    }
-  }
 `;

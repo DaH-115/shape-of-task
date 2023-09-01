@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { StyledCircle, StyledSquare, StyledTriangle } from './FigureStyles';
 
@@ -11,10 +12,10 @@ const LogoFigures = ({ figure }: { figure: string }) => {
   );
 };
 
-export default LogoFigures;
+export default React.memo(LogoFigures);
 
 const LogoWrapper = styled.div`
   display: flex;
   width: 100%;
-  margin-right: 6px;
+  margin-right: 0.3rem;
 `;

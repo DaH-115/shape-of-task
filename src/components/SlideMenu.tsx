@@ -116,7 +116,7 @@ const Backdrop = styled.div<{ $isopen: string }>`
 
   width: 100%;
   height: 100%;
-  background-color: rgba(177, 177, 177, 0.8);
+  background-color: rgba(177, 177, 177, 0.5);
 
   visibility: ${({ $isopen }) => ($isopen === 'true' ? 'visible' : 'hidden')};
   animation: ${({ $isopen }) => ($isopen === 'true' ? fadeIn : fadeOut)} 0.4s

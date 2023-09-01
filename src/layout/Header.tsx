@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-
+import { ReactComponent as Logo } from 'assets/Logo.svg';
 import StyledBtn from 'styles/StyledBtn';
-import StyledLogo from 'components/StyledLogo';
 import SlideMenu from 'components/SlideMenu';
 
 const Header = () => {
@@ -25,7 +24,7 @@ const Header = () => {
       </a>
       <MenueWrapper>
         <a href='/figure-list'>
-          <FigureListBtn>{'완료 리스트'}</FigureListBtn>
+          <FigureListBtn>{'완료된 일'}</FigureListBtn>
         </a>
         <StyledBtn onClick={slideMenuOpenHandler}>{'설정'}</StyledBtn>
       </MenueWrapper>
@@ -42,14 +41,11 @@ const HeaderWrapper = styled.header`
   align-items: center;
 
   width: 100%;
-  min-width: ${({ theme }) => theme.size.mobile};
-  padding: 0.5rem 1rem;
-  padding-top: 1rem;
+  padding: 1rem;
+  padding-top: 1.4rem;
   background-color: #fff;
 
-  ${({ theme }) => theme.device.tablet} {
-    padding: 0.5rem 2rem;
-  }
+  border-bottom: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
 `;
 
 const MenueWrapper = styled.div`
@@ -62,4 +58,9 @@ const FigureListBtn = styled(StyledBtn)`
   ${({ theme }) => theme.device.tablet} {
     display: none;
   }
+`;
+
+const StyledLogo = styled(Logo)`
+  width: auto;
+  height: 1.5rem;
 `;

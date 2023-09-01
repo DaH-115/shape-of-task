@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { addEditTodo, removeTodo, toggleTodo } from 'store/todoListSlice';
 import { editModalIsOpen } from 'store/modalSlice';

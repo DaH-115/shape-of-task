@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   StyledCircle,
   StyledSquare,
@@ -8,20 +7,15 @@ import { styled } from 'styled-components';
 
 interface FigureProps {
   figurecolor: string;
-  size?: string;
 }
 
-const StyledFigures = ({ figurecolor, size }: FigureProps) => {
+const StyledFigures = ({ figurecolor }: FigureProps) => {
   return (
     <FigureStyleWrapper>
-      {figurecolor === 'circle' && (
-        <StyledCircle figurecolor={figurecolor} size={size} />
-      )}
-      {figurecolor === 'square' && (
-        <StyledSquare figurecolor={figurecolor} size={size} />
-      )}
+      {figurecolor === 'circle' && <StyledCircle figurecolor={figurecolor} />}
+      {figurecolor === 'square' && <StyledSquare figurecolor={figurecolor} />}
       {figurecolor === 'triangle' && (
-        <StyledTriangle figurecolor={figurecolor} size={size} />
+        <StyledTriangle figurecolor={figurecolor} />
       )}
     </FigureStyleWrapper>
   );

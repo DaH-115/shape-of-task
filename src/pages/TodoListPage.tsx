@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from 'store/hooks';
 import TodoListItem from 'components/TodoListItem';
@@ -17,7 +18,7 @@ const TodoListPage = () => {
   return (
     <TodoList>
       {!todoList.length ? (
-        <InfoMessage message='할 일을 정리해 보세요' />
+        <InfoMessage message='할 일을 정리하고 도형을 획득해 보세요' />
       ) : (
         todoList.map((todoItem: TodoProps) => (
           <TodoListItem
@@ -34,13 +35,13 @@ const TodoListPage = () => {
   );
 };
 
-export default TodoListPage;
+export default React.memo(TodoListPage);
 
 const TodoList = styled.ul`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.commonColors.light_gray};
-  padding: 1rem;
+  padding: 2rem 1rem;
 
   /* scrollbar */
   overflow-y: scroll;
@@ -48,5 +49,9 @@ const TodoList = styled.ul`
   scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
+  }
+
+  ${({ theme }) => theme.device.tablet} {
+    padding: 1rem 2rem;
   }
 `;
