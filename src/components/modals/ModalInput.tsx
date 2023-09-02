@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { addTodo } from 'store/todoListSlice';
 
 import StyledBtn from 'styles/StyledBtn';
-import Modal from 'layout/Modal';
+import Modal from 'components/modals/Modal';
 import LogoFigures from 'components/LogoFigures';
 import SelectMenu from 'components/SelectMenu';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';

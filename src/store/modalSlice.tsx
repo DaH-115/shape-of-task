@@ -4,12 +4,20 @@ interface initialStateProps {
   inputState: boolean;
   editState: boolean;
   captureState: boolean;
+  notificationState: {
+    isOpen: boolean;
+    isDone: boolean;
+  };
 }
 
 const initialState: initialStateProps = {
   inputState: false,
   editState: false,
   captureState: false,
+  notificationState: {
+    isOpen: false,
+    isDone: false,
+  },
 };
 
 const modalSlice = createSlice({
@@ -25,10 +33,15 @@ const modalSlice = createSlice({
     captureModalIsOpen: (state) => {
       state.captureState = true;
     },
+    notificationIsOpen: (state, action) => {
+      state.notificationState.isOpen = true;
+      state.notificationState.isDone = action.payload;
+    },
     modalIsClose: (state) => {
       state.inputState = false;
       state.editState = false;
       state.captureState = false;
+      state.notificationState.isOpen = false;
     },
   },
 });
@@ -39,4 +52,5 @@ export const {
   modalIsClose,
   editModalIsOpen,
   captureModalIsOpen,
+  notificationIsOpen,
 } = modalSlice.actions;

@@ -1,28 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import html2canvas from 'html2canvas';
+import React, { useCallback } from 'react';
 import { styled } from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
 import StyledBtn from 'styles/StyledBtn';
-import Modal from 'layout/Modal';
+import Modal from 'components/modals/Modal';
 
-const CaptureImgModal = ({
-  captureList,
-}: {
-  captureList: HTMLUListElement;
-}) => {
+const CaptureImgModal = ({ capturedImg }: { capturedImg: string }) => {
   const dispatch = useAppDispatch();
-  const todoList = useAppSelector((state) => state.todoList.todoList);
-  const paletteName = useAppSelector((state) => state.themeChange.paletteName);
   const isCaptureState = useAppSelector((state) => state.modal.captureState);
-  const [isCapturedImg, setIsCapturedImg] = useState<string>('');
-
-  useEffect(() => {
-    (async () => {
-      const figureListImg = await html2canvas(captureList);
-      setIsCapturedImg(figureListImg.toDataURL('image/jpg'));
-    })();
-  }, [paletteName, captureList, todoList]);
 
   const onModalCloseHandler = useCallback(() => {
     dispatch(modalIsClose());
@@ -38,7 +23,7 @@ const CaptureImgModal = ({
           </CaptureModalDesc>
         </CaptureModalHeader>
         <ImageWrapper>
-          <img src={isCapturedImg} alt='square, triangle, circle Figure List' />
+          <img src={capturedImg} alt='square, triangle, circle Figure List' />
         </ImageWrapper>
         <ButtonWrapper>
           <CaptureBtn onClick={onModalCloseHandler}>{'저장하기'}</CaptureBtn>

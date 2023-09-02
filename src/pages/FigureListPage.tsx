@@ -1,26 +1,32 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import FigureListItem from 'components/FigureListItem';
-import CaptureImgModal from 'components/CaptureImgModal';
+import CaptureImgModal from 'components/modals/CaptureImgModal';
 import StyledBtn from 'styles/StyledBtn';
 import { captureModalIsOpen } from 'store/modalSlice';
-import useArrCheck from 'hooks/useArrCheck';
+
+import html2canvas from 'html2canvas';
 
 const FigureListPage = () => {
+  const [isCapturedImg, setIsCapturedImg] = useState<string>('');
   const dispatch = useAppDispatch();
   const figureListRef = useRef<HTMLUListElement>(null);
   const figureList = figureListRef.current!;
   const todoList = useAppSelector((state) => state.todoList.todoList);
-  const arrCheck = useArrCheck();
+  const isDoneArr = todoList.filter(
+    (item: { done: boolean }) => item.done === true
+  );
 
-  const onCaptureModalOpen = useCallback(() => {
+  const onCaptureModalOpen = useCallback(async () => {
+    const figureListImg = await html2canvas(figureList);
+    setIsCapturedImg(figureListImg.toDataURL('image/jpg'));
     dispatch(captureModalIsOpen());
-  }, [dispatch]);
+  }, [dispatch, figureList]);
 
   return (
     <FigureListWrapper>
-      {figureList && <CaptureImgModal captureList={figureList} />}
+      {figureList && <CaptureImgModal capturedImg={isCapturedImg} />}
       <Wrapper>
         <FigureListHeader>
           <FigureListTitle>{'완료된 일'}</FigureListTitle>
@@ -44,7 +50,7 @@ const FigureListPage = () => {
       <ButtonWrapper>
         <CaptureBtn
           onClick={onCaptureModalOpen}
-          disabled={arrCheck ? false : true}
+          disabled={isDoneArr.length ? false : true}
         >
           {'이미지로 만들기'}
         </CaptureBtn>
@@ -53,17 +59,17 @@ const FigureListPage = () => {
   );
 };
 
-export default FigureListPage;
+export default React.memo(FigureListPage);
 
 const FigureListWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 100%;
-  height: 100%;
+  padding: 1rem 2rem;
 
-  padding: 2rem 3rem;
-  background-color: ${({ theme }) => theme.commonColors.light_gray};
+  ${({ theme }) => theme.device.tablet} {
+    padding: 2rem 3rem;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -81,13 +87,13 @@ const FigureListHeader = styled.div`
 `;
 
 const FigureListTitle = styled.h1`
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 `;
 
 const FigureListDesc = styled.p`
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.2rem;
   color: ${({ theme }) => theme.commonColors.gray};
   margin-bottom: 0.8rem;
@@ -103,19 +109,19 @@ const FigureList = styled.ul`
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
-  margin-top: 1.4rem;
+  margin-top: 1.5rem;
 `;
 
 const CaptureBtn = styled(StyledBtn)`
   width: 100%;
   color: #fff;
-  background-color: ${({ theme }) => theme.colors.triangle};
-  border-color: ${({ theme }) => theme.colors.triangle};
+  background-color: ${({ theme }) => theme.colors.important};
+  border-color: ${({ theme }) => theme.colors.important};
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
 
   &:hover,
   &:active {
-    color: ${({ theme }) => theme.colors.triangle};
+    color: ${({ theme }) => theme.colors.important};
     background-color: #fff;
     transition: all 0.4s ease-in-out;
   }

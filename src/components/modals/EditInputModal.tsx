@@ -11,7 +11,7 @@ import { updateTodo } from 'store/todoListSlice';
 import { styled } from 'styled-components';
 import StyledBtn from 'styles/StyledBtn';
 
-import Modal from 'layout/Modal';
+import Modal from 'components/modals/Modal';
 import SelectMenu from 'components/SelectMenu';
 import LogoFigures from 'components/LogoFigures';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';

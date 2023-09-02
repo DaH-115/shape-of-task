@@ -9,6 +9,7 @@ import MetaTags from 'MetaTags';
 import FigureListPage from 'pages/FigureListPage';
 import Header from 'layout/Header';
 import Footer from 'layout/Footer';
+import Notification from 'components/modals/Notification';
 import AddBtn from 'components/AddBtn';
 import ModalInput from 'components/modals/ModalInput';
 import EditInputModal from 'components/modals/EditInputModal';
@@ -52,6 +53,7 @@ const App = () => {
       <Footer />
       <ModalInput />
       <EditInputModal />
+      <Notification />
     </ThemeProvider>
   );
 };

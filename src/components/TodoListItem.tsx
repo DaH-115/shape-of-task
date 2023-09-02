@@ -1,53 +1,30 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { addEditTodo, removeTodo, toggleTodo } from 'store/todoListSlice';
-import { editModalIsOpen } from 'store/modalSlice';
+import { editModalIsOpen, notificationIsOpen } from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
 import { TodoProps } from 'pages/TodoListPage';
 
 import StyledBtn from 'styles/StyledBtn';
-import Notification from 'layout/Notification';
 import StyledFigures from 'components/StyledFigures';
 
 const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
-  const [isToggle, setIsToggle] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const isImportance = () => {
-    switch (figure) {
-      case 'circle':
-        return '언제든지 하세요';
-      case 'triangle':
-        return '중요해요';
-      case 'square':
-        return '기억해 두세요';
-      default:
-        return '';
-    }
-  };
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-
-    if (done && isToggle) {
-      timeout = setTimeout(() => setIsToggle(false), 1500);
-    }
-
-    if (!done && isToggle) {
-      setIsToggle(false);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [isToggle, done]);
+  const isImportance =
+    figure === 'circle'
+      ? '언제든지 하세요'
+      : figure === 'triangle'
+      ? '중요해요'
+      : figure === 'square'
+      ? '기억해 두세요'
+      : '';
 
   const onToggleTodoHandler = useCallback(
-    (id: string) => {
+    (id: string, done: boolean) => {
       dispatch(toggleTodo(id));
-
-      if (!done) {
-        setIsToggle(true);
-      }
+      dispatch(notificationIsOpen(done));
     },
-    [dispatch, done]
+    [dispatch]
   );
 
   const onRemoveTodoHandler = useCallback(
@@ -63,26 +40,23 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
   }, [dispatch, id]);
 
   return (
-    <>
-      <Notification toggle={isToggle} figure={figure} />
-      <TodoItemWrapper>
-        <TodoItemContent onClick={() => onToggleTodoHandler(id)}>
-          <StyledFigures figurecolor={figure} />
-          <ContentText $done={done}>{text}</ContentText>
-          <ContentBottom>
-            <TodoDate>{date}</TodoDate>
-            <FigureDesc>{isImportance}</FigureDesc>
-          </ContentBottom>
-        </TodoItemContent>
+    <TodoItemWrapper>
+      <TodoItemContent onClick={() => onToggleTodoHandler(id, done)}>
+        <StyledFigures figurecolor={figure} />
+        <ContentText $done={done}>{text}</ContentText>
+        <ContentBottom>
+          <TodoDate>{date}</TodoDate>
+          <FigureDesc>{isImportance}</FigureDesc>
+        </ContentBottom>
+      </TodoItemContent>
 
-        <BtnWrapper>
-          <EditBtn onClick={onModalOpenHandler}>{'수정하기'}</EditBtn>
-          <RemoveBtn onClick={() => onRemoveTodoHandler(id)}>
-            {'지우기'}
-          </RemoveBtn>
-        </BtnWrapper>
-      </TodoItemWrapper>
-    </>
+      <BtnWrapper>
+        <EditBtn onClick={onModalOpenHandler}>{'수정하기'}</EditBtn>
+        <RemoveBtn onClick={() => onRemoveTodoHandler(id)}>
+          {'지우기'}
+        </RemoveBtn>
+      </BtnWrapper>
+    </TodoItemWrapper>
   );
 };
 
@@ -100,10 +74,6 @@ const TodoItemWrapper = styled.li`
   margin-bottom: 0.8rem;
 
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
-
-  ${({ theme }) => theme.device.desktop} {
-    padding: 1.4rem 1rem;
-  }
 `;
 
 const TodoItemContent = styled.div`
@@ -178,6 +148,7 @@ const RemoveBtn = styled(StyledBtn)`
   ${({ theme }) => theme.device.tablet} {
     width: auto;
     font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
   }
 `;
 

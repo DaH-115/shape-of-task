@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { fadeIn, fadeOut } from 'styles/animation-setting';
 import { modalIsClose } from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
-import PortalModal from 'components/PortalModal';
+import PortalModal from 'components/modals/PortalModal';
 
 interface ModalProps {
   children: ReactNode;
@@ -57,5 +57,6 @@ const ModalWapper = styled.div<{ $modaltoggle: boolean }>`
   transition: visibility 0.4s ease-in-out;
 
   ${({ theme }) => theme.device.desktop} {
+    width: 40%;
   }
 `;
