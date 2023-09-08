@@ -6,7 +6,7 @@ import { useAppDispatch } from 'store/hooks';
 import { TodoProps } from 'pages/TodoListPage';
 
 import StyledBtn from 'styles/StyledBtn';
-import StyledFigures from 'components/StyledFigures';
+import StyledFigures from 'components/figures/StyledFigures';
 
 const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
   const dispatch = useAppDispatch();
@@ -113,27 +113,28 @@ const ContentText = styled.p<{ $done: boolean }>`
 const ContentBottom = styled.div`
   display: flex;
   width: 100%;
-  padding-top: 0.2rem;
+  padding: 0.6rem 0 0.8rem 0;
   border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 0.9rem;
+  }
 `;
 
 const TodoDate = styled.p`
-  font-size: 0.9rem;
   color: ${({ theme }) => theme.commonColors.gray};
   margin-right: 0.3rem;
-  font-size: 0.8rem;
 `;
 
 const FigureDesc = styled.p`
-  font-size: 0.9rem;
   color: ${({ theme }) => theme.commonColors.gray};
 `;
 
 const BtnWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
+
   width: 100%;
-  margin-top: 0.5rem;
 
   ${({ theme }) => theme.device.tablet} {
     margin-top: 0.2rem;
@@ -141,26 +142,18 @@ const BtnWrapper = styled.div`
 `;
 
 const RemoveBtn = styled(StyledBtn)`
-  width: 100%;
   color: ${({ theme }) => theme.commonColors.gray};
-  font-size: 0.9rem;
+  margin-right: 0.2rem;
 
   ${({ theme }) => theme.device.tablet} {
     width: auto;
-    font-size: 0.8rem;
-    padding: 0.2rem 0.6rem;
   }
 `;
 
 const EditBtn = styled(StyledBtn)`
-  width: 100%;
-  margin-left: 0.2rem;
   color: ${({ theme }) => theme.commonColors.gray};
-  font-size: 0.9rem;
 
   ${({ theme }) => theme.device.tablet} {
     width: auto;
-    font-size: 0.8rem;
-    padding: 0.2rem 0.6rem;
   }
 `;

@@ -13,7 +13,7 @@ import StyledBtn from 'styles/StyledBtn';
 
 import Modal from 'components/modals/Modal';
 import SelectMenu from 'components/SelectMenu';
-import LogoFigures from 'components/LogoFigures';
+import LogoFigures from 'components/figures/LogoFigures';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 interface EditTodoItem {

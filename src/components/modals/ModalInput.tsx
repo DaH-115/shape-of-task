@@ -6,7 +6,7 @@ import { addTodo } from 'store/todoListSlice';
 
 import StyledBtn from 'styles/StyledBtn';
 import Modal from 'components/modals/Modal';
-import LogoFigures from 'components/LogoFigures';
+import LogoFigures from 'components/figures/LogoFigures';
 import SelectMenu from 'components/SelectMenu';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 

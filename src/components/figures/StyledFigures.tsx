@@ -2,14 +2,10 @@ import {
   StyledCircle,
   StyledSquare,
   StyledTriangle,
-} from 'components/FigureStyles';
+} from 'components/figures/FigureStyles';
 import { styled } from 'styled-components';
 
-interface FigureProps {
-  figurecolor: string;
-}
-
-const StyledFigures = ({ figurecolor }: FigureProps) => {
+const StyledFigures = ({ figurecolor }: { figurecolor: string }) => {
   return (
     <FigureStyleWrapper>
       {figurecolor === 'circle' && <StyledCircle figurecolor={figurecolor} />}

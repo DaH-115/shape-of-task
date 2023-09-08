@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import StyledFigures from 'components/StyledFigures';
+import StyledFigures from 'components/figures/StyledFigures';
 
 interface FigureListItemProps {
   figure: string;

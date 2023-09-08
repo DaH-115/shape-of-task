@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
-import StyledFigures from 'components/StyledFigures';
+import StyledFigures from 'components/figures/StyledFigures';
 
 interface SelectMenuProps {
   istoggle: boolean;
