@@ -1,9 +1,17 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { addEditTodo, removeTodo, toggleTodo } from 'store/todoListSlice';
-import { editModalIsOpen, notificationIsOpen } from 'store/modalSlice';
+import { addEditTodo, toggleTodo } from 'store/todoListSlice';
+import {
+  confirmIsOpen,
+  editModalIsOpen,
+  notificationIsOpen,
+} from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
 import { TodoProps } from 'pages/TodoListPage';
+import {
+  IoIosCheckmarkCircleOutline,
+  IoIosCheckmarkCircle,
+} from 'react-icons/io';
 
 import StyledBtn from 'styles/StyledBtn';
 import StyledFigures from 'components/figures/StyledFigures';
@@ -27,12 +35,9 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
     [dispatch]
   );
 
-  const onRemoveTodoHandler = useCallback(
-    (id: string) => {
-      dispatch(removeTodo(id));
-    },
-    [dispatch]
-  );
+  const onRemoveTodoHandler = useCallback(() => {
+    dispatch(confirmIsOpen(id));
+  }, [dispatch, id]);
 
   const onModalOpenHandler = useCallback(() => {
     dispatch(editModalIsOpen());
@@ -42,7 +47,18 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
   return (
     <TodoItemWrapper>
       <TodoItemContent onClick={() => onToggleTodoHandler(id, done)}>
-        <StyledFigures figurecolor={figure} />
+        <TodoItemHeader>
+          <StyledFigures figurecolor={figure} />
+          {done ? (
+            <TodoDoneIcon $ischecked={done.toString()}>
+              <IoIosCheckmarkCircle />
+            </TodoDoneIcon>
+          ) : (
+            <TodoDoneIcon $ischecked={done.toString()}>
+              <IoIosCheckmarkCircleOutline />
+            </TodoDoneIcon>
+          )}
+        </TodoItemHeader>
         <ContentText $done={done}>{text}</ContentText>
         <ContentBottom>
           <TodoDate>{date}</TodoDate>
@@ -52,9 +68,7 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
 
       <BtnWrapper>
         <EditBtn onClick={onModalOpenHandler}>{'수정하기'}</EditBtn>
-        <RemoveBtn onClick={() => onRemoveTodoHandler(id)}>
-          {'지우기'}
-        </RemoveBtn>
+        <RemoveBtn onClick={onRemoveTodoHandler}>{'지우기'}</RemoveBtn>
       </BtnWrapper>
     </TodoItemWrapper>
   );
@@ -80,25 +94,42 @@ const TodoItemContent = styled.div`
   width: 100%;
 `;
 
+const TodoItemHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 2rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1.6rem;
+  }
+`;
+
+const TodoDoneIcon = styled.div<{ $ischecked: string }>`
+  color: ${({ theme, $ischecked }) =>
+    $ischecked === 'true' ? theme.colors.important : theme.commonColors.gray};
+`;
+
 const ContentText = styled.p<{ $done: boolean }>`
   width: 100%;
   font-size: 1.2rem;
-  line-height: 2rem;
+  line-height: 1.2;
   word-break: break-all;
 
-  margin-left: 0.2rem;
-  padding: 0.5rem 1rem 2rem 0;
+  padding: 0.5rem 0 2rem 0;
 
   color: ${({ theme, $done }) =>
     $done ? theme.commonColors.gray : theme.commonColors.black};
   text-decoration: ${({ $done }) => ($done ? 'line-through' : 'none')};
   white-space: pre-line;
 
-  ${({ theme }) => theme.device.desktop} {
+  ${({ theme }) => theme.device.tablet} {
     width: 100%;
     height: 5rem;
     max-height: 5rem;
     font-size: 1rem;
+    margin-left: 0.2rem;
   }
 
   /* scrollbar */

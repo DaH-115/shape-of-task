@@ -115,6 +115,7 @@ const ModalInputWrapper = styled.div`
   border-radius: 1rem;
 
   padding: 1rem;
+  padding-bottom: 0;
 `;
 
 const ModalInputHeader = styled.div`
@@ -136,23 +137,29 @@ const ModalTextarea = styled.textarea`
   height: 50vh;
 
   font-family: 'Pretendard';
-  font-size: 1rem;
+  font-size: 1.2rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1rem;
+  }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
 `;
 
 const SelectToggleWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 6rem;
+  width: 5rem;
 `;
 
 const SubmitBtn = styled(StyledBtn)`
+  width: auto;
   font-size: 1rem;
 
   ${({ theme }) => theme.device.tablet} {

@@ -123,8 +123,6 @@ export default React.memo(EditInputModal);
 const ModalInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
 
   background-color: #fff;
   border-radius: 1rem;
@@ -152,7 +150,11 @@ const ModalTextarea = styled.textarea`
   height: 50vh;
 
   font-family: 'Pretendard';
-  font-size: 1rem;
+  font-size: 1.2rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1rem;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -166,9 +168,14 @@ const ButtonWrapper = styled.div`
 const SelectToggleWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 6rem;
+  width: 5rem;
 `;
 
 const SubmitBtn = styled(StyledBtn)`
+  width: auto;
   font-size: 1rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 0.8rem;
+  }
 `;

@@ -50,20 +50,21 @@ const ColorPaletteWrapper = styled.div<{
   border: 0.1rem solid
     ${({ theme, $themecolor, $isselected }) =>
       $isselected === 'true' ? $themecolor : theme.commonColors.gray};
+  border-width: ${({ $isselected }) =>
+    $isselected === 'true' ? '0.2rem' : '0.1rem'};
   cursor: pointer;
-
-  ${({ theme }) => theme.device.tablet} {
-    border-width: ${({ $isselected }) =>
-      $isselected === 'true' ? '0.2rem' : '0.1rem'};
-  }
 `;
 
 const ColorPaletteTitle = styled.p<{ $isselected: string }>`
+  font-size: 1.2rem;
   color: ${({ theme, $isselected }) =>
-    $isselected === 'true'
-      ? theme.commonColors.black
-      : theme.commonColors.gray};
-  margin: 1rem 0 0.4rem 0;
+    $isselected === 'true' ? theme.colors.important : theme.commonColors.gray};
+  margin: 1.4rem 0 0.4rem 0;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
 `;
 
 const PaletteWrapper = styled.div`

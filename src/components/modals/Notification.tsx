@@ -25,9 +25,7 @@ const Notification = () => {
 
     if (isModalState) {
       timeout = setTimeout(() => dispatch(modalIsClose()), 1500);
-    }
-
-    if (isDoneState) {
+    } else if (isDoneState) {
       dispatch(modalIsClose());
     }
 
@@ -99,11 +97,13 @@ const NoteDesc = styled.p`
 `;
 
 const NoteTitle = styled.h1`
+  color: ${({ theme }) => theme.colors.important};
   font-size: 1rem;
   font-weight: 700;
   margin-left: 0.5rem;
 `;
 
 const IconWrapper = styled.div`
+  color: ${({ theme }) => theme.colors.important};
   margin-right: 0.5rem;
 `;

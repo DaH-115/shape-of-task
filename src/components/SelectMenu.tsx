@@ -104,6 +104,11 @@ const FigureDesc = styled.p`
   flex: 1;
 
   width: 100%;
+  font-size: 1.2rem;
   padding: 1.5rem 1rem;
   padding-right: 0;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1rem;
+  }
 `;

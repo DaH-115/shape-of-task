@@ -1,4 +1,4 @@
-interface CommonColorsTypes {
+export interface CommonColorsTypes {
   black: string;
   gray: string;
   light_gray: string;
@@ -24,7 +24,7 @@ export const commonColors: CommonColorsTypes = {
 
 const originalColors: ColorPaletteTypes = {
   name: 'originalColors',
-  paletteName: 'Original',
+  paletteName: '오리지널 팔레트',
   important: '#EE5A24',
   remember: '#5758BB',
   anytime: '#FFC312',
@@ -32,7 +32,7 @@ const originalColors: ColorPaletteTypes = {
 
 const colorPalette_1: ColorPaletteTypes = {
   name: 'colorPalette_1',
-  paletteName: 'Palette 1',
+  paletteName: '1번 팔레트',
   important: '#DC5987',
   remember: '#F2B6D0',
   anytime: '#D0D7DC',
@@ -40,7 +40,7 @@ const colorPalette_1: ColorPaletteTypes = {
 
 const colorPalette_2: ColorPaletteTypes = {
   name: 'colorPalette_2',
-  paletteName: 'Palette 2',
+  paletteName: '2번 팔레트',
   important: '#0644BF',
   remember: '#07C7F2',
   anytime: '#F2E313',
@@ -48,7 +48,7 @@ const colorPalette_2: ColorPaletteTypes = {
 
 const colorPalette_3: ColorPaletteTypes = {
   name: 'colorPalette_3',
-  paletteName: 'Palette 3',
+  paletteName: '3번 팔레트',
   important: '#121D40',
   remember: '#295073',
   anytime: '#517C8C',

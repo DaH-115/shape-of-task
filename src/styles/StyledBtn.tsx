@@ -10,7 +10,7 @@ const StyledBtn = styled.button`
 
   padding: 0.4rem 0.8rem;
 
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 700;
 
   &:hover,

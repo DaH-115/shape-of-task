@@ -67,6 +67,7 @@ const SlideMenuWrapper = styled.div<{ $isopen: string }>`
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 999;
 
   visibility: ${({ $isopen }) => ($isopen === 'true' ? 'visible' : 'hidden')};
   animation: ${({ $isopen }) =>
@@ -105,18 +106,34 @@ const SlideMenuTitle = styled.p`
 `;
 
 const SlideMenuDesc = styled.p`
+  font-size: 1.2rem;
   color: ${({ theme }) => theme.commonColors.black};
   margin-top: 0.5rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1rem;
+  }
 `;
 
 const SlideMenuBtn = styled(StyledBtn)`
   width: auto;
+  font-size: 1rem;
+
+  &:hover,
+  &:active {
+    transition: none;
+  }
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 0.8rem;
+  }
 `;
 
 const Backdrop = styled.div<{ $isopen: string }>`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 999;
 
   width: 100%;
   height: 100%;

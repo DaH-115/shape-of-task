@@ -1,17 +1,10 @@
 import 'styled-components';
-import { ColorPaletteTypes, CommonColorsTypes } from 'styles/theme-colors';
+import { DeviceTpyes, SizeTpyes } from 'styles/theme';
+import { CommonColorsTypes, ColorPaletteTypes } from 'styles/theme-colors';
 
 type ThemeType = {
-  size: {
-    mobile: string;
-    tablet: string;
-    desktop: string;
-  };
-  device: {
-    modile: string;
-    tablet: string;
-    desktop: string;
-  };
+  size: SizeTpyes;
+  device: DeviceTpyes;
   commonColors: CommonColorsTypes;
   colors: ColorPaletteTypes;
 };

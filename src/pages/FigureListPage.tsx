@@ -60,10 +60,10 @@ const FigureListPage = () => {
           disabled={isDoneArr.length ? false : true}
         >
           {'이미지 저장하기'}
+          <IconWrapper>
+            <GiSaveArrow />
+          </IconWrapper>
         </CaptureBtn>
-        <IconWrapper>
-          <GiSaveArrow />
-        </IconWrapper>
       </ButtonWrapper>
     </FigureListWrapper>
   );
@@ -103,30 +103,40 @@ const FigureListTitle = styled.h1`
 `;
 
 const FigureListDesc = styled.p`
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   line-height: 1.2rem;
   color: ${({ theme }) => theme.commonColors.gray};
   margin-bottom: 0.8rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1rem;
+  }
 `;
 
 const FigureList = styled.ul`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 2rem 1rem;
+  padding: 4rem 1rem;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
-  margin-top: 1.5rem;
 
+  margin-top: 1.2rem;
   color: #fff;
 `;
 
 const CaptureBtn = styled(StyledBtn)`
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1rem;
   color: #fff;
+  padding: 0.6rem 0.8rem;
+  border-radius: 1.4rem;
 
   background-color: ${({ theme }) => theme.colors.important};
   border-color: ${({ theme }) => theme.colors.important};
@@ -143,9 +153,17 @@ const CaptureBtn = styled(StyledBtn)`
 
   ${({ theme }) => theme.device.tablet} {
     width: auto;
+    justify-content: space-around;
+    font-size: 0.8rem;
   }
 `;
 
 const IconWrapper = styled.div`
-  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  margin-left: 0.6rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1rem;
+    margin-left: 0.4rem;
+  }
 `;

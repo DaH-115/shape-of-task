@@ -12,7 +12,7 @@ const Footer = () => {
             target='_blank'
             rel='noreferrer'
           >
-            <FaGithub className='github-icon' />
+            <FaGithub id='github-icon' />
           </a>
         </FooterIcon>
         <FooterIcon>
@@ -21,7 +21,7 @@ const Footer = () => {
             target='_blank'
             rel='noreferrer'
           >
-            <FaHome className='home-icon' />
+            <FaHome id='home-icon' />
           </a>
         </FooterIcon>
       </FooterIconWrapper>
@@ -34,13 +34,22 @@ export default Footer;
 const FooterWrapper = styled.footer`
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
-  padding: 2rem 1rem;
+  padding: 1.4rem 1rem;
   color: #fff;
   background-color: ${({ theme }) => theme.colors.important};
+
+  ${({ theme }) => theme.device.tablet} {
+    padding-left: 2rem;
+  }
 `;
 
 const FooterTitle = styled.p`
+  font-size: 1.1rem;
   margin-bottom: 0.8rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 0.9rem;
+  }
 `;
 
 const FooterIconWrapper = styled.div`
@@ -52,13 +61,18 @@ const FooterIconWrapper = styled.div`
 const FooterIcon = styled.div`
   cursor: pointer;
 
-  .github-icon,
-  .home-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+  #github-icon,
+  #home-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+
+    ${({ theme }) => theme.device.tablet} {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
   }
 
-  .github-icon {
+  #github-icon {
     margin-right: 0.5rem;
   }
 `;

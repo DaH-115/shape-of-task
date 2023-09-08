@@ -26,18 +26,23 @@ const Header = () => {
       <StyledLogo />
       <MeueWrapper>
         <Link to='/'>
-          <MenuBtn isselected={location.pathname === '/' ? true : false}>
+          <MenuBtn $isselected={location.pathname === '/' ? 'true' : 'false'}>
             {'할 일'}
           </MenuBtn>
         </Link>
         <Link to='/figure-list'>
           <MenuBtn
-            isselected={location.pathname === '/figure-list' ? true : false}
+            $isselected={
+              location.pathname === '/figure-list' ? 'true' : 'false'
+            }
           >
             {'완료된 일'}
           </MenuBtn>
         </Link>
-        <MenuBtn isselected={isSelect} onClick={slideMenuOpenHandler}>
+        <MenuBtn
+          $isselected={isSelect.toString()}
+          onClick={slideMenuOpenHandler}
+        >
           {'설정'}
         </MenuBtn>
       </MeueWrapper>
@@ -63,7 +68,11 @@ const HeaderWrapper = styled.header`
 
 const StyledLogo = styled(Logo)`
   width: auto;
-  height: 1rem;
+  height: 1.2rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    height: 1rem;
+  }
 `;
 
 const MeueWrapper = styled.div`
@@ -71,10 +80,14 @@ const MeueWrapper = styled.div`
   color: ${({ theme }) => theme.commonColors.gray};
 `;
 
-const MenuBtn = styled.div<{ isselected: boolean }>`
-  color: ${({ theme, isselected }) =>
-    isselected ? theme.commonColors.black : theme.commonColors.gray};
-  font-weight: ${({ isselected }) => (isselected ? '700' : '500')};
+const MenuBtn = styled.div<{ $isselected: string }>`
+  font-size: 1.2rem;
+  font-weight: ${({ $isselected }) => ($isselected === 'true' ? '700' : '500')};
+
+  color: ${({ theme, $isselected }) =>
+    $isselected === 'true'
+      ? theme.commonColors.black
+      : theme.commonColors.gray};
 
   padding: 0.2rem 0.4rem;
   cursor: pointer;
@@ -83,5 +96,9 @@ const MenuBtn = styled.div<{ isselected: boolean }>`
   &:active {
     color: ${({ theme }) => theme.commonColors.black};
     transition: color 0.2s ease-in-out;
+  }
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1rem;
   }
 `;
