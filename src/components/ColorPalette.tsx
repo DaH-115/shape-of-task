@@ -53,12 +53,12 @@ const ColorPaletteWrapper = styled.div<{
   cursor: pointer;
 
   ${({ theme }) => theme.device.tablet} {
-    border-width: 0.1rem;
+    border-width: ${({ $isselected }) =>
+      $isselected === 'true' ? '0.2rem' : '0.1rem'};
   }
 `;
 
 const ColorPaletteTitle = styled.p<{ $isselected: string }>`
-  font-size: 1.2rem;
   color: ${({ theme, $isselected }) =>
     $isselected === 'true'
       ? theme.commonColors.black
@@ -78,7 +78,7 @@ const Palette = styled.div<{ $themecolor: string }>`
   border-radius: 50%;
   background-color: ${({ $themecolor }) => $themecolor};
 
-  margin-right: 1rem;
+  margin-right: 0.9rem;
 
   &:last-child {
     margin-right: 0;

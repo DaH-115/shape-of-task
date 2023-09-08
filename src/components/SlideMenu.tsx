@@ -21,7 +21,7 @@ const SlideMenu = ({ isopen, slideMenuHandler }: SlideMenuProps) => {
       <SlideMenuWrapper $isopen={isopen}>
         <SlideMenuHeader>
           <SlideMenuTitle>{'설정'}</SlideMenuTitle>
-          <StyledBtn onClick={slideMenuHandler}>{'닫기'}</StyledBtn>
+          <SlideMenuBtn onClick={slideMenuHandler}>{'닫기'}</SlideMenuBtn>
         </SlideMenuHeader>
         <SlideMenuDesc>{'원하는 색을 적용해 보세요'}</SlideMenuDesc>
         {themeColorPalette.map((item, index) => (
@@ -76,7 +76,7 @@ const SlideMenuWrapper = styled.div<{ $isopen: string }>`
 
   width: 100%;
   height: 100vh;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.commonColors.light_gray};
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
   padding: 1rem 2rem;
 
@@ -107,6 +107,10 @@ const SlideMenuTitle = styled.p`
 const SlideMenuDesc = styled.p`
   color: ${({ theme }) => theme.commonColors.black};
   margin-top: 0.5rem;
+`;
+
+const SlideMenuBtn = styled(StyledBtn)`
+  width: auto;
 `;
 
 const Backdrop = styled.div<{ $isopen: string }>`
