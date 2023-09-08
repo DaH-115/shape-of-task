@@ -5,21 +5,25 @@ import { defalutTheme } from 'styles/theme';
 import { themeColors } from 'styles/theme-colors';
 import { useAppSelector } from 'store/hooks';
 
+import useGetwindowWidth from 'hooks/useGetwindowWidth';
 import MetaTags from 'MetaTags';
 import FigureListPage from 'pages/FigureListPage';
 import Header from 'layout/Header';
 import Footer from 'layout/Footer';
-import Notification from 'components/modals/Notification';
 import AddBtn from 'components/AddBtn';
+import Notification from 'components/modals/Notification';
 import ModalInput from 'components/modals/ModalInput';
 import EditInputModal from 'components/modals/EditInputModal';
-import useGetwindowWidth from 'hooks/useGetwindowWidth';
 import Alert from 'components/modals/Alert';
+import Confirm from 'components/modals/Confirm';
 
 const App = () => {
   const todoList = useAppSelector((state) => state.todoList.todoList);
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
   const alertState = useAppSelector((state) => state.modal.alertState);
+  const confirmState = useAppSelector(
+    (state) => state.modal.confirmState.isOpen
+  );
   const restTodo = todoList.filter(
     (todo: { done: boolean }) => todo.done === false
   );
@@ -39,12 +43,10 @@ const App = () => {
           <MainContent>
             <Routes />
           </MainContent>
-          <TodoCountMessage>
-            {restTodo.length
-              ? `총 ${restTodo.length}개의 할 일이 있습니다`
-              : '할 일이 없습니다'}
-          </TodoCountMessage>
-          <AddBtn />
+          <ContentBottom>
+            <TodoCountMessage>{restTodo.length}</TodoCountMessage>
+            <AddBtn />
+          </ContentBottom>
         </MainContentWrapper>
         {windowWidth >= tabletSize && (
           <FigureListView>
@@ -57,6 +59,7 @@ const App = () => {
       <EditInputModal />
       <Notification />
       {alertState && <Alert />}
+      {confirmState && <Confirm />}
     </ThemeProvider>
   );
 };
@@ -82,6 +85,8 @@ const FigureListView = styled.div`
 `;
 
 const MainContentWrapper = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -93,13 +98,39 @@ const MainContent = styled.div`
   overflow: auto;
 `;
 
-const TodoCountMessage = styled.div`
+const ContentBottom = styled.div`
+  position: absolute;
+  right: 1rem;
+  bottom: 1.2rem;
+
+  display: flex;
+  align-items: center;
+
   font-size: 1.2rem;
-  padding: 0.8rem 1rem;
-  border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
-  border-bottom: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
 
   ${({ theme }) => theme.device.tablet} {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
+`;
+
+const TodoCountMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 2.8rem;
+  height: 2.8rem;
+
+  font-weight: 700;
+  text-align: center;
+  line-height: 2.8rem;
+
+  padding-right: 0.1rem;
+
+  color: ${({ theme }) => theme.colors.important};
+  background-color: #fff;
+  border: 0.1rem solid ${({ theme }) => theme.colors.important};
+  border-radius: 50%;
+
+  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.3);
 `;

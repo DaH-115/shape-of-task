@@ -3,36 +3,44 @@ import { styled } from 'styled-components';
 import StyledBtn from 'styles/StyledBtn';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
+import { removeTodo } from 'store/todoListSlice';
 import PortalComponents from 'components/modals/PortalComponents';
 import Backdrop from 'components/modals/Backdrop';
 
-const Alert = () => {
+const Confirm = () => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.modal.confirmState.isOpen);
+  const isTodoId = useAppSelector((state) => state.modal.confirmState.isTodoId);
 
-  const AlertIsCloseHandler = useCallback(() => {
+  const ConfirmIsCheckedHandler = useCallback(() => {
+    dispatch(removeTodo(isTodoId));
+    dispatch(modalIsClose());
+  }, [dispatch, isTodoId]);
+
+  const ConfirmIsCloseHandler = useCallback(() => {
     dispatch(modalIsClose());
   }, [dispatch]);
 
   return (
     <PortalComponents>
       <Backdrop isopen={isOpen} />
-      <AlertWrapper>
+      <ConfirmWrapper>
         <MessageWrapper>
-          <AlertTitel>{'알림'}</AlertTitel>
-          <AlertDesc>{'문제가 발생했습니다.'}</AlertDesc>
+          <ConfirmTitle>{'확인'}</ConfirmTitle>
+          <ConfirmDesc>{'정말 지우시겠어요?'}</ConfirmDesc>
           <BtnWrapper>
-            <StyledBtn onClick={AlertIsCloseHandler}>{'확인'}</StyledBtn>
+            <ConfirmBtn onClick={ConfirmIsCheckedHandler}>{'예'}</ConfirmBtn>
+            <StyledBtn onClick={ConfirmIsCloseHandler}>{'아니요'}</StyledBtn>
           </BtnWrapper>
         </MessageWrapper>
-      </AlertWrapper>
+      </ConfirmWrapper>
     </PortalComponents>
   );
 };
 
-export default Alert;
+export default Confirm;
 
-const AlertWrapper = styled.div`
+const ConfirmWrapper = styled.div`
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
   padding: 1rem;
@@ -61,18 +69,32 @@ const MessageWrapper = styled.div`
   }
 `;
 
-const AlertTitel = styled.h1`
+const ConfirmTitle = styled.h1`
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 0.8rem;
 `;
 
-const AlertDesc = styled.p`
-  font-size: 0.9rem;
-  margin-bottom: 0.6rem;
+const ConfirmDesc = styled.p`
+  margin-bottom: 1rem;
 `;
 
 const BtnWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
+`;
+
+const ConfirmBtn = styled(StyledBtn)`
+  margin-left: 0.4rem;
+
+  color: #fff;
+  background-color: ${({ theme }) => theme.colors.important};
+  border-color: ${({ theme }) => theme.colors.important};
+
+  &:hover,
+  &:active {
+    color: ${({ theme }) => theme.colors.important};
+    background-color: #fff;
+    transition: all 0.4s ease-in-out;
+  }
 `;

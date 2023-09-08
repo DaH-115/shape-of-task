@@ -5,6 +5,10 @@ interface initialStateProps {
   editState: boolean;
   captureState: boolean;
   alertState: boolean;
+  confirmState: {
+    isOpen: boolean;
+    isTodoId: string;
+  };
   notificationState: {
     isOpen: boolean;
     isDone: boolean;
@@ -16,6 +20,10 @@ const initialState: initialStateProps = {
   editState: false,
   captureState: false,
   alertState: false,
+  confirmState: {
+    isOpen: false,
+    isTodoId: '',
+  },
   notificationState: {
     isOpen: false,
     isDone: false,
@@ -42,12 +50,17 @@ const modalSlice = createSlice({
     alertIsOpen: (state) => {
       state.alertState = true;
     },
+    confirmIsOpen: (state, action) => {
+      state.confirmState.isOpen = true;
+      state.confirmState.isTodoId = action.payload;
+    },
     modalIsClose: (state) => {
       state.inputState = false;
       state.editState = false;
       state.captureState = false;
       state.alertState = false;
       state.notificationState.isOpen = false;
+      state.confirmState.isOpen = false;
     },
   },
 });
@@ -60,4 +73,5 @@ export const {
   captureModalIsOpen,
   notificationIsOpen,
   alertIsOpen,
+  confirmIsOpen,
 } = modalSlice.actions;
