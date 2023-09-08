@@ -14,10 +14,12 @@ import AddBtn from 'components/AddBtn';
 import ModalInput from 'components/modals/ModalInput';
 import EditInputModal from 'components/modals/EditInputModal';
 import useGetwindowWidth from 'hooks/useGetwindowWidth';
+import Alert from 'components/modals/Alert';
 
 const App = () => {
   const todoList = useAppSelector((state) => state.todoList.todoList);
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
+  const alertState = useAppSelector((state) => state.modal.alertState);
   const restTodo = todoList.filter(
     (todo: { done: boolean }) => todo.done === false
   );
@@ -54,6 +56,7 @@ const App = () => {
       <ModalInput />
       <EditInputModal />
       <Notification />
+      {alertState && <Alert />}
     </ThemeProvider>
   );
 };

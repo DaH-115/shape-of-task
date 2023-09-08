@@ -5,7 +5,7 @@ import useGetwindowWidth from 'hooks/useGetwindowWidth';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
 import { fadeSlideIn, fadeSlideOut } from 'styles/animation-setting';
-import PortalModal from 'components/modals/PortalModal';
+import PortalComponents from 'components/modals/PortalComponents';
 import { MdArrowForwardIos } from 'react-icons/md';
 
 const Notification = () => {
@@ -41,17 +41,17 @@ const Notification = () => {
   }, [navigate, shouldRedirect]);
 
   return (
-    <PortalModal>
+    <PortalComponents>
       <NoteWrapper onClick={onNavgateHandler} $toggle={isModalState}>
         <MessageWrapper>
-          <NoteName>{'알림'}</NoteName>
-          <NoteText>{`할 일 끝! 도형이 추가되었습니다`}</NoteText>
+          <NoteTitle>{'알림'}</NoteTitle>
+          <NoteDesc>{`할 일 끝! 도형이 추가되었습니다`}</NoteDesc>
           <IconWrapper>
             <MdArrowForwardIos />
           </IconWrapper>
         </MessageWrapper>
       </NoteWrapper>
-    </PortalModal>
+    </PortalComponents>
   );
 };
 
@@ -94,11 +94,11 @@ const MessageWrapper = styled.div`
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
 `;
 
-const NoteText = styled.p`
+const NoteDesc = styled.p`
   flex: 1;
 `;
 
-const NoteName = styled.p`
+const NoteTitle = styled.h1`
   font-size: 1rem;
   font-weight: 700;
   margin-left: 0.5rem;

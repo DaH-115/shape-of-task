@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { fadeIn, fadeOut } from 'styles/animation-setting';
 import { modalIsClose } from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
-import PortalModal from 'components/modals/PortalModal';
+import PortalComponents from 'components/modals/PortalComponents';
 
 interface ModalProps {
   children: ReactNode;
@@ -18,10 +18,10 @@ const Modal = ({ children, modalState }: ModalProps) => {
   }, [dispatch]);
 
   return (
-    <PortalModal>
+    <PortalComponents>
       <Backdrop $modaltoggle={modalState} onClick={onModalCloseHandler} />
       <ModalWapper $modaltoggle={modalState}>{children}</ModalWapper>
-    </PortalModal>
+    </PortalComponents>
   );
 };
 

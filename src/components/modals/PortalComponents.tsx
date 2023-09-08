@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 
-const PortalModal = ({ children }: { children: ReactNode }) => {
+const PortalComponents = ({ children }: { children: ReactNode }) => {
   const portalRoot = document.querySelector('#portal-root');
 
   if (!portalRoot) {
@@ -11,4 +11,4 @@ const PortalModal = ({ children }: { children: ReactNode }) => {
   return ReactDOM.createPortal(children, portalRoot);
 };
 
-export default React.memo(PortalModal);
+export default React.memo(PortalComponents);

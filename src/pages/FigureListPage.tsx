@@ -1,32 +1,39 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import FigureListItem from 'components/FigureListItem';
-import CaptureImgModal from 'components/modals/CaptureImgModal';
-import StyledBtn from 'styles/StyledBtn';
-import { captureModalIsOpen } from 'store/modalSlice';
-
 import html2canvas from 'html2canvas';
+import saveAs from 'file-saver';
+import { useAppSelector } from 'store/hooks';
+import { alertIsOpen } from 'store/modalSlice';
+import StyledBtn from 'styles/StyledBtn';
+import FigureListItem from 'components/FigureListItem';
+import { GiSaveArrow } from 'react-icons/gi';
+import { useDispatch } from 'react-redux';
 
 const FigureListPage = () => {
-  const [isCapturedImg, setIsCapturedImg] = useState<string>('');
-  const dispatch = useAppDispatch();
   const figureListRef = useRef<HTMLUListElement>(null);
-  const figureList = figureListRef.current!;
+  const dispatch = useDispatch();
   const todoList = useAppSelector((state) => state.todoList.todoList);
   const isDoneArr = todoList.filter(
     (item: { done: boolean }) => item.done === true
   );
 
   const onCaptureModalOpen = useCallback(async () => {
-    const figureListImg = await html2canvas(figureList);
-    setIsCapturedImg(figureListImg.toDataURL('image/jpg'));
-    dispatch(captureModalIsOpen());
-  }, [dispatch, figureList]);
+    try {
+      const figureList = figureListRef.current!;
+      const figureListImg = await html2canvas(figureList, { scale: 4 });
+
+      figureListImg.toBlob((blob) => {
+        if (blob) {
+          saveAs(blob, 'result.png');
+        }
+      });
+    } catch (error) {
+      dispatch(alertIsOpen());
+    }
+  }, [dispatch]);
 
   return (
     <FigureListWrapper>
-      {figureList && <CaptureImgModal capturedImg={isCapturedImg} />}
       <Wrapper>
         <FigureListHeader>
           <FigureListTitle>{'완료된 일'}</FigureListTitle>
@@ -52,8 +59,11 @@ const FigureListPage = () => {
           onClick={onCaptureModalOpen}
           disabled={isDoneArr.length ? false : true}
         >
-          {'이미지로 만들기'}
+          {'이미지 저장하기'}
         </CaptureBtn>
+        <IconWrapper>
+          <GiSaveArrow />
+        </IconWrapper>
       </ButtonWrapper>
     </FigureListWrapper>
   );
@@ -110,28 +120,32 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
   margin-top: 1.5rem;
+
+  color: #fff;
 `;
 
 const CaptureBtn = styled(StyledBtn)`
   width: 100%;
   color: #fff;
+
   background-color: ${({ theme }) => theme.colors.important};
   border-color: ${({ theme }) => theme.colors.important};
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
 
   &:hover,
   &:active {
-    color: ${({ theme }) => theme.colors.important};
     background-color: #fff;
-    transition: all 0.4s ease-in-out;
+  }
+
+  &:disabled {
+    background-color: #fff;
   }
 
   ${({ theme }) => theme.device.tablet} {
     width: auto;
   }
+`;
 
-  &:disabled {
-    color: ${({ theme }) => theme.commonColors.gray};
-    background-color: #fff;
-  }
+const IconWrapper = styled.div`
+  margin-left: 0.5rem;
 `;
