@@ -45,13 +45,15 @@ const FigureListPage = () => {
         </FigureListHeader>
         <FigureList ref={figureListRef}>
           {todoList &&
-            todoList.map((todoItem: any) => (
-              <FigureListItem
-                key={todoItem.id}
-                figure={todoItem.figure}
-                done={todoItem.done}
-              />
-            ))}
+            todoList.map(
+              (todoItem: { id: string; figure: string; done: boolean }) => (
+                <FigureListItem
+                  key={todoItem.id}
+                  figure={todoItem.figure}
+                  done={todoItem.done}
+                />
+              )
+            )}
         </FigureList>
       </Wrapper>
       <ButtonWrapper>

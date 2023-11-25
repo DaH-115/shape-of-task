@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useGetwindowWidth from 'hooks/useGetwindowWidth';
+import useGetWindowWidth from 'hooks/useGetWindowWidth';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
 import { fadeSlideIn, fadeSlideOut } from 'styles/animation-setting';
@@ -17,7 +17,8 @@ const Notification = () => {
   const isDoneState = useAppSelector(
     (state) => state.modal.notificationState.isDone
   );
-  const { windowWidth, tabletSize } = useGetwindowWidth();
+  const tabletSize = 768;
+  const { windowWidth } = useGetWindowWidth(tabletSize);
   const shouldRedirect = windowWidth >= tabletSize;
 
   useEffect(() => {

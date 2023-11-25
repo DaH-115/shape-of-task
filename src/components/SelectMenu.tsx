@@ -5,7 +5,7 @@ import StyledFigures from 'components/figures/StyledFigures';
 interface SelectMenuProps {
   istoggle: boolean;
   getToggle: () => void;
-  getFigure: (figureName: any) => void;
+  getFigure: (figureName: string) => void;
 }
 
 const SelectMenu = ({ istoggle, getToggle, getFigure }: SelectMenuProps) => {

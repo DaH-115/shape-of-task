@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface initialStateProps {
   inputState: boolean;
@@ -43,14 +43,14 @@ const modalSlice = createSlice({
     captureModalIsOpen: (state) => {
       state.captureState = true;
     },
-    notificationIsOpen: (state, action) => {
+    notificationIsOpen: (state, action: PayloadAction<boolean>) => {
       state.notificationState.isOpen = true;
       state.notificationState.isDone = action.payload;
     },
     alertIsOpen: (state) => {
       state.alertState = true;
     },
-    confirmIsOpen: (state, action) => {
+    confirmIsOpen: (state, action: PayloadAction<string>) => {
       state.confirmState.isOpen = true;
       state.confirmState.isTodoId = action.payload;
     },

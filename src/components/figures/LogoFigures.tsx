@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StyledCircle, StyledSquare, StyledTriangle } from './FigureStyles';
+import {
+  StyledCircle,
+  StyledSquare,
+  StyledTriangle,
+} from 'components/figures/FigureStyles';
 
 const LogoFigures = ({ figure }: { figure: string }) => {
   return (

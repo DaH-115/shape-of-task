@@ -5,7 +5,7 @@ import { defalutTheme } from 'styles/theme';
 import { themeColors } from 'styles/theme-colors';
 import { useAppSelector } from 'store/hooks';
 
-import useGetwindowWidth from 'hooks/useGetwindowWidth';
+import useGetWindowWidth from 'hooks/useGetWindowWidth';
 import MetaTags from 'MetaTags';
 import FigureListPage from 'pages/FigureListPage';
 import Header from 'layout/Header';
@@ -27,7 +27,8 @@ const App = () => {
   const restTodo = todoList.filter(
     (todo: { done: boolean }) => todo.done === false
   );
-  const { windowWidth, tabletSize } = useGetwindowWidth();
+  const tabletSize = 768;
+  const { windowWidth } = useGetWindowWidth(tabletSize);
   const theme = {
     ...defalutTheme,
     colors: themeColors[paletteName],

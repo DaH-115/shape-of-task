@@ -1,12 +1,26 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+interface TodoItemTypes {
+  id: string;
+  date: string;
+  text: string;
+  figure: string;
+  done: boolean;
+}
+
+interface EditTodoItemTypes {
+  id: string;
+  text: string;
+  figure: string;
+}
+
 interface initialStateProps {
-  todoList: any;
-  editTodo: any;
+  todoList: TodoItemTypes[];
+  editTodo: EditTodoItemTypes[];
 }
 
 const storedValue = localStorage.getItem('todoList');
-const parsedValue = storedValue ? JSON.parse(storedValue) : [];
+const parsedValue: TodoItemTypes[] = storedValue ? JSON.parse(storedValue) : [];
 
 const initialState: initialStateProps = {
   todoList: parsedValue,
@@ -17,34 +31,39 @@ const todoListSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
-    addTodo: (state, action: PayloadAction<any>) => {
+    addTodo: (state, action: PayloadAction<TodoItemTypes>) => {
       state.todoList = [...state.todoList, action.payload];
       localStorage.setItem('todoList', JSON.stringify(state.todoList));
     },
-    addEditTodo: (state, action) => {
+    addEditTodo: (state, action: PayloadAction<string>) => {
       state.editTodo = state.todoList.filter(
-        (item: any) => item.id === action.payload
+        (item: TodoItemTypes) => item.id === action.payload
       );
     },
-    updateTodo: (state, action) => {
+    updateTodo: (
+      state,
+      action: PayloadAction<{
+        id: string;
+        date: string;
+        text: string;
+        figure: string;
+      }>
+    ) => {
       const { id, date, text, figure } = action.payload;
 
-      state.todoList = state.todoList.map((item: any) =>
-        item.id === id
-          ? { ...item, date: date, text: text, figure: figure }
-          : item
+      state.todoList = state.todoList.map((item: TodoItemTypes) =>
+        item.id === id ? { ...item, date, text, figure } : item
       );
-
       localStorage.setItem('todoList', JSON.stringify(state.todoList));
     },
-    removeTodo: (state, action) => {
+    removeTodo: (state, action: PayloadAction<string>) => {
       state.todoList = state.todoList.filter(
-        (item: any) => item.id !== action.payload
+        (item: TodoItemTypes) => item.id !== action.payload
       );
       localStorage.setItem('todoList', JSON.stringify(state.todoList));
     },
-    toggleTodo: (state, action) => {
-      state.todoList = state.todoList.map((item: any) =>
+    toggleTodo: (state, action: PayloadAction<string>) => {
+      state.todoList = state.todoList.map((item: TodoItemTypes) =>
         item.id === action.payload ? { ...item, done: !item.done } : item
       );
       localStorage.setItem('todoList', JSON.stringify(state.todoList));
