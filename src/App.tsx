@@ -5,7 +5,6 @@ import { defalutTheme } from 'styles/theme';
 import { themeColors } from 'styles/theme-colors';
 import { useAppSelector } from 'store/hooks';
 
-import useGetWindowWidth from 'hooks/useGetWindowWidth';
 import MetaTags from 'MetaTags';
 import FigureListPage from 'pages/FigureListPage';
 import Header from 'layout/Header';
@@ -16,6 +15,7 @@ import ModalInput from 'components/modals/ModalInput';
 import EditInputModal from 'components/modals/EditInputModal';
 import Alert from 'components/modals/Alert';
 import Confirm from 'components/modals/Confirm';
+import useGetWindowWidth from 'hooks/useGetWindowWidth';
 
 const App = () => {
   const todoList = useAppSelector((state) => state.todoList.todoList);
