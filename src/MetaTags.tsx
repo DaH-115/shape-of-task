@@ -8,7 +8,7 @@ const MetaTags = () => {
   return (
     <Helmet>
       <title>
-        세모 네모 동그라미 TODO LIST | {pathname === '/' ? '메인' : '도형 보기'}
+        {'SHAPE OF TASK |'} {pathname === '/' ? '메인' : '도형 보기'}
       </title>
     </Helmet>
   );

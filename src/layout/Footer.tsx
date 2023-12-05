@@ -4,7 +4,7 @@ import { FaGithub, FaHome } from 'react-icons/fa';
 const Footer = () => {
   return (
     <FooterWrapper>
-      <FooterTitle>{'세모 네모 동그라미 TODO LIST'}</FooterTitle>
+      <FooterTitle>{'Task Management App <SHAPE OF TASK>'}</FooterTitle>
       <FooterIconWrapper>
         <FooterIcon>
           <a
@@ -67,8 +67,8 @@ const FooterIcon = styled.div`
     height: 1.8rem;
 
     ${({ theme }) => theme.device.tablet} {
-      width: 1.6rem;
-      height: 1.6rem;
+      width: 1.4rem;
+      height: 1.4rem;
     }
   }
 
