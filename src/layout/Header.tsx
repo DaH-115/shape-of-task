@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import useGetWindowWidth from 'hooks/useGetWindowWidth';
 import { ReactComponent as Logo } from 'assets/Logo.svg';
 import SlideMenu from 'components/SlideMenu';
 
@@ -8,6 +9,8 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState<string>('false');
   const [isSelect, setIsSelect] = useState<boolean>(false);
   const location = useLocation();
+  const tabletSize = 768;
+  const { windowWidth } = useGetWindowWidth(tabletSize);
 
   const slideMenuOpenHandler = useCallback(() => {
     if (isOpen === 'true') {
@@ -30,15 +33,17 @@ const Header = () => {
             {'할 일'}
           </MenuBtn>
         </Link>
-        <Link to='/figure-list'>
-          <MenuBtn
-            $isselected={
-              location.pathname === '/figure-list' ? 'true' : 'false'
-            }
-          >
-            {'완료된 일'}
-          </MenuBtn>
-        </Link>
+        {windowWidth <= tabletSize && (
+          <Link to='/figure-list'>
+            <MenuBtn
+              $isselected={
+                location.pathname === '/figure-list' ? 'true' : 'false'
+              }
+            >
+              {'완료된 일'}
+            </MenuBtn>
+          </Link>
+        )}
         <MenuBtn
           $isselected={isSelect.toString()}
           onClick={slideMenuOpenHandler}

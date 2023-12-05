@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { ReactComponent as Circle } from '../../assets/Circle.svg';
-import { ReactComponent as Square } from '../../assets/Square.svg';
-import { ReactComponent as Triangle } from '../../assets/Triangle.svg';
+import { ReactComponent as Circle } from 'assets/Circle.svg';
+import { ReactComponent as Square } from 'assets/Square.svg';
+import { ReactComponent as Triangle } from 'assets/Triangle.svg';
 
 export const StyledCircle = styled(Circle)<{ figurecolor: string }>`
   fill: ${({ theme, figurecolor }) =>
