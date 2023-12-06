@@ -6,7 +6,7 @@ import { addTodo } from 'store/todoListSlice';
 
 import StyledBtn from 'styles/StyledBtn';
 import Modal from 'components/modals/Modal';
-import LogoFigures from 'components/figures/LogoFigures';
+import SelectedShapes from 'components/figures/SelectedShapes';
 import SelectMenu from 'components/SelectMenu';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
@@ -14,13 +14,13 @@ interface TodoItem {
   id: string;
   date: string;
   text: string;
-  figure: string;
+  shape: string;
   done: boolean;
 }
 
 const ModalInput = () => {
   const [text, setText] = useState<string>('');
-  const [figure, setFigure] = useState<string>('');
+  const [shape, setShape] = useState<string>('');
   const [toggle, setToggle] = useState<boolean>(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ const ModalInput = () => {
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
-      if (!text || !figure) {
+      if (!text || !shape) {
         alert('텍스트와 도형을 채워주세요!');
         textareaRef.current?.focus();
         return;
@@ -49,23 +49,23 @@ const ModalInput = () => {
         id: uuidv4(),
         date: today.toLocaleDateString(),
         text,
-        figure,
+        shape,
         done: false,
       };
 
       dispatch(addTodo(newTodoItem));
       setText('');
-      setFigure('');
+      setShape('');
     },
-    [dispatch, figure, text, today]
+    [dispatch, shape, text, today]
   );
 
   const onToggleHandler = useCallback(() => {
     setToggle((preve) => !preve);
   }, []);
 
-  const getFigureHandler = useCallback((figureName: string) => {
-    setFigure(figureName);
+  const getShapeHandler = useCallback((shapeName: string) => {
+    setShape(shapeName);
   }, []);
 
   return (
@@ -89,12 +89,12 @@ const ModalInput = () => {
           <SelectMenu
             istoggle={toggle}
             getToggle={onToggleHandler}
-            getFigure={getFigureHandler}
+            getShape={getShapeHandler}
           />
 
           <ButtonWrapper>
             <SelectToggleWrapper onClick={onToggleHandler}>
-              <LogoFigures figure={figure} />
+              <SelectedShapes shape={shape} />
               <div>{toggle ? <FaAngleDown /> : <FaAngleUp />}</div>
             </SelectToggleWrapper>
             <SubmitBtn>{'등록'}</SubmitBtn>

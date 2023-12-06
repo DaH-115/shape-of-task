@@ -1,15 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from 'store/hooks';
+import { TodoItemTypes } from 'store/todoListSlice';
 import TodoListItem from 'components/TodoListItem';
-
-export interface TodoProps {
-  id: string;
-  text: string;
-  figure: string;
-  done: boolean;
-  date: string;
-}
 
 const TodoListPage = () => {
   const todoList = useAppSelector((state) => state.todoList.todoList);
@@ -19,12 +12,12 @@ const TodoListPage = () => {
       {!todoList.length ? (
         <InfoMessage>{'할 일을 정리하고 도형을 획득해 보세요'}</InfoMessage>
       ) : (
-        todoList.map((todoItem: TodoProps) => (
+        todoList.map((todoItem: TodoItemTypes) => (
           <TodoListItem
             key={todoItem.id}
             id={todoItem.id}
             text={todoItem.text}
-            figure={todoItem.figure}
+            shape={todoItem.shape}
             done={todoItem.done}
             date={todoItem.date}
           />

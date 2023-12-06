@@ -13,14 +13,14 @@ import StyledBtn from 'styles/StyledBtn';
 
 import Modal from 'components/modals/Modal';
 import SelectMenu from 'components/SelectMenu';
-import LogoFigures from 'components/figures/LogoFigures';
+import SelectedShapes from 'components/figures/SelectedShapes';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 interface EditTodoItem {
   id: string;
   date: string;
   text: string;
-  figure: string;
+  shape: string;
 }
 
 const EditInputModal = () => {
@@ -30,7 +30,7 @@ const EditInputModal = () => {
 
   const [editTodoId, setEditTodoId] = useState<string>('');
   const [editText, setEditText] = useState<string>('');
-  const [editFigure, setEditFigure] = useState<string>('');
+  const [editShape, setEditShape] = useState<string>('');
   const [toggle, setToggle] = useState<boolean>(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const today = useMemo(() => new Date(), []);
@@ -39,7 +39,7 @@ const EditInputModal = () => {
     if (isEditTodo) {
       setEditTodoId(isEditTodo[0].id);
       setEditText(isEditTodo[0].text);
-      setEditFigure(isEditTodo[0].figure);
+      setEditShape(isEditTodo[0].shape);
     }
   }, [isEditTodo]);
 
@@ -55,7 +55,7 @@ const EditInputModal = () => {
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
-      if (!editText || !editFigure) {
+      if (!editText || !editShape) {
         alert('텍스트와 도형을 채워주세요!');
         textareaRef.current?.focus();
         return;
@@ -65,21 +65,21 @@ const EditInputModal = () => {
         id: editTodoId,
         date: today.toLocaleDateString(),
         text: editText,
-        figure: editFigure,
+        shape: editShape,
       };
 
       dispatch(updateTodo(editTodoItem));
       dispatch(modalIsClose());
     },
-    [dispatch, editTodoId, editText, editFigure, today]
+    [dispatch, editTodoId, editText, editShape, today]
   );
 
   const onToggleHandler = useCallback(() => {
     setToggle((preve) => !preve);
   }, []);
 
-  const getFigureHandler = useCallback((figureName: string) => {
-    setEditFigure(figureName);
+  const getEditeShapeHandler = useCallback((shapeName: string) => {
+    setEditShape(shapeName);
   }, []);
 
   return (
@@ -102,12 +102,12 @@ const EditInputModal = () => {
           <SelectMenu
             istoggle={toggle}
             getToggle={onToggleHandler}
-            getFigure={getFigureHandler}
+            getShape={getEditeShapeHandler}
           />
 
           <ButtonWrapper>
             <SelectToggleWrapper onClick={onToggleHandler}>
-              <LogoFigures figure={editFigure} />
+              <SelectedShapes shape={editShape} />
               <div>{toggle ? <FaAngleDown /> : <FaAngleUp />}</div>
             </SelectToggleWrapper>
             <SubmitBtn>{'수정'}</SubmitBtn>

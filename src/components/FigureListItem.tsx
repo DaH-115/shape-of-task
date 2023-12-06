@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import StyledFigures from 'components/figures/StyledFigures';
+import StyledShapes from 'components/figures/StyledShapes';
 
 interface FigureListItemProps {
-  figure: string;
+  shape: string;
   done: boolean;
 }
 
-const FigureListItem = ({ figure, done }: FigureListItemProps) => {
+const FigureListItem = ({ shape, done }: FigureListItemProps) => {
   return (
     <>
       {done && (
         <FigureListLi>
-          <StyledFigures figurecolor={figure} />
+          <StyledShapes shapeName={shape} />
         </FigureListLi>
       )}
     </>

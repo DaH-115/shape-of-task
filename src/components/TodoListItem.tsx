@@ -1,29 +1,28 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { addEditTodo, toggleTodo } from 'store/todoListSlice';
+import { TodoItemTypes, addEditTodo, toggleTodo } from 'store/todoListSlice';
 import {
   confirmIsOpen,
   editModalIsOpen,
   notificationIsOpen,
 } from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
-import { TodoProps } from 'pages/TodoListPage';
 import {
   IoIosCheckmarkCircleOutline,
   IoIosCheckmarkCircle,
 } from 'react-icons/io';
 
 import StyledBtn from 'styles/StyledBtn';
-import StyledFigures from 'components/figures/StyledFigures';
+import StyledShapes from 'components/figures/StyledShapes';
 
-const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
+const TodoListItem = ({ id, text, shape, done, date }: TodoItemTypes) => {
   const dispatch = useAppDispatch();
   const isImportance =
-    figure === 'circle'
+    shape === 'circle'
       ? '언제든지 하세요'
-      : figure === 'triangle'
+      : shape === 'triangle'
       ? '중요해요'
-      : figure === 'square'
+      : shape === 'square'
       ? '기억해 두세요'
       : '';
 
@@ -48,7 +47,7 @@ const TodoListItem = ({ id, text, figure, done, date }: TodoProps) => {
     <TodoItemWrapper>
       <TodoItemContent onClick={() => onToggleTodoHandler(id, done)}>
         <TodoItemHeader>
-          <StyledFigures figurecolor={figure} />
+          <StyledShapes shapeName={shape} />
           {done ? (
             <TodoDoneIcon $ischecked={done.toString()}>
               <IoIosCheckmarkCircle />

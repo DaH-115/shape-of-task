@@ -1,17 +1,17 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface TodoItemTypes {
+export interface TodoItemTypes {
   id: string;
   date: string;
   text: string;
-  figure: string;
+  shape: string;
   done: boolean;
 }
 
 interface EditTodoItemTypes {
   id: string;
   text: string;
-  figure: string;
+  shape: string;
 }
 
 interface initialStateProps {
@@ -24,7 +24,7 @@ const parsedValue: TodoItemTypes[] = storedValue ? JSON.parse(storedValue) : [];
 
 const initialState: initialStateProps = {
   todoList: parsedValue,
-  editTodo: [{ id: '', text: '', figure: '' }],
+  editTodo: [{ id: '', text: '', shape: '' }],
 };
 
 const todoListSlice = createSlice({
@@ -46,13 +46,13 @@ const todoListSlice = createSlice({
         id: string;
         date: string;
         text: string;
-        figure: string;
+        shape: string;
       }>
     ) => {
-      const { id, date, text, figure } = action.payload;
+      const { id, date, text, shape } = action.payload;
 
       state.todoList = state.todoList.map((item: TodoItemTypes) =>
-        item.id === id ? { ...item, date, text, figure } : item
+        item.id === id ? { ...item, date, text, shape } : item
       );
       localStorage.setItem('todoList', JSON.stringify(state.todoList));
     },

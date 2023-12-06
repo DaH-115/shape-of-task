@@ -1,41 +1,41 @@
 import React, { useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
-import StyledFigures from 'components/figures/StyledFigures';
+import StyledShapes from 'components/figures/StyledShapes';
 
 interface SelectMenuProps {
   istoggle: boolean;
   getToggle: () => void;
-  getFigure: (figureName: string) => void;
+  getShape: (figureName: string) => void;
 }
 
-const SelectMenu = ({ istoggle, getToggle, getFigure }: SelectMenuProps) => {
+const SelectMenu = ({ istoggle, getToggle, getShape }: SelectMenuProps) => {
   const getFigureHandler = useCallback(
     (event: React.MouseEvent<HTMLUListElement>) => {
-      const figureItem = event.target as HTMLElement;
-      const figureName = figureItem.getAttribute('data-figure');
+      const shapeItem = event.target as HTMLElement;
+      const shapeName = shapeItem.getAttribute('data-shape');
 
-      if (figureName) {
-        getFigure(figureName);
+      if (shapeName) {
+        getShape(shapeName);
         getToggle();
       }
     },
-    [getFigure, getToggle]
+    [getShape, getToggle]
   );
 
   return (
     <SelectMenuWrapper $istoggle={istoggle}>
       <SelectMenuList onClick={getFigureHandler}>
         <SelectMenuItem>
-          <StyledFigures figurecolor='triangle' />
-          <FigureDesc data-figure='triangle'>{'중요해요'}</FigureDesc>
+          <StyledShapes shapeName='triangle' />
+          <ShapeDesc data-shape='triangle'>{'중요해요'}</ShapeDesc>
         </SelectMenuItem>
         <SelectMenuItem>
-          <StyledFigures figurecolor='square' />
-          <FigureDesc data-figure='square'>{'기억해 두세요'}</FigureDesc>
+          <StyledShapes shapeName='square' />
+          <ShapeDesc data-shape='square'>{'기억해 두세요'}</ShapeDesc>
         </SelectMenuItem>
         <SelectMenuItem>
-          <StyledFigures figurecolor='circle' />
-          <FigureDesc data-figure='circle'>{'언제든지 하세요'}</FigureDesc>
+          <StyledShapes shapeName='circle' />
+          <ShapeDesc data-shape='circle'>{'언제든지 하세요'}</ShapeDesc>
         </SelectMenuItem>
       </SelectMenuList>
     </SelectMenuWrapper>
@@ -100,7 +100,7 @@ const SelectMenuItem = styled.li`
   }
 `;
 
-const FigureDesc = styled.p`
+const ShapeDesc = styled.p`
   flex: 1;
 
   width: 100%;
