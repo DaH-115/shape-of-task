@@ -30,8 +30,8 @@ const TodoAddBtn = styled.button`
   padding: 1rem 1.2rem;
 
   color: #fff;
-  background-color: ${({ theme }) => theme.colors.remember};
-  border: 0.1rem solid ${({ theme }) => theme.colors.remember};
+  background-color: ${({ theme }) => theme.colors.important};
+  border: 0.1rem solid ${({ theme }) => theme.colors.important};
   border-radius: 2.2rem;
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.3);
 

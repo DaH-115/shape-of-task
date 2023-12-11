@@ -11,11 +11,8 @@ import { MdArrowForwardIos } from 'react-icons/md';
 const Notification = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isModalState = useAppSelector(
+  const isOpen = useAppSelector(
     (state) => state.modal.notificationState.isOpen
-  );
-  const isDoneState = useAppSelector(
-    (state) => state.modal.notificationState.isDone
   );
   const tabletSize = 768;
   const { windowWidth } = useGetWindowWidth(tabletSize);
@@ -24,14 +21,12 @@ const Notification = () => {
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 
-    if (isModalState) {
+    if (isOpen) {
       timeout = setTimeout(() => dispatch(modalIsClose()), 1500);
-    } else if (isDoneState) {
-      dispatch(modalIsClose());
     }
 
     return () => clearTimeout(timeout);
-  }, [dispatch, isModalState, isDoneState]);
+  }, [dispatch, isOpen]);
 
   const onNavgateHandler = useCallback(() => {
     if (!shouldRedirect) {
@@ -41,7 +36,7 @@ const Notification = () => {
 
   return (
     <PortalComponents>
-      <NoteWrapper onClick={onNavgateHandler} $toggle={isModalState}>
+      <NoteWrapper onClick={onNavgateHandler} $isOpen={isOpen}>
         <MessageWrapper>
           <NoteTitle>{'알림'}</NoteTitle>
           <NoteDesc>{`할 일 끝! 도형이 추가되었습니다`}</NoteDesc>
@@ -56,7 +51,7 @@ const Notification = () => {
 
 export default React.memo(Notification);
 
-const NoteWrapper = styled.div<{ $toggle: boolean }>`
+const NoteWrapper = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -65,8 +60,8 @@ const NoteWrapper = styled.div<{ $toggle: boolean }>`
   min-width: ${({ theme }) => theme.size.mobile};
   padding: 1rem;
 
-  visibility: ${({ $toggle }) => ($toggle ? 'visible' : 'hidden')};
-  animation: ${({ $toggle }) => ($toggle ? fadeSlideIn : fadeSlideOut)} 0.4s
+  visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
+  animation: ${({ $isOpen }) => ($isOpen ? fadeSlideIn : fadeSlideOut)} 0.4s
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
 

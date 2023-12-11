@@ -26,13 +26,10 @@ const TodoListItem = ({ id, text, shape, done, date }: TodoItemTypes) => {
       ? '기억해 두세요'
       : '';
 
-  const onToggleTodoHandler = useCallback(
-    (id: string, done: boolean) => {
-      dispatch(toggleTodo(id));
-      dispatch(notificationIsOpen(done));
-    },
-    [dispatch]
-  );
+  const onToggleTodoHandler = useCallback(() => {
+    dispatch(toggleTodo(id));
+    dispatch(notificationIsOpen(!done));
+  }, [dispatch, id, done]);
 
   const onRemoveTodoHandler = useCallback(() => {
     dispatch(confirmIsOpen(id));
@@ -45,7 +42,7 @@ const TodoListItem = ({ id, text, shape, done, date }: TodoItemTypes) => {
 
   return (
     <TodoItemWrapper>
-      <TodoItemContent onClick={() => onToggleTodoHandler(id, done)}>
+      <TodoItemContent onClick={onToggleTodoHandler}>
         <TodoItemHeader>
           <StyledShapes shapeName={shape} />
           {done ? (

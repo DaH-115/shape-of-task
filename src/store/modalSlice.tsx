@@ -11,7 +11,6 @@ interface initialStateProps {
   };
   notificationState: {
     isOpen: boolean;
-    isDone: boolean;
   };
 }
 
@@ -26,7 +25,6 @@ const initialState: initialStateProps = {
   },
   notificationState: {
     isOpen: false,
-    isDone: false,
   },
 };
 
@@ -44,8 +42,7 @@ const modalSlice = createSlice({
       state.captureState = true;
     },
     notificationIsOpen: (state, action: PayloadAction<boolean>) => {
-      state.notificationState.isOpen = true;
-      state.notificationState.isDone = action.payload;
+      state.notificationState.isOpen = action.payload;
     },
     alertIsOpen: (state) => {
       state.alertState = true;
