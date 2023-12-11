@@ -134,13 +134,14 @@ const ModalInputForm = styled.form`
 
 const ModalTextarea = styled.textarea`
   width: 100%;
-  height: 50vh;
+  height: 20vh;
 
   font-family: 'Pretendard';
   font-size: 1.2rem;
 
   ${({ theme }) => theme.device.tablet} {
     font-size: 1rem;
+    height: 50vh;
   }
 `;
 
@@ -155,7 +156,11 @@ const ButtonWrapper = styled.div`
 const SelectToggleWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 5rem;
+  width: 40%;
+
+  ${({ theme }) => theme.device.tablet} {
+    width: 20%;
+  }
 `;
 
 const SubmitBtn = styled(StyledBtn)`

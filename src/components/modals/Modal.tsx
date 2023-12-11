@@ -34,7 +34,7 @@ const ModalWapper = styled.div<{ $modaltoggle: boolean }>`
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
 
-  ${({ theme }) => theme.device.desktop} {
-    width: 40%;
+  ${({ theme }) => theme.device.tablet} {
+    width: auto;
   }
 `;
