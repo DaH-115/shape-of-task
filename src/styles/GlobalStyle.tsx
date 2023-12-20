@@ -10,12 +10,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    font-size: 20px;
-    color: #141414;
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-      'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    font-family: 'Roboto','Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
       'Helvetica Neue', sans-serif;
     letter-spacing: -0.1rem;
+    font-size: 20px;
+    color: #141414;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     user-select: none;
@@ -43,6 +43,10 @@ const GlobalStyle = createGlobalStyle`
   input,
   select,
   textarea {
+    font-family: 'Roboto', 'Pretendard', -apple-system, BlinkMacSystemFont,
+      'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+      'Helvetica Neue', sans-serif;
+    letter-spacing: -0.05rem;
     background-color: transparent;
     border: 0;
 
