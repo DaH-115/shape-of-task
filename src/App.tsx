@@ -6,7 +6,7 @@ import { themeColors } from 'styles/theme-colors';
 
 import MetaTags from 'MetaTags';
 import NewHeader from 'layout/NewHeader';
-import { MainPage } from 'pages/MainPage';
+import TaskListPage from 'pages/TaskListPage';
 import Footer from 'layout/Footer';
 
 const App = () => {
@@ -22,7 +22,8 @@ const App = () => {
       <GlobalStyle />
       <Container>
         <NewHeader />
-        <MainPage />
+        {/* <MainPage /> */}
+        <TaskListPage />
       </Container>
       <Footer />
     </ThemeProvider>
@@ -34,4 +35,5 @@ export default App;
 const Container = styled.div`
   width: 100%;
   height: 100dvh;
+  overflow-y: scroll;
 `;

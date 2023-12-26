@@ -1,12 +1,12 @@
 import 'styled-components';
 import { DeviceTpyes, SizeTpyes } from 'styles/theme';
-import { CommonColorsTypes, ColorPaletteTypes } from 'styles/theme-colors';
+import { CommonColorsTypes, PaletteTypes } from 'styles/theme-colors';
 
 type ThemeType = {
   size: SizeTpyes;
   device: DeviceTpyes;
   commonColors: CommonColorsTypes;
-  colors: ColorPaletteTypes;
+  colors: PaletteTypes;
 };
 
 declare module 'styled-components' {

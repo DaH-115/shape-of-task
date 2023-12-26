@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { TodoItemTypes, addEditTodo, toggleTodo } from 'store/todoListSlice';
+import { TaskItemTypes, addEditTodo, toggleTodo } from 'store/todoListSlice';
 import {
   confirmIsOpen,
   editModalIsOpen,
@@ -12,73 +12,77 @@ import {
   IoIosCheckmarkCircle,
 } from 'react-icons/io';
 
-import StyledBtn from 'styles/StyledBtn';
 import StyledShapes from 'components/figures/StyledShapes';
+import { ButtonWrapper } from 'styles/Button/Btn';
 
-const TodoListItem = ({ id, text, shape, done, date }: TodoItemTypes) => {
+const TaskItem = ({ id, text, shape, done, date }: TaskItemTypes) => {
   const dispatch = useAppDispatch();
   const isImportance =
-    shape === 'circle'
-      ? '언제든지 하세요'
-      : shape === 'triangle'
+    shape === 'triangle'
       ? '중요해요'
       : shape === 'square'
       ? '기억해 두세요'
+      : shape === 'circle'
+      ? '언제든지 해요'
       : '';
 
-  const onToggleTodoHandler = useCallback(() => {
+  const onToggleTodoHandler = React.useCallback(() => {
     dispatch(toggleTodo(id));
     dispatch(notificationIsOpen(!done));
   }, [dispatch, id, done]);
 
-  const onRemoveTodoHandler = useCallback(() => {
+  const onRemoveTodoHandler = React.useCallback(() => {
     dispatch(confirmIsOpen(id));
   }, [dispatch, id]);
 
-  const onModalOpenHandler = useCallback(() => {
+  const onModalOpenHandler = React.useCallback(() => {
     dispatch(editModalIsOpen());
     dispatch(addEditTodo(id));
   }, [dispatch, id]);
 
   return (
-    <TodoItemWrapper>
-      <TodoItemContent onClick={onToggleTodoHandler}>
-        <TodoItemHeader>
+    <TaskItemContainer>
+      <TaskContent onClick={onToggleTodoHandler}>
+        <ContentHeader>
           <StyledShapes shapeName={shape} />
           {done ? (
-            <TodoDoneIcon $ischecked={done.toString()}>
+            <DoneIcon $isChecked={done}>
               <IoIosCheckmarkCircle />
-            </TodoDoneIcon>
+            </DoneIcon>
           ) : (
-            <TodoDoneIcon $ischecked={done.toString()}>
+            <DoneIcon $isChecked={done}>
               <IoIosCheckmarkCircleOutline />
-            </TodoDoneIcon>
+            </DoneIcon>
           )}
-        </TodoItemHeader>
-        <ContentText $done={done}>{text}</ContentText>
+        </ContentHeader>
+        <ContentText $isDone={done}>{text}</ContentText>
         <ContentBottom>
-          <TodoDate>{date}</TodoDate>
-          <FigureDesc>{isImportance}</FigureDesc>
+          <TaskDate>{date}</TaskDate>
+          <ShapeDesc>{isImportance}</ShapeDesc>
         </ContentBottom>
-      </TodoItemContent>
-
+      </TaskContent>
       <BtnWrapper>
-        <EditBtn onClick={onModalOpenHandler}>{'수정하기'}</EditBtn>
-        <RemoveBtn onClick={onRemoveTodoHandler}>{'지우기'}</RemoveBtn>
+        <EditBtn onClick={onModalOpenHandler} $isEmpty>
+          {'수정'}
+        </EditBtn>
+        <RemoveBtn onClick={onRemoveTodoHandler} $isEmpty>
+          {'삭제'}
+        </RemoveBtn>
       </BtnWrapper>
-    </TodoItemWrapper>
+    </TaskItemContainer>
   );
 };
 
-export default React.memo(TodoListItem);
+export default React.memo(TaskItem);
 
-const TodoItemWrapper = styled.li`
+const TaskItemContainer = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
   background-color: #fff;
+  border: 0.1rem solid ${({ theme }) => theme.commonColors.gray};
   border-radius: 1rem;
   padding: 1rem;
   margin-bottom: 0.8rem;
@@ -86,11 +90,11 @@ const TodoItemWrapper = styled.li`
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
 `;
 
-const TodoItemContent = styled.div`
+const TaskContent = styled.div`
   width: 100%;
 `;
 
-const TodoItemHeader = styled.div`
+const ContentHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -102,12 +106,12 @@ const TodoItemHeader = styled.div`
   }
 `;
 
-const TodoDoneIcon = styled.div<{ $ischecked: string }>`
-  color: ${({ theme, $ischecked }) =>
-    $ischecked === 'true' ? theme.colors.important : theme.commonColors.gray};
+const DoneIcon = styled.div<{ $isChecked: boolean }>`
+  color: ${({ theme, $isChecked }) =>
+    $isChecked ? theme.colors.important : theme.commonColors.gray};
 `;
 
-const ContentText = styled.p<{ $done: boolean }>`
+const ContentText = styled.p<{ $isDone: boolean }>`
   width: 100%;
   font-size: 1.2rem;
   line-height: 1.2;
@@ -115,9 +119,9 @@ const ContentText = styled.p<{ $done: boolean }>`
 
   padding: 0.5rem 0 2rem 0;
 
-  color: ${({ theme, $done }) =>
-    $done ? theme.commonColors.gray : theme.commonColors.black};
-  text-decoration: ${({ $done }) => ($done ? 'line-through' : 'none')};
+  color: ${({ theme, $isDone }) =>
+    $isDone ? theme.commonColors.gray : theme.commonColors.black};
+  text-decoration: ${({ $isDone }) => ($isDone ? 'line-through' : 'none')};
   white-space: pre-line;
 
   ${({ theme }) => theme.device.tablet} {
@@ -148,39 +152,38 @@ const ContentBottom = styled.div`
   }
 `;
 
-const TodoDate = styled.p`
+const TaskDate = styled.p`
   color: ${({ theme }) => theme.commonColors.gray};
   margin-right: 0.3rem;
 `;
 
-const FigureDesc = styled.p`
+const ShapeDesc = styled.p`
   color: ${({ theme }) => theme.commonColors.gray};
 `;
 
 const BtnWrapper = styled.div`
   display: flex;
-  flex-direction: row-reverse;
-
   width: 100%;
 
   ${({ theme }) => theme.device.tablet} {
-    margin-top: 0.2rem;
   }
 `;
 
-const RemoveBtn = styled(StyledBtn)`
+const CustomBtn = styled(ButtonWrapper)`
   color: ${({ theme }) => theme.commonColors.gray};
-  margin-right: 0.2rem;
-
-  ${({ theme }) => theme.device.tablet} {
-    width: auto;
+  border-color: ${({ theme }) => theme.commonColors.gray};
+  padding: 0.5rem 1rem;
+  &:hover,
+  :active {
+    color: #fff;
+    border-color: ${({ theme }) => theme.colors.important};
   }
 `;
 
-const EditBtn = styled(StyledBtn)`
-  color: ${({ theme }) => theme.commonColors.gray};
+const EditBtn = styled(CustomBtn)`
+  margin-right: 1rem;
+`;
 
-  ${({ theme }) => theme.device.tablet} {
-    width: auto;
-  }
+const RemoveBtn = styled(CustomBtn)`
+  width: 100%;
 `;

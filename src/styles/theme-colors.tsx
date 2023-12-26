@@ -4,7 +4,7 @@ export interface CommonColorsTypes {
   light_gray: string;
 }
 
-export interface ColorPaletteTypes {
+export interface PaletteTypes {
   name: string;
   paletteName: string;
   important: string;
@@ -12,8 +12,8 @@ export interface ColorPaletteTypes {
   anytime: string;
 }
 
-interface ThemeTypes {
-  [key: string]: ColorPaletteTypes;
+interface ThemeType {
+  [key: string]: PaletteTypes;
 }
 
 export const commonColors: CommonColorsTypes = {
@@ -22,7 +22,7 @@ export const commonColors: CommonColorsTypes = {
   light_gray: '#F2F2F2',
 };
 
-const originalColors: ColorPaletteTypes = {
+const originalColors: PaletteTypes = {
   name: 'originalColors',
   paletteName: '오리지널 팔레트',
   important: '#EE5A24',
@@ -30,7 +30,7 @@ const originalColors: ColorPaletteTypes = {
   anytime: '#FFC312',
 };
 
-const colorPalette_1: ColorPaletteTypes = {
+const colorPalette_1: PaletteTypes = {
   name: 'colorPalette_1',
   paletteName: '1번 팔레트',
   important: '#DC5987',
@@ -38,7 +38,7 @@ const colorPalette_1: ColorPaletteTypes = {
   anytime: '#D0D7DC',
 };
 
-const colorPalette_2: ColorPaletteTypes = {
+const colorPalette_2: PaletteTypes = {
   name: 'colorPalette_2',
   paletteName: '2번 팔레트',
   important: '#0644BF',
@@ -46,7 +46,7 @@ const colorPalette_2: ColorPaletteTypes = {
   anytime: '#F2E313',
 };
 
-const colorPalette_3: ColorPaletteTypes = {
+const colorPalette_3: PaletteTypes = {
   name: 'colorPalette_3',
   paletteName: '3번 팔레트',
   important: '#121D40',
@@ -54,14 +54,14 @@ const colorPalette_3: ColorPaletteTypes = {
   anytime: '#517C8C',
 };
 
-export const themeColorPalette: ColorPaletteTypes[] = [
+export const themePalettes: PaletteTypes[] = [
   originalColors,
   colorPalette_1,
   colorPalette_2,
   colorPalette_3,
 ];
 
-export const themeColors: ThemeTypes = {
+export const themeColors: ThemeType = {
   originalColors,
   colorPalette_1,
   colorPalette_2,

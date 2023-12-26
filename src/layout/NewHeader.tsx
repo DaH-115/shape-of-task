@@ -2,28 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoMenu } from 'react-icons/io5';
 import { ReactComponent as Logo } from 'assets/Logo.svg';
+import SlideMenu from 'components/SlideMenu';
 
 const NewHeader = () => {
+  const [isToggle, setIsToggle] = React.useState(false);
   const todayDate = React.useMemo(() => new Date(), []);
   const today = todayDate.toLocaleDateString();
 
-  const menuOpenHandler = () => {
-    console.log('OPEN');
-  };
+  const menuToggleHandler = React.useCallback(() => {
+    setIsToggle((prev) => !prev);
+  }, []);
 
   return (
-    <HeaderWrapper>
-      <Wrapper>
-        <LogoWrapper>
-          <StyledLogo />
-        </LogoWrapper>
-        <IoMenu fontSize={'2rem'} onClick={menuOpenHandler} />
-      </Wrapper>
-      <Contents>
-        {today}
-        {' ☀️ 맑음'}
-      </Contents>
-    </HeaderWrapper>
+    <>
+      <HeaderWrapper>
+        <Wrapper>
+          <LogoWrapper>
+            <StyledLogo />
+          </LogoWrapper>
+          <IoMenu fontSize={'2rem'} onClick={menuToggleHandler} />
+        </Wrapper>
+        <Contents>
+          {today}
+          {' ☀️ 맑음'}
+        </Contents>
+      </HeaderWrapper>
+      <SlideMenu isOpen={isToggle} slideMenuHandler={menuToggleHandler} />
+    </>
   );
 };
 

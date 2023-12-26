@@ -17,12 +17,13 @@ export const Title = ({ title, desc }: TitleProps) => {
 
 const TitleWrapper = styled.div`
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 0;
 `;
 
 const ContentsTitle = styled.h1`
   font-size: 2rem;
   font-weight: bold;
+  margin-bottom: 0.3rem;
 `;
 
 const ContentsTitleDesc = styled.h2`
