@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { TbArrowsSort } from 'react-icons/tb';
 import { useAppSelector } from 'store/hooks';
-import { TaskItemTypes } from 'store/todoListSlice';
 import { Title } from 'styles/Title';
 import TaskItem from 'components/TaskItem';
 import AddBtn from 'components/AddBtn';
@@ -10,7 +9,7 @@ import AddBtn from 'components/AddBtn';
 const TaskListPage = () => {
   const [ascending, setAscending] = React.useState(true);
 
-  const taskList = useAppSelector((state) => state.todoList.todoList);
+  const taskList = useAppSelector((state) => state.taskList.taskList);
   const restTask = taskList.filter((task) => !task.done);
   const addImportance = taskList.map((task) => ({
     ...task,
@@ -39,7 +38,7 @@ const TaskListPage = () => {
   return (
     <>
       <TaskListHeader>
-        <Title title='Tasks' desc='오늘의 할 일' />
+        <Title title='Tasks' desc='오늘의 일정' />
         <SortIcon onClick={sortHandler}>
           <TbArrowsSort fontSize={'1.8rem'} />
         </SortIcon>
@@ -50,7 +49,7 @@ const TaskListPage = () => {
         </MessagWrapper>
       ) : (
         <TaskItemList>
-          {sortedTaskList.map((task: TaskItemTypes) => (
+          {sortedTaskList.map((task) => (
             <TaskItem
               key={task.id}
               id={task.id}
@@ -62,6 +61,7 @@ const TaskListPage = () => {
           ))}
         </TaskItemList>
       )}
+      {/* TODO: TASK LIST 페이지에서만 보일 것 */}
       <BtnContainer>
         <CountNumber>{restTask.length}</CountNumber>
         <AddBtn />

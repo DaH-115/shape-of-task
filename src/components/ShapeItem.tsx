@@ -2,25 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import StyledShapes from 'components/figures/StyledShapes';
 
-interface FigureListItemProps {
+interface ShapeItemProps {
   shape: string;
-  done: boolean;
+  isDone: boolean;
 }
 
-const FigureListItem = ({ shape, done }: FigureListItemProps) => {
+const ShapeItem = ({ shape, isDone }: ShapeItemProps) => {
   return (
     <>
-      {done && (
-        <FigureListLi>
+      {isDone && (
+        <ShapeItems>
           <StyledShapes shapeName={shape} />
-        </FigureListLi>
+        </ShapeItems>
       )}
     </>
   );
 };
 
-export default React.memo(FigureListItem);
+export default React.memo(ShapeItem);
 
-const FigureListLi = styled.li`
+const ShapeItems = styled.li`
   padding: 0.4rem;
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TaskItemTypes, addEditTodo, toggleTodo } from 'store/todoListSlice';
+import { TaskTypes, selectEditTask, toggleTask } from 'store/taskListSlice';
 import {
   confirmIsOpen,
   editModalIsOpen,
@@ -15,7 +15,7 @@ import {
 import StyledShapes from 'components/figures/StyledShapes';
 import { ButtonWrapper } from 'styles/Button/Btn';
 
-const TaskItem = ({ id, text, shape, done, date }: TaskItemTypes) => {
+const TaskItem = ({ id, text, shape, done, date }: TaskTypes) => {
   const dispatch = useAppDispatch();
   const isImportance =
     shape === 'triangle'
@@ -27,7 +27,7 @@ const TaskItem = ({ id, text, shape, done, date }: TaskItemTypes) => {
       : '';
 
   const onToggleTodoHandler = React.useCallback(() => {
-    dispatch(toggleTodo(id));
+    dispatch(toggleTask(id));
     dispatch(notificationIsOpen(!done));
   }, [dispatch, id, done]);
 
@@ -37,7 +37,7 @@ const TaskItem = ({ id, text, shape, done, date }: TaskItemTypes) => {
 
   const onModalOpenHandler = React.useCallback(() => {
     dispatch(editModalIsOpen());
-    dispatch(addEditTodo(id));
+    dispatch(selectEditTask(id));
   }, [dispatch, id]);
 
   return (

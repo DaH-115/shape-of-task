@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import StyledBtn from 'styles/StyledBtn';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
-import { removeTodo } from 'store/todoListSlice';
+import { removeTask } from 'store/taskListSlice';
 import PortalComponents from 'components/modals/PortalComponents';
 import Backdrop from 'components/modals/Backdrop';
 
@@ -12,12 +12,12 @@ const Confirm = () => {
   const isOpen = useAppSelector((state) => state.modal.confirmState.isOpen);
   const isTodoId = useAppSelector((state) => state.modal.confirmState.isTodoId);
 
-  const ConfirmIsCheckedHandler = useCallback(() => {
-    dispatch(removeTodo(isTodoId));
+  const confirmCheckedHandler = useCallback(() => {
+    dispatch(removeTask(isTodoId));
     dispatch(modalIsClose());
   }, [dispatch, isTodoId]);
 
-  const ConfirmIsCloseHandler = useCallback(() => {
+  const confirmCloseHandler = useCallback(() => {
     dispatch(modalIsClose());
   }, [dispatch]);
 
@@ -29,8 +29,8 @@ const Confirm = () => {
           <ConfirmTitle>{'확인'}</ConfirmTitle>
           <ConfirmDesc>{'정말 지우시겠어요?'}</ConfirmDesc>
           <BtnWrapper>
-            <ConfirmBtn onClick={ConfirmIsCheckedHandler}>{'예'}</ConfirmBtn>
-            <StyledBtn onClick={ConfirmIsCloseHandler}>{'아니요'}</StyledBtn>
+            <ConfirmBtn onClick={confirmCheckedHandler}>{'예'}</ConfirmBtn>
+            <StyledBtn onClick={confirmCloseHandler}>{'아니요'}</StyledBtn>
           </BtnWrapper>
         </MessageWrapper>
       </ConfirmWrapper>

@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
-import { updateTodo } from 'store/todoListSlice';
+import { updateTask } from 'store/taskListSlice';
 import { styled } from 'styled-components';
 import StyledBtn from 'styles/StyledBtn';
 
@@ -26,22 +26,22 @@ interface EditTodoItem {
 const EditInputModal = () => {
   const dispatch = useAppDispatch();
   const isEditState = useAppSelector((state) => state.modal.editState);
-  const isEditTodo = useAppSelector((state) => state.todoList.editTodo);
+  const isEditingTask = useAppSelector((state) => state.taskList.editingTask);
 
-  const [editTodoId, setEditTodoId] = useState<string>('');
-  const [editText, setEditText] = useState<string>('');
-  const [editShape, setEditShape] = useState<string>('');
-  const [toggle, setToggle] = useState<boolean>(false);
+  const [editTodoId, setEditTodoId] = useState('');
+  const [editText, setEditText] = useState('');
+  const [editShape, setEditShape] = useState('');
+  const [toggle, setToggle] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const today = useMemo(() => new Date(), []);
 
   useEffect(() => {
-    if (isEditTodo) {
-      setEditTodoId(isEditTodo[0].id);
-      setEditText(isEditTodo[0].text);
-      setEditShape(isEditTodo[0].shape);
+    if (isEditingTask) {
+      setEditTodoId(isEditingTask[0].id);
+      setEditText(isEditingTask[0].text);
+      setEditShape(isEditingTask[0].shape);
     }
-  }, [isEditTodo]);
+  }, [isEditingTask]);
 
   const onChangeHandler = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -68,7 +68,7 @@ const EditInputModal = () => {
         shape: editShape,
       };
 
-      dispatch(updateTodo(editTodoItem));
+      dispatch(updateTask(editTodoItem));
       dispatch(modalIsClose());
     },
     [dispatch, editTodoId, editText, editShape, today]

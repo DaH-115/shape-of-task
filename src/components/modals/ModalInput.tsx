@@ -2,21 +2,13 @@ import React, { useState, useCallback, useRef, useMemo } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { addTodo } from 'store/todoListSlice';
+import { TaskTypes, addTask } from 'store/taskListSlice';
 
 import StyledBtn from 'styles/StyledBtn';
 import Modal from 'components/modals/Modal';
 import SelectedShapes from 'components/figures/SelectedShapes';
 import SelectMenu from 'components/SelectMenu';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-
-interface TodoItem {
-  id: string;
-  date: string;
-  text: string;
-  shape: string;
-  done: boolean;
-}
 
 const ModalInput = () => {
   const [text, setText] = useState<string>('');
@@ -45,7 +37,7 @@ const ModalInput = () => {
         return;
       }
 
-      const newTodoItem: TodoItem = {
+      const newTask: TaskTypes = {
         id: uuidv4(),
         date: today.toLocaleDateString(),
         text,
@@ -53,7 +45,7 @@ const ModalInput = () => {
         done: false,
       };
 
-      dispatch(addTodo(newTodoItem));
+      dispatch(addTask(newTask));
       setText('');
       setShape('');
     },
