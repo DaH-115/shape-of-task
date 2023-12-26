@@ -26,6 +26,7 @@ export const ButtonWrapper = styled.div<{ $isEmpty: boolean }>`
   border: 0.1rem solid ${({ theme }) => theme.colors.important};
   border-radius: 2rem;
   padding: 1rem 1.5rem;
+  cursor: pointer;
 
   button {
     color: ${({ theme, $isEmpty }) =>

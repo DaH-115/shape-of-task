@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoMenu } from 'react-icons/io5';
 import { ReactComponent as Logo } from 'assets/Logo.svg';
-import SlideMenu from 'components/SlideMenu';
 
 const NewHeader = () => {
   const [isToggle, setIsToggle] = React.useState(false);
@@ -11,7 +10,8 @@ const NewHeader = () => {
 
   const menuToggleHandler = React.useCallback(() => {
     setIsToggle((prev) => !prev);
-  }, []);
+    console.log(isToggle, '슬라이드 메뉴 오픈');
+  }, [isToggle]);
 
   return (
     <>
@@ -20,14 +20,15 @@ const NewHeader = () => {
           <LogoWrapper>
             <StyledLogo />
           </LogoWrapper>
+          {/* TODO: 슬라이드 메뉴 */}
           <IoMenu fontSize={'2rem'} onClick={menuToggleHandler} />
         </Wrapper>
         <Contents>
+          {/* TODO: 날씨 API 적용 */}
           {today}
           {' ☀️ 맑음'}
         </Contents>
       </HeaderWrapper>
-      <SlideMenu isOpen={isToggle} slideMenuHandler={menuToggleHandler} />
     </>
   );
 };

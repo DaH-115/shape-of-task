@@ -1,13 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IoMdSettings } from 'react-icons/io';
+import SettingMenu from 'components/SettingMenu';
 
 export const BtnSetting = () => {
+  const [isToggle, setIsToggle] = React.useState(false);
+
+  const menuToggleHandler = React.useCallback(() => {
+    setIsToggle((prev) => !prev);
+  }, []);
+
   return (
-    <ButtonWrapper>
-      <IoMdSettings fontSize='1.2rem' />
-      <button>{'설정'}</button>
-    </ButtonWrapper>
+    <>
+      <ButtonWrapper onClick={menuToggleHandler}>
+        <IoMdSettings fontSize='1.2rem' />
+        <button type='button'>{'설정'}</button>
+      </ButtonWrapper>
+      <SettingMenu isOpen={isToggle} slideMenuHandler={menuToggleHandler} />
+    </>
   );
 };
 
@@ -21,6 +31,7 @@ const ButtonWrapper = styled.div`
   border: 0.1rem solid #fff;
   border-radius: 2rem;
   padding: 1rem 1.5rem;
+  cursor: pointer;
 
   button {
     color: ${({ theme }) => theme.commonColors.black};
