@@ -1,14 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
 import TaskListPage from 'pages/TaskListPage';
-import FigureListPage from 'pages/FigureListPage';
+import MainPage from 'pages/MainPage';
+import ShapeListPage from 'pages/ShapeListPage';
 
-const MainRoutes = () => {
+const RoutesComponent = () => {
   return (
     <Routes>
-      <Route path='/' element={<TaskListPage />} />
-      <Route path='/figure-list' element={<FigureListPage />} />
+      <Route path='/' element={<MainPage />} />
+      <Route path='/task-list' element={<TaskListPage />} />
+      <Route path='/shape-list' element={<ShapeListPage />} />
     </Routes>
   );
 };
 
-export default MainRoutes;
+export default RoutesComponent;

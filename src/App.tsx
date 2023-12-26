@@ -6,7 +6,7 @@ import { themeColors } from 'styles/theme-colors';
 
 import MetaTags from 'MetaTags';
 import NewHeader from 'layout/NewHeader';
-import TaskListPage from 'pages/TaskListPage';
+import RoutesComponent from 'routes/Routes';
 import Footer from 'layout/Footer';
 
 const App = () => {
@@ -22,8 +22,7 @@ const App = () => {
       <GlobalStyle />
       <Container>
         <NewHeader />
-        {/* <MainPage /> */}
-        <TaskListPage />
+        <RoutesComponent />
       </Container>
       <Footer />
     </ThemeProvider>

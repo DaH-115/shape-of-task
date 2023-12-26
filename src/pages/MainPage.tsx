@@ -3,26 +3,35 @@ import styled from 'styled-components';
 import { BtnLink } from 'styles/Button/BtnLink';
 import { BtnSetting } from 'styles/Button/BtnSetting';
 import { TodaysQuote } from 'components/TodaysQuote';
+import { Link } from 'react-router-dom';
 
-export const MainPage = () => {
+const MainPage = () => {
   return (
     <>
       <TodaysQuote />
-      <BtnWrapper>
-        <BtnLink text='할 일 추가' />
-      </BtnWrapper>
-      <BtnWrapper>
-        <BtnLink text='할 일' isEmpty />
-      </BtnWrapper>
-      <BtnWrapper>
-        <BtnLink text='완료된 일' isEmpty />
-      </BtnWrapper>
+      <Link to='/task-list'>
+        <BtnWrapper>
+          <BtnLink text='일정 추가' />
+        </BtnWrapper>
+      </Link>
+      <Link to='/task-list'>
+        <BtnWrapper>
+          <BtnLink text='일정' isEmpty />
+        </BtnWrapper>
+      </Link>
+      <Link to='/shape-list'>
+        <BtnWrapper>
+          <BtnLink text='완료된 일' isEmpty />
+        </BtnWrapper>
+      </Link>
       <BtnWrapper>
         <BtnSetting />
       </BtnWrapper>
     </>
   );
 };
+
+export default React.memo(MainPage);
 
 const BtnWrapper = styled.div`
   width: 100%;
