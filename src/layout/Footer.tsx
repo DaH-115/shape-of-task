@@ -4,7 +4,7 @@ import { FaGithub, FaHome } from 'react-icons/fa';
 const Footer = () => {
   return (
     <FooterWrapper>
-      <FooterTitle>{'Task Management App <SHAPE OF TASK>'}</FooterTitle>
+      <FooterTitle>{'Task Management - SHAPE OF TASK'}</FooterTitle>
       <FooterIconWrapper>
         <FooterIcon>
           <a
