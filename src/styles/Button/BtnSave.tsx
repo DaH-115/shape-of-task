@@ -1,11 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
+import html2canvas from 'html2canvas';
+import saveAs from 'file-saver';
+import { useDispatch } from 'react-redux';
+import { alertIsOpen } from 'store/modalSlice';
 import { GiSaveArrow } from 'react-icons/gi';
 
-export const BtnSave = () => {
+interface BtnSaveProps {
+  taskListRef: React.RefObject<HTMLUListElement>;
+  isDisabled: boolean;
+}
+
+export const BtnSave = ({ taskListRef, isDisabled }: BtnSaveProps) => {
+  const dispatch = useDispatch();
+
+  const captureModalOpen = React.useCallback(async () => {
+    try {
+      const taskList = taskListRef.current!;
+      const taskListImg = await html2canvas(taskList, { scale: 4 });
+
+      taskListImg.toBlob((blob) => {
+        if (blob) {
+          saveAs(blob, 'result.png');
+        }
+      });
+    } catch (error) {
+      dispatch(alertIsOpen());
+    }
+  }, [dispatch, taskListRef]);
+
   return (
-    <ButtonWrapper>
-      <button>{'이미지 저장'}</button>
+    <ButtonWrapper onClick={captureModalOpen}>
+      <button type='button' disabled={isDisabled}>
+        {'이미지 저장'}
+      </button>
       <GiSaveArrow fontSize='1.4rem' />
     </ButtonWrapper>
   );
@@ -22,6 +50,7 @@ const ButtonWrapper = styled.div`
   border: 0.1rem solid ${({ theme }) => theme.colors.important};
   border-radius: 2rem;
   padding: 1rem 1.5rem;
+  cursor: pointer;
 
   button {
     color: #fff;
