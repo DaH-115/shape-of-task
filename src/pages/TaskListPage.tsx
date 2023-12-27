@@ -5,6 +5,7 @@ import { useAppSelector } from 'store/hooks';
 import { Title } from 'styles/Title';
 import TaskItem from 'components/TaskItem';
 import AddBtn from 'components/AddBtn';
+import ModalInput from 'components/modals/ModalInput';
 
 const TaskListPage = () => {
   const [ascending, setAscending] = React.useState(true);
@@ -66,6 +67,7 @@ const TaskListPage = () => {
         <CountNumber>{restTask.length}</CountNumber>
         <AddBtn />
       </BtnContainer>
+      <ModalInput />
     </>
   );
 };

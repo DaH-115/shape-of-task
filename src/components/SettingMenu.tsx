@@ -31,7 +31,7 @@ const SettingMenu = ({ isOpen, slideMenuHandler }: SlideMenuProps) => {
         ))}
 
         <BtnWrapper onClick={slideMenuHandler}>
-          <Btn text='적용' isEmpty />
+          <Btn type='button' text='적용' isEmpty />
         </BtnWrapper>
       </SlideMenuContainer>
     </>

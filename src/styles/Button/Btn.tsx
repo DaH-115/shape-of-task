@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 export type BtnProps = {
   text: string;
+  type: 'button' | 'submit' | 'reset';
   isEmpty?: boolean;
 };
 
-export const Btn = ({ text, isEmpty = false }: BtnProps) => {
+export const Btn = ({ text, type, isEmpty = false }: BtnProps) => {
   return (
     <ButtonWrapper $isEmpty={isEmpty}>
-      <button type='button'>{text}</button>
+      <button type={type}>{text}</button>
     </ButtonWrapper>
   );
 };

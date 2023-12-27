@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-const PortalComponents = ({ children }: { children: ReactNode }) => {
+const PortalComponents = ({ children }: { children: React.ReactNode }) => {
   const portalRoot = document.querySelector('#portal-root');
 
   if (!portalRoot) {

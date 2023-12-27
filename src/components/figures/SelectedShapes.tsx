@@ -21,5 +21,4 @@ export default React.memo(SelectedShapes);
 const ShapeWrapper = styled.div`
   display: flex;
   width: 100%;
-  margin-right: 0.3rem;
 `;

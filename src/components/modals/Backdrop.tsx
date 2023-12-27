@@ -5,22 +5,22 @@ import { styled } from 'styled-components';
 import { fadeIn, fadeOut } from 'styles/animation-setting';
 
 interface BackdropProps {
-  isopen: boolean;
+  isOpen: boolean;
 }
 
-const Backdrop = ({ isopen }: BackdropProps) => {
+const Backdrop = ({ isOpen }: BackdropProps) => {
   const dispatch = useDispatch();
 
   const onModalCloseHandler = useCallback(() => {
     dispatch(modalIsClose());
   }, [dispatch]);
 
-  return <BackdropComponent $isopen={isopen} onClick={onModalCloseHandler} />;
+  return <BackdropComponent $isOpen={isOpen} onClick={onModalCloseHandler} />;
 };
 
 export default Backdrop;
 
-const BackdropComponent = styled.div<{ $isopen: boolean }>`
+const BackdropComponent = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -29,7 +29,7 @@ const BackdropComponent = styled.div<{ $isopen: boolean }>`
   height: 100%;
   background-color: rgba(177, 177, 177, 0.5);
 
-  visibility: ${({ $isopen }) => ($isopen ? 'visible' : 'hidden')};
-  animation: ${({ $isopen }) => ($isopen ? fadeIn : fadeOut)} 0.4s ease-in-out;
+  visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
+  animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.4s ease-in-out;
   transition: visibility 0.4s ease-in-out;
 `;

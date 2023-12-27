@@ -13,7 +13,7 @@ const AddBtn = () => {
 
   return (
     <AddBtnContainer onClick={modalOpenHandler}>
-      <Btn text='일정 추가 +' />
+      <Btn type='button' text='일정 추가 +' />
     </AddBtnContainer>
   );
 };

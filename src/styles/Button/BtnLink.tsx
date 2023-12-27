@@ -6,7 +6,7 @@ import { BtnProps, ButtonWrapper } from 'styles/Button/Btn';
 export const BtnLink = ({ text, isEmpty = false }: BtnProps) => {
   return (
     <BtnLinkWrapper $isEmpty={isEmpty}>
-      <button>{text}</button>
+      <button type='button'>{text}</button>
       <FaArrowRight fontSize={'1.2rem'} />
     </BtnLinkWrapper>
   );

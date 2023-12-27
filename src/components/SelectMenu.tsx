@@ -3,28 +3,26 @@ import styled, { keyframes } from 'styled-components';
 import StyledShapes from 'components/figures/StyledShapes';
 
 interface SelectMenuProps {
-  istoggle: boolean;
-  getToggle: () => void;
+  isToggle: boolean;
   getShape: (figureName: string) => void;
 }
 
-const SelectMenu = ({ istoggle, getToggle, getShape }: SelectMenuProps) => {
-  const getFigureHandler = useCallback(
+const SelectMenu = ({ isToggle, getShape }: SelectMenuProps) => {
+  const getShapeHandler = useCallback(
     (event: React.MouseEvent<HTMLUListElement>) => {
       const shapeItem = event.target as HTMLElement;
       const shapeName = shapeItem.getAttribute('data-shape');
 
       if (shapeName) {
         getShape(shapeName);
-        getToggle();
       }
     },
-    [getShape, getToggle]
+    [getShape]
   );
 
   return (
-    <SelectMenuWrapper $istoggle={istoggle}>
-      <SelectMenuList onClick={getFigureHandler}>
+    <SelectMenuWrapper $isToggle={isToggle}>
+      <SelectMenuList onClick={getShapeHandler}>
         <SelectMenuItem>
           <StyledShapes shapeName='triangle' />
           <ShapeDesc data-shape='triangle'>{'중요해요'}</ShapeDesc>
@@ -35,7 +33,7 @@ const SelectMenu = ({ istoggle, getToggle, getShape }: SelectMenuProps) => {
         </SelectMenuItem>
         <SelectMenuItem>
           <StyledShapes shapeName='circle' />
-          <ShapeDesc data-shape='circle'>{'언제든지 하세요'}</ShapeDesc>
+          <ShapeDesc data-shape='circle'>{'언제든지 해요'}</ShapeDesc>
         </SelectMenuItem>
       </SelectMenuList>
     </SelectMenuWrapper>
@@ -69,13 +67,13 @@ const fadeSlideOut = keyframes`
   }
 `;
 
-const SelectMenuWrapper = styled.div<{ $istoggle: boolean }>`
+const SelectMenuWrapper = styled.div<{ $isToggle: boolean }>`
   position: absolute;
   bottom: 4rem;
   left: 0;
 
-  visibility: ${({ $istoggle }) => ($istoggle ? 'visible' : 'hidden')};
-  animation: ${({ $istoggle }) => ($istoggle ? fadeSlideIn : fadeSlideOut)} 0.4s
+  visibility: ${({ $isToggle }) => ($isToggle ? 'visible' : 'hidden')};
+  animation: ${({ $isToggle }) => ($isToggle ? fadeSlideIn : fadeSlideOut)} 0.4s
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
 `;
