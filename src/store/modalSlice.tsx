@@ -2,7 +2,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface initialStateProps {
   inputState: boolean;
-  editState: boolean;
   captureState: boolean;
   alertState: boolean;
   confirmState: {
@@ -16,7 +15,6 @@ interface initialStateProps {
 
 const initialState: initialStateProps = {
   inputState: false,
-  editState: false,
   captureState: false,
   alertState: false,
   confirmState: {
@@ -35,9 +33,6 @@ const modalSlice = createSlice({
     modalIsOpen: (state) => {
       state.inputState = true;
     },
-    editModalIsOpen: (state) => {
-      state.editState = true;
-    },
     captureModalIsOpen: (state) => {
       state.captureState = true;
     },
@@ -53,7 +48,6 @@ const modalSlice = createSlice({
     },
     modalIsClose: (state) => {
       state.inputState = false;
-      state.editState = false;
       state.captureState = false;
       state.alertState = false;
       state.notificationState.isOpen = false;
@@ -66,7 +60,6 @@ export default modalSlice;
 export const {
   modalIsOpen,
   modalIsClose,
-  editModalIsOpen,
   captureModalIsOpen,
   notificationIsOpen,
   alertIsOpen,

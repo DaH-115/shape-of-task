@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { TaskTypes, selectEditTask, toggleTask } from 'store/taskListSlice';
 import {
   confirmIsOpen,
-  editModalIsOpen,
+  modalIsOpen,
   notificationIsOpen,
 } from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
@@ -26,23 +26,23 @@ const TaskItem = ({ id, text, shape, done, date }: TaskTypes) => {
       ? '언제든지 해요'
       : '';
 
-  const onToggleTodoHandler = React.useCallback(() => {
+  const toggleTaskHandler = React.useCallback(() => {
     dispatch(toggleTask(id));
     dispatch(notificationIsOpen(!done));
   }, [dispatch, id, done]);
 
-  const onRemoveTodoHandler = React.useCallback(() => {
+  const removeTaskHandler = React.useCallback(() => {
     dispatch(confirmIsOpen(id));
   }, [dispatch, id]);
 
-  const onModalOpenHandler = React.useCallback(() => {
-    dispatch(editModalIsOpen());
+  const modalOpenHandler = React.useCallback(() => {
+    dispatch(modalIsOpen());
     dispatch(selectEditTask(id));
   }, [dispatch, id]);
 
   return (
     <TaskItemContainer>
-      <TaskContent onClick={onToggleTodoHandler}>
+      <TaskContent onClick={toggleTaskHandler}>
         <ContentHeader>
           <StyledShapes shapeName={shape} />
           {done ? (
@@ -62,10 +62,10 @@ const TaskItem = ({ id, text, shape, done, date }: TaskTypes) => {
         </ContentBottom>
       </TaskContent>
       <BtnWrapper>
-        <EditBtn onClick={onModalOpenHandler} $isEmpty>
+        <EditBtn onClick={modalOpenHandler} $isEmpty>
           {'수정'}
         </EditBtn>
-        <RemoveBtn onClick={onRemoveTodoHandler} $isEmpty>
+        <RemoveBtn onClick={removeTaskHandler} $isEmpty>
           {'삭제'}
         </RemoveBtn>
       </BtnWrapper>

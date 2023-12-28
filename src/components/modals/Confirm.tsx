@@ -1,38 +1,41 @@
 import { useCallback } from 'react';
 import { styled } from 'styled-components';
-import StyledBtn from 'styles/StyledBtn';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
 import { removeTask } from 'store/taskListSlice';
 import PortalComponents from 'components/modals/PortalComponents';
 import Backdrop from 'components/modals/Backdrop';
+import { fadeIn, fadeOut } from 'styles/animation-setting';
+import { Title } from 'styles/Title';
+import { Btn } from 'styles/Button/Btn';
 
 const Confirm = () => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.modal.confirmState.isOpen);
   const isTodoId = useAppSelector((state) => state.modal.confirmState.isTodoId);
 
-  const confirmCheckedHandler = useCallback(() => {
+  const confirmHandler = useCallback(() => {
     dispatch(removeTask(isTodoId));
     dispatch(modalIsClose());
   }, [dispatch, isTodoId]);
 
-  const confirmCloseHandler = useCallback(() => {
+  const closeHandler = useCallback(() => {
     dispatch(modalIsClose());
   }, [dispatch]);
 
   return (
     <PortalComponents>
-      <Backdrop isopen={isOpen} />
-      <ConfirmWrapper>
-        <MessageWrapper>
-          <ConfirmTitle>{'확인'}</ConfirmTitle>
-          <ConfirmDesc>{'정말 지우시겠어요?'}</ConfirmDesc>
-          <BtnWrapper>
-            <ConfirmBtn onClick={confirmCheckedHandler}>{'예'}</ConfirmBtn>
-            <StyledBtn onClick={confirmCloseHandler}>{'아니요'}</StyledBtn>
-          </BtnWrapper>
-        </MessageWrapper>
+      <Backdrop isOpen={isOpen} />
+      <ConfirmWrapper $isOpen={isOpen}>
+        <Title title='확인' desc='정말 지우시겠어요?' />
+        <BtnWrapper>
+          <RejectBtnWrapper onClick={closeHandler}>
+            <Btn type='button' text='취소' isEmpty />
+          </RejectBtnWrapper>
+          <ConfrimBtnWrapper onClick={confirmHandler}>
+            <Btn type='button' text='삭제' />
+          </ConfrimBtnWrapper>
+        </BtnWrapper>
       </ConfirmWrapper>
     </PortalComponents>
   );
@@ -40,61 +43,41 @@ const Confirm = () => {
 
 export default Confirm;
 
-const ConfirmWrapper = styled.div`
-  width: 100%;
-  min-width: ${({ theme }) => theme.size.mobile};
-  padding: 1rem;
-  z-index: 999;
-`;
-
-const MessageWrapper = styled.div`
+const ConfirmWrapper = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   width: 90%;
-  font-size: 1.2rem;
+  min-width: ${({ theme }) => theme.size.mobile};
 
-  padding: 1rem 1.2rem;
-
+  padding: 0 1rem;
   background-color: #fff;
   border: 0.1rem solid ${({ theme }) => theme.colors.important};
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
 
   ${({ theme }) => theme.device.tablet} {
-    width: 30%;
-    font-size: 1rem;
   }
-`;
 
-const ConfirmTitle = styled.h1`
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 0.8rem;
-`;
-
-const ConfirmDesc = styled.p`
-  margin-bottom: 1rem;
+  visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
+  animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.4s ease-in-out;
+  transition: visibility 0.4s ease-in-out;
 `;
 
 const BtnWrapper = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 0;
 `;
 
-const ConfirmBtn = styled(StyledBtn)`
-  margin-left: 0.4rem;
+const ConfrimBtnWrapper = styled.div`
+  width: 100%;
+`;
 
-  color: #fff;
-  background-color: ${({ theme }) => theme.colors.important};
-  border-color: ${({ theme }) => theme.colors.important};
-
-  &:hover,
-  &:active {
-    color: ${({ theme }) => theme.colors.important};
-    background-color: #fff;
-    transition: all 0.4s ease-in-out;
-  }
+const RejectBtnWrapper = styled.div`
+  width: 100%;
+  margin-right: 0.6rem;
 `;

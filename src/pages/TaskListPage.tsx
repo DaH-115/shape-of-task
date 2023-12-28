@@ -6,10 +6,10 @@ import { Title } from 'styles/Title';
 import TaskItem from 'components/TaskItem';
 import AddBtn from 'components/AddBtn';
 import ModalInput from 'components/modals/ModalInput';
+import Confirm from 'components/modals/Confirm';
 
 const TaskListPage = () => {
   const [ascending, setAscending] = React.useState(true);
-
   const taskList = useAppSelector((state) => state.taskList.taskList);
   const restTask = taskList.filter((task) => !task.done);
   const addImportance = taskList.map((task) => ({
@@ -68,6 +68,7 @@ const TaskListPage = () => {
         <AddBtn />
       </BtnContainer>
       <ModalInput />
+      <Confirm />
     </>
   );
 };
@@ -75,6 +76,8 @@ const TaskListPage = () => {
 export default React.memo(TaskListPage);
 
 const TaskItemList = styled.ul`
+  width: 100%;
+  height: 100%;
   padding: 1rem 1rem 8rem;
   background-color: ${({ theme }) => theme.commonColors.light_gray};
 `;

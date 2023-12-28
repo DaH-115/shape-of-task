@@ -1,8 +1,19 @@
-import React, { useState, useCallback, useRef, useMemo } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useMemo,
+  useEffect,
+} from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { TaskTypes, addTask } from 'store/taskListSlice';
+import {
+  EditTaskTypes,
+  TaskTypes,
+  addTask,
+  updateTask,
+} from 'store/taskListSlice';
 
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Modal from 'components/modals/Modal';
@@ -15,42 +26,74 @@ const ModalInput = () => {
   const [text, setText] = useState('');
   const [shape, setShape] = useState('');
   const [toggle, setToggle] = useState(false);
+  const [editTaskId, setEditTaskId] = useState('');
+  const today = useMemo(() => new Date(), []);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
   const isInputState = useAppSelector((state) => state.modal.inputState);
-  const today = useMemo(() => new Date(), []);
+  const isEditingTask = useAppSelector((state) => state.taskList.editingTask);
 
-  const onChangeHandler = useCallback(
-    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const text = event.target.value;
-      setText(text);
-    },
-    []
-  );
+  useEffect(() => {
+    if (isEditingTask.id) {
+      setEditTaskId(isEditingTask.id);
+      setText(isEditingTask.text);
+      setShape(isEditingTask.shape);
+    } else {
+      setEditTaskId('');
+      setText('');
+      setShape('');
+    }
+  }, [isEditingTask]);
 
-  const onSubmitHandler = useCallback(
+  const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const text = event.target.value;
+    setText(text);
+  };
+
+  const updateTaskHandler = useCallback(() => {
+    const editTask: EditTaskTypes = {
+      id: editTaskId,
+      date: today.toLocaleDateString(),
+      text,
+      shape,
+    };
+    dispatch(updateTask(editTask));
+  }, [dispatch, editTaskId, text, shape, today]);
+
+  const addTaskHandler = useCallback(() => {
+    const newTask: TaskTypes = {
+      id: uuidv4(),
+      date: today.toLocaleDateString(),
+      text,
+      shape,
+      done: false,
+    };
+    dispatch(addTask(newTask));
+  }, [dispatch, shape, text, today]);
+
+  const validateHanlder = useCallback(() => {
+    if (!text || !shape) {
+      alert('텍스트와 도형을 채워주세요');
+      textareaRef.current?.focus();
+      return;
+    }
+  }, [text, shape]);
+
+  const submitHandler = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      validateHanlder();
 
-      if (!text || !shape) {
-        alert('텍스트와 도형을 채워주세요');
-        textareaRef.current?.focus();
-        return;
+      if (isEditingTask.id) {
+        updateTaskHandler();
+      } else {
+        addTaskHandler();
       }
 
-      const newTask: TaskTypes = {
-        id: uuidv4(),
-        date: today.toLocaleDateString(),
-        text,
-        shape,
-        done: false,
-      };
-
-      dispatch(addTask(newTask));
       setText('');
       setShape('');
     },
-    [dispatch, shape, text, today]
+    [isEditingTask, updateTaskHandler, addTaskHandler, validateHanlder]
   );
 
   const onToggleHandler = useCallback(() => {
@@ -69,7 +112,7 @@ const ModalInput = () => {
         </ModalHeader>
 
         <InputLabel htmlFor='task-input'>{'Task Input'}</InputLabel>
-        <InputForm id='task-input' onSubmit={onSubmitHandler}>
+        <InputForm id='task-input' onSubmit={submitHandler}>
           <Textarea
             value={text}
             onChange={onChangeHandler}

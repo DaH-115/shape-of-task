@@ -8,30 +8,35 @@ export interface TaskTypes {
   done: boolean;
 }
 
-interface SelectedTaskTypes {
-  id: string;
-  text: string;
-  shape: string;
-}
-
-interface EditTaskTypes {
+export interface EditTaskTypes {
   id: string;
   date: string;
   text: string;
   shape: string;
 }
 
+interface SelectedTaskTypes {
+  id: string;
+  text: string;
+  shape: string;
+}
+
 interface initialStateProps {
   taskList: TaskTypes[];
-  editingTask: SelectedTaskTypes[];
+  editingTask: SelectedTaskTypes;
 }
 
 const storedValue = localStorage.getItem('taskList');
 const parsedValue: TaskTypes[] = storedValue ? JSON.parse(storedValue) : [];
+const editingTaskinitailValue: SelectedTaskTypes = {
+  id: '',
+  text: '',
+  shape: '',
+};
 
 const initialState: initialStateProps = {
   taskList: parsedValue,
-  editingTask: [{ id: '', text: '', shape: '' }],
+  editingTask: editingTaskinitailValue,
 };
 
 const taskListSlice = createSlice({
@@ -43,17 +48,18 @@ const taskListSlice = createSlice({
       localStorage.setItem('taskList', JSON.stringify(state.taskList));
     },
     selectEditTask: (state, action: PayloadAction<string>) => {
-      state.editingTask = state.taskList.filter(
+      const selectedTask = state.taskList.filter(
         (task) => task.id === action.payload
       );
+      state.editingTask = selectedTask[0];
     },
     updateTask: (state, action: PayloadAction<EditTaskTypes>) => {
       const { id, date, text, shape } = action.payload;
-
       state.taskList = state.taskList.map((task) =>
         task.id === id ? { ...task, date, text, shape } : task
       );
       localStorage.setItem('taskList', JSON.stringify(state.taskList));
+      state.editingTask = editingTaskinitailValue;
     },
     removeTask: (state, action: PayloadAction<string>) => {
       state.taskList = state.taskList.filter(
