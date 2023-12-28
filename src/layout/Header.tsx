@@ -1,12 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IoMenu } from 'react-icons/io5';
 import { ReactComponent as Logo } from 'assets/Logo.svg';
 
-const NewHeader = () => {
+const Header = () => {
   const [isToggle, setIsToggle] = React.useState(false);
   const todayDate = React.useMemo(() => new Date(), []);
   const today = todayDate.toLocaleDateString();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const onMoveToMainHandler = React.useCallback(() => {
+    if (pathname !== '/') {
+      navigate('/');
+    }
+  }, [navigate, pathname]);
 
   const menuToggleHandler = React.useCallback(() => {
     setIsToggle((prev) => !prev);
@@ -17,7 +26,7 @@ const NewHeader = () => {
     <>
       <HeaderWrapper>
         <Wrapper>
-          <LogoWrapper>
+          <LogoWrapper onClick={onMoveToMainHandler}>
             <StyledLogo />
           </LogoWrapper>
           {/* TODO: 슬라이드 메뉴 */}
@@ -33,7 +42,7 @@ const NewHeader = () => {
   );
 };
 
-export default React.memo(NewHeader);
+export default React.memo(Header);
 
 const HeaderWrapper = styled.div`
   width: 100%;

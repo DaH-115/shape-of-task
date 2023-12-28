@@ -11,17 +11,17 @@ const MainPage = () => {
       <TodaysQuote />
       <Link to='/task-list'>
         <BtnWrapper>
-          <BtnLink text='일정 추가' />
+          <BtnLink type='button' text='일정 추가' />
         </BtnWrapper>
       </Link>
       <Link to='/task-list'>
         <BtnWrapper>
-          <BtnLink text='일정' isEmpty />
+          <BtnLink type='button' text='일정' isEmpty />
         </BtnWrapper>
       </Link>
       <Link to='/shape-list'>
         <BtnWrapper>
-          <BtnLink text='완료된 일' isEmpty />
+          <BtnLink type='button' text='완료된 일' isEmpty />
         </BtnWrapper>
       </Link>
       <BtnWrapper>

@@ -67,4 +67,7 @@ const PaletteColors = styled.div<{ $themeColor: string; $isSelected: boolean }>`
   &:last-child {
     margin-right: 0;
   }
+
+  ${({ theme }) => theme.device.tablet} {
+  }
 `;

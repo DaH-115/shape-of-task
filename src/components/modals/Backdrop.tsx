@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import { modalIsClose } from 'store/modalSlice';
-import { styled } from 'styled-components';
 import { fadeIn, fadeOut } from 'styles/animation-setting';
 
 interface BackdropProps {

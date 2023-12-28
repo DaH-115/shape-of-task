@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IoMdSettings } from 'react-icons/io';
-import SettingMenu from 'components/SettingMenu';
+import SettingMenu from 'components/menus/SettingMenu';
 
 export const BtnSetting = () => {
   const [isToggle, setIsToggle] = React.useState(false);

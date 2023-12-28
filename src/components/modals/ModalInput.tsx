@@ -18,7 +18,7 @@ import {
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Modal from 'components/modals/Modal';
 import SelectedShapes from 'components/figures/SelectedShapes';
-import SelectMenu from 'components/SelectMenu';
+import SelectMenu from 'components/menus/SelectMenu';
 import { Title } from 'styles/Title';
 import { Btn } from 'styles/Button/Btn';
 
