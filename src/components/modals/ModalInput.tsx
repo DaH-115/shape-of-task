@@ -105,56 +105,46 @@ const ModalInput = () => {
   }, []);
 
   return (
-    <Modal modalState={isInputState}>
-      <ModalInputWrapper>
-        <ModalHeader>
-          <Title title='Task' desc={today.toLocaleDateString()} />
-        </ModalHeader>
+    <Modal isOpen={isInputState}>
+      <ModalHeader>
+        <Title title='Task' desc={today.toLocaleDateString()} />
+      </ModalHeader>
 
-        <InputLabel htmlFor='task-input'>{'Task Input'}</InputLabel>
-        <InputForm id='task-input' onSubmit={submitHandler}>
-          <Textarea
-            value={text}
-            onChange={onChangeHandler}
-            ref={textareaRef}
-            placeholder='오늘 해야 할 일은 무엇인가요?'
-          />
-          <BtnWrapper>
-            <SelectShapesWrapper onClick={onToggleHandler}>
-              <ShapeWrapper>
-                <SelectedShapes shape={shape} />
-              </ShapeWrapper>
-              <SelectMenu
-                isToggle={!isInputState ? false : toggle}
-                getShape={getShapeHandler}
-              />
-            </SelectShapesWrapper>
-            <ToggleIcon>
-              {toggle ? (
-                <FaAngleDown fontSize={'1.3rem'} />
-              ) : (
-                <FaAngleUp fontSize={'1.3rem'} />
-              )}
-            </ToggleIcon>
-            <SubmitBtnWrapper>
-              <Btn type='submit' text='등록' />
-            </SubmitBtnWrapper>
-          </BtnWrapper>
-        </InputForm>
-      </ModalInputWrapper>
+      <InputLabel htmlFor='task-input'>{'Task Input'}</InputLabel>
+      <InputForm id='task-input' onSubmit={submitHandler}>
+        <Textarea
+          value={text}
+          onChange={onChangeHandler}
+          ref={textareaRef}
+          placeholder='오늘 해야 할 일은 무엇인가요?'
+        />
+        <BtnWrapper>
+          <SelectShapesWrapper onClick={onToggleHandler}>
+            <ShapeWrapper>
+              <SelectedShapes shape={shape} />
+            </ShapeWrapper>
+            <SelectMenu
+              isToggle={!isInputState ? false : toggle}
+              getShape={getShapeHandler}
+            />
+          </SelectShapesWrapper>
+          <ToggleIcon>
+            {toggle ? (
+              <FaAngleDown fontSize={'1.3rem'} />
+            ) : (
+              <FaAngleUp fontSize={'1.3rem'} />
+            )}
+          </ToggleIcon>
+          <SubmitBtnWrapper>
+            <Btn type='submit' text='등록' />
+          </SubmitBtnWrapper>
+        </BtnWrapper>
+      </InputForm>
     </Modal>
   );
 };
 
 export default React.memo(ModalInput);
-
-const ModalInputWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 1rem;
-`;
 
 const ModalHeader = styled.div`
   color: ${({ theme }) => theme.commonColors.gray};

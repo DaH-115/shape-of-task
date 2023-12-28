@@ -4,10 +4,10 @@ import GlobalStyle from 'styles/GlobalStyle';
 import { defalutTheme } from 'styles/theme';
 import { themeColors } from 'styles/theme-colors';
 
-import MetaTags from 'MetaTags';
-import NewHeader from 'layout/NewHeader';
+import Header from 'layout/Header';
 import RoutesComponent from 'routes/Routes';
 import Footer from 'layout/Footer';
+import ErrorAlert from 'components/modals/ErrorAlert';
 
 const App = () => {
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
@@ -18,13 +18,13 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <MetaTags />
       <GlobalStyle />
       <Container>
-        <NewHeader />
+        <Header />
         <RoutesComponent />
       </Container>
       <Footer />
+      <ErrorAlert />
     </ThemeProvider>
   );
 };

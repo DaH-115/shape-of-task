@@ -1,0 +1,32 @@
+import { useCallback } from 'react';
+import { styled } from 'styled-components';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { modalIsClose } from 'store/modalSlice';
+import Modal from 'components/modals/Modal';
+import { Title } from 'styles/Title';
+import { Btn } from 'styles/Button/Btn';
+
+const ErrorAlert = () => {
+  const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state) => state.modal.alertState);
+
+  const alertCloseHandler = useCallback(() => {
+    dispatch(modalIsClose());
+  }, [dispatch]);
+
+  return (
+    <Modal isOpen={isOpen}>
+      <Title title='알림' desc='문제가 발생했습니다.' />
+      <ConfrimBtnWrapper onClick={alertCloseHandler}>
+        <Btn type='button' text='확인' />
+      </ConfrimBtnWrapper>
+    </Modal>
+  );
+};
+
+export default ErrorAlert;
+
+const ConfrimBtnWrapper = styled.div`
+  width: 100%;
+  padding: 1rem 0;
+`;

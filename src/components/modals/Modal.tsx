@@ -6,14 +6,14 @@ import Backdrop from 'components/modals/Backdrop';
 
 interface ModalProps {
   children: React.ReactNode;
-  modalState: boolean;
+  isOpen: boolean;
 }
 
-const Modal = ({ children, modalState }: ModalProps) => {
+const Modal = ({ children, isOpen }: ModalProps) => {
   return (
     <PortalComponents>
-      <Backdrop isOpen={modalState} />
-      <ModalWapper $modalToggle={modalState}>{children}</ModalWapper>
+      <Backdrop isOpen={isOpen} />
+      <ModalWapper $modalToggle={isOpen}>{children}</ModalWapper>
     </PortalComponents>
   );
 };
@@ -27,11 +27,17 @@ const ModalWapper = styled.div<{ $modalToggle: boolean }>`
   transform: translate(-50%, -50%);
 
   width: 90%;
+  min-width: ${({ theme }) => theme.size.mobile};
+  padding: 0 1rem;
+  border: 0.1rem solid ${({ theme }) => theme.colors.important};
+  border-radius: 1rem;
+  background-color: #fff;
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.3);
+
   visibility: ${({ $modalToggle }) => ($modalToggle ? 'visible' : 'hidden')};
-  animation: ${({ $modalToggle }) => ($modalToggle ? fadeIn : fadeOut)} 0.4s
+  animation: ${({ $modalToggle }) => ($modalToggle ? fadeIn : fadeOut)} 0.3s
     ease-in-out;
-  transition: visibility 0.4s ease-in-out;
+  transition: visibility 0.3s ease-in-out;
 
   ${({ theme }) => theme.device.tablet} {
     width: auto;

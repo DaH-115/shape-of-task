@@ -26,10 +26,10 @@ const BackdropComponent = styled.div<{ $isOpen: boolean }>`
   left: 0;
 
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   background-color: rgba(177, 177, 177, 0.5);
 
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
-  animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.4s ease-in-out;
-  transition: visibility 0.4s ease-in-out;
+  animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.3s ease-in-out;
+  transition: visibility 0.3s ease-in-out;
 `;

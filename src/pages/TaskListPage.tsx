@@ -4,9 +4,9 @@ import { TbArrowsSort } from 'react-icons/tb';
 import { useAppSelector } from 'store/hooks';
 import { Title } from 'styles/Title';
 import TaskItem from 'components/TaskItem';
-import AddBtn from 'components/AddBtn';
+import AddBtn from 'styles/Button/AddBtn';
 import ModalInput from 'components/modals/ModalInput';
-import Confirm from 'components/modals/Confirm';
+import ConfirmAlert from 'components/modals/ConfirmAlert';
 
 const TaskListPage = () => {
   const [ascending, setAscending] = React.useState(true);
@@ -68,7 +68,7 @@ const TaskListPage = () => {
         <AddBtn />
       </BtnContainer>
       <ModalInput />
-      <Confirm />
+      <ConfirmAlert />
     </>
   );
 };
