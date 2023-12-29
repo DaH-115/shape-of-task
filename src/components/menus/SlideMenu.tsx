@@ -54,6 +54,7 @@ const SlideMenuContainer = styled.div<{ $isOpen: boolean }>`
   right: 0;
 
   width: 100%;
+  min-width: ${({ theme }) => theme.size.mobile};
   height: 100%;
   background-color: ${({ theme }) => theme.commonColors.light_gray};
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);

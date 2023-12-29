@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IoMenu } from 'react-icons/io5';
 import { ReactComponent as Logo } from 'assets/Logo.svg';
+import HamburgerMenu from 'components/menus/HamburgerMenu';
 
 const Header = () => {
   const [isToggle, setIsToggle] = React.useState(false);
@@ -29,7 +30,6 @@ const Header = () => {
           <LogoWrapper onClick={onMoveToMainHandler}>
             <StyledLogo />
           </LogoWrapper>
-          {/* TODO: 슬라이드 메뉴 */}
           <IoMenu fontSize={'2rem'} onClick={menuToggleHandler} />
         </Wrapper>
         <Contents>
@@ -38,6 +38,7 @@ const Header = () => {
           {' ☀️ 맑음'}
         </Contents>
       </HeaderWrapper>
+      <HamburgerMenu isOpen={isToggle} slideMenuHandler={menuToggleHandler} />
     </>
   );
 };

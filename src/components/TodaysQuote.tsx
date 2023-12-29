@@ -6,6 +6,7 @@ export const TodaysQuote = () => {
   return (
     <QuoteWrapper>
       <Title title='Todats Quote' desc='오늘의 명언' />
+      {/* TODO: Quote API 적용 */}
       <QuoteText>
         {
           '“We cannot solve problems with the kind of thinking we employed when we came up with them.” — Albert Einstein'
