@@ -11,26 +11,32 @@ export const BtnSetting = () => {
   }, []);
 
   return (
-    <>
+    <BtnWrapper>
       <ButtonWrapper onClick={menuToggleHandler}>
-        <IoMdSettings fontSize='1.2rem' />
+        <IoMdSettings fontSize='1.5rem' />
         <button type='button'>{'설정'}</button>
       </ButtonWrapper>
       <SettingMenu isOpen={isToggle} slideMenuHandler={menuToggleHandler} />
-    </>
+    </BtnWrapper>
   );
 };
+
+const BtnWrapper = styled.div`
+  width: 100%;
+
+  ${({ theme }) => theme.device.tablet} {
+    padding: 0 1rem;
+  }
+`;
 
 const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
 
   width: 100%;
-  height: 100%;
-  background-color: #fff;
   border: 0.1rem solid #fff;
   border-radius: 2rem;
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
 
   button {
@@ -47,5 +53,12 @@ const ButtonWrapper = styled.div`
   svg {
     color: ${({ theme }) => theme.colors.anytime};
     margin-right: 0.3rem;
+  }
+
+  ${({ theme }) => theme.device.tablet} {
+    button {
+      color: ${({ theme }) => theme.commonColors.black};
+      font-size: 1rem;
+    }
   }
 `;

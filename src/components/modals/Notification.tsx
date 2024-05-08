@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useGetWindowWidth from 'hooks/useGetWindowWidth';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
 import { fadeSlideIn, fadeSlideOut } from 'styles/animation-setting';
@@ -14,9 +13,6 @@ const Notification = () => {
   const isOpen = useAppSelector(
     (state) => state.modal.notificationState.isOpen
   );
-  const tabletSize = 768;
-  const { windowWidth } = useGetWindowWidth(tabletSize);
-  const shouldRedirect = windowWidth >= tabletSize;
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -29,18 +25,16 @@ const Notification = () => {
   }, [dispatch, isOpen]);
 
   const onNavgateHandler = useCallback(() => {
-    if (!shouldRedirect) {
-      navigate('/figure-list');
-    }
-  }, [navigate, shouldRedirect]);
+    navigate('/shape-list');
+  }, [navigate]);
 
   return (
     <PortalComponents>
-      <NoteWrapper onClick={onNavgateHandler} $isOpen={isOpen}>
+      <NoteWrapper $isOpen={isOpen}>
         <MessageWrapper>
           <NoteTitle>{'알림'}</NoteTitle>
           <NoteDesc>{`할 일 끝! 도형이 추가되었습니다`}</NoteDesc>
-          <IconWrapper>
+          <IconWrapper onClick={onNavgateHandler}>
             <MdArrowForwardIos />
           </IconWrapper>
         </MessageWrapper>
@@ -102,4 +96,8 @@ const NoteTitle = styled.h1`
 const IconWrapper = styled.div`
   color: ${({ theme }) => theme.colors.important};
   margin-right: 0.5rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    display: none;
+  }
 `;

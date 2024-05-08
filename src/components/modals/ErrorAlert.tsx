@@ -27,6 +27,8 @@ const ErrorAlert = () => {
 export default ErrorAlert;
 
 const ConfrimBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
-  padding: 1rem 0;
+  padding: 0 0 1rem;
 `;

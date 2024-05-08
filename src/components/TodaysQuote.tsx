@@ -5,7 +5,9 @@ import { Title } from 'styles/Title';
 export const TodaysQuote = () => {
   return (
     <QuoteWrapper>
-      <Title title='Todats Quote' desc='오늘의 명언' />
+      <QuoteHeader>
+        <Title title='Todats Quote' desc='오늘의 명언' />
+      </QuoteHeader>
       {/* TODO: Quote API 적용 */}
       <QuoteText>
         {
@@ -23,11 +25,31 @@ const QuoteWrapper = styled.main`
   align-items: center;
 
   width: 100%;
-  padding: 1rem;
-  margin: 1rem 0 4rem;
+  margin-bottom: 3rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    padding: 1rem;
+    margin-bottom: 0;
+  }
+`;
+
+const QuoteHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  padding: 0 1rem;
 `;
 
 const QuoteText = styled.div`
   width: 80%;
   font-style: italic;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
 `;

@@ -171,9 +171,6 @@ const Textarea = styled.textarea`
   padding: 0;
   margin-bottom: 1rem;
   font-size: 1.2rem;
-
-  ${({ theme }) => theme.device.tablet} {
-  }
 `;
 
 const BtnWrapper = styled.div`
@@ -197,5 +194,7 @@ const ToggleIcon = styled.div`
 `;
 
 const SubmitBtnWrapper = styled.div`
+  display: flex;
+  justify-content: end;
   width: 100%;
 `;

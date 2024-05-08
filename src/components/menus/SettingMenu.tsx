@@ -31,4 +31,7 @@ export default React.memo(SettingMenu);
 
 const BtnWrapper = styled.div`
   width: 100%;
+  max-width: 5rem;
+  margin-top: 2rem;
+  margin-left: auto;
 `;

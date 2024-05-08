@@ -1,39 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BtnLink } from 'styles/Button/BtnLink';
 import { BtnSetting } from 'styles/Button/BtnSetting';
 import { TodaysQuote } from 'components/TodaysQuote';
-import { Link } from 'react-router-dom';
+import TaskListCount from 'components/TaskListCount';
+import AddBtn from 'styles/Button/AddBtn';
 
 const MainPage = () => {
   return (
-    <>
-      <TodaysQuote />
-      <Link to='/task-list'>
-        <BtnWrapper>
-          <BtnLink type='button' text='일정 추가' />
-        </BtnWrapper>
-      </Link>
-      <Link to='/task-list'>
-        <BtnWrapper>
-          <BtnLink type='button' text='일정' isEmpty />
-        </BtnWrapper>
-      </Link>
-      <Link to='/shape-list'>
-        <BtnWrapper>
-          <BtnLink type='button' text='완료된 일' isEmpty />
-        </BtnWrapper>
-      </Link>
-      <BtnWrapper>
+    <Container>
+      <Wrapper>
+        <TodaysQuote />
+        <ResponsiveWrapper>
+          <AddBtn />
+        </ResponsiveWrapper>
+        <TaskListCount />
         <BtnSetting />
-      </BtnWrapper>
-    </>
+      </Wrapper>
+    </Container>
   );
 };
 
 export default React.memo(MainPage);
 
-const BtnWrapper = styled.div`
+const Container = styled.div`
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
+  min-width: 18rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    max-width: 18rem;
+  }
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding-bottom: 1rem;
+`;
+
+const ResponsiveWrapper = styled.div`
+  ${({ theme }) => theme.device.tablet} {
+    display: none;
+  }
 `;

@@ -1,31 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FaArrowRight } from 'react-icons/fa';
-import { BtnProps, ButtonWrapper } from 'styles/Button/Btn';
+import { Btn, BtnProps } from 'styles/Button/Btn';
 
-export const BtnLink = ({ text, isEmpty = false }: BtnProps) => {
+interface BtnLinkProps extends BtnProps {
+  linkTo: string;
+}
+
+export const BtnLink = ({ type, text, linkTo, children }: BtnLinkProps) => {
   return (
-    <BtnLinkWrapper $isEmpty={isEmpty}>
-      <button type='button'>{text}</button>
-      <FaArrowRight fontSize={'1.2rem'} />
-    </BtnLinkWrapper>
+    <Wrapper>
+      <Link to={linkTo}>
+        <Btn type={type} text={text} />
+        {children}
+      </Link>
+    </Wrapper>
   );
 };
 
-const BtnLinkWrapper = styled(ButtonWrapper)<{ $isEmpty: boolean }>`
-  justify-content: space-between;
+const Wrapper = styled.div`
+  margin-bottom: 0.5rem;
 
-  svg {
-    color: ${({ theme, $isEmpty }) =>
-      $isEmpty ? theme.colors.important : '#fff'};
-  }
-
-  &:hover,
-  :active {
-    svg {
-      color: ${({ theme, $isEmpty }) =>
-        $isEmpty ? '#fff' : theme.colors.important};
-      transition: color 0.2s ease-in-out;
-    }
+  &:last-child {
+    margin-bottom: 0;
   }
 `;

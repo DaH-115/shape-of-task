@@ -24,7 +24,7 @@ const ModalWapper = styled.div<{ $modalToggle: boolean }>`
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
 
   width: 90%;
   min-width: ${({ theme }) => theme.size.mobile};
@@ -40,6 +40,7 @@ const ModalWapper = styled.div<{ $modalToggle: boolean }>`
   transition: visibility 0.3s ease-in-out;
 
   ${({ theme }) => theme.device.tablet} {
+    transform: translate(-50%, -50%);
     width: auto;
   }
 `;

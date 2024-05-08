@@ -5,12 +5,14 @@ export type BtnProps = {
   text: string;
   type: 'button' | 'submit' | 'reset';
   isEmpty?: boolean;
+  children?: React.ReactNode;
 };
 
-export const Btn = ({ text, type, isEmpty = false }: BtnProps) => {
+export const Btn = ({ text, type, isEmpty = false, children }: BtnProps) => {
   return (
     <ButtonWrapper $isEmpty={isEmpty}>
       <button type={type}>{text}</button>
+      {children}
     </ButtonWrapper>
   );
 };
@@ -45,6 +47,21 @@ export const ButtonWrapper = styled.div<{ $isEmpty: boolean }>`
       color: ${({ theme, $isEmpty }) =>
         $isEmpty ? '#fff' : theme.commonColors.black};
       transition: color 0.2s ease-in-out;
+    }
+
+    svg {
+      color: ${({ theme, $isEmpty }) =>
+        $isEmpty ? '#fff' : theme.commonColors.black};
+      transition: color 0.2s ease-in-out;
+    }
+  }
+
+  ${({ theme }) => theme.device.tablet} {
+    width: 100%;
+    padding: 0.6rem 1rem;
+
+    button {
+      font-size: 0.9rem;
     }
   }
 `;

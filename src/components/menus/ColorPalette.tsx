@@ -33,7 +33,7 @@ export default ColorPalette;
 
 const Container = styled.div`
   width: 100%;
-  margin: 1rem 0 2rem;
+  margin-bottom: 0.5rem;
 `;
 
 const PaletteWrapper = styled.div`
@@ -45,8 +45,6 @@ const PaletteWrapper = styled.div`
 `;
 
 const PaletteName = styled.p<{ $isSelected: boolean }>`
-  font-size: 1.2rem;
-
   color: ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.important : theme.commonColors.gray};
   margin-bottom: 0.6rem;

@@ -56,7 +56,7 @@ const SlideMenuContainer = styled.div<{ $isOpen: boolean }>`
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
   height: 100%;
-  background-color: ${({ theme }) => theme.commonColors.light_gray};
+  background-color: #fff;
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
   padding: 1rem 2rem;
 
@@ -68,8 +68,8 @@ const SlideMenuContainer = styled.div<{ $isOpen: boolean }>`
   transition: visibility 0.4s ease-in-out;
 
   ${({ theme }) => theme.device.tablet} {
-    width: 40%;
-    padding: 1rem 2rem;
+    width: 20rem;
+    padding: 0.5rem 2rem;
   }
 `;
 

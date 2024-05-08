@@ -33,6 +33,7 @@ export default Footer;
 
 const FooterWrapper = styled.footer`
   width: 100%;
+
   min-width: ${({ theme }) => theme.size.mobile};
   padding: 1.4rem 1rem;
   color: #fff;

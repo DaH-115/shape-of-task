@@ -21,11 +21,19 @@ const TitleWrapper = styled.div`
 `;
 
 const ContentsTitle = styled.h1`
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 1.4rem;
+  }
 `;
 
 const ContentsTitleDesc = styled.h2`
   font-size: 1rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 0.9rem;
+  }
 `;

@@ -3,12 +3,10 @@ import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IoMenu } from 'react-icons/io5';
 import { ReactComponent as Logo } from 'assets/Logo.svg';
-import HamburgerMenu from 'components/menus/HamburgerMenu';
+import NavMenu from 'components/menus/NavMenu';
 
 const Header = () => {
   const [isToggle, setIsToggle] = React.useState(false);
-  const todayDate = React.useMemo(() => new Date(), []);
-  const today = todayDate.toLocaleDateString();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -20,49 +18,45 @@ const Header = () => {
 
   const menuToggleHandler = React.useCallback(() => {
     setIsToggle((prev) => !prev);
-    console.log(isToggle, '슬라이드 메뉴 오픈');
-  }, [isToggle]);
+  }, []);
 
   return (
-    <>
-      <HeaderWrapper>
-        <Wrapper>
-          <LogoWrapper onClick={onMoveToMainHandler}>
-            <StyledLogo />
-          </LogoWrapper>
-          <IoMenu fontSize={'2rem'} onClick={menuToggleHandler} />
-        </Wrapper>
-        <Contents>
-          {/* TODO: 날씨 API 적용 */}
-          {today}
-          {' ☀️ 맑음'}
-        </Contents>
-      </HeaderWrapper>
-      <HamburgerMenu isOpen={isToggle} slideMenuHandler={menuToggleHandler} />
-    </>
+    <HeaderWrapper>
+      <Wrapper>
+        <LogoWrapper onClick={onMoveToMainHandler}>
+          <StyledLogo />
+        </LogoWrapper>
+        <ResponsiveIoMenu fontSize={'2rem'} onClick={menuToggleHandler} />
+      </Wrapper>
+      <NavMenu isOpen={isToggle} slideMenuHandler={menuToggleHandler} />
+    </HeaderWrapper>
   );
 };
 
 export default React.memo(Header);
 
+const ResponsiveIoMenu = styled(IoMenu)`
+  ${({ theme }) => theme.device.tablet} {
+    display: none;
+  }
+`;
+
 const HeaderWrapper = styled.div`
   width: 100%;
-  color: ${({ theme }) => theme.commonColors.black};
-  background-color: #fff;
-  padding: 2rem 1rem 1rem;
+  padding: 1rem 2rem 0 1rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    padding: 0.5rem 1rem;
+  }
 `;
 
 const LogoWrapper = styled.div`
-  width: 30%;
+  width: 4rem;
 `;
 
 const StyledLogo = styled(Logo)`
   width: 100%;
   height: 100%;
-`;
-
-const Contents = styled.div`
-  margin-top: 0.2rem;
 `;
 
 const Wrapper = styled.div`

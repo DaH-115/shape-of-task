@@ -48,10 +48,14 @@ const taskListSlice = createSlice({
       localStorage.setItem('taskList', JSON.stringify(state.taskList));
     },
     selectEditTask: (state, action: PayloadAction<string>) => {
-      const selectedTask = state.taskList.filter(
-        (task) => task.id === action.payload
-      );
-      state.editingTask = selectedTask[0];
+      if (action.payload) {
+        const selectedTask = state.taskList.filter(
+          (task) => task.id === action.payload
+        );
+        state.editingTask = selectedTask[0];
+      } else {
+        state.editingTask = editingTaskinitailValue;
+      }
     },
     updateTask: (state, action: PayloadAction<EditTaskTypes>) => {
       const { id, date, text, shape } = action.payload;

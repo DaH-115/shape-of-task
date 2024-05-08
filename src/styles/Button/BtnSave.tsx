@@ -30,14 +30,23 @@ export const BtnSave = ({ taskListRef, isDisabled }: BtnSaveProps) => {
   }, [dispatch, taskListRef]);
 
   return (
-    <ButtonWrapper onClick={captureModalOpen}>
-      <button type='button' disabled={isDisabled}>
-        {'이미지 저장'}
-      </button>
-      <GiSaveArrow fontSize='1.4rem' />
-    </ButtonWrapper>
+    <BtnSaveWrapper>
+      <ButtonWrapper onClick={captureModalOpen}>
+        <button type='button' disabled={isDisabled}>
+          {'이미지 저장'}
+        </button>
+        <GiSaveArrow />
+      </ButtonWrapper>
+    </BtnSaveWrapper>
   );
 };
+
+const BtnSaveWrapper = styled.div`
+  width: 100%;
+
+  ${({ theme }) => theme.device.tablet} {
+  }
+`;
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -58,6 +67,7 @@ const ButtonWrapper = styled.div`
   }
 
   svg {
+    font-size: 1.4rem;
     color: #fff;
   }
 
@@ -74,6 +84,18 @@ const ButtonWrapper = styled.div`
     svg {
       color: ${({ theme }) => theme.colors.important};
       transition: color 0.2s ease-in-out;
+    }
+  }
+
+  ${({ theme }) => theme.device.tablet} {
+    padding: 0.5rem 1rem;
+
+    button {
+      font-size: 0.8rem;
+    }
+
+    svg {
+      font-size: 1rem;
     }
   }
 `;

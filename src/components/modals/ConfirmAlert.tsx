@@ -42,14 +42,22 @@ const BtnWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 1rem 0;
+  padding: 0 0 1rem;
 `;
 
 const ConfrimBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
 `;
 
 const RejectBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
   margin-right: 0.6rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    margin-right: 0;
+  }
 `;
