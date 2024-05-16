@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TaskTypes, selectEditTask, toggleTask } from 'store/taskListSlice';
+import { TaskTypes, editingTask, toggleTask } from 'store/taskListSlice';
 import {
-  confirmIsOpen,
-  modalIsOpen,
   notificationIsOpen,
+  removeConfirmOpen,
+  updateConfirmOpen,
 } from 'store/modalSlice';
 import { useAppDispatch } from 'store/hooks';
 import {
@@ -31,13 +31,14 @@ const TaskItem = ({ id, text, shape, done, date }: TaskTypes) => {
     dispatch(notificationIsOpen(!done));
   }, [dispatch, id, done]);
 
-  const removeTaskHandler = React.useCallback(() => {
-    dispatch(confirmIsOpen(id));
+  const removeConfirmOpenHandler = React.useCallback(() => {
+    dispatch(removeConfirmOpen());
+    dispatch(editingTask(id));
   }, [dispatch, id]);
 
-  const modalOpenHandler = React.useCallback(() => {
-    dispatch(modalIsOpen());
-    dispatch(selectEditTask(id));
+  const updateConfirmOpenHandler = React.useCallback(() => {
+    dispatch(updateConfirmOpen());
+    dispatch(editingTask(id));
   }, [dispatch, id]);
 
   return (
@@ -62,10 +63,10 @@ const TaskItem = ({ id, text, shape, done, date }: TaskTypes) => {
         </ContentBottom>
       </TaskContent>
       <BtnWrapper>
-        <EditBtn onClick={modalOpenHandler} $isEmpty>
+        <EditBtn onClick={updateConfirmOpenHandler} $isEmpty>
           {'수정'}
         </EditBtn>
-        <RemoveBtn onClick={removeTaskHandler} $isEmpty>
+        <RemoveBtn onClick={removeConfirmOpenHandler} $isEmpty>
           {'삭제'}
         </RemoveBtn>
       </BtnWrapper>
@@ -126,8 +127,6 @@ const ContentText = styled.p<{ $isDone: boolean }>`
 
   ${({ theme }) => theme.device.tablet} {
     width: 100%;
-    height: 5rem;
-    max-height: 5rem;
     font-size: 1rem;
     margin-left: 0.2rem;
   }

@@ -13,8 +13,9 @@ interface BtnSaveProps {
 
 export const BtnSave = ({ taskListRef, isDisabled }: BtnSaveProps) => {
   const dispatch = useDispatch();
-
   const captureModalOpen = React.useCallback(async () => {
+    if (isDisabled) return; // *일을 완료하라고 안내해주는 모달창을 띄워준다.
+
     try {
       const taskList = taskListRef.current!;
       const taskListImg = await html2canvas(taskList, { scale: 4 });
@@ -27,7 +28,7 @@ export const BtnSave = ({ taskListRef, isDisabled }: BtnSaveProps) => {
     } catch (error) {
       dispatch(alertIsOpen());
     }
-  }, [dispatch, taskListRef]);
+  }, [dispatch, taskListRef, isDisabled]);
 
   return (
     <BtnSaveWrapper>

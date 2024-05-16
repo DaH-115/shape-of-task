@@ -1,42 +1,46 @@
 import { useCallback } from 'react';
 import { styled } from 'styled-components';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { modalIsClose } from 'store/modalSlice';
-import { removeTask } from 'store/taskListSlice';
+import { useAppDispatch } from 'store/hooks';
+import { confirmClose } from 'store/modalSlice';
 import Modal from 'components/modals/Modal';
 import { Title } from 'styles/Title';
 import { Btn } from 'styles/Button/Btn';
+import { editingTaskReset } from 'store/taskListSlice';
 
-const ConfirmAlert = () => {
+interface ConfirmModalProps {
+  isOpen: boolean;
+  modalDesc: string;
+  confirmHandler: () => void;
+}
+
+const ConfirmModal = ({
+  isOpen,
+  modalDesc,
+  confirmHandler,
+}: ConfirmModalProps) => {
   const dispatch = useAppDispatch();
-  const isOpen = useAppSelector((state) => state.modal.confirmState.isOpen);
-  const isTodoId = useAppSelector((state) => state.modal.confirmState.isTodoId);
-
-  const confirmHandler = useCallback(() => {
-    dispatch(removeTask(isTodoId));
-    dispatch(modalIsClose());
-  }, [dispatch, isTodoId]);
 
   const closeHandler = useCallback(() => {
-    dispatch(modalIsClose());
+    dispatch(confirmClose());
+    dispatch(editingTaskReset());
   }, [dispatch]);
 
   return (
     <Modal isOpen={isOpen}>
-      <Title title='확인' desc='정말 지우시겠어요?' />
+      <Title title='확인' desc={modalDesc} />
       <BtnWrapper>
         <RejectBtnWrapper onClick={closeHandler}>
           <Btn type='button' text='취소' isEmpty />
         </RejectBtnWrapper>
         <ConfrimBtnWrapper onClick={confirmHandler}>
-          <Btn type='button' text='삭제' />
+          <Btn type='button' text='확인' />
         </ConfrimBtnWrapper>
       </BtnWrapper>
     </Modal>
   );
 };
 
-export default ConfirmAlert;
+export default ConfirmModal;
 
 const BtnWrapper = styled.div`
   display: flex;

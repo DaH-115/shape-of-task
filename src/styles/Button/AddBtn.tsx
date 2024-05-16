@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch } from 'store/hooks';
-import { modalIsOpen } from 'store/modalSlice';
+import { InputModalOpen } from 'store/modalSlice';
 import styled from 'styled-components';
 import { Btn } from 'styles/Button/Btn';
 import { IoIosAddCircleOutline } from 'react-icons/io';
@@ -9,7 +9,7 @@ const AddBtn = () => {
   const dispatch = useAppDispatch();
 
   const modalOpenHandler = React.useCallback(() => {
-    dispatch(modalIsOpen());
+    dispatch(InputModalOpen());
   }, [dispatch]);
 
   return (

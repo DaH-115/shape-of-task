@@ -9,56 +9,47 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
-  EditTaskTypes,
   TaskTypes,
   addTask,
+  editingTaskReset,
   updateTask,
 } from 'store/taskListSlice';
 
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import { Title } from 'styles/Title';
+import { Btn } from 'styles/Button/Btn';
 import Modal from 'components/modals/Modal';
 import SelectedShapes from 'components/figures/SelectedShapes';
 import SelectMenu from 'components/menus/SelectMenu';
-import { Title } from 'styles/Title';
-import { Btn } from 'styles/Button/Btn';
 
 const ModalInput = () => {
+  const editingTask = useAppSelector((state) => state.taskList.editingTask);
+  const isInputState = useAppSelector((state) => state.modal.inputState);
   const [text, setText] = useState('');
   const [shape, setShape] = useState('');
   const [toggle, setToggle] = useState(false);
-  const [editTaskId, setEditTaskId] = useState('');
   const today = useMemo(() => new Date(), []);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
-  const isInputState = useAppSelector((state) => state.modal.inputState);
-  const isEditingTask = useAppSelector((state) => state.taskList.editingTask);
 
   useEffect(() => {
-    if (isEditingTask.id) {
-      setEditTaskId(isEditingTask.id);
-      setText(isEditingTask.text);
-      setShape(isEditingTask.shape);
+    !isInputState && dispatch(editingTaskReset());
+  }, [isInputState, dispatch]);
+
+  useEffect(() => {
+    if (editingTask.id) {
+      setText(editingTask.text);
+      setShape(editingTask.shape);
     } else {
-      setEditTaskId('');
       setText('');
       setShape('');
     }
-  }, [isEditingTask]);
+  }, [isInputState, editingTask, dispatch]);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = event.target.value;
     setText(text);
   };
-
-  const updateTaskHandler = useCallback(() => {
-    const editTask: EditTaskTypes = {
-      id: editTaskId,
-      date: today.toLocaleDateString(),
-      text,
-      shape,
-    };
-    dispatch(updateTask(editTask));
-  }, [dispatch, editTaskId, text, shape, today]);
 
   const addTaskHandler = useCallback(() => {
     const newTask: TaskTypes = {
@@ -71,11 +62,21 @@ const ModalInput = () => {
     dispatch(addTask(newTask));
   }, [dispatch, shape, text, today]);
 
+  const updateTaskHandler = useCallback(() => {
+    const updatedTask: TaskTypes = {
+      id: editingTask.id,
+      date: today.toLocaleDateString(),
+      text,
+      shape,
+      done: false,
+    };
+    dispatch(updateTask(updatedTask));
+  }, [dispatch, editingTask, shape, text, today]);
+
   const validateHanlder = useCallback(() => {
     if (!text || !shape) {
       alert('텍스트와 도형을 채워주세요');
       textareaRef.current?.focus();
-      return;
     }
   }, [text, shape]);
 
@@ -84,7 +85,7 @@ const ModalInput = () => {
       event.preventDefault();
       validateHanlder();
 
-      if (isEditingTask.id) {
+      if (editingTask.id) {
         updateTaskHandler();
       } else {
         addTaskHandler();
@@ -93,7 +94,7 @@ const ModalInput = () => {
       setText('');
       setShape('');
     },
-    [isEditingTask, updateTaskHandler, addTaskHandler, validateHanlder]
+    [addTaskHandler, updateTaskHandler, validateHanlder, editingTask]
   );
 
   const onToggleHandler = useCallback(() => {
@@ -116,7 +117,7 @@ const ModalInput = () => {
           value={text}
           onChange={onChangeHandler}
           ref={textareaRef}
-          placeholder='오늘 해야 할 일은 무엇인가요?'
+          placeholder='오늘의 할 일은 무엇인가요?'
         />
         <BtnWrapper>
           <SelectShapesWrapper onClick={onToggleHandler}>

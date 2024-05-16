@@ -25,7 +25,7 @@ const ShapeListPage = () => {
         <ShapeListConatiner>
           <ShapeListWrapper>
             <ShapeList ref={taskListRef}>
-              {taskList &&
+              {taskList.length &&
                 taskList.map((task) => (
                   <ShapeItem
                     key={task.id}

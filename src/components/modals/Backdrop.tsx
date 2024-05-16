@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { modalIsClose } from 'store/modalSlice';
 import { fadeIn, fadeOut } from 'styles/animation-setting';
-import { selectEditTask } from 'store/taskListSlice';
 
 interface BackdropProps {
   isOpen: boolean;
@@ -14,7 +13,6 @@ const Backdrop = ({ isOpen }: BackdropProps) => {
 
   const onModalCloseHandler = useCallback(() => {
     dispatch(modalIsClose());
-    dispatch(selectEditTask(''));
   }, [dispatch]);
 
   return <BackdropComponent $isOpen={isOpen} onClick={onModalCloseHandler} />;

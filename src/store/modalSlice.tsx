@@ -5,8 +5,9 @@ interface initialStateProps {
   captureState: boolean;
   alertState: boolean;
   confirmState: {
+    removeModalOpen: boolean;
+    updateModalOpen: boolean;
     isOpen: boolean;
-    isTodoId: string;
   };
   notificationState: {
     isOpen: boolean;
@@ -19,7 +20,8 @@ const initialState: initialStateProps = {
   alertState: false,
   confirmState: {
     isOpen: false,
-    isTodoId: '',
+    removeModalOpen: false,
+    updateModalOpen: false,
   },
   notificationState: {
     isOpen: false,
@@ -30,7 +32,7 @@ const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    modalIsOpen: (state) => {
+    InputModalOpen: (state) => {
       state.inputState = true;
     },
     captureModalIsOpen: (state) => {
@@ -42,26 +44,33 @@ const modalSlice = createSlice({
     alertIsOpen: (state) => {
       state.alertState = true;
     },
-    confirmIsOpen: (state, action: PayloadAction<string>) => {
-      state.confirmState.isOpen = true;
-      state.confirmState.isTodoId = action.payload;
+    removeConfirmOpen: (state) => {
+      state.confirmState.removeModalOpen = true;
+    },
+    updateConfirmOpen: (state) => {
+      state.confirmState.updateModalOpen = true;
     },
     modalIsClose: (state) => {
       state.inputState = false;
       state.captureState = false;
       state.alertState = false;
       state.notificationState.isOpen = false;
-      state.confirmState.isOpen = false;
+    },
+    confirmClose: (state) => {
+      state.confirmState.removeModalOpen = false;
+      state.confirmState.updateModalOpen = false;
     },
   },
 });
 
 export default modalSlice;
 export const {
-  modalIsOpen,
+  InputModalOpen,
   modalIsClose,
   captureModalIsOpen,
   notificationIsOpen,
   alertIsOpen,
-  confirmIsOpen,
+  removeConfirmOpen,
+  updateConfirmOpen,
+  confirmClose,
 } = modalSlice.actions;
