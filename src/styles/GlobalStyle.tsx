@@ -13,25 +13,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto','Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
       'Helvetica Neue', sans-serif;
-    letter-spacing: -0.1rem;
+    letter-spacing: -0.05rem;
     font-size: 20px;
     color: #141414;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-  }
-  
-  body {
-     /* scrollbar */
-     overflow: scroll;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera*/
-    }
   }
 
   a {

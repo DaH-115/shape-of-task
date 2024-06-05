@@ -27,8 +27,12 @@ const Container = styled.div`
   padding: 1rem;
   min-width: 18rem;
 
-  ${({ theme }) => theme.device.tablet} {
-    max-width: 18rem;
+  /* scrollbar */
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
   }
 `;
 

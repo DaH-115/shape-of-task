@@ -47,8 +47,16 @@ export default React.memo(ShapeListPage);
 
 const Container = styled.div`
   width: 100%;
+  height: 100dvh;
   padding: 1rem;
-  max-width: 20rem;
+
+  /* scrollbar */
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 const MessagWrapper = styled.div`

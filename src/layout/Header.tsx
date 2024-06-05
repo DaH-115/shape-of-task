@@ -43,7 +43,7 @@ const ResponsiveIoMenu = styled(IoMenu)`
 
 const HeaderWrapper = styled.div`
   width: 100%;
-  padding: 1rem 2rem 0 1rem;
+  padding: 1rem 2rem;
 
   ${({ theme }) => theme.device.tablet} {
     padding: 0.5rem 1rem;

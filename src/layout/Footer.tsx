@@ -4,7 +4,7 @@ import { FaGithub, FaHome } from 'react-icons/fa';
 const Footer = () => {
   return (
     <FooterWrapper>
-      <FooterTitle>{'Task Management - SHAPE OF TASK'}</FooterTitle>
+      <FooterTitle>{'SHAPE OF TASK'}</FooterTitle>
       <FooterIconWrapper>
         <FooterIcon>
           <a
@@ -45,7 +45,7 @@ const FooterWrapper = styled.footer`
 `;
 
 const FooterTitle = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 0.8rem;
 
   ${({ theme }) => theme.device.tablet} {
@@ -64,8 +64,8 @@ const FooterIcon = styled.div`
 
   #github-icon,
   #home-icon {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.6rem;
+    height: 1.6rem;
 
     ${({ theme }) => theme.device.tablet} {
       width: 1.4rem;

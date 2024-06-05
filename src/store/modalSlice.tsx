@@ -3,11 +3,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 interface initialStateProps {
   inputState: boolean;
   captureState: boolean;
-  alertState: boolean;
+  alertState: {
+    noteAlertOpen: boolean;
+    errorAlertOpen: boolean;
+  };
   confirmState: {
     removeModalOpen: boolean;
     updateModalOpen: boolean;
-    isOpen: boolean;
   };
   notificationState: {
     isOpen: boolean;
@@ -17,9 +19,11 @@ interface initialStateProps {
 const initialState: initialStateProps = {
   inputState: false,
   captureState: false,
-  alertState: false,
+  alertState: {
+    noteAlertOpen: false,
+    errorAlertOpen: false,
+  },
   confirmState: {
-    isOpen: false,
     removeModalOpen: false,
     updateModalOpen: false,
   },
@@ -41,8 +45,11 @@ const modalSlice = createSlice({
     notificationIsOpen: (state, action: PayloadAction<boolean>) => {
       state.notificationState.isOpen = action.payload;
     },
-    alertIsOpen: (state) => {
-      state.alertState = true;
+    errorAlertIsOpen: (state) => {
+      state.alertState.errorAlertOpen = true;
+    },
+    noteAlertIsOpen: (state) => {
+      state.alertState.noteAlertOpen = true;
     },
     removeConfirmOpen: (state) => {
       state.confirmState.removeModalOpen = true;
@@ -53,7 +60,8 @@ const modalSlice = createSlice({
     modalIsClose: (state) => {
       state.inputState = false;
       state.captureState = false;
-      state.alertState = false;
+      state.alertState.errorAlertOpen = false;
+      state.alertState.noteAlertOpen = false;
       state.notificationState.isOpen = false;
     },
     confirmClose: (state) => {
@@ -69,7 +77,8 @@ export const {
   modalIsClose,
   captureModalIsOpen,
   notificationIsOpen,
-  alertIsOpen,
+  errorAlertIsOpen,
+  noteAlertIsOpen,
   removeConfirmOpen,
   updateConfirmOpen,
   confirmClose,

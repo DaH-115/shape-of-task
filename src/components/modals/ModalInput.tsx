@@ -8,16 +8,11 @@ import React, {
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import {
-  TaskTypes,
-  addTask,
-  editingTaskReset,
-  updateTask,
-} from 'store/taskListSlice';
+import { addTask, editingTaskReset, updateTask } from 'store/taskListSlice';
+import { modalIsClose, noteAlertIsOpen } from 'store/modalSlice';
 
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { Title } from 'styles/Title';
-import { Btn } from 'styles/Button/Btn';
 import Modal from 'components/modals/Modal';
 import SelectedShapes from 'components/figures/SelectedShapes';
 import SelectMenu from 'components/menus/SelectMenu';
@@ -46,55 +41,71 @@ const ModalInput = () => {
     }
   }, [isInputState, editingTask, dispatch]);
 
+  const getImportance = useCallback((shape: string) => {
+    const importanceObj: { [key: string]: { number: number; desc: string } } = {
+      triangle: { number: 1, desc: '중요해요' },
+      square: { number: 2, desc: '기억해 두세요' },
+      circle: { number: 3, desc: '언제든지 해요' },
+      default: { number: 0, desc: '' },
+    };
+    return importanceObj[shape] || importanceObj.default;
+  }, []);
+
+  const createTask = useCallback(() => {
+    const { desc, number } = getImportance(shape);
+
+    return {
+      id: editingTask.id || uuidv4(),
+      date: today.toLocaleDateString(),
+      text,
+      shape,
+      importance: number,
+      importanceDesc: desc,
+      done: false,
+    };
+  }, [editingTask, shape, text, today, getImportance]);
+
+  const addTaskHandler = useCallback(() => {
+    const newTask = createTask();
+    dispatch(addTask(newTask));
+  }, [dispatch, createTask]);
+
+  const updateTaskHandler = useCallback(() => {
+    const updatedTask = createTask();
+    dispatch(updateTask(updatedTask));
+  }, [dispatch, createTask]);
+
   const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = event.target.value;
     setText(text);
   };
 
-  const addTaskHandler = useCallback(() => {
-    const newTask: TaskTypes = {
-      id: uuidv4(),
-      date: today.toLocaleDateString(),
-      text,
-      shape,
-      done: false,
-    };
-    dispatch(addTask(newTask));
-  }, [dispatch, shape, text, today]);
-
-  const updateTaskHandler = useCallback(() => {
-    const updatedTask: TaskTypes = {
-      id: editingTask.id,
-      date: today.toLocaleDateString(),
-      text,
-      shape,
-      done: false,
-    };
-    dispatch(updateTask(updatedTask));
-  }, [dispatch, editingTask, shape, text, today]);
-
   const validateHanlder = useCallback(() => {
     if (!text || !shape) {
       alert('텍스트와 도형을 채워주세요');
       textareaRef.current?.focus();
+    } else {
+      return true;
     }
   }, [text, shape]);
 
   const submitHandler = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      validateHanlder();
+      const isValid = validateHanlder();
 
-      if (editingTask.id) {
+      if (isValid && editingTask.id) {
         updateTaskHandler();
-      } else {
+      } else if (isValid && !editingTask.id) {
         addTaskHandler();
       }
 
       setText('');
       setShape('');
+      dispatch(modalIsClose());
+      dispatch(noteAlertIsOpen());
     },
-    [addTaskHandler, updateTaskHandler, validateHanlder, editingTask]
+    [dispatch, addTaskHandler, updateTaskHandler, validateHanlder, editingTask]
   );
 
   const onToggleHandler = useCallback(() => {
@@ -137,7 +148,7 @@ const ModalInput = () => {
             )}
           </ToggleIcon>
           <SubmitBtnWrapper>
-            <Btn type='submit' text='등록' />
+            <button type='submit'>{'등록'}</button>
           </SubmitBtnWrapper>
         </BtnWrapper>
       </InputForm>
@@ -195,7 +206,26 @@ const ToggleIcon = styled.div`
 `;
 
 const SubmitBtnWrapper = styled.div`
-  display: flex;
-  justify-content: end;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    width: 100%;
+    font-size: 0.9rem;
+    color: #fff;
+    background-color: ${({ theme }) => theme.colors.remember};
+    border: 0.1rem solid #fff;
+    padding: 1rem 0;
+    border-radius: 0.9rem;
+  }
+
+  :active,
+  :hover {
+    color: ${({ theme }) => theme.commonColors.black};
+    background-color: #fff;
+    border: 0.1rem solid ${({ theme }) => theme.colors.remember};
+    transition: all 0.2s ease-in-out;
+  }
 `;

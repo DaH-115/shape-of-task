@@ -59,9 +59,5 @@ const RejectBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-right: 0.6rem;
-
-  ${({ theme }) => theme.device.tablet} {
-    margin-right: 0;
-  }
+  margin-right: 0.4rem;
 `;

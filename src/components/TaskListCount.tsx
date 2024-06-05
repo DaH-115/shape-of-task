@@ -5,30 +5,44 @@ import {
   StyledSquare,
   StyledTriangle,
 } from 'components/figures/ShapeStyles';
+import { useAppSelector } from 'store/hooks';
+import { TaskTypes } from 'store/taskListSlice';
 
 const TaskListCount = () => {
+  const TaskList = useAppSelector((state) => state.taskList.taskList);
+
+  const countShapeNotDone = (TaskList: TaskTypes[], shape: string): number => {
+    return TaskList.filter(
+      (item: TaskTypes) => item.shape === shape && item.done === false
+    ).length;
+  };
+
+  const triangleValue = countShapeNotDone(TaskList, 'triangle');
+  const squareValue = countShapeNotDone(TaskList, 'square');
+  const circleValue = countShapeNotDone(TaskList, 'circle');
+
   return (
     <Container>
       <TaskListWrapper>
         <ShapeStylesWrapper>
-          <StyledTriangle $shapeName={'any'} />
+          <StyledTriangle $shapeName={triangleValue ? 'triangle' : 'any'} />
         </ShapeStylesWrapper>
         <p>{'중요해요'}</p>
-        <CountNumber>{'1'}</CountNumber>
+        <CountNumber>{triangleValue}</CountNumber>
       </TaskListWrapper>
       <TaskListWrapper>
         <ShapeStylesWrapper>
-          <StyledSquare $shapeName={'any'} />
+          <StyledSquare $shapeName={squareValue ? 'square' : 'any'} />
         </ShapeStylesWrapper>
         <p>{'기억해 두세요'}</p>
-        <CountNumber>{'2'}</CountNumber>
+        <CountNumber>{squareValue}</CountNumber>
       </TaskListWrapper>
       <TaskListWrapper>
         <ShapeStylesWrapper>
-          <StyledCircle $shapeName={'any'} />
+          <StyledCircle $shapeName={circleValue ? 'circle' : 'any'} />
         </ShapeStylesWrapper>
         <p>{'언제든지 해요'}</p>
-        <CountNumber>{'3'}</CountNumber>
+        <CountNumber>{circleValue}</CountNumber>
       </TaskListWrapper>
     </Container>
   );
@@ -51,7 +65,7 @@ const TaskListWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 
   p {
     font-size: 1.2rem;

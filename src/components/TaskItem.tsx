@@ -11,20 +11,20 @@ import {
   IoIosCheckmarkCircleOutline,
   IoIosCheckmarkCircle,
 } from 'react-icons/io';
+import { BsPencil, BsTrash } from 'react-icons/bs';
 
 import StyledShapes from 'components/figures/StyledShapes';
-import { ButtonWrapper } from 'styles/Button/Btn';
+import { Btn, ButtonWrapper } from 'styles/Button/Btn';
 
-const TaskItem = ({ id, text, shape, done, date }: TaskTypes) => {
+const TaskItem = ({
+  id,
+  text,
+  shape,
+  importanceDesc,
+  done,
+  date,
+}: TaskTypes) => {
   const dispatch = useAppDispatch();
-  const isImportance =
-    shape === 'triangle'
-      ? '중요해요'
-      : shape === 'square'
-      ? '기억해 두세요'
-      : shape === 'circle'
-      ? '언제든지 해요'
-      : '';
 
   const toggleTaskHandler = React.useCallback(() => {
     dispatch(toggleTask(id));
@@ -59,17 +59,25 @@ const TaskItem = ({ id, text, shape, done, date }: TaskTypes) => {
         <ContentText $isDone={done}>{text}</ContentText>
         <ContentBottom>
           <TaskDate>{date}</TaskDate>
-          <ShapeDesc>{isImportance}</ShapeDesc>
+          <ShapeDesc>{importanceDesc}</ShapeDesc>
         </ContentBottom>
       </TaskContent>
       <BtnWrapper>
-        <EditBtn onClick={updateConfirmOpenHandler} $isEmpty>
-          {'수정'}
-        </EditBtn>
-        <RemoveBtn onClick={removeConfirmOpenHandler} $isEmpty>
-          {'삭제'}
-        </RemoveBtn>
+        <Btn type='button' text='수정' onClickFn={updateConfirmOpenHandler}>
+          <UpdateIcon />
+        </Btn>
+        <Btn type='button' text='삭제' onClickFn={removeConfirmOpenHandler}>
+          <RemoveIcon />
+        </Btn>
       </BtnWrapper>
+      <MobileIconContainer>
+        <ButtonWrapper $isEmpty={false} onClick={updateConfirmOpenHandler}>
+          <UpdateIcon />
+        </ButtonWrapper>
+        <ButtonWrapper $isEmpty={false} onClick={removeConfirmOpenHandler}>
+          <RemoveIcon />
+        </ButtonWrapper>
+      </MobileIconContainer>
     </TaskItemContainer>
   );
 };
@@ -130,14 +138,6 @@ const ContentText = styled.p<{ $isDone: boolean }>`
     font-size: 1rem;
     margin-left: 0.2rem;
   }
-
-  /* scrollbar */
-  overflow-y: scroll;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-  }
 `;
 
 const ContentBottom = styled.div`
@@ -161,28 +161,47 @@ const ShapeDesc = styled.p`
 `;
 
 const BtnWrapper = styled.div`
+  display: none;
+
+  ${({ theme }) => theme.device.tablet} {
+    display: flex;
+    width: 100%;
+
+    div:first-child {
+      margin-right: 0.3rem;
+    }
+  }
+`;
+
+const MobileIconContainer = styled.div`
   display: flex;
   width: 100%;
 
+  div:first-child {
+    margin-right: 0.3rem;
+  }
+
   ${({ theme }) => theme.device.tablet} {
+    display: none;
   }
 `;
 
-const CustomBtn = styled(ButtonWrapper)`
-  color: ${({ theme }) => theme.commonColors.gray};
-  border-color: ${({ theme }) => theme.commonColors.gray};
-  padding: 0.5rem 1rem;
-  &:hover,
-  :active {
-    color: #fff;
-    border-color: ${({ theme }) => theme.colors.important};
+const UpdateIcon = styled(BsPencil)`
+  font-size: 1rem;
+  color: #fff;
+  margin-left: 0.3rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 0.8rem;
   }
 `;
 
-const EditBtn = styled(CustomBtn)`
-  margin-right: 1rem;
-`;
+const RemoveIcon = styled(BsTrash)`
+  font-size: 1rem;
+  color: #fff;
+  margin-left: 0.3rem;
 
-const RemoveBtn = styled(CustomBtn)`
-  width: 100%;
+  ${({ theme }) => theme.device.tablet} {
+    font-size: 0.8rem;
+  }
 `;

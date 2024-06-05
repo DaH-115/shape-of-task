@@ -3,6 +3,7 @@ import { useAppSelector } from 'store/hooks';
 import GlobalStyle from 'styles/GlobalStyle';
 import { defalutTheme } from 'styles/theme';
 import { themeColors } from 'styles/theme-colors';
+import RoutesComponent from 'routes/Routes';
 
 import Header from 'layout/Header';
 import Footer from 'layout/Footer';
@@ -23,13 +24,13 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Header />
-      <Container>
+      <DesktopContainer>
         <MainPage />
         <TaskListPage />
         <ShapeListPage />
-      </Container>
+      </DesktopContainer>
       <MobileContainer>
-        <MainPage />
+        <RoutesComponent />
       </MobileContainer>
       <Footer />
       <ErrorAlert />
@@ -39,7 +40,7 @@ const App = () => {
 
 export default App;
 
-const Container = styled.div`
+const DesktopContainer = styled.div`
   display: none;
 
   ${({ theme }) => theme.device.tablet} {
@@ -47,14 +48,6 @@ const Container = styled.div`
     width: 100%;
     height: 100dvh;
     background-color: ${({ theme }) => theme.commonColors.light_gray};
-    overflow-y: scroll;
-
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    scrollbar-width: none; /* For Firefox */
-    -ms-overflow-style: none; /* For Internet Explorer and Edge */
   }
 `;
 

@@ -5,6 +5,8 @@ export interface TaskTypes {
   date: string;
   text: string;
   shape: string;
+  importance: number;
+  importanceDesc: string;
   done: boolean;
 }
 

@@ -6,10 +6,10 @@ import Modal from 'components/modals/Modal';
 import { Title } from 'styles/Title';
 import { Btn } from 'styles/Button/Btn';
 
-const ErrorAlert = () => {
+const NoteAlert = () => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector(
-    (state) => state.modal.alertState.errorAlertOpen
+    (state) => state.modal.alertState.noteAlertOpen
   );
 
   const alertCloseHandler = useCallback(() => {
@@ -18,7 +18,7 @@ const ErrorAlert = () => {
 
   return (
     <Modal isOpen={isOpen}>
-      <Title title='알림' desc='문제가 발생했습니다.' />
+      <Title title='알림' desc='등록되었습니다.' />
       <ConfrimBtnWrapper onClick={alertCloseHandler}>
         <Btn type='button' text='확인' />
       </ConfrimBtnWrapper>
@@ -26,7 +26,7 @@ const ErrorAlert = () => {
   );
 };
 
-export default ErrorAlert;
+export default NoteAlert;
 
 const ConfrimBtnWrapper = styled.div`
   display: flex;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 import saveAs from 'file-saver';
 import { useDispatch } from 'react-redux';
-import { alertIsOpen } from 'store/modalSlice';
+import { errorAlertIsOpen } from 'store/modalSlice';
 import { GiSaveArrow } from 'react-icons/gi';
 
 interface BtnSaveProps {
@@ -14,8 +14,6 @@ interface BtnSaveProps {
 export const BtnSave = ({ taskListRef, isDisabled }: BtnSaveProps) => {
   const dispatch = useDispatch();
   const captureModalOpen = React.useCallback(async () => {
-    if (isDisabled) return; // *일을 완료하라고 안내해주는 모달창을 띄워준다.
-
     try {
       const taskList = taskListRef.current!;
       const taskListImg = await html2canvas(taskList, { scale: 4 });
@@ -26,13 +24,13 @@ export const BtnSave = ({ taskListRef, isDisabled }: BtnSaveProps) => {
         }
       });
     } catch (error) {
-      dispatch(alertIsOpen());
+      dispatch(errorAlertIsOpen());
     }
-  }, [dispatch, taskListRef, isDisabled]);
+  }, [taskListRef, dispatch]);
 
   return (
     <BtnSaveWrapper>
-      <ButtonWrapper onClick={captureModalOpen}>
+      <ButtonWrapper onClick={isDisabled ? undefined : captureModalOpen}>
         <button type='button' disabled={isDisabled}>
           {'이미지 저장'}
         </button>
@@ -44,9 +42,6 @@ export const BtnSave = ({ taskListRef, isDisabled }: BtnSaveProps) => {
 
 const BtnSaveWrapper = styled.div`
   width: 100%;
-
-  ${({ theme }) => theme.device.tablet} {
-  }
 `;
 
 const ButtonWrapper = styled.div`

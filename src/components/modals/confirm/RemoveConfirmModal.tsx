@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { confirmClose } from 'store/modalSlice';
-import ConfirmModal from 'components/modals/ConfirmModal';
+import ConfirmModal from 'components/modals/confirm/ConfirmModal';
 import { removeTask } from 'store/taskListSlice';
 
 const RemoveConfirmModal = () => {
