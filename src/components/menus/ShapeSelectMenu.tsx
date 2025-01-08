@@ -29,7 +29,7 @@ const ShapeSelectMenu = ({
   );
 
   return (
-    <SelectMenuWrapper id={id} $isToggle={isToggle}>
+    <SelectMenuWrapper id={id} $isToggle={isToggle} role='listbox'>
       <SelectMenuList onClick={getShapeHandler}>
         <SelectMenuItem>
           <StyledShapes shapeName='triangle' />

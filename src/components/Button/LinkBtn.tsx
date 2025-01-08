@@ -34,7 +34,7 @@ const StyledLink = styled(Link)`
   &:active {
     color: ${({ theme }) => theme.colors.important};
     text-decoration: underline;
-    transition: color 0.1s ease-in-out;
+    transition: color 0.2s ease-in-out;
   }
 `;
 
@@ -45,6 +45,6 @@ const ArrowIcon = styled(FaArrowRight)`
   &:hover,
   &:active {
     color: ${({ theme }) => theme.colors.important};
-    transition: color 0.1s ease-in-out;
+    transition: color 0.2s ease-in-out;
   }
 `;

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useRef } from 'react';
 import { useAppSelector } from 'store/hooks';
 import {
   BlankMessage,
@@ -13,10 +13,10 @@ import SaveBtn from 'components/Button/SaveBtn';
 import Title from 'styles/TitleComponent';
 
 const ShapeListPage = () => {
-  const taskListRef = React.useRef<HTMLUListElement>(null);
+  const taskListRef = useRef<HTMLUListElement>(null);
   const taskList = useAppSelector((state) => state.taskList.taskList);
   const doneList = taskList.filter((task) => task.done === true);
-  const isDone = doneList.length > 0 ? false : true;
+  const isDisabled = doneList.length === 0;
 
   return (
     <Container>
@@ -26,7 +26,7 @@ const ShapeListPage = () => {
       <ShapeListConatiner>
         <ShapeListWrapper>
           {doneList.length > 0 ? (
-            <ShapeList>
+            <ShapeList ref={taskListRef}>
               {doneList.map((task) => (
                 <ShapeListItem key={task.id} shape={task.shape} />
               ))}
@@ -35,7 +35,7 @@ const ShapeListPage = () => {
             <BlankMessage>오늘의 형태를 만들어 보세요</BlankMessage>
           )}
         </ShapeListWrapper>
-        <SaveBtn taskListRef={taskListRef} isDisabled={isDone} />
+        <SaveBtn taskListRef={taskListRef} isDisabled={isDisabled} />
       </ShapeListConatiner>
     </Container>
   );

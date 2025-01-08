@@ -23,7 +23,7 @@ const Header = () => {
     }
   }, [navigate, pathname]);
 
-  const SideMenuHandler = useCallback(() => {
+  const sideMenuHandler = useCallback(() => {
     setIsToggle((prev) => !prev);
   }, []);
 
@@ -33,11 +33,15 @@ const Header = () => {
         <LogoWrapper onClick={onMoveToMainHandler}>
           <StyledLogo />
         </LogoWrapper>
-        <SideMenuBtn onClick={SideMenuHandler}>
-          <SideMenuIcon />
+        <SideMenuBtn
+          onClick={sideMenuHandler}
+          aria-label='사이드 메뉴'
+          aria-expanded={isToggle}
+        >
+          <SideMenuIcon aria-hidden />
         </SideMenuBtn>
       </Wrapper>
-      <NavMenu isOpen={isToggle} sideMenuHandler={SideMenuHandler} />
+      <NavMenu isOpen={isToggle} sideMenuHandler={sideMenuHandler} />
     </HeaderWrapper>
   );
 };

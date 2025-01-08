@@ -14,7 +14,7 @@ interface BtnSaveProps {
 const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
   const dispatch = useDispatch();
   const captureModalOpen = React.useCallback(async () => {
-    if (!isDisabled) return;
+    if (isDisabled) return;
 
     try {
       const taskList = taskListRef.current!;

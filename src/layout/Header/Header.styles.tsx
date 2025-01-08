@@ -16,10 +16,10 @@ export const SideMenuIcon = styled(IoMenu)`
 
 export const HeaderWrapper = styled.div`
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 1rem;
 
   ${({ theme }) => theme.device.tablet} {
-    padding: 0.5rem 2rem;
+    padding: 1rem 2rem;
   }
 `;
 

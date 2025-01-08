@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const ErrorMsg = styled.p`
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 0.4rem;
+`;
+
 export const ModalHeader = styled.div`
   margin-bottom: 1rem;
 `;
@@ -43,6 +49,10 @@ export const SelectShapesWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 50%;
+
+  ${({ theme }) => theme.device.tablet} {
+    width: 20%;
+  }
 `;
 
 export const ToggleBtn = styled.button`
@@ -56,4 +66,8 @@ export const ToggleBtn = styled.button`
 export const SubmitBtnWrapper = styled.div`
   width: 100%;
   margin-left: 0.5rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    width: 20%;
+  }
 `;

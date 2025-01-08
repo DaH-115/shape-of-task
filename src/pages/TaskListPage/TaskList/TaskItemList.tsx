@@ -49,7 +49,18 @@ const TaskItemList = ({ renderedTask }: { renderedTask: TaskTypes }) => {
   return (
     <TaskList>
       <TaskItem>
-        <ContentHeader onClick={toggleTaskHandler}>
+        <ContentHeader
+          onClick={toggleTaskHandler}
+          role='checkbox'
+          aria-checked={done}
+          tabIndex={0}
+          onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggleTaskHandler();
+            }
+          }}
+        >
           {/* 도형 이미지 */}
           <StyledShapes shapeName={shape} />
           {done ? (

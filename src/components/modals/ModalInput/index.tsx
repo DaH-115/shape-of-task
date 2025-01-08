@@ -18,6 +18,7 @@ import {
   SelectShapesWrapper,
   SubmitBtnWrapper,
   ToggleBtn,
+  ErrorMsg,
 } from 'components/modals/ModalInput/ModalInput.styles';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Title from 'styles/TitleComponent';
@@ -32,6 +33,10 @@ const ModalInput = () => {
   const [text, setText] = useState('');
   const [shape, setShape] = useState('');
   const [toggle, setToggle] = useState(false);
+  const [isErrors, setIsErrors] = useState({
+    textError: '',
+    shapeError: '',
+  });
   const today = useMemo(() => new Date(), []);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
@@ -96,7 +101,11 @@ const ModalInput = () => {
       event.preventDefault();
 
       if (!text || !shape) {
-        alert('텍스트와 도형을 채워주세요');
+        const newErrors = {
+          textError: !text ? '할 일을 입력해주세요' : '',
+          shapeError: !shape ? '중요도를 선택해주세요' : '',
+        };
+        setIsErrors(newErrors);
         textareaRef.current?.focus();
         return;
       }
@@ -127,7 +136,7 @@ const ModalInput = () => {
   return (
     <Modal isOpen={isInputState}>
       <ModalHeader>
-        <Title title='Task' desc={today.toLocaleDateString()} />
+        <Title title='New Task' desc={today.toLocaleDateString()} />
       </ModalHeader>
 
       <InputLabel htmlFor='task-input'>{'Task Input'}</InputLabel>
@@ -138,6 +147,8 @@ const ModalInput = () => {
           ref={textareaRef}
           placeholder='오늘의 할 일은 무엇인가요?'
         />
+        {isErrors.textError && <ErrorMsg>{isErrors.textError}</ErrorMsg>}
+        {isErrors.shapeError && <ErrorMsg>{isErrors.shapeError}</ErrorMsg>}
         <BtnWrapper>
           <SelectShapesWrapper>
             <SelectedShapes shape={shape} />
@@ -146,12 +157,16 @@ const ModalInput = () => {
               isToggle={toggle}
               getShape={getShapeHandler}
               onToggle={() => setToggle((prev) => !prev)}
+              aria-label='중요도 선택'
             />
             <ToggleBtn
               type='button'
               onClick={onToggleHandler}
               aria-expanded={toggle}
               aria-controls='shape-select-menu'
+              aria-label={
+                toggle ? '중요도 선택 메뉴 닫기' : '중요도 선택 메뉴 열기'
+              }
             >
               {toggle ? (
                 <FaAngleDown fontSize={'1.3rem'} aria-hidden />

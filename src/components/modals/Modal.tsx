@@ -53,7 +53,6 @@ const ModalWapper = styled.div<{ $modalToggle: boolean }>`
       : 'none'};
 
   ${({ theme }) => theme.device.tablet} {
-    min-width: ${({ theme }) => theme.size.mobile};
-    width: auto;
+    min-width: ${({ theme }) => theme.size.tablet};
   }
 `;

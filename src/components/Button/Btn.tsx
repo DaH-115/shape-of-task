@@ -18,7 +18,7 @@ const Btn = ({
 }: BtnProps) => {
   return (
     <ButtonWrapper onClick={onClickFn} $isEmpty={isEmpty}>
-      <button type={type}>
+      <button type={type} aria-label={text}>
         {children}
         {text}
       </button>

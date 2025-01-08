@@ -53,9 +53,11 @@ export const IconsWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const RefreshIcon = styled.div<{ disabled?: boolean }>`
+export const RefreshIcon = styled.div<{ disabled: boolean }>`
   font-size: 1.2rem;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.commonColors.gray : theme.commonColors.black};
 
   display: flex;
   justify-content: center;

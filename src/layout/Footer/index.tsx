@@ -17,6 +17,7 @@ const Footer = () => {
           href='https://github.com/DaH-115/tsc-todo-list'
           target='_blank'
           rel='noreferrer'
+          aria-label='GitHub 저장소로 이동'
         >
           <GitHubIcon aria-hidden />
         </FooterLinkBtn>
@@ -24,6 +25,7 @@ const Footer = () => {
           href='https://www.notion.so/bab771634f4b4f78b8872aa4195e0b16'
           target='_blank'
           rel='noreferrer'
+          aria-label='Notion 페이지로 이동'
         >
           <HomeIcon aria-hidden />
         </FooterLinkBtn>
