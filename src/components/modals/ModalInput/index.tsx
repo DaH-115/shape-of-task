@@ -5,17 +5,26 @@ import React, {
   useMemo,
   useEffect,
 } from 'react';
-import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { addTask, editingTaskReset, updateTask } from 'store/taskListSlice';
 import { modalIsClose, noteAlertIsOpen } from 'store/modalSlice';
-
+import {
+  ModalHeader,
+  InputLabel,
+  InputForm,
+  Textarea,
+  BtnWrapper,
+  SelectShapesWrapper,
+  SubmitBtnWrapper,
+  ToggleBtn,
+} from 'components/modals/ModalInput/ModalInput.styles';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import { Title } from 'styles/Title';
+import Title from 'styles/TitleComponent';
 import Modal from 'components/modals/Modal';
 import SelectedShapes from 'components/figures/SelectedShapes';
-import SelectMenu from 'components/menus/SelectMenu';
+import ShapeSelectMenu from 'components/menus/ShapeSelectMenu';
+import Btn from 'components/Button/Btn';
 
 const ModalInput = () => {
   const editingTask = useAppSelector((state) => state.taskList.editingTask);
@@ -28,7 +37,10 @@ const ModalInput = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    !isInputState && dispatch(editingTaskReset());
+    if (!isInputState) {
+      setToggle(false);
+      dispatch(editingTaskReset());
+    }
   }, [isInputState, dispatch]);
 
   useEffect(() => {
@@ -53,7 +65,6 @@ const ModalInput = () => {
 
   const createTask = useCallback(() => {
     const { desc, number } = getImportance(shape);
-
     return {
       id: editingTask.id || uuidv4(),
       date: today.toLocaleDateString(),
@@ -80,23 +91,19 @@ const ModalInput = () => {
     setText(text);
   };
 
-  const validateHanlder = useCallback(() => {
-    if (!text || !shape) {
-      alert('텍스트와 도형을 채워주세요');
-      textareaRef.current?.focus();
-    } else {
-      return true;
-    }
-  }, [text, shape]);
-
   const submitHandler = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      const isValid = validateHanlder();
 
-      if (isValid && editingTask.id) {
+      if (!text || !shape) {
+        alert('텍스트와 도형을 채워주세요');
+        textareaRef.current?.focus();
+        return;
+      }
+
+      if (editingTask.id) {
         updateTaskHandler();
-      } else if (isValid && !editingTask.id) {
+      } else {
         addTaskHandler();
       }
 
@@ -105,10 +112,11 @@ const ModalInput = () => {
       dispatch(modalIsClose());
       dispatch(noteAlertIsOpen());
     },
-    [dispatch, addTaskHandler, updateTaskHandler, validateHanlder, editingTask]
+    [dispatch, addTaskHandler, updateTaskHandler, editingTask, text, shape]
   );
 
-  const onToggleHandler = useCallback(() => {
+  const onToggleHandler = useCallback((e) => {
+    e.preventDefault();
     setToggle((prev) => !prev);
   }, []);
 
@@ -131,24 +139,29 @@ const ModalInput = () => {
           placeholder='오늘의 할 일은 무엇인가요?'
         />
         <BtnWrapper>
-          <SelectShapesWrapper onClick={onToggleHandler}>
-            <ShapeWrapper>
-              <SelectedShapes shape={shape} />
-            </ShapeWrapper>
-            <SelectMenu
-              isToggle={!isInputState ? false : toggle}
+          <SelectShapesWrapper>
+            <SelectedShapes shape={shape} />
+            <ShapeSelectMenu
+              id='shape-select-menu'
+              isToggle={toggle}
               getShape={getShapeHandler}
+              onToggle={() => setToggle((prev) => !prev)}
             />
+            <ToggleBtn
+              type='button'
+              onClick={onToggleHandler}
+              aria-expanded={toggle}
+              aria-controls='shape-select-menu'
+            >
+              {toggle ? (
+                <FaAngleDown fontSize={'1.3rem'} aria-hidden />
+              ) : (
+                <FaAngleUp fontSize={'1.3rem'} aria-hidden />
+              )}
+            </ToggleBtn>
           </SelectShapesWrapper>
-          <ToggleIcon>
-            {toggle ? (
-              <FaAngleDown fontSize={'1.3rem'} />
-            ) : (
-              <FaAngleUp fontSize={'1.3rem'} />
-            )}
-          </ToggleIcon>
           <SubmitBtnWrapper>
-            <button type='submit'>{'등록'}</button>
+            <Btn type='submit' text='등록' />
           </SubmitBtnWrapper>
         </BtnWrapper>
       </InputForm>
@@ -157,75 +170,3 @@ const ModalInput = () => {
 };
 
 export default React.memo(ModalInput);
-
-const ModalHeader = styled.div`
-  color: ${({ theme }) => theme.commonColors.gray};
-`;
-
-const InputLabel = styled.label`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-`;
-
-const InputForm = styled.form`
-  width: 100%;
-`;
-
-const Textarea = styled.textarea`
-  width: 100%;
-  height: 40dvh;
-  padding: 0;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-`;
-
-const BtnWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
-`;
-
-const SelectShapesWrapper = styled.div`
-  width: 40%;
-`;
-
-const ShapeWrapper = styled.div`
-  width: 100%;
-`;
-
-const ToggleIcon = styled.div`
-  padding: 0.5rem;
-  margin-right: 1rem;
-`;
-
-const SubmitBtnWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  button {
-    width: 100%;
-    font-size: 0.9rem;
-    color: #fff;
-    background-color: ${({ theme }) => theme.colors.remember};
-    border: 0.1rem solid #fff;
-    padding: 1rem 0;
-    border-radius: 0.9rem;
-  }
-
-  :active,
-  :hover {
-    color: ${({ theme }) => theme.commonColors.black};
-    background-color: #fff;
-    border: 0.1rem solid ${({ theme }) => theme.colors.remember};
-    transition: all 0.2s ease-in-out;
-  }
-`;

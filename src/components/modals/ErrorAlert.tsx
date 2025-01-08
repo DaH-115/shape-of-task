@@ -3,8 +3,8 @@ import { styled } from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
 import Modal from 'components/modals/Modal';
-import { Title } from 'styles/Title';
-import { Btn } from 'styles/Button/Btn';
+import Title from 'styles/TitleComponent';
+import Btn from 'components/Button/Btn';
 
 const ErrorAlert = () => {
   const dispatch = useAppDispatch();

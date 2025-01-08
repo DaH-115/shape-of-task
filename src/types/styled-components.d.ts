@@ -1,5 +1,5 @@
 import 'styled-components';
-import { DeviceTpyes, SizeTpyes } from 'styles/theme';
+import { DeviceTpyes, SizeTpyes } from 'styles/theme-device';
 import { CommonColorsTypes, PaletteTypes } from 'styles/theme-colors';
 
 type ThemeType = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import {
   StyledCircle,
@@ -16,9 +16,12 @@ const SelectedShapes = ({ shape }: { shape: string }) => {
   );
 };
 
-export default React.memo(SelectedShapes);
+export default memo(SelectedShapes);
 
 const ShapeWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 100%;
 `;

@@ -1,7 +1,7 @@
 import styled, { ThemeProvider } from 'styled-components';
 import { useAppSelector } from 'store/hooks';
-import GlobalStyle from 'styles/GlobalStyle';
-import { defalutTheme } from 'styles/theme';
+import GlobalStyle from 'styles/global-style';
+import { defalutTheme } from 'styles/theme-device';
 import { themeColors } from 'styles/theme-colors';
 import RoutesComponent from 'routes/Routes';
 

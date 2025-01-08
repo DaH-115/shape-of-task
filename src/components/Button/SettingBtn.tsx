@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { IoMdSettings } from 'react-icons/io';
 import SettingMenu from 'components/menus/SettingMenu';
 
-export const BtnSetting = () => {
-  const [isToggle, setIsToggle] = React.useState(false);
+const SettingBtn = () => {
+  const [isToggle, setIsToggle] = useState(false);
 
-  const menuToggleHandler = React.useCallback(() => {
+  const menuToggleHandler = useCallback(() => {
     setIsToggle((prev) => !prev);
   }, []);
 
   return (
     <BtnWrapper>
       <ButtonWrapper onClick={menuToggleHandler}>
-        <IoMdSettings fontSize='1.5rem' />
-        <button type='button'>{'설정'}</button>
+        <IoMdSettings aria-hidden />
+        <button type='button'>설정</button>
       </ButtonWrapper>
-      <SettingMenu isOpen={isToggle} slideMenuHandler={menuToggleHandler} />
+      <SettingMenu isOpen={isToggle} sideMenuHandler={menuToggleHandler} />
     </BtnWrapper>
   );
 };
+
+export default SettingBtn;
 
 const BtnWrapper = styled.div`
   width: 100%;
@@ -41,24 +43,18 @@ const ButtonWrapper = styled.div`
 
   button {
     color: ${({ theme }) => theme.commonColors.black};
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   &:hover,
   :active {
     border-color: ${({ theme }) => theme.colors.important};
-    transition: all 0.2s ease-in-out;
+    transition: all 0.1s ease-in-out;
   }
 
   svg {
+    font-size: 1.5rem;
     color: ${({ theme }) => theme.colors.anytime};
     margin-right: 0.3rem;
-  }
-
-  ${({ theme }) => theme.device.tablet} {
-    button {
-      color: ${({ theme }) => theme.commonColors.black};
-      font-size: 1rem;
-    }
   }
 `;

@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled, { keyframes } from 'styled-components';
 import PortalComponents from 'components/modals/PortalComponents';
 import { fadeIn, fadeOut } from 'styles/animation-setting';
 
 export interface MenuProps {
   isOpen: boolean;
-  slideMenuHandler: () => void;
+  sideMenuHandler: () => void;
 }
 
 interface SlideMenuProps extends MenuProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const SlideMenu = ({ isOpen, children, slideMenuHandler }: SlideMenuProps) => {
+const SlideMenu = ({ isOpen, children, sideMenuHandler }: SlideMenuProps) => {
   return (
     <PortalComponents>
-      <SlideBackdrop $isOpen={isOpen} onClick={slideMenuHandler} />
+      <SlideBackdrop $isOpen={isOpen} onClick={sideMenuHandler} />
       <SlideMenuContainer $isOpen={isOpen}>{children}</SlideMenuContainer>
     </PortalComponents>
   );
@@ -58,7 +58,7 @@ const SlideMenuContainer = styled.div<{ $isOpen: boolean }>`
   height: 100%;
   background-color: #fff;
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
-  padding: 1rem 2rem;
+  padding: 1rem;
 
   overflow-y: scroll;
 

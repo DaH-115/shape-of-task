@@ -1,21 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Title } from 'styles/Title';
-import { BtnLink } from 'styles/Button/BtnLink';
+import LinkBtn from 'components/Button/LinkBtn';
 import SlideMenu, { MenuProps } from 'components/menus/SlideMenu';
 import { BsX } from 'react-icons/bs';
 
-const NavMenu = ({ isOpen, slideMenuHandler }: MenuProps) => {
+const NavMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
   return (
-    <SlideMenu isOpen={isOpen} slideMenuHandler={slideMenuHandler}>
+    <SlideMenu isOpen={isOpen} sideMenuHandler={sideMenuHandler}>
       <HeaderWrapper>
-        <Title title='Menu' desc='메뉴' />
-        <CloseBtn onClick={slideMenuHandler} />
+        <CloseBtn onClick={sideMenuHandler} />
       </HeaderWrapper>
-      <SlideMenuBtnWrapper onClick={slideMenuHandler}>
-        <BtnLink linkTo='/' type='button' text='메인 화면' />
-        <BtnLink linkTo='/task-list' type='button' text='일정' />
-        <BtnLink linkTo='/shape-list' type='button' text='완료된 일' />
+      <SlideMenuBtnWrapper onClick={sideMenuHandler}>
+        <LinkBtn linkTo='/' text='Home' />
+        <LinkBtn linkTo='/task-list' text='Task List' />
+        <LinkBtn linkTo='/shape-list' text='Shape List' />
       </SlideMenuBtnWrapper>
     </SlideMenu>
   );
@@ -25,15 +23,15 @@ export default React.memo(NavMenu);
 
 const HeaderWrapper = styled.div`
   display: flex;
+  justify-content: end;
   width: 100%;
+  margin-bottom: 1rem;
 `;
 
 const CloseBtn = styled(BsX)`
-  font-size: 3rem;
-  margin-top: 0.5rem;
+  font-size: 1.8rem;
 `;
 
 const SlideMenuBtnWrapper = styled.div`
   width: 100%;
-  margin-top: 1rem;
 `;

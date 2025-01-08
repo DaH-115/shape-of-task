@@ -33,14 +33,13 @@ export default ColorPalette;
 
 const Container = styled.div`
   width: 100%;
-  margin-bottom: 0.5rem;
+  margin-top: 1.6rem;
 `;
 
 const PaletteWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   cursor: pointer;
 `;
 
@@ -54,18 +53,12 @@ const PaletteName = styled.p<{ $isSelected: boolean }>`
 `;
 
 const PaletteColors = styled.div<{ $themeColor: string; $isSelected: boolean }>`
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
-
   background-color: ${({ $themeColor }) => $themeColor};
-  border: 0.3rem solid #fff;
-  margin-right: 0.6rem;
 
-  &:last-child {
-    margin-right: 0;
-  }
-
-  ${({ theme }) => theme.device.tablet} {
+  &:not(:last-child) {
+    margin-right: 0.6rem;
   }
 `;

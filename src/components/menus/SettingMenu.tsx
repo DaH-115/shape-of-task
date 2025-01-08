@@ -4,14 +4,14 @@ import { themePalettes } from 'styles/theme-colors';
 import { useAppSelector } from 'store/hooks';
 import SlideMenu, { MenuProps } from 'components/menus/SlideMenu';
 import ColorPalette from 'components/menus/ColorPalette';
-import { Title } from 'styles/Title';
-import { Btn } from 'styles/Button/Btn';
+import Title from 'styles/TitleComponent';
+import Btn from 'components/Button/Btn';
 
-const SettingMenu = ({ isOpen, slideMenuHandler }: MenuProps) => {
+const SettingMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
 
   return (
-    <SlideMenu isOpen={isOpen} slideMenuHandler={slideMenuHandler}>
+    <SlideMenu isOpen={isOpen} sideMenuHandler={sideMenuHandler}>
       <Title title='Setting' desc='색상 설정' />
       {themePalettes.map((item, index) => (
         <ColorPalette
@@ -20,7 +20,7 @@ const SettingMenu = ({ isOpen, slideMenuHandler }: MenuProps) => {
           isSelected={paletteName === item.name ? true : false}
         />
       ))}
-      <BtnWrapper onClick={slideMenuHandler}>
+      <BtnWrapper onClick={sideMenuHandler}>
         <Btn type='button' text='적용' isEmpty />
       </BtnWrapper>
     </SlideMenu>
@@ -30,8 +30,5 @@ const SettingMenu = ({ isOpen, slideMenuHandler }: MenuProps) => {
 export default React.memo(SettingMenu);
 
 const BtnWrapper = styled.div`
-  width: 100%;
-  max-width: 5rem;
   margin-top: 2rem;
-  margin-left: auto;
 `;

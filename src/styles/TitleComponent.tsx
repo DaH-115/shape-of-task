@@ -6,7 +6,7 @@ interface TitleProps {
   desc: string;
 }
 
-export const Title = ({ title, desc }: TitleProps) => {
+const Title = ({ title, desc }: TitleProps) => {
   return (
     <TitleWrapper>
       <ContentsTitle>{title}</ContentsTitle>
@@ -15,25 +15,19 @@ export const Title = ({ title, desc }: TitleProps) => {
   );
 };
 
+export default React.memo(Title);
+
 const TitleWrapper = styled.div`
   width: 100%;
-  padding: 1rem 0;
 `;
 
 const ContentsTitle = styled.h1`
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.4rem;
-
-  ${({ theme }) => theme.device.tablet} {
-    font-size: 1.4rem;
-  }
 `;
 
-const ContentsTitleDesc = styled.h2`
-  font-size: 1rem;
-
-  ${({ theme }) => theme.device.tablet} {
-    font-size: 0.9rem;
-  }
+const ContentsTitleDesc = styled.p`
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.commonColors.gray};
 `;

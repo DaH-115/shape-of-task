@@ -2,12 +2,19 @@ import React, { useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import StyledShapes from 'components/figures/StyledShapes';
 
-interface SelectMenuProps {
+interface ShapeSelectMenuProps {
+  id: string;
   isToggle: boolean;
   getShape: (figureName: string) => void;
+  onToggle: () => void;
 }
 
-const SelectMenu = ({ isToggle, getShape }: SelectMenuProps) => {
+const ShapeSelectMenu = ({
+  id,
+  isToggle,
+  getShape,
+  onToggle,
+}: ShapeSelectMenuProps) => {
   const getShapeHandler = useCallback(
     (event: React.MouseEvent<HTMLUListElement>) => {
       const shapeItem = event.target as HTMLElement;
@@ -15,13 +22,14 @@ const SelectMenu = ({ isToggle, getShape }: SelectMenuProps) => {
 
       if (shapeName) {
         getShape(shapeName);
+        onToggle();
       }
     },
-    [getShape]
+    [getShape, onToggle]
   );
 
   return (
-    <SelectMenuWrapper $isToggle={isToggle}>
+    <SelectMenuWrapper id={id} $isToggle={isToggle}>
       <SelectMenuList onClick={getShapeHandler}>
         <SelectMenuItem>
           <StyledShapes shapeName='triangle' />
@@ -40,7 +48,7 @@ const SelectMenu = ({ isToggle, getShape }: SelectMenuProps) => {
   );
 };
 
-export default React.memo(SelectMenu);
+export default React.memo(ShapeSelectMenu);
 
 // Animation Setting
 const fadeSlideIn = keyframes`
@@ -70,17 +78,18 @@ const fadeSlideOut = keyframes`
 const SelectMenuWrapper = styled.div<{ $isToggle: boolean }>`
   position: absolute;
   bottom: 4rem;
-  left: 0;
+  left: 0.5rem;
 
   visibility: ${({ $isToggle }) => ($isToggle ? 'visible' : 'hidden')};
-  animation: ${({ $isToggle }) => ($isToggle ? fadeSlideIn : fadeSlideOut)} 0.4s
+  animation: ${({ $isToggle }) => ($isToggle ? fadeSlideIn : fadeSlideOut)} 0.3s
     ease-in-out;
-  transition: visibility 0.4s ease-in-out;
+  transition: visibility 0.3s ease-in-out;
 `;
 
 const SelectMenuList = styled.ul`
   border: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
   border-radius: 1rem;
+  overflow: hidden;
 
   background-color: #fff;
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
@@ -90,7 +99,7 @@ const SelectMenuItem = styled.li`
   display: flex;
   align-items: center;
 
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
 
   &:hover,
   &:active {
@@ -99,14 +108,7 @@ const SelectMenuItem = styled.li`
 `;
 
 const ShapeDesc = styled.p`
-  flex: 1;
-
   width: 100%;
-  font-size: 1.2rem;
-  padding: 1.5rem 1rem;
-  padding-right: 0;
-
-  ${({ theme }) => theme.device.tablet} {
-    font-size: 1rem;
-  }
+  font-size: 0.9rem;
+  margin-left: 0.4rem;
 `;

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BtnSetting } from 'styles/Button/BtnSetting';
-import { TodaysQuote } from 'components/TodaysQuote';
-import TaskListCount from 'components/TaskListCount';
-import AddBtn from 'styles/Button/AddBtn';
+import SettingBtn from 'components/Button/SettingBtn';
+import TodaysQuote from 'components/TodaysQuote/TodaysQuote';
+import TaskListCount from 'components/TaskListCount/TaskListCount';
+import AddBtn from 'components/Button/AddBtn';
 
 const MainPage = () => {
   return (
@@ -14,7 +14,7 @@ const MainPage = () => {
           <AddBtn />
         </ResponsiveWrapper>
         <TaskListCount />
-        <BtnSetting />
+        <SettingBtn />
       </Wrapper>
     </Container>
   );
@@ -23,9 +23,10 @@ const MainPage = () => {
 export default React.memo(MainPage);
 
 const Container = styled.div`
+  flex: 1;
   width: 100%;
+  min-width: ${({ theme }) => theme.size.mobile};
   padding: 1rem;
-  min-width: 18rem;
 
   /* scrollbar */
   overflow-y: scroll;
@@ -41,6 +42,14 @@ const Wrapper = styled.div`
   background-color: #fff;
   border-radius: 1rem;
   padding-bottom: 1rem;
+
+  border: none;
+  box-shadow: none;
+
+  ${({ theme }) => theme.device.tablet} {
+    border: 0.1rem solid ${({ theme }) => theme.commonColors.gray};
+    box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
+  }
 `;
 
 const ResponsiveWrapper = styled.div`
