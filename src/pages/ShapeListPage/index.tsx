@@ -4,7 +4,6 @@ import {
   BlankMessage,
   Container,
   ShapeList,
-  ShapeListConatiner,
   ShapeListHeader,
   ShapeListWrapper,
 } from 'pages/ShapeListPage/ShapeListPage.styles';
@@ -23,20 +22,19 @@ const ShapeListPage = () => {
       <ShapeListHeader>
         <Title title='My Shapes' desc='완료된 일' />
       </ShapeListHeader>
-      <ShapeListConatiner>
-        <ShapeListWrapper>
-          {doneList.length > 0 ? (
-            <ShapeList ref={taskListRef}>
-              {doneList.map((task) => (
-                <ShapeListItem key={task.id} shape={task.shape} />
-              ))}
-            </ShapeList>
-          ) : (
-            <BlankMessage>오늘의 형태를 만들어 보세요</BlankMessage>
-          )}
-        </ShapeListWrapper>
-        <SaveBtn taskListRef={taskListRef} isDisabled={isDisabled} />
-      </ShapeListConatiner>
+
+      <ShapeListWrapper>
+        {doneList.length > 0 ? (
+          <ShapeList ref={taskListRef}>
+            {doneList.map((task) => (
+              <ShapeListItem key={task.id} shape={task.shape} />
+            ))}
+          </ShapeList>
+        ) : (
+          <BlankMessage>오늘의 형태를 만들어 보세요</BlankMessage>
+        )}
+      </ShapeListWrapper>
+      <SaveBtn taskListRef={taskListRef} isDisabled={isDisabled} />
     </Container>
   );
 };

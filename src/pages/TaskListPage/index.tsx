@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import { TbArrowsSort } from 'react-icons/tb';
 import { useAppSelector } from 'store/hooks';
 import Title from 'styles/TitleComponent';
 import {
@@ -8,6 +7,7 @@ import {
   MessagWrapper,
   SortButton,
   TaskListHeader,
+  TasksHeaderBtns,
 } from 'pages/TaskListPage/index.styles';
 import TaskItemList from 'pages/TaskListPage/TaskList/TaskItemList';
 import ModalInput from 'components/modals/ModalInput';
@@ -16,39 +16,82 @@ import AddBtn from 'components/Button/AddBtn';
 import UpdateConfirmModal from 'components/modals/confirm/UpdateConfirmModal';
 import RemoveConfirmModal from 'components/modals/confirm/RemoveConfirmModal';
 import NoteAlert from 'components/modals/NoteAlert';
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
+import SortDropdown, {
+  ImportanceFilter,
+  SortType,
+} from 'pages/TaskListPage/SortDropdown';
 
 const TaskListPage = () => {
   const taskList = useAppSelector((state) => state.taskList.taskList);
-  const [isSortAscending, setIsSortAscending] = useState(false);
-  const sortedTaskList = useMemo(() => {
-    return [...taskList].sort((a, b) => {
-      if (isSortAscending) {
-        return a.importance - b.importance;
-      } else {
-        return b.importance - a.importance;
-      }
-    });
-  }, [taskList, isSortAscending]);
-  const renderTaskList = isSortAscending ? sortedTaskList : taskList;
+  // 정렬 기준
+  const [sortType, setSortType] = useState<SortType>('created');
+  // 완료된 일정 숨기기
+  const [hideCompleted, setHideCompleted] = useState(false);
+  // 중요도 필터
+  const [importanceFilter, setImportanceFilter] = useState<ImportanceFilter>(0);
+
+  const sortTypeChangeHandler = (type: SortType) => {
+    setSortType(type);
+  };
+
+  const importanceFilterChangeHanlder = (importance: ImportanceFilter) => {
+    setImportanceFilter((prev: ImportanceFilter) =>
+      prev === importance ? 0 : importance
+    );
+  };
+
+  const processTaskList = useMemo(() => {
+    return [...taskList]
+      .sort((a, b) => {
+        if (a.done !== b.done) {
+          return a.done ? 1 : -1;
+        }
+
+        if (sortType === 'created') {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          return dateB - dateA;
+        } else {
+          return a.importance - b.importance;
+        }
+      })
+      .filter((task) => !hideCompleted || !task.done)
+      .filter(
+        (task) => importanceFilter === 0 || task.importance === importanceFilter
+      );
+  }, [taskList, sortType, hideCompleted, importanceFilter]);
 
   return (
     <Container>
-      {/* 일정 페이지 헤더 */}
       <TaskListHeader>
         <Title title='Tasks' desc='오늘의 일정' />
-        <SortButton
-          onClick={() => setIsSortAscending((prev) => !prev)}
-          title={isSortAscending ? '내림차순 정렬' : '오름차순 정렬'}
-          aria-label={isSortAscending ? '내림차순 정렬' : '오름차순 정렬'}
-        >
-          <TbArrowsSort aria-hidden />
-        </SortButton>
+        <TasksHeaderBtns>
+          <SortButton
+            onClick={() => setHideCompleted((prev) => !prev)}
+            isActived={!hideCompleted}
+            title={hideCompleted ? '완료된 일정 표시' : '완료된 일정 숨기기'}
+            aria-label={
+              hideCompleted ? '완료된 일정 표시' : '완료된 일정 숨기기'
+            }
+          >
+            {hideCompleted ? (
+              <MdOutlineVisibility aria-hidden />
+            ) : (
+              <MdOutlineVisibilityOff aria-hidden />
+            )}
+          </SortButton>
+          <SortDropdown
+            sortType={sortType}
+            importanceFilter={importanceFilter}
+            onSortChange={sortTypeChangeHandler}
+            onImportanceFilterChange={importanceFilterChangeHanlder}
+          />
+        </TasksHeaderBtns>
       </TaskListHeader>
-      {/* 일정 추가 버튼 */}
       <AddBtn />
-      {/* 일정 리스트 */}
       {taskList.length > 0 ? (
-        renderTaskList.map((task) => (
+        processTaskList.map((task) => (
           <TaskItemList key={task.id} renderedTask={task} />
         ))
       ) : (

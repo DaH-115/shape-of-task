@@ -23,7 +23,6 @@ const MainPage = () => {
 export default React.memo(MainPage);
 
 const Container = styled.div`
-  flex: 1;
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
   padding: 1rem;

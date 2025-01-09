@@ -38,7 +38,7 @@ export const CountNumber = styled.div`
   color: ${({ theme }) => theme.colors.important};
 
   background-color: #fff;
-  border: 0.1rem solid ${({ theme }) => theme.colors.important};
+  border: 0.05rem solid ${({ theme }) => theme.commonColors.gray};
   border-radius: 50%;
 `;
 

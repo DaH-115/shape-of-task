@@ -38,6 +38,7 @@ export const ContentText = styled.p<{ $isDone: boolean }>`
     $isDone ? theme.commonColors.gray : theme.commonColors.black};
   text-decoration: ${({ $isDone }) => ($isDone ? 'line-through' : 'none')};
   word-break: keep-all;
+  white-space: pre-line;
 `;
 
 export const ContentBottom = styled.div`

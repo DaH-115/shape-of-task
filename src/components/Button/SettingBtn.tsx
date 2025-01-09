@@ -54,7 +54,7 @@ const ButtonWrapper = styled.div`
 
   svg {
     font-size: 1.5rem;
-    color: ${({ theme }) => theme.colors.anytime};
+    color: ${({ theme }) => theme.commonColors.gray};
     margin-right: 0.3rem;
   }
 `;

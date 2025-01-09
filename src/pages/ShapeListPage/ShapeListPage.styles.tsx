@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  flex: 1;
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   padding: 1rem;
 
   /* scrollbar */
@@ -39,10 +38,6 @@ export const ShapeListHeader = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const ShapeListConatiner = styled.div`
-  width: 100%;
-`;
-
 export const ShapeListWrapper = styled.div`
   width: 100%;
   padding: 1rem;
@@ -57,6 +52,7 @@ export const ShapeListWrapper = styled.div`
 export const ShapeList = styled.ul`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  flex-wrap: nowrap;
+  gap: 0.4rem;
 `;

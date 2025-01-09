@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  flex: 1;
   width: 100%;
+  height: 100%;
   padding: 1rem;
 
   /* scrollbar */
@@ -28,12 +28,22 @@ export const TaskListHeader = styled.div`
   }
 `;
 
-export const SortButton = styled.button`
-  font-size: 1.5rem;
-  cursor: pointer;
+export const SortButton = styled.button<{ isActived: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 1rem;
+  color: ${({ theme, isActived }) =>
+    isActived ? theme.colors.important : theme.commonColors.gray};
+
+  font-size: 1.2rem;
 
   &:hover,
   :active {
+    background-color: #ffffff;
     color: ${({ theme }) => theme.colors.important};
     transition: color 0.2s ease-in-out;
   }
@@ -50,4 +60,9 @@ export const BlankMessage = styled.p`
   color: ${({ theme }) => theme.commonColors.gray};
   font-size: 1.2rem;
   margin-top: 2rem;
+`;
+
+export const TasksHeaderBtns = styled.div`
+  display: flex;
+  align-items: center;
 `;

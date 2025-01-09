@@ -5,7 +5,11 @@ import {
 } from 'components/figures/ShapeStyles';
 import { styled } from 'styled-components';
 
-const StyledShapes = ({ shapeName }: { shapeName: string }) => {
+interface StyledShapesProps {
+  shapeName: 'circle' | 'square' | 'triangle';
+}
+
+const StyledShapes = ({ shapeName }: StyledShapesProps) => {
   return (
     <ShapeStylesWrapper>
       {shapeName === 'circle' && <StyledCircle $shapeName={shapeName} />}
@@ -21,6 +25,6 @@ const ShapeStylesWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
 `;

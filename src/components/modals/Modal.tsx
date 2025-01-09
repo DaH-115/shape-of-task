@@ -51,8 +51,4 @@ const ModalWapper = styled.div<{ $modalToggle: boolean }>`
           ${slideUp} 0.2s ease-in-out
         `
       : 'none'};
-
-  ${({ theme }) => theme.device.tablet} {
-    min-width: ${({ theme }) => theme.size.tablet};
-  }
 `;
