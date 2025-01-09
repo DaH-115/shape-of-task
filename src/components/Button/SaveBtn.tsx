@@ -18,8 +18,13 @@ const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
 
     try {
       const taskList = taskListRef.current!;
-      const taskListImg = await html2canvas(taskList, { scale: 4 });
 
+      if (!taskList) {
+        dispatch(errorAlertIsOpen());
+        return;
+      }
+
+      const taskListImg = await html2canvas(taskList, { scale: 4 });
       taskListImg.toBlob((blob) => {
         if (blob) {
           saveAs(blob, 'result.png');
@@ -32,7 +37,7 @@ const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
 
   return (
     <ButtonWrapper onClick={captureModalOpen} $isDisabled={isDisabled}>
-      <button type='button' disabled={isDisabled}>
+      <button type='button' disabled={isDisabled} title='이미지 저장'>
         {'이미지 저장'}
       </button>
       <GiSaveArrow aria-hidden />
