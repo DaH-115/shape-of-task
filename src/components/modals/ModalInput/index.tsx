@@ -132,10 +132,13 @@ const ModalInput = () => {
     [dispatch, addTaskHandler, updateTaskHandler, editingTask, text, shape]
   );
 
-  const onToggleHandler = useCallback((e) => {
-    e.preventDefault();
-    setToggle((prev) => !prev);
-  }, []);
+  const onToggleHandler = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      setToggle((prev) => !prev);
+    },
+    []
+  );
 
   const getShapeHandler = useCallback((shapeName: ShapeName) => {
     setShape(shapeName);

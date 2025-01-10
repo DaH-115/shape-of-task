@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Loading = () => {
   return (
-    <LoadingWrapper>
+    <LoadingWrapper role='status'>
       <LoadingSpinner />
     </LoadingWrapper>
   );
