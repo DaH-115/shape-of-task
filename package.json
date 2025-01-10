@@ -1,6 +1,6 @@
 {
-  "name": "tsc-todo-list",
-  "version": "0.1.0",
+  "name": "shape-of-task",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/file-saver": "^2.0.5",
     "file-saver": "^2.0.5"
   }

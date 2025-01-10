@@ -18,7 +18,7 @@ const Notification = () => {
     let timeout: NodeJS.Timeout;
 
     if (isOpen) {
-      timeout = setTimeout(() => dispatch(modalIsClose()), 1500);
+      timeout = setTimeout(() => dispatch(modalIsClose()), 2000);
     }
 
     return () => clearTimeout(timeout);
@@ -32,10 +32,10 @@ const Notification = () => {
     <PortalComponents>
       <NoteWrapper $isOpen={isOpen}>
         <MessageWrapper>
-          <NoteTitle>{'알림'}</NoteTitle>
-          <NoteDesc>{`할 일 끝! 도형이 추가되었습니다`}</NoteDesc>
+          <NoteTitle>알림</NoteTitle>
+          <NoteDesc>할 일 끝! 도형이 추가되었습니다</NoteDesc>
           <IconWrapper onClick={onNavgateHandler}>
-            <MdArrowForwardIos />
+            <MdArrowForwardIos aria-hidden />
           </IconWrapper>
         </MessageWrapper>
       </NoteWrapper>
@@ -51,7 +51,7 @@ const NoteWrapper = styled.div<{ $isOpen: boolean }>`
   left: 0;
 
   width: 100%;
-  min-width: ${({ theme }) => theme.size.mobile};
+  max-width: ${({ theme }) => theme.size.mobile};
   padding: 1rem;
 
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
@@ -60,23 +60,18 @@ const NoteWrapper = styled.div<{ $isOpen: boolean }>`
   transition: visibility 0.4s ease-in-out;
 
   cursor: pointer;
-
-  ${({ theme }) => theme.device.tablet} {
-    width: 50%;
-  }
 `;
 
 const MessageWrapper = styled.div`
   display: flex;
   align-items: center;
 
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   text-align: center;
   padding: 1rem 0.5rem;
 
   background-color: #fff;
   border: 0.1rem solid ${({ theme }) => theme.colors.important};
-
   border-radius: 1.5rem;
 
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);

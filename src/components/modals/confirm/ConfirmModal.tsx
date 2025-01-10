@@ -3,8 +3,7 @@ import { styled } from 'styled-components';
 import { useAppDispatch } from 'store/hooks';
 import { confirmClose } from 'store/modalSlice';
 import Modal from 'components/modals/Modal';
-import { Title } from 'styles/Title';
-import { Btn } from 'styles/Button/Btn';
+import Btn from 'components/Button/Btn';
 import { editingTaskReset } from 'store/taskListSlice';
 
 interface ConfirmModalProps {
@@ -27,7 +26,8 @@ const ConfirmModal = ({
 
   return (
     <Modal isOpen={isOpen}>
-      <Title title='확인' desc={modalDesc} />
+      <AlertTitle>알림</AlertTitle>
+      <AlertDesc>{modalDesc}</AlertDesc>
       <BtnWrapper>
         <RejectBtnWrapper onClick={closeHandler}>
           <Btn type='button' text='취소' isEmpty />
@@ -42,11 +42,21 @@ const ConfirmModal = ({
 
 export default ConfirmModal;
 
+const AlertTitle = styled.div`
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+`;
+
+const AlertDesc = styled.p`
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+`;
+
 const BtnWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0 0 1rem;
 `;
 
 const ConfrimBtnWrapper = styled.div`

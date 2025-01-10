@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import { fadeIn, fadeOut } from 'styles/animation-setting';
 import PortalComponents from 'components/modals/PortalComponents';
 import Backdrop from 'components/modals/Backdrop';
 
@@ -22,23 +21,24 @@ export default React.memo(Modal);
 
 const slideUp = keyframes`
   from {
-    transform: translateY(100%);
+    top: 60%;
+    opacity: 0;
   }
   to {
-    transform: translateY(0);
+    top: 50%;
+    opacity: 1;
   }
 `;
 
 const ModalWapper = styled.div<{ $modalToggle: boolean }>`
   position: fixed;
-  top: ${({ $modalToggle }) => ($modalToggle ? '50%' : '100%')};
+  top: ${({ $modalToggle }) => ($modalToggle ? '50%' : '80%')};
   left: 50%;
-  transform: ${({ $modalToggle }) =>
-    $modalToggle ? 'translate(-50%, -50%)' : 'translate(-50%, 100%)'};
+  transform: translate(-50%, -50%); // 중앙 정렬
 
   width: 100%;
-  min-width: ${({ theme }) => theme.size.mobile};
-  padding: 0 1rem;
+  max-width: ${({ theme }) => theme.size.mobile};
+  padding: 1rem;
   border: 0.1rem solid ${({ theme }) => theme.colors.important};
   border-radius: 1rem;
   background-color: #fff;
@@ -46,16 +46,9 @@ const ModalWapper = styled.div<{ $modalToggle: boolean }>`
 
   visibility: ${({ $modalToggle }) => ($modalToggle ? 'visible' : 'hidden')};
   animation: ${({ $modalToggle }) =>
-      $modalToggle
-        ? css`
-            ${fadeIn} 0.3s ease-in-out, ${slideUp} 0.3s ease-in-out
-          `
-        : fadeOut}
-    0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-
-  ${({ theme }) => theme.device.tablet} {
-    transform: translate(-50%, -50%);
-    width: auto;
-  }
+    $modalToggle
+      ? css`
+          ${slideUp} 0.2s ease-in-out
+        `
+      : 'none'};
 `;
