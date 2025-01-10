@@ -21,14 +21,10 @@ import {
 
 const TodaysQuote = () => {
   const [isPinned, setIsPinned] = useState(false);
-  const { data: quoteDate, isLoading, isError, refetch } = useGetPostsQuery();
+  const { data: quoteData, isLoading, isError, refetch } = useGetPostsQuery();
 
   const refetchHandler = useCallback(() => {
-    if (isPinned) {
-      return;
-    } else {
-      refetch();
-    }
+    if (!isPinned) refetch();
   }, [isPinned, refetch]);
 
   const togglePinHandler = useCallback(() => {
@@ -47,7 +43,7 @@ const TodaysQuote = () => {
           </ErrorMessage>
         ) : isLoading ? (
           <LoadingMessage>Loading...</LoadingMessage>
-        ) : !isLoading && quoteDate ? (
+        ) : !isLoading && quoteData ? (
           <QuoteWrapper>
             <IconsWrapper>
               <RefreshIcon
@@ -72,8 +68,8 @@ const TodaysQuote = () => {
                 )}
               </PinIcon>
             </IconsWrapper>
-            <QuoteText>{quoteDate.content}</QuoteText>
-            <QuoteAuthor>- {quoteDate.author}</QuoteAuthor>
+            <QuoteText>{quoteData.content}</QuoteText>
+            <QuoteAuthor>- {quoteData.author}</QuoteAuthor>
           </QuoteWrapper>
         ) : null}
       </QuoteContent>

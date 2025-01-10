@@ -1,5 +1,5 @@
 import { BsChatQuote } from 'react-icons/bs';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 export const QuoteIcon = styled(BsChatQuote)`
   color: ${({ theme }) => theme.commonColors.gray};
@@ -53,6 +53,15 @@ export const IconsWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
+const rotateAnimation = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+`;
+
 export const RefreshIcon = styled.div<{ disabled: boolean }>`
   font-size: 1.2rem;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
@@ -68,8 +77,11 @@ export const RefreshIcon = styled.div<{ disabled: boolean }>`
 
   &:active,
   &:hover {
-    transform: ${({ disabled }) => (!disabled ? 'rotate(180deg)' : 'none')};
-    transition: transform 0.5s ease-in-out;
+    animation: ${({ disabled }) =>
+      !disabled &&
+      css`
+        ${rotateAnimation} 0.5s ease-in-out
+      `};
   }
 `;
 

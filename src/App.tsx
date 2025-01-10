@@ -10,6 +10,7 @@ import Footer from 'layout/Footer';
 import ErrorAlert from 'components/modals/ErrorAlert';
 import MainPage from 'pages/MainPage';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import Loading from 'layout/Loading';
 
 const TaskListPage = lazy(() => import('pages/TaskListPage'));
 const ShapeListPage = lazy(() => import('pages/ShapeListPage'));
@@ -32,7 +33,7 @@ const App = () => {
       {isDesktop ? (
         <DesktopContainer>
           <MainPage />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <TaskListPage />
             <ShapeListPage />
           </Suspense>

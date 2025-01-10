@@ -32,6 +32,11 @@ export const Textarea = styled.textarea`
   margin-bottom: 1rem;
   font-size: 1rem;
 
+  &:focus {
+    outline: 0.2rem solid ${({ theme }) => theme.commonColors.gray};
+    border-radius: 0.4rem;
+  }
+
   &::placeholder {
     color: ${({ theme }) => theme.commonColors.gray};
   }

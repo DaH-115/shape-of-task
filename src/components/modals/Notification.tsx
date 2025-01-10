@@ -51,7 +51,7 @@ const NoteWrapper = styled.div<{ $isOpen: boolean }>`
   left: 0;
 
   width: 100%;
-  min-width: ${({ theme }) => theme.size.mobile};
+  max-width: ${({ theme }) => theme.size.mobile};
   padding: 1rem;
 
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
@@ -60,10 +60,6 @@ const NoteWrapper = styled.div<{ $isOpen: boolean }>`
   transition: visibility 0.4s ease-in-out;
 
   cursor: pointer;
-
-  ${({ theme }) => theme.device.tablet} {
-    width: 50%;
-  }
 `;
 
 const MessageWrapper = styled.div`

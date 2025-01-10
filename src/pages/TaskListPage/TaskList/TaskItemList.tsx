@@ -63,15 +63,13 @@ const TaskItemList = ({ renderedTask }: { renderedTask: TaskTypes }) => {
         >
           {/* 도형 이미지 */}
           <SingleShapes shapeName={shape} />
-          {done ? (
-            <DoneButton $isChecked={done}>
+          <DoneButton $isChecked={done}>
+            {done ? (
               <IoIosCheckmarkCircle aria-hidden />
-            </DoneButton>
-          ) : (
-            <DoneButton $isChecked={done}>
+            ) : (
               <IoIosCheckmarkCircleOutline aria-hidden />
-            </DoneButton>
-          )}
+            )}
+          </DoneButton>
         </ContentHeader>
         <ContentText $isDone={done}>{text}</ContentText>
         <ContentBottom>

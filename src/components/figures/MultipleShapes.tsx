@@ -5,8 +5,9 @@ import {
   StyledSquare,
   StyledTriangle,
 } from 'components/figures/SingleShapes.styles';
+import { ShapeName } from 'store/taskListSlice';
 
-const SelectedShapes = ({ shape }: { shape: string }) => {
+const SelectedShapes = ({ shape }: { shape: ShapeName }) => {
   return (
     <ShapeWrapper>
       <StyledTriangle $shapeName={shape} />

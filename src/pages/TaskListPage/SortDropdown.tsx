@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { BiSortAlt2 } from 'react-icons/bi';
-import { FaSortAmountDown } from 'react-icons/fa';
 import StyledShapes from 'components/figures/SingleShapes';
 import {
   DropdownButton,
@@ -30,10 +29,13 @@ const SortDropdown: React.FC<SortDropdownProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const sortChangeHandler = (newSortType: SortType) => {
-    onSortChange(newSortType);
-    setIsOpen(false);
-  };
+  const sortChangeHandler = useCallback(
+    (newSortType: SortType) => {
+      onSortChange(newSortType);
+      setIsOpen(false);
+    },
+    [onSortChange]
+  );
 
   return (
     <DropdownContainer>
@@ -53,14 +55,12 @@ const SortDropdown: React.FC<SortDropdownProps> = ({
             $isActive={sortType === 'priority'}
             onClick={() => sortChangeHandler('priority')}
           >
-            <FaSortAmountDown />
             중요도순 정렬
           </MenuItem>
           <MenuItem
             $isActive={sortType === 'created'}
             onClick={() => sortChangeHandler('created')}
           >
-            <FaSortAmountDown />
             등록순 정렬
           </MenuItem>
         </MenuSection>

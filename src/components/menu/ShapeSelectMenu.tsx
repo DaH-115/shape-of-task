@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import StyledShapes from 'components/figures/SingleShapes';
+import { ShapeName } from 'store/taskListSlice';
 
 interface ShapeSelectMenuProps {
   id: string;
   isToggle: boolean;
-  getShape: (figureName: string) => void;
+  getShape: (shapeName: ShapeName) => void;
   onToggle: () => void;
 }
 
@@ -20,13 +21,18 @@ const ShapeSelectMenu = ({
       const shapeItem = event.target as HTMLElement;
       const shapeName = shapeItem.getAttribute('data-shape');
 
-      if (shapeName) {
+      if (shapeName && isShapeName(shapeName)) {
         getShape(shapeName);
         onToggle();
       }
     },
     [getShape, onToggle]
   );
+
+  // ShapeName 타입 가드 함수
+  const isShapeName = (value: string): value is ShapeName => {
+    return ['triangle', 'square', 'circle'].includes(value);
+  };
 
   return (
     <SelectMenuWrapper id={id} $isToggle={isToggle} role='listbox'>

@@ -16,7 +16,14 @@ const SideMenu = ({ isOpen, children, sideMenuHandler }: SideMenuProps) => {
   return (
     <PortalComponents>
       <SideBackdrop $isOpen={isOpen} onClick={sideMenuHandler} />
-      <SideMenuContainer $isOpen={isOpen}>{children}</SideMenuContainer>
+      <SideMenuContainer
+        $isOpen={isOpen}
+        role='dialog'
+        aria-modal='true'
+        aria-hidden={!isOpen}
+      >
+        {children}
+      </SideMenuContainer>
     </PortalComponents>
   );
 };
@@ -66,7 +73,7 @@ const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   animation: ${({ $isOpen }) => ($isOpen ? fadeSlideIn : fadeSlideOut)} 0.3s
     ease-in-out;
   transition: visibility 0.3s ease-in-out;
-  z-index: 10;
+  z-index: 20;
 
   ${({ theme }) => theme.device.tablet} {
     width: 20rem;
@@ -86,4 +93,6 @@ const SideBackdrop = styled.div<{ $isOpen: boolean }>`
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
   animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.3s ease-in-out;
   transition: visibility 0.3s ease-in-out;
+
+  z-index: 10;
 `;

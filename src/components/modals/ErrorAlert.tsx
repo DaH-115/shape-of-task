@@ -6,7 +6,11 @@ import Modal from 'components/modals/Modal';
 import Title from 'components/TitleComponent';
 import Btn from 'components/Button/Btn';
 
-const ErrorAlert = () => {
+const ErrorAlert = ({
+  message = '문제가 발생했습니다',
+}: {
+  message?: string;
+}) => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector(
     (state) => state.modal.alertState.errorAlertOpen
@@ -18,7 +22,7 @@ const ErrorAlert = () => {
 
   return (
     <Modal isOpen={isOpen}>
-      <Title title='알림' desc='문제가 발생했습니다.' />
+      <Title title='알림' desc={message} />
       <ConfrimBtnWrapper onClick={alertCloseHandler}>
         <Btn type='button' text='확인' />
       </ConfrimBtnWrapper>

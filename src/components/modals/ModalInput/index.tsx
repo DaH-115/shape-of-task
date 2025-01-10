@@ -7,7 +7,12 @@ import React, {
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { addTask, editingTaskReset, updateTask } from 'store/taskListSlice';
+import {
+  addTask,
+  editingTaskReset,
+  ShapeName,
+  updateTask,
+} from 'store/taskListSlice';
 import { modalIsClose, noteAlertIsOpen } from 'store/modalSlice';
 import {
   ModalHeader,
@@ -31,7 +36,7 @@ const ModalInput = () => {
   const editingTask = useAppSelector((state) => state.taskList.editingTask);
   const isInputState = useAppSelector((state) => state.modal.inputState);
   const [text, setText] = useState('');
-  const [shape, setShape] = useState('');
+  const [shape, setShape] = useState<ShapeName>('circle');
   const [toggle, setToggle] = useState(false);
   const [isErrors, setIsErrors] = useState({
     textError: '',
@@ -44,6 +49,9 @@ const ModalInput = () => {
   useEffect(() => {
     if (!isInputState) {
       setToggle(false);
+      setText('');
+      setShape('circle');
+      setIsErrors({ textError: '', shapeError: '' });
       dispatch(editingTaskReset());
     }
   }, [isInputState, dispatch]);
@@ -54,11 +62,11 @@ const ModalInput = () => {
       setShape(editingTask.shape);
     } else {
       setText('');
-      setShape('');
+      setShape('circle');
     }
   }, [isInputState, editingTask, dispatch]);
 
-  const getPriority = useCallback((shape: string) => {
+  const getPriority = useCallback((shape: ShapeName) => {
     const priorityObj: { [key: string]: { number: number; desc: string } } = {
       triangle: { number: 1, desc: '중요해요' },
       square: { number: 2, desc: '기억해 두세요' },
@@ -117,7 +125,7 @@ const ModalInput = () => {
       }
 
       setText('');
-      setShape('');
+      setShape('circle');
       dispatch(modalIsClose());
       dispatch(noteAlertIsOpen());
     },
@@ -129,7 +137,7 @@ const ModalInput = () => {
     setToggle((prev) => !prev);
   }, []);
 
-  const getShapeHandler = useCallback((shapeName: string) => {
+  const getShapeHandler = useCallback((shapeName: ShapeName) => {
     setShape(shapeName);
   }, []);
 

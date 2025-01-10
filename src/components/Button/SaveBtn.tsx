@@ -37,8 +37,17 @@ const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
 
   return (
     <ButtonWrapper onClick={captureModalOpen} $isDisabled={isDisabled}>
-      <button type='button' disabled={isDisabled} title='이미지 저장'>
-        {'이미지 저장'}
+      <button
+        type='button'
+        disabled={isDisabled}
+        title='이미지 저장'
+        aria-label={
+          isDisabled
+            ? '완료된 작업이 없어 저장할 수 없습니다'
+            : '작업 목록을 이미지로 저장'
+        }
+      >
+        이미지 저장
       </button>
       <GiSaveArrow aria-hidden />
     </ButtonWrapper>

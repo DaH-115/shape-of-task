@@ -49,7 +49,7 @@ export const SortButton = styled.button<{ $isActived: boolean }>`
   }
 `;
 
-export const MessagWrapper = styled.div`
+export const MessageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

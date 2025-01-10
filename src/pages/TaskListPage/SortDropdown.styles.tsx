@@ -91,7 +91,7 @@ export const MenuSection = styled.div`
 `;
 
 export const MenuLabel = styled.div`
-  padding: 0.2rem 0.6rem;
+  padding: 0.2rem;
   font-size: 0.6rem;
   color: ${({ theme }) => theme.commonColors.gray};
 `;

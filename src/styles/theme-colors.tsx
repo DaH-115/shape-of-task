@@ -15,7 +15,6 @@ export interface PaletteTypes {
 interface ThemeType {
   [key: string]: PaletteTypes;
 }
-
 export const commonColors: CommonColorsTypes = {
   black: '#141414',
   gray: '#BFBFBF',

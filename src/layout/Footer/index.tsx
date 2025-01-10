@@ -30,7 +30,7 @@ const Footer = () => {
           <HomeIcon aria-hidden />
         </FooterLinkBtn>
       </FooterIconWrapper>
-      <Copyright>ⓒGWAK DA HYUN 2022 - 2025</Copyright>
+      <Copyright>{`ⓒGWAK DA HYUN 2022 - ${new Date().getFullYear()}`}</Copyright>
     </FooterWrapper>
   );
 };

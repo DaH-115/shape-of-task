@@ -8,7 +8,7 @@ const NavMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
   return (
     <SideMenu isOpen={isOpen} sideMenuHandler={sideMenuHandler}>
       <HeaderWrapper>
-        <CloseBtn onClick={sideMenuHandler} />
+        <CloseBtn onClick={sideMenuHandler} aria-label='메뉴 닫기' />
       </HeaderWrapper>
       <SideMenuBtnWrapper onClick={sideMenuHandler}>
         <LinkBtn linkTo='/' text='Home' />

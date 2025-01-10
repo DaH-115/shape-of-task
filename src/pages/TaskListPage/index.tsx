@@ -4,7 +4,7 @@ import Title from 'components/TitleComponent';
 import {
   BlankMessage,
   Container,
-  MessagWrapper,
+  MessageWrapper,
   SortButton,
   TaskListHeader,
   TasksHeaderBtns,
@@ -21,6 +21,7 @@ import SortDropdown, {
   PriorityFilter,
   SortType,
 } from 'pages/TaskListPage/SortDropdown';
+import ErrorAlert from 'components/modals/ErrorAlert';
 
 const TaskListPage = () => {
   const taskList = useAppSelector((state) => state.taskList.taskList);
@@ -35,13 +36,18 @@ const TaskListPage = () => {
     setSortType(type);
   };
 
-  const priorityFilterChangeHanlder = (priority: PriorityFilter) => {
+  const priorityFilterChangeHandler = (priority: PriorityFilter) => {
     setPriorityFilter((prev: PriorityFilter) =>
       prev === priority ? 0 : priority
     );
   };
 
   const processTaskList = useMemo(() => {
+    const isValidDateString = (dateStr: string): boolean => {
+      const date = new Date(dateStr);
+      return !isNaN(date.getTime());
+    };
+
     return [...taskList]
       .sort((a, b) => {
         if (a.done !== b.done) {
@@ -49,9 +55,20 @@ const TaskListPage = () => {
         }
 
         if (sortType === 'created') {
-          const dateA = new Date(a.date).getTime();
-          const dateB = new Date(b.date).getTime();
-          return dateB - dateA;
+          const isValidA = isValidDateString(a.date);
+          const isValidB = isValidDateString(b.date);
+
+          // 둘 다 유효하지 않은 날짜
+          if (!isValidA && !isValidB) {
+            <ErrorAlert message='날짜 형식이 잘못되었습니다.' />;
+            return 0;
+          }
+          // a만 유효하지 않은 날짜
+          if (!isValidA) return 1;
+          // b만 유효하지 않은 날짜
+          if (!isValidB) return -1;
+
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
         } else {
           return a.priority - b.priority;
         }
@@ -85,7 +102,7 @@ const TaskListPage = () => {
             sortType={sortType}
             priorityFilter={priorityFilter}
             onSortChange={sortTypeChangeHandler}
-            onPriorityFilterChange={priorityFilterChangeHanlder}
+            onPriorityFilterChange={priorityFilterChangeHandler}
           />
         </TasksHeaderBtns>
       </TaskListHeader>
@@ -95,9 +112,9 @@ const TaskListPage = () => {
           <TaskItemList key={task.id} renderedTask={task} />
         ))
       ) : (
-        <MessagWrapper>
+        <MessageWrapper>
           <BlankMessage>오늘의 일정을 추가해 보세요</BlankMessage>
-        </MessagWrapper>
+        </MessageWrapper>
       )}
       <ModalInput />
       <UpdateConfirmModal />

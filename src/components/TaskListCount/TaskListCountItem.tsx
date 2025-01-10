@@ -4,7 +4,8 @@ import {
   ShapesWrapper,
   TaskItemWrapper,
 } from 'components/TaskListCount/TaskListCountItem.styles';
-import SingleShapes, { ShapeName } from 'components/figures/SingleShapes';
+import SingleShapes from 'components/figures/SingleShapes';
+import { ShapeName } from 'store/taskListSlice';
 
 interface TaskListCountItemProps {
   priority: string;
@@ -20,7 +21,7 @@ const TaskListCountItem = ({
   return (
     <TaskItemWrapper>
       <ShapesWrapper>
-        <SingleShapes shapeName={shape} isCountTask={!!count} />
+        <SingleShapes shapeName={shape} isCountTask={count > 0} />
       </ShapesWrapper>
       <PriorityText>{priority}</PriorityText>
       <CountNumber>{count}</CountNumber>
