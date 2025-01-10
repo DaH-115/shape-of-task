@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useAppSelector } from 'store/hooks';
-import Title from 'styles/TitleComponent';
+import Title from 'components/TitleComponent';
 import {
   BlankMessage,
   Container,
@@ -18,7 +18,7 @@ import RemoveConfirmModal from 'components/modals/confirm/RemoveConfirmModal';
 import NoteAlert from 'components/modals/NoteAlert';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 import SortDropdown, {
-  ImportanceFilter,
+  PriorityFilter,
   SortType,
 } from 'pages/TaskListPage/SortDropdown';
 
@@ -29,15 +29,15 @@ const TaskListPage = () => {
   // 완료된 일정 숨기기
   const [hideCompleted, setHideCompleted] = useState(false);
   // 중요도 필터
-  const [importanceFilter, setImportanceFilter] = useState<ImportanceFilter>(0);
+  const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(0);
 
   const sortTypeChangeHandler = (type: SortType) => {
     setSortType(type);
   };
 
-  const importanceFilterChangeHanlder = (importance: ImportanceFilter) => {
-    setImportanceFilter((prev: ImportanceFilter) =>
-      prev === importance ? 0 : importance
+  const priorityFilterChangeHanlder = (priority: PriorityFilter) => {
+    setPriorityFilter((prev: PriorityFilter) =>
+      prev === priority ? 0 : priority
     );
   };
 
@@ -53,14 +53,14 @@ const TaskListPage = () => {
           const dateB = new Date(b.date).getTime();
           return dateB - dateA;
         } else {
-          return a.importance - b.importance;
+          return a.priority - b.priority;
         }
       })
       .filter((task) => !hideCompleted || !task.done)
       .filter(
-        (task) => importanceFilter === 0 || task.importance === importanceFilter
+        (task) => priorityFilter === 0 || task.priority === priorityFilter
       );
-  }, [taskList, sortType, hideCompleted, importanceFilter]);
+  }, [taskList, sortType, hideCompleted, priorityFilter]);
 
   return (
     <Container>
@@ -69,7 +69,7 @@ const TaskListPage = () => {
         <TasksHeaderBtns>
           <SortButton
             onClick={() => setHideCompleted((prev) => !prev)}
-            isActived={!hideCompleted}
+            $isActived={!hideCompleted}
             title={hideCompleted ? '완료된 일정 표시' : '완료된 일정 숨기기'}
             aria-label={
               hideCompleted ? '완료된 일정 표시' : '완료된 일정 숨기기'
@@ -83,9 +83,9 @@ const TaskListPage = () => {
           </SortButton>
           <SortDropdown
             sortType={sortType}
-            importanceFilter={importanceFilter}
+            priorityFilter={priorityFilter}
             onSortChange={sortTypeChangeHandler}
-            onImportanceFilterChange={importanceFilterChangeHanlder}
+            onPriorityFilterChange={priorityFilterChangeHanlder}
           />
         </TasksHeaderBtns>
       </TaskListHeader>

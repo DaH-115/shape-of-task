@@ -1,25 +1,27 @@
-import { ReactNode } from 'react';
 import {
   CountNumber,
   PriorityText,
   ShapesWrapper,
   TaskItemWrapper,
 } from 'components/TaskListCount/TaskListCountItem.styles';
+import SingleShapes, { ShapeName } from 'components/figures/SingleShapes';
 
 interface TaskListCountItemProps {
-  children: ReactNode;
   priority: string;
   count: number;
+  shape: ShapeName;
 }
 
 const TaskListCountItem = ({
-  children,
   priority,
   count,
+  shape,
 }: TaskListCountItemProps) => {
   return (
     <TaskItemWrapper>
-      <ShapesWrapper>{children}</ShapesWrapper>
+      <ShapesWrapper>
+        <SingleShapes shapeName={shape} isCountTask={!!count} />
+      </ShapesWrapper>
       <PriorityText>{priority}</PriorityText>
       <CountNumber>{count}</CountNumber>
     </TaskItemWrapper>

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
-import StyledShapes from 'components/figures/StyledShapes';
+import StyledShapes from 'components/figures/SingleShapes';
 
 interface ShapeSelectMenuProps {
   id: string;

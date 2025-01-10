@@ -26,7 +26,7 @@ export const DropdownButton = styled.button`
   }
 `;
 
-export const DropdownMenu = styled.div<{ isOpen: boolean }>`
+export const DropdownMenu = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   top: calc(100% + 0.2rem);
   right: 0;
@@ -39,22 +39,22 @@ export const DropdownMenu = styled.div<{ isOpen: boolean }>`
   min-width: 8rem;
 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
-  transform: translateY(${({ isOpen }) => (isOpen ? '0' : '-0.4rem')});
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
+  transform: translateY(${({ $isOpen }) => ($isOpen ? '0' : '-0.4rem')});
   transition: all 0.2s ease-in-out;
   z-index: 10;
 `;
 
-export const MenuItem = styled.button<{ isActive?: boolean }>`
+export const MenuItem = styled.button<{ $isActive?: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
   width: 100%;
   padding: 8px 12px;
   border: none;
-  background: ${({ theme, isActive }) =>
-    isActive ? theme.commonColors.light_gray : 'transparent'};
+  background: ${({ theme, $isActive }) =>
+    $isActive ? theme.commonColors.light_gray : 'transparent'};
   text-align: left;
   cursor: pointer;
   border-radius: 6px;

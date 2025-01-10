@@ -24,11 +24,11 @@ import {
   IoIosCheckmarkCircle,
 } from 'react-icons/io';
 
-import StyledShapes from 'components/figures/StyledShapes';
+import SingleShapes from 'components/figures/SingleShapes';
 import Btn from 'components/Button/Btn';
 
 const TaskItemList = ({ renderedTask }: { renderedTask: TaskTypes }) => {
-  const { id, text, shape, importanceDesc, date, done } = renderedTask;
+  const { id, text, shape, priorityDesc, date, done } = renderedTask;
   const dispatch = useAppDispatch();
 
   const toggleTaskHandler = useCallback(() => {
@@ -62,7 +62,7 @@ const TaskItemList = ({ renderedTask }: { renderedTask: TaskTypes }) => {
           }}
         >
           {/* 도형 이미지 */}
-          <StyledShapes shapeName={shape} />
+          <SingleShapes shapeName={shape} />
           {done ? (
             <DoneButton $isChecked={done}>
               <IoIosCheckmarkCircle aria-hidden />
@@ -76,7 +76,7 @@ const TaskItemList = ({ renderedTask }: { renderedTask: TaskTypes }) => {
         <ContentText $isDone={done}>{text}</ContentText>
         <ContentBottom>
           <TaskDate>{date}</TaskDate>
-          <ShapeDesc>{importanceDesc}</ShapeDesc>
+          <ShapeDesc>{priorityDesc}</ShapeDesc>
         </ContentBottom>
         {/* 버튼 영역 */}
         <BtnWrapper>

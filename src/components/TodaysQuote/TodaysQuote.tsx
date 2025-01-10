@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useGetPostsQuery } from 'store/api/apiSlice';
-import Title from 'styles/TitleComponent';
+import Title from 'components/TitleComponent';
 import { BsPinAngleFill } from 'react-icons/bs';
 import { BsPinAngle } from 'react-icons/bs';
 import { HiOutlineRefresh } from 'react-icons/hi';

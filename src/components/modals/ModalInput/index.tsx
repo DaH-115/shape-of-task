@@ -21,10 +21,10 @@ import {
   ErrorMsg,
 } from 'components/modals/ModalInput/ModalInput.styles';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import Title from 'styles/TitleComponent';
+import Title from 'components/TitleComponent';
 import Modal from 'components/modals/Modal';
-import SelectedShapes from 'components/figures/SelectedShapes';
-import ShapeSelectMenu from 'components/menus/ShapeSelectMenu';
+import MultipleShapes from 'components/figures/MultipleShapes';
+import ShapeSelectMenu from 'components/menu/ShapeSelectMenu';
 import Btn from 'components/Button/Btn';
 
 const ModalInput = () => {
@@ -58,28 +58,28 @@ const ModalInput = () => {
     }
   }, [isInputState, editingTask, dispatch]);
 
-  const getImportance = useCallback((shape: string) => {
-    const importanceObj: { [key: string]: { number: number; desc: string } } = {
+  const getPriority = useCallback((shape: string) => {
+    const priorityObj: { [key: string]: { number: number; desc: string } } = {
       triangle: { number: 1, desc: '중요해요' },
       square: { number: 2, desc: '기억해 두세요' },
       circle: { number: 3, desc: '언제든지 해요' },
       default: { number: 0, desc: '' },
     };
-    return importanceObj[shape] || importanceObj.default;
+    return priorityObj[shape] || priorityObj.default;
   }, []);
 
   const createTask = useCallback(() => {
-    const { desc, number } = getImportance(shape);
+    const { desc, number } = getPriority(shape);
     return {
       id: editingTask.id || uuidv4(),
       date: today.toLocaleDateString(),
       text,
       shape,
-      importance: number,
-      importanceDesc: desc,
+      priority: number,
+      priorityDesc: desc,
       done: false,
     };
-  }, [editingTask, shape, text, today, getImportance]);
+  }, [editingTask, shape, text, today, getPriority]);
 
   const addTaskHandler = useCallback(() => {
     const newTask = createTask();
@@ -151,7 +151,7 @@ const ModalInput = () => {
         {isErrors.shapeError && <ErrorMsg>{isErrors.shapeError}</ErrorMsg>}
         <BtnWrapper>
           <SelectShapesWrapper>
-            <SelectedShapes shape={shape} />
+            <MultipleShapes shape={shape} />
             <ShapeSelectMenu
               id='shape-select-menu'
               isToggle={toggle}

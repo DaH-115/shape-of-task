@@ -11,6 +11,9 @@ import ErrorAlert from 'components/modals/ErrorAlert';
 import MainPage from 'pages/MainPage';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 
+const TaskListPage = lazy(() => import('pages/TaskListPage'));
+const ShapeListPage = lazy(() => import('pages/ShapeListPage'));
+
 const App = () => {
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
   const theme = useMemo(
@@ -21,8 +24,6 @@ const App = () => {
     [paletteName]
   );
   const isDesktop = useBreakpoint(768);
-  const TaskListPage = lazy(() => import('pages/TaskListPage'));
-  const ShapeListPage = lazy(() => import('pages/ShapeListPage'));
 
   return (
     <ThemeProvider theme={theme}>

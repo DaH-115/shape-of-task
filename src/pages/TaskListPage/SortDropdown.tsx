@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BiSortAlt2 } from 'react-icons/bi';
 import { FaSortAmountDown } from 'react-icons/fa';
-import StyledShapes from 'components/figures/StyledShapes';
+import StyledShapes from 'components/figures/SingleShapes';
 import {
   DropdownButton,
   DropdownContainer,
@@ -12,21 +12,21 @@ import {
   MenuSection,
 } from 'pages/TaskListPage/SortDropdown.styles';
 
-export type SortType = 'importance' | 'created';
-export type ImportanceFilter = 0 | 1 | 2 | 3;
+export type SortType = 'priority' | 'created';
+export type PriorityFilter = 0 | 1 | 2 | 3;
 
 interface SortDropdownProps {
   sortType: SortType;
-  importanceFilter: ImportanceFilter;
+  priorityFilter: PriorityFilter;
   onSortChange: (type: SortType) => void;
-  onImportanceFilterChange: (importance: ImportanceFilter) => void;
+  onPriorityFilterChange: (priority: PriorityFilter) => void;
 }
 
 const SortDropdown: React.FC<SortDropdownProps> = ({
   sortType,
-  importanceFilter,
+  priorityFilter,
   onSortChange,
-  onImportanceFilterChange,
+  onPriorityFilterChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,18 +46,18 @@ const SortDropdown: React.FC<SortDropdownProps> = ({
         <BiSortAlt2 aria-hidden />
       </DropdownButton>
 
-      <DropdownMenu isOpen={isOpen}>
+      <DropdownMenu $isOpen={isOpen}>
         <MenuSection>
           <MenuLabel>정렬</MenuLabel>
           <MenuItem
-            isActive={sortType === 'importance'}
-            onClick={() => sortChangeHandler('importance')}
+            $isActive={sortType === 'priority'}
+            onClick={() => sortChangeHandler('priority')}
           >
             <FaSortAmountDown />
             중요도순 정렬
           </MenuItem>
           <MenuItem
-            isActive={sortType === 'created'}
+            $isActive={sortType === 'created'}
             onClick={() => sortChangeHandler('created')}
           >
             <FaSortAmountDown />
@@ -70,9 +70,9 @@ const SortDropdown: React.FC<SortDropdownProps> = ({
         <MenuSection>
           <MenuLabel>중요도 필터</MenuLabel>
           <MenuItem
-            isActive={importanceFilter === 1}
+            $isActive={priorityFilter === 1}
             onClick={() => {
-              onImportanceFilterChange(importanceFilter === 1 ? 0 : 1);
+              onPriorityFilterChange(priorityFilter === 1 ? 0 : 1);
               setIsOpen(false);
             }}
           >
@@ -80,9 +80,9 @@ const SortDropdown: React.FC<SortDropdownProps> = ({
             중요한 일정만
           </MenuItem>
           <MenuItem
-            isActive={importanceFilter === 2}
+            $isActive={priorityFilter === 2}
             onClick={() => {
-              onImportanceFilterChange(importanceFilter === 2 ? 0 : 2);
+              onPriorityFilterChange(priorityFilter === 2 ? 0 : 2);
               setIsOpen(false);
             }}
           >
@@ -90,9 +90,9 @@ const SortDropdown: React.FC<SortDropdownProps> = ({
             기억할 일정만
           </MenuItem>
           <MenuItem
-            isActive={importanceFilter === 3}
+            $isActive={priorityFilter === 3}
             onClick={() => {
-              onImportanceFilterChange(importanceFilter === 3 ? 0 : 3);
+              onPriorityFilterChange(priorityFilter === 3 ? 0 : 3);
               setIsOpen(false);
             }}
           >

@@ -1,12 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+export type ShapeName = 'circle' | 'square' | 'triangle';
+
 export interface TaskTypes {
   id: string;
   date: string;
   text: string;
-  shape: string;
-  importance: number;
-  importanceDesc: string;
+  shape: ShapeName;
+  priority: number;
+  priorityDesc: string;
   done: boolean;
 }
 

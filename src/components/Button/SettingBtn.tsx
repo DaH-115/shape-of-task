@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { IoMdSettings } from 'react-icons/io';
-import SettingMenu from 'components/menus/SettingMenu';
+import SettingMenu from 'components/menu/Setting/SettingMenu';
 
 const SettingBtn = () => {
   const [isToggle, setIsToggle] = useState(false);

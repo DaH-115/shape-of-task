@@ -48,10 +48,10 @@ export const BtnWrapper = styled.div`
 export const SelectShapesWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 80%;
 
   ${({ theme }) => theme.device.tablet} {
-    width: 20%;
+    width: 50%;
   }
 `;
 

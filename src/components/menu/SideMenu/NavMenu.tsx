@@ -1,21 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import LinkBtn from 'components/Button/LinkBtn';
-import SlideMenu, { MenuProps } from 'components/menus/SlideMenu';
+import SideMenu, { MenuProps } from 'components/menu/SideMenu/SideMenu';
 import { BsX } from 'react-icons/bs';
 
 const NavMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
   return (
-    <SlideMenu isOpen={isOpen} sideMenuHandler={sideMenuHandler}>
+    <SideMenu isOpen={isOpen} sideMenuHandler={sideMenuHandler}>
       <HeaderWrapper>
         <CloseBtn onClick={sideMenuHandler} />
       </HeaderWrapper>
-      <SlideMenuBtnWrapper onClick={sideMenuHandler}>
+      <SideMenuBtnWrapper onClick={sideMenuHandler}>
         <LinkBtn linkTo='/' text='Home' />
         <LinkBtn linkTo='/task-list' text='Task List' />
         <LinkBtn linkTo='/shape-list' text='Shape List' />
-      </SlideMenuBtnWrapper>
-    </SlideMenu>
+      </SideMenuBtnWrapper>
+    </SideMenu>
   );
 };
 
@@ -32,6 +32,6 @@ const CloseBtn = styled(BsX)`
   font-size: 1.8rem;
 `;
 
-const SlideMenuBtnWrapper = styled.div`
+const SideMenuBtnWrapper = styled.div`
   width: 100%;
 `;

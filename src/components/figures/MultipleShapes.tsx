@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 import {
   StyledCircle,
   StyledSquare,
   StyledTriangle,
-} from 'components/figures/ShapeStyles';
+} from 'components/figures/SingleShapes.styles';
 
 const SelectedShapes = ({ shape }: { shape: string }) => {
   return (

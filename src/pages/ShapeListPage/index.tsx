@@ -9,7 +9,7 @@ import {
 } from 'pages/ShapeListPage/ShapeListPage.styles';
 import ShapeListItem from 'pages/ShapeListPage/ShapeListItem';
 import SaveBtn from 'components/Button/SaveBtn';
-import Title from 'styles/TitleComponent';
+import Title from 'components/TitleComponent';
 
 const ShapeListPage = () => {
   const taskListRef = useRef<HTMLUListElement>(null);

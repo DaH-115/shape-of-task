@@ -8,7 +8,7 @@ import {
   StyledLogo,
   Wrapper,
 } from 'layout/Header/Header.styles';
-import NavMenu from 'components/menus/NavMenu';
+import NavMenu from 'components/menu/SideMenu/NavMenu';
 
 const Header = () => {
   const [isToggle, setIsToggle] = useState(false);

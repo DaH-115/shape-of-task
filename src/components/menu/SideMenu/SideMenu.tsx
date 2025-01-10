@@ -8,22 +8,22 @@ export interface MenuProps {
   sideMenuHandler: () => void;
 }
 
-interface SlideMenuProps extends MenuProps {
+interface SideMenuProps extends MenuProps {
   children: ReactNode;
 }
 
-const SlideMenu = ({ isOpen, children, sideMenuHandler }: SlideMenuProps) => {
+const SideMenu = ({ isOpen, children, sideMenuHandler }: SideMenuProps) => {
   return (
     <PortalComponents>
-      <SlideBackdrop $isOpen={isOpen} onClick={sideMenuHandler} />
-      <SlideMenuContainer $isOpen={isOpen}>{children}</SlideMenuContainer>
+      <SideBackdrop $isOpen={isOpen} onClick={sideMenuHandler} />
+      <SideMenuContainer $isOpen={isOpen}>{children}</SideMenuContainer>
     </PortalComponents>
   );
 };
 
-export default React.memo(SlideMenu);
+export default React.memo(SideMenu);
 
-// For Slide Menu Animation Setting
+// Animation Setting
 const fadeSlideIn = keyframes`
   from {
     transform: translateX(100%);
@@ -48,7 +48,7 @@ const fadeSlideOut = keyframes`
   }
 `;
 
-const SlideMenuContainer = styled.div<{ $isOpen: boolean }>`
+const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
@@ -63,9 +63,10 @@ const SlideMenuContainer = styled.div<{ $isOpen: boolean }>`
   overflow-y: scroll;
 
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
-  animation: ${({ $isOpen }) => ($isOpen ? fadeSlideIn : fadeSlideOut)} 0.4s
+  animation: ${({ $isOpen }) => ($isOpen ? fadeSlideIn : fadeSlideOut)} 0.3s
     ease-in-out;
-  transition: visibility 0.4s ease-in-out;
+  transition: visibility 0.3s ease-in-out;
+  z-index: 10;
 
   ${({ theme }) => theme.device.tablet} {
     width: 20rem;
@@ -73,7 +74,7 @@ const SlideMenuContainer = styled.div<{ $isOpen: boolean }>`
   }
 `;
 
-const SlideBackdrop = styled.div<{ $isOpen: boolean }>`
+const SideBackdrop = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -83,6 +84,6 @@ const SlideBackdrop = styled.div<{ $isOpen: boolean }>`
   background-color: rgba(177, 177, 177, 0.5);
 
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
-  animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.4s ease-in-out;
-  transition: visibility 0.4s ease-in-out;
+  animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.3s ease-in-out;
+  transition: visibility 0.3s ease-in-out;
 `;
