@@ -1,10 +1,10 @@
-import React, { RefObject } from 'react';
+import React, { RefObject, useCallback, useState } from 'react';
 import styled from 'styled-components';
-import html2canvas from 'html2canvas';
-import saveAs from 'file-saver';
-import { useDispatch } from 'react-redux';
 import { errorAlertIsOpen } from 'store/modalSlice';
 import { GiSaveArrow } from 'react-icons/gi';
+import { useAppDispatch } from 'store/hooks';
+import captureImages from 'utils/captureImages';
+import saveAs from 'file-saver';
 
 interface BtnSaveProps {
   taskListRef: RefObject<HTMLUListElement>;
@@ -12,42 +12,55 @@ interface BtnSaveProps {
 }
 
 const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
-  const dispatch = useDispatch();
-  const captureModalOpen = React.useCallback(async () => {
-    if (isDisabled) return;
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
 
+  const captureImagesHandler = useCallback(async () => {
+    if (!taskListRef.current) {
+      dispatch(
+        errorAlertIsOpen('작업 목록이 없어 이미지를 저장할 수 없습니다.')
+      );
+      return;
+    }
+    setIsLoading(true);
     try {
-      const taskList = taskListRef.current!;
+      const { paddedCanvas, fileName } = await captureImages(taskListRef);
 
-      if (!taskList) {
-        dispatch(errorAlertIsOpen());
-        return;
-      }
-
-      const taskListImg = await html2canvas(taskList, { scale: 4 });
-      taskListImg.toBlob((blob) => {
-        if (blob) {
-          saveAs(blob, 'result.png');
-        }
+      await new Promise<void>((resolve, reject) => {
+        paddedCanvas.toBlob((blob) => {
+          if (blob) {
+            saveAs(blob, fileName);
+            resolve();
+          } else {
+            reject(dispatch(errorAlertIsOpen('이미지 저장에 실패했습니다.')));
+          }
+        });
       });
     } catch (error) {
-      dispatch(errorAlertIsOpen());
+      dispatch(errorAlertIsOpen('이미지 저장에 실패했습니다.'));
+    } finally {
+      setIsLoading(false);
     }
-  }, [taskListRef, isDisabled, dispatch]);
+  }, [taskListRef, dispatch]);
 
   return (
-    <ButtonWrapper onClick={captureModalOpen} $isDisabled={isDisabled}>
+    <ButtonWrapper
+      onClick={captureImagesHandler}
+      $isDisabled={isDisabled || isLoading}
+    >
       <button
         type='button'
-        disabled={isDisabled}
+        disabled={isDisabled || isLoading}
         title='이미지 저장'
         aria-label={
           isDisabled
             ? '완료된 작업이 없어 저장할 수 없습니다'
+            : isLoading
+            ? '이미지 저장 중'
             : '작업 목록을 이미지로 저장'
         }
       >
-        이미지 저장
+        {isLoading ? '저장 중' : '이미지 저장'}
       </button>
       <GiSaveArrow aria-hidden />
     </ButtonWrapper>

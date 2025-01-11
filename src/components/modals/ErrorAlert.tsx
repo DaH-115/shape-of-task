@@ -3,17 +3,12 @@ import { styled } from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { modalIsClose } from 'store/modalSlice';
 import Modal from 'components/modals/Modal';
-import Title from 'components/TitleComponent';
 import Btn from 'components/Button/Btn';
 
-const ErrorAlert = ({
-  message = '문제가 발생했습니다',
-}: {
-  message?: string;
-}) => {
+const ErrorAlert = () => {
   const dispatch = useAppDispatch();
-  const isOpen = useAppSelector(
-    (state) => state.modal.alertState.errorAlertOpen
+  const { alertOpen, message: alertMessage } = useAppSelector(
+    (state) => state.modal.alertState.errorAlert
   );
 
   const alertCloseHandler = useCallback(() => {
@@ -21,8 +16,9 @@ const ErrorAlert = ({
   }, [dispatch]);
 
   return (
-    <Modal isOpen={isOpen}>
-      <Title title='알림' desc={message} />
+    <Modal isOpen={alertOpen}>
+      <AlertTitle>알림</AlertTitle>
+      <AlertDesc>{alertMessage}</AlertDesc>
       <ConfrimBtnWrapper onClick={alertCloseHandler}>
         <Btn type='button' text='확인' />
       </ConfrimBtnWrapper>
@@ -31,6 +27,17 @@ const ErrorAlert = ({
 };
 
 export default ErrorAlert;
+
+const AlertTitle = styled.div`
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+`;
+
+const AlertDesc = styled.p`
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+`;
 
 const ConfrimBtnWrapper = styled.div`
   display: flex;

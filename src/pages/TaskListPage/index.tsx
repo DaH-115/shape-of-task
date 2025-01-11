@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import Title from 'components/TitleComponent';
 import {
   BlankMessage,
@@ -21,7 +21,7 @@ import SortDropdown, {
   PriorityFilter,
   SortType,
 } from 'pages/TaskListPage/SortDropdown';
-import ErrorAlert from 'components/modals/ErrorAlert';
+import { errorAlertIsOpen } from 'store/modalSlice';
 
 const TaskListPage = () => {
   const taskList = useAppSelector((state) => state.taskList.taskList);
@@ -31,6 +31,7 @@ const TaskListPage = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
   // 중요도 필터
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(0);
+  const dispatch = useAppDispatch();
 
   const sortTypeChangeHandler = (type: SortType) => {
     setSortType(type);
@@ -60,7 +61,7 @@ const TaskListPage = () => {
 
           // 둘 다 유효하지 않은 날짜
           if (!isValidA && !isValidB) {
-            <ErrorAlert message='날짜 형식이 잘못되었습니다.' />;
+            dispatch(errorAlertIsOpen('날짜 형식이 잘못되었습니다'));
             return 0;
           }
           // a만 유효하지 않은 날짜
@@ -77,7 +78,7 @@ const TaskListPage = () => {
       .filter(
         (task) => priorityFilter === 0 || task.priority === priorityFilter
       );
-  }, [taskList, sortType, hideCompleted, priorityFilter]);
+  }, [taskList, sortType, hideCompleted, priorityFilter, dispatch]);
 
   return (
     <Container>

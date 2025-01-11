@@ -5,7 +5,10 @@ interface initialStateProps {
   captureState: boolean;
   alertState: {
     noteAlertOpen: boolean;
-    errorAlertOpen: boolean;
+    errorAlert: {
+      alertOpen: boolean;
+      message: string;
+    };
   };
   confirmState: {
     removeModalOpen: boolean;
@@ -21,7 +24,10 @@ const initialState: initialStateProps = {
   captureState: false,
   alertState: {
     noteAlertOpen: false,
-    errorAlertOpen: false,
+    errorAlert: {
+      alertOpen: false,
+      message: '',
+    },
   },
   confirmState: {
     removeModalOpen: false,
@@ -45,8 +51,9 @@ const modalSlice = createSlice({
     notificationIsOpen: (state, action: PayloadAction<boolean>) => {
       state.notificationState.isOpen = action.payload;
     },
-    errorAlertIsOpen: (state) => {
-      state.alertState.errorAlertOpen = true;
+    errorAlertIsOpen: (state, action: PayloadAction<string>) => {
+      state.alertState.errorAlert.alertOpen = true;
+      state.alertState.errorAlert.message = action.payload;
     },
     noteAlertIsOpen: (state) => {
       state.alertState.noteAlertOpen = true;
@@ -60,7 +67,7 @@ const modalSlice = createSlice({
     modalIsClose: (state) => {
       state.inputState = false;
       state.captureState = false;
-      state.alertState.errorAlertOpen = false;
+      state.alertState.errorAlert.alertOpen = false;
       state.alertState.noteAlertOpen = false;
       state.notificationState.isOpen = false;
     },
