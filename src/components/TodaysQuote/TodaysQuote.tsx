@@ -1,5 +1,3 @@
-import React, { useCallback, useState } from 'react';
-import { useGetPostsQuery } from 'store/api/apiSlice';
 import Title from 'components/TitleComponent';
 import { BsPinAngleFill } from 'react-icons/bs';
 import { BsPinAngle } from 'react-icons/bs';
@@ -18,18 +16,17 @@ import {
   QuoteWrapper,
   RefreshIcon,
 } from 'components/TodaysQuote/TodaysQuote.styles';
+import useTodaysQuote from 'hooks/useTodaysQuote';
 
 const TodaysQuote = () => {
-  const [isPinned, setIsPinned] = useState(false);
-  const { data: quoteData, isLoading, isError, refetch } = useGetPostsQuery();
-
-  const refetchHandler = useCallback(() => {
-    if (!isPinned) refetch();
-  }, [isPinned, refetch]);
-
-  const togglePinHandler = useCallback(() => {
-    setIsPinned((prev) => !prev);
-  }, []);
+  const {
+    displayedQuote,
+    isError,
+    isLoading,
+    pinSaveHandler,
+    refetchHandler,
+    isPinned,
+  } = useTodaysQuote();
 
   return (
     <QuoteContainer>
@@ -41,9 +38,9 @@ const TodaysQuote = () => {
           <ErrorMessage>
             문제가 생겼어요. 잠시 후 다시 시도해 주세요
           </ErrorMessage>
-        ) : isLoading ? (
+        ) : isLoading && !isPinned ? (
           <LoadingMessage>Loading...</LoadingMessage>
-        ) : !isLoading && quoteData ? (
+        ) : displayedQuote ? (
           <QuoteWrapper>
             <IconsWrapper>
               <RefreshIcon
@@ -58,7 +55,7 @@ const TodaysQuote = () => {
               <PinIcon
                 title='게시글 고정하기'
                 aria-label='현재 명언을 고정하기'
-                onClick={togglePinHandler}
+                onClick={pinSaveHandler}
                 $isPinned={isPinned}
               >
                 {isPinned ? (
@@ -68,8 +65,8 @@ const TodaysQuote = () => {
                 )}
               </PinIcon>
             </IconsWrapper>
-            <QuoteText>{quoteData.content}</QuoteText>
-            <QuoteAuthor>- {quoteData.author}</QuoteAuthor>
+            <QuoteText>{displayedQuote.content}</QuoteText>
+            <QuoteAuthor>- {displayedQuote.author}</QuoteAuthor>
           </QuoteWrapper>
         ) : null}
       </QuoteContent>
