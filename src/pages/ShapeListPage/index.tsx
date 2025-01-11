@@ -6,7 +6,7 @@ import {
   ShapeList,
   ShapeListHeader,
   ShapeListWrapper,
-} from 'pages/ShapeListPage/ShapeListPage.styles';
+} from 'pages/ShapeListPage/index.styles';
 import ShapeListItem from 'pages/ShapeListPage/ShapeListItem';
 import SaveBtn from 'components/Button/SaveBtn';
 import Title from 'components/TitleComponent';

@@ -29,5 +29,5 @@ const ContentsTitle = styled.h1`
 
 const ContentsTitleDesc = styled.p`
   font-size: 0.8rem;
-  color: ${({ theme }) => theme.commonColors.gray};
+  color: ${({ theme }) => theme.commonColors.black};
 `;

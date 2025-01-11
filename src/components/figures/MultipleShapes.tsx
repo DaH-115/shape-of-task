@@ -10,9 +10,9 @@ import { ShapeName } from 'store/taskListSlice';
 const SelectedShapes = ({ shape }: { shape: ShapeName }) => {
   return (
     <ShapeWrapper>
-      <StyledTriangle $shapeName={shape} />
-      <StyledSquare $shapeName={shape} />
-      <StyledCircle $shapeName={shape} />
+      <StyledTriangle $shapeName={shape} $isCountTask />
+      <StyledSquare $shapeName={shape} $isCountTask />
+      <StyledCircle $shapeName={shape} $isCountTask />
     </ShapeWrapper>
   );
 };

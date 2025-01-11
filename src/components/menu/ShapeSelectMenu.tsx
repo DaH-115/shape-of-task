@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import StyledShapes from 'components/figures/SingleShapes';
 import { ShapeName } from 'store/taskListSlice';
+import SingleShapes from 'components/figures/SingleShapes';
 
 interface ShapeSelectMenuProps {
   id: string;
@@ -38,7 +39,7 @@ const ShapeSelectMenu = ({
     <SelectMenuWrapper id={id} $isToggle={isToggle} role='listbox'>
       <SelectMenuList onClick={getShapeHandler}>
         <SelectMenuItem>
-          <StyledShapes shapeName='triangle' />
+          <SingleShapes shapeName='triangle' />
           <ShapeDesc data-shape='triangle'>{'중요해요'}</ShapeDesc>
         </SelectMenuItem>
         <SelectMenuItem>

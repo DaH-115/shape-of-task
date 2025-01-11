@@ -33,7 +33,7 @@ export const Textarea = styled.textarea`
   font-size: 1rem;
 
   &:focus {
-    outline: 0.2rem solid ${({ theme }) => theme.commonColors.gray};
+    outline: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
     border-radius: 0.4rem;
   }
 
