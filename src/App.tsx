@@ -66,6 +66,7 @@ const DesktopContainer = styled.div`
 const MobileContainer = styled.div`
   display: block;
   width: 100%;
+  min-width: ${({ theme }) => theme.size.mobile};
   height: 100dvh;
 
   ${({ theme }) => theme.device.tablet} {
