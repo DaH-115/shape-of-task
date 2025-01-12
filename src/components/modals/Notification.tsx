@@ -51,7 +51,6 @@ const NoteWrapper = styled.div<{ $isOpen: boolean }>`
   left: 0;
 
   width: 100%;
-  max-width: ${({ theme }) => theme.size.mobile};
   padding: 1rem;
 
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
@@ -60,12 +59,18 @@ const NoteWrapper = styled.div<{ $isOpen: boolean }>`
   transition: visibility 0.4s ease-in-out;
 
   cursor: pointer;
+
+  ${({ theme }) => theme.device.tablet} {
+    max-width: ${({ theme }) => theme.size.mobile};
+  }
 `;
 
 const MessageWrapper = styled.div`
   display: flex;
   align-items: center;
 
+  width: 100%;
+  min-width: ${({ theme }) => theme.size.mobile};
   font-size: 0.9rem;
   text-align: center;
   padding: 1rem 0.5rem;

@@ -58,7 +58,7 @@ export const ButtonWrapper = styled.div<{ $isEmpty: boolean }>`
   }
 
   &:hover,
-  :active {
+  &:active {
     background-color: ${({ theme, $isEmpty }) =>
       $isEmpty ? theme.colors.important : '#fff'};
     transition: background-color 0.2s ease-in-out;

@@ -28,7 +28,7 @@ const AddBtnContainer = styled.div`
   margin-bottom: 1rem;
 `;
 
-const StyledAddIcon = styled(IoIosAddCircleOutline)`
+export const StyledAddIcon = styled(IoIosAddCircleOutline)`
   color: #fff;
   font-size: 1.2rem;
   margin-left: 0.3rem;
