@@ -9,7 +9,6 @@ interface QuoteTypes {
   tags: string[];
 }
 
-// apiSlice.ts
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
@@ -17,7 +16,7 @@ export const apiSlice = createApi({
   }),
   endpoints: (builder) => ({
     getPosts: builder.query<QuoteTypes, void>({
-      query: () => '/quotes/random',
+      query: () => '/quotes/random?maxLength=100',
       transformResponse: (response: QuoteTypes[] | QuoteTypes) => {
         const quoteData = Array.isArray(response) ? response[0] : response;
 

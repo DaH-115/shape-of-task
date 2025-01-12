@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: 100%;
-  padding: 1rem 1.5rem;
-`;
-
 export const ShapesWrapper = styled.div`
   display: flex;
   justify-content: center;

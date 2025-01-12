@@ -33,7 +33,7 @@ export default memo(ColorPalette);
 
 const Container = styled.div`
   width: 100%;
-  margin-top: 1.6rem;
+  margin-top: 1.5rem;
 `;
 
 const PaletteWrapper = styled.div`
@@ -53,8 +53,8 @@ const PaletteName = styled.p<{ $isSelected: boolean }>`
 `;
 
 const PaletteColors = styled.div<{ $themeColor: string; $isSelected: boolean }>`
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.2rem;
+  height: 2.2rem;
   border-radius: 50%;
   background-color: ${({ $themeColor }) => $themeColor};
 

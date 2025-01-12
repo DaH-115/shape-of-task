@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
+import styled from 'styled-components';
 import { useAppSelector } from 'store/hooks';
 import { TaskTypes } from 'store/taskListSlice';
-import { Container } from 'components/TaskListCount/TaskListCountItem.styles';
 import TaskListCountItem from 'components/TaskListCount/TaskListCountItem';
 
 const TaskListCount = () => {
@@ -49,3 +49,12 @@ const TaskListCount = () => {
 };
 
 export default TaskListCount;
+
+const Container = styled.div`
+  width: 100%;
+  padding: 1rem 1.5rem;
+
+  ${({ theme }) => theme.device.tablet} {
+    padding-top: 0;
+  }
+`;

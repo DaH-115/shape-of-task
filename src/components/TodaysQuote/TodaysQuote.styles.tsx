@@ -24,7 +24,7 @@ export const QuoteContainer = styled.div`
   align-items: center;
 
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   ${({ theme }) => theme.device.tablet} {
     padding: 1rem;
@@ -104,18 +104,24 @@ export const PinIcon = styled.div<{ $isPinned: boolean }>`
 export const QuoteWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100%;
+  height: 6rem;
   border-radius: 1rem;
+
+  overflow: scroll;
+  ${({ theme }) => theme.mixins.hideScrollbar}
 `;
 
 export const QuoteText = styled.strong`
+  width: 100%;
+
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  line-height: 1.1;
   font-style: normal;
-  margin-bottom: 1rem;
-  padding: 0 2rem;
+  padding: 0 1rem;
+  margin-bottom: 0.5rem;
 
   ${({ theme }) => theme.device.tablet} {
     font-size: 0.9rem;
