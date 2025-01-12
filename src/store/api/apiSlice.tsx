@@ -1,27 +1,32 @@
+// features/api/apiSlice.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-interface QuoteTypes {
-  _id: string;
-  content: string;
+interface NinjasQuote {
+  quote: string;
   author: string;
-  authorSlug: string;
-  length: number;
-  tags: string[];
+  category: string;
 }
 
 export const apiSlice = createApi({
-  reducerPath: 'api',
+  reducerPath: 'ninjasApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.quotable.io',
+    baseUrl: 'https://api.api-ninjas.com/v1',
+    prepareHeaders: (headers) => {
+      headers.set('X-Api-Key', process.env.REACT_APP_API_NINJAS_KEY!);
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
-    getPosts: builder.query<QuoteTypes, void>({
-      query: () => '/quotes/random?maxLength=100',
-      transformResponse: (response: QuoteTypes[] | QuoteTypes) => {
-        const quoteData = Array.isArray(response) ? response[0] : response;
+    getQuote: builder.query<NinjasQuote, string | void>({
+      query: (category) => ({
+        url: '/quotes',
+        params: category ? { category } : undefined,
+      }),
+      transformResponse: (response: NinjasQuote[]) => {
+        const quoteData = response[0];
 
-        if (!quoteData || !quoteData.content || !quoteData.author) {
-          console.error('Received invalid quote data:', quoteData);
+        if (!quoteData || !quoteData.quote || !quoteData.author) {
+          console.error('Invalid quote data received:', quoteData);
           throw new Error('필수 데이터가 누락되었습니다');
         }
 
@@ -31,11 +36,11 @@ export const apiSlice = createApi({
         console.error('API Error:', error);
         return {
           status: error.status,
-          message: '에러가 발생했습니다.',
+          message: 'API 호출 중 에러가 발생했습니다.',
         };
       },
     }),
   }),
 });
 
-export const { useGetPostsQuery } = apiSlice;
+export const { useGetQuoteQuery } = apiSlice;

@@ -66,7 +66,7 @@ const TodaysQuote = () => {
             </ErrorMessage>
           ) : displayedQuote ? (
             <>
-              <QuoteText>{displayedQuote.content}</QuoteText>
+              <QuoteText>{displayedQuote.quote}</QuoteText>
               <QuoteAuthor>- {displayedQuote.author}</QuoteAuthor>
             </>
           ) : null}

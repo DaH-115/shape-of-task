@@ -115,11 +115,7 @@ export const QuoteWrapper = styled.div`
 
 export const QuoteText = styled.strong`
   width: 100%;
-
   text-align: center;
-  font-size: 1.1rem;
-  line-height: 1.1;
-  font-style: normal;
   padding: 0 1rem;
   margin-bottom: 0.5rem;
 

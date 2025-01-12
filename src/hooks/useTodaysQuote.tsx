@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useGetPostsQuery } from 'store/api/apiSlice';
+import { useGetQuoteQuery } from 'store/api/apiSlice';
 
 interface QuoteType {
-  content: string;
+  quote: string;
   author: string;
+  category?: string;
 }
 
 // localStorage에 저장되는 상태 타입
@@ -42,7 +43,7 @@ const useTodaysQuote = (): UseTodaysQuoteReturn => {
   const { savedPinned, savedQuote } = useMemo(() => getInitialState(), []);
   const [isPinned, setIsPinned] = useState(savedPinned);
   const [pinnedQuote, setPinnedQuote] = useState<QuoteType | null>(savedQuote);
-  const { data: quoteData, isLoading, isError, refetch } = useGetPostsQuery();
+  const { data: quoteData, isLoading, isError, refetch } = useGetQuoteQuery();
 
   const refetchHandler = useCallback(() => {
     if (!isPinned) refetch();
