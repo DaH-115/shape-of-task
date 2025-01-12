@@ -59,9 +59,8 @@ const taskListSlice = createSlice({
       )[0];
     },
     updateTask: (state, action: PayloadAction<TaskTypes>) => {
-      const { id, date, text, shape, done } = action.payload;
       state.taskList = state.taskList.map((task) =>
-        task.id === id ? { ...task, date, text, shape, done } : task
+        task.id === action.payload.id ? { ...task, ...action.payload } : task
       );
       setItemHandler(state.taskList);
       state.selectedTodoId = '';
