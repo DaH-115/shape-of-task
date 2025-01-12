@@ -8,5 +8,8 @@ declare module 'styled-components' {
     device: DeviceTypes;
     commonColors: CommonColorsTypes;
     colors: PaletteTypes;
+    mixins: {
+      hideScrollbar: string;
+    };
   }
 }

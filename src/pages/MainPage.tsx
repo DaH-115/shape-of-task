@@ -27,13 +27,7 @@ const Container = styled.div`
   min-width: ${({ theme }) => theme.size.mobile};
   padding: 1rem;
 
-  /* scrollbar */
-  overflow-y: scroll;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-  }
+  ${({ theme }) => theme.mixins.hideScrollbar}
 `;
 
 const Wrapper = styled.div`

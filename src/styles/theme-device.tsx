@@ -1,4 +1,5 @@
 import { commonColors } from 'styles/theme-colors';
+import { mixins } from 'styles/them-scrollbar';
 
 export interface SizeTypes {
   mobile: string;
@@ -28,4 +29,5 @@ export const defaultTheme = {
   size,
   device,
   commonColors,
+  mixins,
 };

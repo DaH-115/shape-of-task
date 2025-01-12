@@ -67,8 +67,6 @@ const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
   padding: 1rem;
 
-  overflow-y: scroll;
-
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
   animation: ${({ $isOpen }) => ($isOpen ? fadeSlideIn : fadeSlideOut)} 0.3s
     ease-in-out;
