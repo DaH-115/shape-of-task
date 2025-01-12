@@ -1,5 +1,5 @@
 import { commonColors } from 'styles/theme-colors';
-import { mixins } from 'styles/them-scrollbar';
+import { mixins } from 'styles/theme-scrollbar';
 
 export interface SizeTypes {
   mobile: string;
