@@ -118,4 +118,6 @@ const ShapeDesc = styled.p`
   width: 100%;
   font-size: 0.9rem;
   margin-left: 0.4rem;
+
+  cursor: pointer;
 `;

@@ -15,11 +15,6 @@ export const TaskListHeader = styled.div`
 
   width: 100%;
   margin-bottom: 1rem;
-  padding: 0 1rem;
-
-  ${({ theme }) => theme.device.tablet} {
-    padding: 0;
-  }
 `;
 
 export const SortButton = styled.button<{ $isActived: boolean }>`
