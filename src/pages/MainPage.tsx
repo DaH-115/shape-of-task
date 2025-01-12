@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import SettingBtn from 'components/Button/SettingBtn';
 import TodaysQuote from 'components/TodaysQuote/TodaysQuote';
@@ -5,21 +7,27 @@ import TaskListCount from 'components/TaskListCount/TaskListCount';
 import { StyledAddIcon } from 'components/Button/AddBtn';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import Btn from 'components/Button/Btn';
-import { Link } from 'react-router-dom';
 
 const MainPage = () => {
   const isDesktop = useBreakpoint(768);
+  const navigate = useNavigate();
+
+  const navigateHandler = useCallback(() => {
+    navigate('/task-list');
+  }, [navigate]);
 
   return (
     <Container>
       <Wrapper>
         <TodaysQuote />
         {!isDesktop && (
-          <Link to='/task-list'>
-            <Btn type={'button'} text={'일정 추가하기'}>
-              <StyledAddIcon aria-hidden />
-            </Btn>
-          </Link>
+          <Btn
+            type={'button'}
+            text={'일정 추가하기'}
+            onClickFn={navigateHandler}
+          >
+            <StyledAddIcon aria-hidden />
+          </Btn>
         )}
         <TaskListCount />
         <SettingBtn />
