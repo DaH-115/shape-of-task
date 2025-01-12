@@ -7,7 +7,7 @@ import captureImages from 'utils/captureImages';
 import saveAs from 'file-saver';
 
 interface BtnSaveProps {
-  taskListRef: RefObject<HTMLUListElement>;
+  taskListRef: RefObject<HTMLUListElement | null>;
   isDisabled: boolean;
 }
 
@@ -32,7 +32,7 @@ const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
             saveAs(blob, fileName);
             resolve();
           } else {
-            reject(dispatch(errorAlertIsOpen('이미지 저장에 실패했습니다.')));
+            reject(dispatch(errorAlertIsOpen('이미지 변환에 실패했습니다.')));
           }
         });
       });

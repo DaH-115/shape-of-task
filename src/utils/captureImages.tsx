@@ -1,8 +1,12 @@
 import html2canvas from 'html2canvas';
 
 const captureImages = async (
-  taskListRef: React.RefObject<HTMLUListElement>
+  taskListRef: React.RefObject<HTMLUListElement | null>
 ) => {
+  if (!taskListRef.current) {
+    throw new Error('저장할 이미지가 없습니다.');
+  }
+
   const taskList = taskListRef.current!;
 
   const taskListImg = await html2canvas(taskList, {

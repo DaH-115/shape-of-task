@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import StyledShapes from 'components/shapes/SingleShapes';
 import { ShapeName } from 'store/taskListSlice';

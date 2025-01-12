@@ -12,7 +12,7 @@ const MainPage = () => {
     <Container>
       <Wrapper>
         <TodaysQuote />
-        {isDesktop && <AddBtn />}
+        {!isDesktop && <AddBtn />}
         <TaskListCount />
         <SettingBtn />
       </Wrapper>
