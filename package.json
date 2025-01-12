@@ -49,10 +49,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "7.25.9",
+    "@babel/helper-builder-binary-assignment-operator-visitor": "^7.25.9",
     "@babel/helper-function-name": "^7.24.7",
     "@babel/helper-split-export-declaration": "^7.24.7",
     "@babel/plugin-proposal-async-generator-functions": "^7.20.7",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "7.25.9",
+    "@babel/preset-react": "7.25.9",
     "@types/file-saver": "^2.0.5",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",
