@@ -33,7 +33,7 @@ export const ButtonWrapper = styled.div<{ $isEmpty: boolean }>`
   height: 100%;
   background-color: ${({ theme, $isEmpty }) =>
     $isEmpty ? '#fff' : theme.colors.important};
-  border: 0.1rem solid
+  border: 0.08rem solid
     ${({ theme, $isEmpty }) =>
       $isEmpty ? theme.commonColors.light_gray : theme.colors.important};
   border-radius: 2rem;
