@@ -4,7 +4,8 @@ import {
   ShapesWrapper,
   TaskItemWrapper,
 } from 'components/TaskListCount/TaskListCountItem.styles';
-import SingleShapes from 'components/figures/SingleShapes';
+import SingleShapes from 'components/shapes/SingleShapes';
+import { memo } from 'react';
 import { ShapeName } from 'store/taskListSlice';
 
 interface TaskListCountItemProps {
@@ -29,4 +30,4 @@ const TaskListCountItem = ({
   );
 };
 
-export default TaskListCountItem;
+export default memo(TaskListCountItem);

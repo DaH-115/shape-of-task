@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
-import StyledShapes from 'components/figures/SingleShapes';
+import StyledShapes from 'components/shapes/SingleShapes';
 import { ShapeName } from 'store/taskListSlice';
-import SingleShapes from 'components/figures/SingleShapes';
+import SingleShapes from 'components/shapes/SingleShapes';
 
 interface ShapeSelectMenuProps {
   id: string;
@@ -55,7 +55,7 @@ const ShapeSelectMenu = ({
   );
 };
 
-export default React.memo(ShapeSelectMenu);
+export default memo(ShapeSelectMenu);
 
 // Animation Setting
 const fadeSlideIn = keyframes`

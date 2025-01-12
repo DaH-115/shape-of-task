@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useAppSelector } from 'store/hooks';
 import { TaskTypes } from 'store/taskListSlice';
 import { Container } from 'components/TaskListCount/TaskListCountItem.styles';
@@ -6,18 +6,21 @@ import TaskListCountItem from 'components/TaskListCount/TaskListCountItem';
 
 const TaskListCount = () => {
   const taskList = useAppSelector((state) => state.taskList.taskList);
-  const countTaskHandler = (taskList: TaskTypes[], shape: string): number => {
-    return taskList.filter(
-      (item: TaskTypes) => item.shape === shape && item.done === false
-    ).length;
-  };
+  const countTaskHandler = useCallback(
+    (taskList: TaskTypes[], shape: string): number => {
+      return taskList.filter(
+        (item: TaskTypes) => item.shape === shape && item.done === false
+      ).length;
+    },
+    []
+  );
   const shapeCounts = useMemo(() => {
     return {
       triangle: countTaskHandler(taskList, 'triangle'),
       square: countTaskHandler(taskList, 'square'),
       circle: countTaskHandler(taskList, 'circle'),
     };
-  }, [taskList]);
+  }, [taskList, countTaskHandler]);
   const {
     triangle: triangleValue,
     square: squareValue,

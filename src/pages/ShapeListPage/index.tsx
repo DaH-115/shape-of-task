@@ -1,4 +1,4 @@
-import React, { memo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useAppSelector } from 'store/hooks';
 import {
   BlankMessage,
@@ -14,19 +14,21 @@ import Title from 'components/TitleComponent';
 const ShapeListPage = () => {
   const taskListRef = useRef<HTMLUListElement>(null);
   const taskList = useAppSelector((state) => state.taskList.taskList);
-  const doneList = taskList.filter((task) => task.done === true);
-  const isDisabled = doneList.length === 0;
+  const completedTakList = useMemo(
+    () => taskList.filter((task) => task.done === true),
+    [taskList]
+  );
+  const isDisabled = completedTakList.length === 0;
 
   return (
     <Container>
       <ShapeListHeader>
         <Title title='My Shapes' desc='완료된 일' />
       </ShapeListHeader>
-
       <ShapeListWrapper>
-        {doneList.length > 0 ? (
+        {completedTakList.length > 0 ? (
           <ShapeList ref={taskListRef}>
-            {doneList.map((task) => (
+            {completedTakList.map((task) => (
               <ShapeListItem key={task.id} shape={task.shape} />
             ))}
           </ShapeList>
@@ -39,4 +41,4 @@ const ShapeListPage = () => {
   );
 };
 
-export default memo(ShapeListPage);
+export default ShapeListPage;

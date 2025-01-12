@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -19,7 +19,7 @@ const LinkBtn = ({ linkTo, text }: LinkBtnProps) => {
   );
 };
 
-export default LinkBtn;
+export default memo(LinkBtn);
 
 const Wrapper = styled.div`
   font-size: 1.2rem;

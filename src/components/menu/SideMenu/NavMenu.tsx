@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import LinkBtn from 'components/Button/LinkBtn';
 import SideMenu, { MenuProps } from 'components/menu/SideMenu/SideMenu';
@@ -11,15 +11,15 @@ const NavMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
         <CloseBtn onClick={sideMenuHandler} aria-label='메뉴 닫기' />
       </HeaderWrapper>
       <SideMenuBtnWrapper onClick={sideMenuHandler}>
-        <LinkBtn linkTo='/' text='Home' />
-        <LinkBtn linkTo='/task-list' text='Task List' />
-        <LinkBtn linkTo='/shape-list' text='Shape List' />
+        <LinkBtn linkTo={'/'} text={'Home'} />
+        <LinkBtn linkTo={'/task-list'} text={'Task List'} />
+        <LinkBtn linkTo={'/shape-list'} text={'Shape List'} />
       </SideMenuBtnWrapper>
     </SideMenu>
   );
 };
 
-export default React.memo(NavMenu);
+export default memo(NavMenu);
 
 const HeaderWrapper = styled.div`
   display: flex;

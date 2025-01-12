@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import PortalComponents from 'components/modals/PortalComponents';
 import Backdrop from 'components/modals/Backdrop';
@@ -17,7 +17,7 @@ const Modal = ({ children, isOpen }: ModalProps) => {
   );
 };
 
-export default React.memo(Modal);
+export default memo(Modal);
 
 const slideUp = keyframes`
   from {

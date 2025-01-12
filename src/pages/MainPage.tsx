@@ -1,18 +1,18 @@
-import React from 'react';
 import styled from 'styled-components';
 import SettingBtn from 'components/Button/SettingBtn';
 import TodaysQuote from 'components/TodaysQuote/TodaysQuote';
 import TaskListCount from 'components/TaskListCount/TaskListCount';
 import AddBtn from 'components/Button/AddBtn';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 
 const MainPage = () => {
+  const isDesktop = useBreakpoint(768);
+
   return (
     <Container>
       <Wrapper>
         <TodaysQuote />
-        <ResponsiveWrapper>
-          <AddBtn />
-        </ResponsiveWrapper>
+        {isDesktop && <AddBtn />}
         <TaskListCount />
         <SettingBtn />
       </Wrapper>
@@ -20,7 +20,7 @@ const MainPage = () => {
   );
 };
 
-export default React.memo(MainPage);
+export default MainPage;
 
 const Container = styled.div`
   width: 100%;
@@ -48,11 +48,5 @@ const Wrapper = styled.div`
   ${({ theme }) => theme.device.tablet} {
     border: 0.1rem solid ${({ theme }) => theme.commonColors.gray};
     box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
-  }
-`;
-
-const ResponsiveWrapper = styled.div`
-  ${({ theme }) => theme.device.tablet} {
-    display: none;
   }
 `;

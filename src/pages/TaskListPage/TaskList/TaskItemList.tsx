@@ -24,11 +24,11 @@ import {
   IoIosCheckmarkCircle,
 } from 'react-icons/io';
 
-import SingleShapes from 'components/figures/SingleShapes';
+import SingleShapes from 'components/shapes/SingleShapes';
 import Btn from 'components/Button/Btn';
 
-const TaskItemList = ({ renderedTask }: { renderedTask: TaskTypes }) => {
-  const { id, text, shape, priorityDesc, date, done } = renderedTask;
+const TaskItemList = ({ processTask }: { processTask: TaskTypes }) => {
+  const { id, text, shape, priorityDesc, date, done } = processTask;
   const dispatch = useAppDispatch();
 
   const toggleTaskHandler = useCallback(() => {

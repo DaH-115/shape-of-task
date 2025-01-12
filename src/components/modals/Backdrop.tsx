@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { modalIsClose } from 'store/modalSlice';
@@ -18,7 +18,7 @@ const Backdrop = ({ isOpen }: BackdropProps) => {
   return <BackdropComponent $isOpen={isOpen} onClick={onModalCloseHandler} />;
 };
 
-export default Backdrop;
+export default memo(Backdrop);
 
 const BackdropComponent = styled.div<{ $isOpen: boolean }>`
   position: fixed;

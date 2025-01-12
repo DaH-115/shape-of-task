@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 import styled from 'styled-components';
 
 export interface BtnProps {
@@ -26,7 +26,7 @@ const Btn = ({
   );
 };
 
-export default Btn;
+export default memo(Btn);
 
 export const ButtonWrapper = styled.div<{ $isEmpty: boolean }>`
   width: 100%;

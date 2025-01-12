@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from 'store/hooks';
 import { themeChange } from 'store/themeChangeSlice';
@@ -29,7 +29,7 @@ const ColorPalette = ({ name, isSelected }: ColorPaletteProps) => {
   );
 };
 
-export default ColorPalette;
+export default memo(ColorPalette);
 
 const Container = styled.div`
   width: 100%;

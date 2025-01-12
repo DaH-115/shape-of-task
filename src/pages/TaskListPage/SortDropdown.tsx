@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { BiSortAlt2 } from 'react-icons/bi';
-import StyledShapes from 'components/figures/SingleShapes';
+import StyledShapes from 'components/shapes/SingleShapes';
 import {
   DropdownButton,
   DropdownContainer,
@@ -10,9 +10,7 @@ import {
   MenuLabel,
   MenuSection,
 } from 'pages/TaskListPage/SortDropdown.styles';
-
-export type SortType = 'priority' | 'created';
-export type PriorityFilter = 0 | 1 | 2 | 3;
+import { PriorityFilter, SortType } from 'pages/TaskListPage';
 
 interface SortDropdownProps {
   sortType: SortType;
@@ -21,12 +19,12 @@ interface SortDropdownProps {
   onPriorityFilterChange: (priority: PriorityFilter) => void;
 }
 
-const SortDropdown: React.FC<SortDropdownProps> = ({
+const SortDropdown = ({
   sortType,
   priorityFilter,
   onSortChange,
   onPriorityFilterChange,
-}) => {
+}: SortDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const sortChangeHandler = useCallback(
@@ -37,10 +35,14 @@ const SortDropdown: React.FC<SortDropdownProps> = ({
     [onSortChange]
   );
 
+  const dropdownToggleHandler = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
+
   return (
     <DropdownContainer>
       <DropdownButton
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={dropdownToggleHandler}
         title='정렬 및 필터 옵션'
         aria-expanded={isOpen}
         aria-haspopup='true'
@@ -105,4 +107,4 @@ const SortDropdown: React.FC<SortDropdownProps> = ({
   );
 };
 
-export default SortDropdown;
+export default memo(SortDropdown);

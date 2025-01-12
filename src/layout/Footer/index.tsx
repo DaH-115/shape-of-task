@@ -6,7 +6,7 @@ import {
   FooterWrapper,
   GitHubIcon,
   HomeIcon,
-} from 'layout/Footer/Footer.styles';
+} from 'layout/Footer/index.styles';
 
 const Footer = () => {
   return (
@@ -14,7 +14,7 @@ const Footer = () => {
       <FooterTitle>{'SHAPE OF TASK'}</FooterTitle>
       <FooterIconWrapper>
         <FooterLinkBtn
-          href='https://github.com/DaH-115/tsc-todo-list'
+          href='https://github.com/DaH-115/shape-of-task'
           target='_blank'
           rel='noreferrer'
           aria-label='GitHub 저장소로 이동'

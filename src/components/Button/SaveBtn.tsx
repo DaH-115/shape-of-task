@@ -1,4 +1,4 @@
-import React, { RefObject, useCallback, useState } from 'react';
+import { memo, RefObject, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { errorAlertIsOpen } from 'store/modalSlice';
 import { GiSaveArrow } from 'react-icons/gi';
@@ -67,7 +67,7 @@ const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
   );
 };
 
-export default SaveBtn;
+export default memo(SaveBtn);
 
 const ButtonWrapper = styled.div<{
   $isDisabled: boolean;

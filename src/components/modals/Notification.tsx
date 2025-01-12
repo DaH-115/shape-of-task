@@ -43,7 +43,7 @@ const Notification = () => {
   );
 };
 
-export default React.memo(Notification);
+export default Notification;
 
 const NoteWrapper = styled.div<{ $isOpen: boolean }>`
   position: fixed;

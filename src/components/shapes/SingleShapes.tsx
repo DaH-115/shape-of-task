@@ -5,7 +5,7 @@ import {
   StyledCircle,
   StyledSquare,
   StyledTriangle,
-} from 'components/figures/SingleShapes.styles';
+} from 'components/shapes/SingleShapes.styles';
 
 interface SingleShapesProps {
   shapeName: ShapeName;

@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 
 interface TitleProps {
@@ -15,7 +15,7 @@ const Title = ({ title, desc }: TitleProps) => {
   );
 };
 
-export default React.memo(Title);
+export default memo(Title);
 
 const TitleWrapper = styled.div`
   width: 100%;

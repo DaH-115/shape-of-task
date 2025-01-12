@@ -1,9 +1,10 @@
-import React, {
+import {
   useState,
   useCallback,
   useRef,
   useMemo,
   useEffect,
+  ChangeEvent,
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -24,11 +25,11 @@ import {
   SubmitBtnWrapper,
   ToggleBtn,
   ErrorMsg,
-} from 'components/modals/ModalInput/ModalInput.styles';
+} from 'components/modals/ModalInput/index.styles';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Title from 'components/TitleComponent';
 import Modal from 'components/modals/Modal';
-import MultipleShapes from 'components/figures/MultipleShapes';
+import MultipleShapes from 'components/shapes/MultipleShapes';
 import ShapeSelectMenu from 'components/menu/ShapeSelectMenu';
 import Btn from 'components/Button/Btn';
 
@@ -99,7 +100,7 @@ const ModalInput = () => {
     dispatch(updateTask(updatedTask));
   }, [dispatch, createTask]);
 
-  const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const text = event.target.value;
     setText(text);
   };
@@ -144,13 +145,17 @@ const ModalInput = () => {
     setShape(shapeName);
   }, []);
 
+  const shapeSelectMenuToggle = useCallback(() => {
+    setToggle((prev) => !prev);
+  }, []);
+
   return (
     <Modal isOpen={isInputState}>
       <ModalHeader>
-        <Title title='New Task' desc={today.toLocaleDateString()} />
+        <Title title={'New Task'} desc={today.toLocaleDateString()} />
       </ModalHeader>
 
-      <InputLabel htmlFor='task-input'>{'Task Input'}</InputLabel>
+      <InputLabel htmlFor='task-input'>Task Input</InputLabel>
       <InputForm id='task-input' onSubmit={submitHandler}>
         <Textarea
           value={text}
@@ -167,7 +172,7 @@ const ModalInput = () => {
               id='shape-select-menu'
               isToggle={toggle}
               getShape={getShapeHandler}
-              onToggle={() => setToggle((prev) => !prev)}
+              onToggle={shapeSelectMenuToggle}
               aria-label='중요도 선택'
             />
             <ToggleBtn
@@ -187,7 +192,7 @@ const ModalInput = () => {
             </ToggleBtn>
           </SelectShapesWrapper>
           <SubmitBtnWrapper>
-            <Btn type='submit' text='등록' />
+            <Btn type={'submit'} text={'등록'} />
           </SubmitBtnWrapper>
         </BtnWrapper>
       </InputForm>
@@ -195,4 +200,4 @@ const ModalInput = () => {
   );
 };
 
-export default React.memo(ModalInput);
+export default ModalInput;

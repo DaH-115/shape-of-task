@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   HeaderWrapper,
@@ -7,7 +7,7 @@ import {
   SideMenuIcon,
   StyledLogo,
   Wrapper,
-} from 'layout/Header/Header.styles';
+} from 'layout/Header/index.styles';
 import NavMenu from 'components/menu/SideMenu/NavMenu';
 
 const Header = () => {
@@ -46,4 +46,4 @@ const Header = () => {
   );
 };
 
-export default memo(Header);
+export default Header;

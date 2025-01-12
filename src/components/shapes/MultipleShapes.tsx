@@ -4,7 +4,7 @@ import {
   StyledCircle,
   StyledSquare,
   StyledTriangle,
-} from 'components/figures/SingleShapes.styles';
+} from 'components/shapes/SingleShapes.styles';
 import { ShapeName } from 'store/taskListSlice';
 
 const SelectedShapes = ({ shape }: { shape: ShapeName }) => {

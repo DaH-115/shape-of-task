@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { styled } from 'styled-components';
 import { useAppDispatch } from 'store/hooks';
 import { confirmClose } from 'store/modalSlice';
@@ -40,7 +40,7 @@ const ConfirmModal = ({
   );
 };
 
-export default ConfirmModal;
+export default memo(ConfirmModal);
 
 const AlertTitle = styled.div`
   font-size: 1rem;

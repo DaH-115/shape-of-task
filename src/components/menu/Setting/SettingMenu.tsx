@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 import { themePalettes } from 'styles/theme-colors';
 import { useAppSelector } from 'store/hooks';
@@ -27,7 +27,7 @@ const SettingMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
   );
 };
 
-export default React.memo(SettingMenu);
+export default memo(SettingMenu);
 
 const BtnWrapper = styled.div`
   margin-top: 2rem;

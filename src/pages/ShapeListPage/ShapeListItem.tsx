@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import StyledShapes from 'components/figures/SingleShapes';
+import StyledShapes from 'components/shapes/SingleShapes';
 import { ShapeName } from 'store/taskListSlice';
 
 const ShapeListItem = ({ shape }: { shape: ShapeName }) => {

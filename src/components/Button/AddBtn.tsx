@@ -1,27 +1,27 @@
-import React from 'react';
 import { useAppDispatch } from 'store/hooks';
 import { InputModalOpen } from 'store/modalSlice';
 import styled from 'styled-components';
 import Btn from 'components/Button/Btn';
 import { IoIosAddCircleOutline } from 'react-icons/io';
+import { useCallback } from 'react';
 
 const AddBtn = () => {
   const dispatch = useAppDispatch();
 
-  const modalOpenHandler = React.useCallback(() => {
+  const modalOpenHandler = useCallback(() => {
     dispatch(InputModalOpen());
   }, [dispatch]);
 
   return (
     <AddBtnContainer onClick={modalOpenHandler}>
-      <Btn type='button' text='일정 추가'>
+      <Btn type={'button'} text={'일정 추가'}>
         <StyledAddIcon aria-hidden />
       </Btn>
     </AddBtnContainer>
   );
 };
 
-export default React.memo(AddBtn);
+export default AddBtn;
 
 const AddBtnContainer = styled.div`
   width: 100%;

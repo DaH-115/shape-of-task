@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import Title from 'components/TitleComponent';
 import {
@@ -17,11 +17,11 @@ import UpdateConfirmModal from 'components/modals/confirm/UpdateConfirmModal';
 import RemoveConfirmModal from 'components/modals/confirm/RemoveConfirmModal';
 import NoteAlert from 'components/modals/NoteAlert';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
-import SortDropdown, {
-  PriorityFilter,
-  SortType,
-} from 'pages/TaskListPage/SortDropdown';
 import { errorAlertIsOpen } from 'store/modalSlice';
+import SortDropdown from 'pages/TaskListPage/SortDropdown';
+
+export type SortType = 'priority' | 'created';
+export type PriorityFilter = 0 | 1 | 2 | 3;
 
 const TaskListPage = () => {
   const taskList = useAppSelector((state) => state.taskList.taskList);
@@ -33,15 +33,18 @@ const TaskListPage = () => {
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(0);
   const dispatch = useAppDispatch();
 
-  const sortTypeChangeHandler = (type: SortType) => {
+  const sortTypeChangeHandler = useCallback((type: SortType) => {
     setSortType(type);
-  };
+  }, []);
 
-  const priorityFilterChangeHandler = (priority: PriorityFilter) => {
-    setPriorityFilter((prev: PriorityFilter) =>
-      prev === priority ? 0 : priority
-    );
-  };
+  const priorityFilterChangeHandler = useCallback(
+    (priority: PriorityFilter) => {
+      setPriorityFilter((prev: PriorityFilter) =>
+        prev === priority ? 0 : priority
+      );
+    },
+    []
+  );
 
   const processTaskList = useMemo(() => {
     const isValidDateString = (dateStr: string): boolean => {
@@ -110,7 +113,7 @@ const TaskListPage = () => {
       <AddBtn />
       {taskList.length > 0 ? (
         processTaskList.map((task) => (
-          <TaskItemList key={task.id} renderedTask={task} />
+          <TaskItemList key={task.id} processTask={task} />
         ))
       ) : (
         <MessageWrapper>
@@ -126,4 +129,4 @@ const TaskListPage = () => {
   );
 };
 
-export default React.memo(TaskListPage);
+export default TaskListPage;

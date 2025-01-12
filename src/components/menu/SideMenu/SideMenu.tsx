@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 import styled, { keyframes } from 'styled-components';
 import PortalComponents from 'components/modals/PortalComponents';
 import { fadeIn, fadeOut } from 'styles/animation-setting';
@@ -28,7 +28,7 @@ const SideMenu = ({ isOpen, children, sideMenuHandler }: SideMenuProps) => {
   );
 };
 
-export default React.memo(SideMenu);
+export default memo(SideMenu);
 
 // Animation Setting
 const fadeSlideIn = keyframes`
