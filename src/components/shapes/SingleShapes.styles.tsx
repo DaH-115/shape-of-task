@@ -7,8 +7,8 @@ export const ShapeWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2rem;
+  height: 2rem;
 `;
 
 export const StyledCircle = styled(Circle)<{
@@ -27,8 +27,8 @@ export const StyledSquare = styled(Square)<{
   $shapeName: string;
   $isCountTask?: boolean;
 }>`
-  width: 100%;
-  height: 100%;
+  width: 110%;
+  height: 110%;
   fill: ${({ theme, $shapeName, $isCountTask }) =>
     $shapeName === 'square' && $isCountTask
       ? theme.colors.remember
@@ -39,7 +39,7 @@ export const StyledTriangle = styled(Triangle)<{
   $shapeName: string;
   $isCountTask?: boolean;
 }>`
-  width: 100%;
+  width: 115%;
   height: 100%;
   fill: ${({ theme, $shapeName, $isCountTask }) =>
     $shapeName === 'triangle' && $isCountTask

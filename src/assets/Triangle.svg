@@ -1,8 +1,8 @@
 <svg role="img"
   aria-labelledby="title desc"
-  width="117" 
-  height="104" 
-  viewBox="0 0 117 104" 
+  width="90" 
+  height="90" 
+  viewBox="0 0 90 90" 
   fill="none" 
   xmlns="http://www.w3.org/2000/svg">
 
@@ -11,5 +11,5 @@
     우선순위 기억해 두세요라는 의미를 가진 세모(Triangle)입니다.
   </desc>
 
-<path d="M0.854925 103.5L58.5 1.01987L116.145 103.5H0.854925Z" fill="current"/>
+<path d="M45 15L85 85H5L45 15Z" fill="current"/>
 </svg>

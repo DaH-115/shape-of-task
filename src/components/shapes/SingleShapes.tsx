@@ -13,6 +13,7 @@ interface SingleShapesProps {
 }
 
 const SingleShapes = ({ shapeName, isCountTask = true }: SingleShapesProps) => {
+  // 도형 타입에 따른 컴포넌트 매핑
   const Components = {
     circle: StyledCircle,
     square: StyledSquare,

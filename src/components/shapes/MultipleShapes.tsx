@@ -7,7 +7,11 @@ import {
 } from 'components/shapes/SingleShapes.styles';
 import { ShapeName } from 'store/taskListSlice';
 
-const SelectedShapes = ({ shape }: { shape: ShapeName }) => {
+interface MultipleShapesProps {
+  shape: ShapeName;
+}
+
+const MultipleShapes = ({ shape }: MultipleShapesProps) => {
   return (
     <ShapeWrapper>
       <StyledTriangle $shapeName={shape} $isCountTask />
@@ -17,7 +21,7 @@ const SelectedShapes = ({ shape }: { shape: ShapeName }) => {
   );
 };
 
-export default memo(SelectedShapes);
+export default memo(MultipleShapes);
 
 const ShapeWrapper = styled.div`
   display: flex;

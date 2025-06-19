@@ -14,7 +14,7 @@ export interface TaskTypes {
 
 interface initialStateProps {
   taskList: TaskTypes[];
-  selectedTodoId: string;
+  selectedTaskId: string;
   editingTask: TaskTypes;
 }
 
@@ -23,7 +23,7 @@ const parsedValue: TaskTypes[] = storedValue ? JSON.parse(storedValue) : [];
 
 const initialState: initialStateProps = {
   taskList: parsedValue,
-  selectedTodoId: '',
+  selectedTaskId: '',
   editingTask: {} as TaskTypes,
 };
 
@@ -41,7 +41,7 @@ const taskListSlice = createSlice({
     },
     removeTask: (state) => {
       state.taskList = state.taskList.filter(
-        (task) => task.id !== state.selectedTodoId
+        (task) => task.id !== state.selectedTaskId
       );
       setItemHandler(state.taskList);
     },
@@ -53,7 +53,7 @@ const taskListSlice = createSlice({
       setItemHandler(state.taskList);
     },
     editingTask: (state, action: PayloadAction<string>) => {
-      state.selectedTodoId = action.payload;
+      state.selectedTaskId = action.payload;
       state.editingTask = state.taskList.filter(
         (task) => task.id === action.payload
       )[0];
@@ -63,11 +63,11 @@ const taskListSlice = createSlice({
         task.id === action.payload.id ? { ...task, ...action.payload } : task
       );
       setItemHandler(state.taskList);
-      state.selectedTodoId = '';
+      state.selectedTaskId = '';
       state.editingTask = {} as TaskTypes;
     },
     editingTaskReset: (state) => {
-      state.selectedTodoId = '';
+      state.selectedTaskId = '';
       state.editingTask = {} as TaskTypes;
     },
   },

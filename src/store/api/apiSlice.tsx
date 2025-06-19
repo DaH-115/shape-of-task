@@ -7,6 +7,13 @@ interface NinjasQuote {
   category: string;
 }
 
+// 개발 환경에서만 에러 로깅
+const logError = (message: string, data?: any) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.error(message, data);
+  }
+};
+
 export const apiSlice = createApi({
   reducerPath: 'ninjasApi',
   baseQuery: fetchBaseQuery({
@@ -26,14 +33,14 @@ export const apiSlice = createApi({
         const quoteData = response[0];
 
         if (!quoteData || !quoteData.quote || !quoteData.author) {
-          console.error('Invalid quote data received:', quoteData);
+          logError('Invalid quote data received:', quoteData);
           throw new Error('필수 데이터가 누락되었습니다');
         }
 
         return quoteData;
       },
       transformErrorResponse: (error: any) => {
-        console.error('API Error:', error);
+        logError('API Error:', error);
         return {
           status: error.status,
           message: 'API 호출 중 에러가 발생했습니다.',
