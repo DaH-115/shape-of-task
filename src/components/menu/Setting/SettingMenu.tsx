@@ -21,7 +21,7 @@ const SettingMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
         />
       ))}
       <BtnWrapper onClick={sideMenuHandler}>
-        <Btn type='button' text='적용' isEmpty />
+        <Btn type='button' text='적용' variant='outline' />
       </BtnWrapper>
     </SideMenu>
   );

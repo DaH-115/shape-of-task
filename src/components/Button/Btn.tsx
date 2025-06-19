@@ -1,24 +1,24 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
+import { BtnProps } from './types';
+import { BUTTON_STYLES, BUTTON_COLORS } from './styles/constants';
 
-export interface BtnProps {
-  text: string;
-  type: 'button' | 'submit' | 'reset';
-  isEmpty?: boolean;
-  children?: ReactNode;
-  onClickFn?: () => void;
-}
-
+// 기본 버튼 컴포넌트 (개선된 버전)
 const Btn = ({
   text,
   type,
-  isEmpty = false,
+  variant = 'filled',
   children,
-  onClickFn,
+  onClick,
+  disabled = false,
 }: BtnProps) => {
   return (
-    <ButtonWrapper onClick={onClickFn} $isEmpty={isEmpty}>
-      <button type={type} aria-label={text}>
+    <ButtonWrapper
+      onClick={disabled ? undefined : onClick}
+      $variant={variant}
+      $disabled={disabled}
+    >
+      <button type={type} aria-label={text} disabled={disabled}>
         {children}
         {text}
       </button>
@@ -28,51 +28,75 @@ const Btn = ({
 
 export default memo(Btn);
 
-export const ButtonWrapper = styled.div<{ $isEmpty: boolean }>`
+// ButtonWrapper (variant와 disabled 상태 지원)
+export const ButtonWrapper = styled.div<{
+  $variant: 'filled' | 'outline';
+  $disabled: boolean;
+}>`
   width: 100%;
   height: 100%;
-  background-color: ${({ theme, $isEmpty }) =>
-    $isEmpty ? '#fff' : theme.colors.important};
-  border: 0.08rem solid
-    ${({ theme, $isEmpty }) =>
-      $isEmpty ? theme.commonColors.light_gray : theme.colors.important};
-  border-radius: 2rem;
+  background-color: ${({ theme, $variant, $disabled }) => {
+    if ($disabled) return theme.commonColors.light_gray;
+    return $variant === 'outline' ? '#fff' : theme.colors.important;
+  }};
+  border: ${({ theme, $variant, $disabled }) =>
+    `${BUTTON_STYLES.border} ${
+      $disabled
+        ? theme.commonColors.light_gray
+        : $variant === 'outline'
+        ? theme.commonColors.light_gray
+        : theme.colors.important
+    }`};
+  border-radius: ${BUTTON_STYLES.borderRadius};
   overflow: hidden;
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  opacity: ${({ $disabled }) => ($disabled ? 0.6 : 1)};
 
   button {
     display: flex;
     justify-content: center;
     align-items: center;
-
     width: 100%;
-    color: ${({ theme, $isEmpty }) =>
-      $isEmpty ? theme.commonColors.gray : '#fff'};
-    font-size: 0.8rem;
+    color: ${({ theme, $variant, $disabled }) => {
+      if ($disabled) return theme.commonColors.gray;
+      return $variant === 'outline' ? theme.commonColors.gray : '#fff';
+    }};
+    font-size: ${BUTTON_STYLES.fontSize};
     padding: 0.4rem;
   }
 
   svg {
-    color: ${({ theme, $isEmpty }) =>
-      $isEmpty ? theme.commonColors.gray : '#fff'};
+    color: ${({ theme, $variant, $disabled }) => {
+      if ($disabled) return theme.commonColors.gray;
+      return $variant === 'outline' ? theme.commonColors.gray : '#fff';
+    }};
     margin-right: 0.3rem;
   }
 
   &:hover,
   &:active {
-    background-color: ${({ theme, $isEmpty }) =>
-      $isEmpty ? theme.colors.important : '#fff'};
-    transition: background-color 0.2s ease-in-out;
+    background-color: ${({ theme, $variant, $disabled }) => {
+      if ($disabled) return theme.commonColors.light_gray;
+      return $variant === 'outline'
+        ? theme.colors.important
+        : BUTTON_COLORS.hover.background;
+    }};
+    transition: ${BUTTON_STYLES.transition};
 
     button {
-      color: ${({ theme, $isEmpty }) =>
-        $isEmpty ? '#fff' : theme.commonColors.black};
-      transition: color 0.2s ease-in-out;
+      color: ${({ theme, $variant, $disabled }) => {
+        if ($disabled) return theme.commonColors.gray;
+        return $variant === 'outline' ? '#fff' : theme.commonColors.black;
+      }};
+      transition: ${BUTTON_STYLES.transition};
     }
 
     svg {
-      color: ${({ theme, $isEmpty }) =>
-        $isEmpty ? '#fff' : theme.commonColors.black};
-      transition: color 0.2s ease-in-out;
+      color: ${({ theme, $variant, $disabled }) => {
+        if ($disabled) return theme.commonColors.gray;
+        return $variant === 'outline' ? '#fff' : theme.commonColors.black;
+      }};
+      transition: ${BUTTON_STYLES.transition};
     }
   }
 `;

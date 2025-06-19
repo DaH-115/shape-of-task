@@ -1,56 +1,30 @@
-import { memo, RefObject, useCallback, useState } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
-import { errorAlertIsOpen } from 'store/modalSlice';
 import { GiSaveArrow } from 'react-icons/gi';
-import { useAppDispatch } from 'store/hooks';
-import captureImages from 'utils/captureImages';
-import saveAs from 'file-saver';
+import { useSaveImage } from 'hooks/useSaveImage';
+import { SaveBtnProps } from './types';
+import { BUTTON_STYLES } from './styles/constants';
 
-interface BtnSaveProps {
-  taskListRef: RefObject<HTMLUListElement | null>;
-  isDisabled: boolean;
-}
+// 이미지 저장 버튼 컴포넌트
+const SaveBtn = ({ taskListRef, isDisabled }: SaveBtnProps) => {
+  // 커스텀 훅으로 로직 분리
+  const { saveImage, isLoading } = useSaveImage();
 
-const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useAppDispatch();
+  // 이미지 저장 핸들러
+  const handleSaveImage = () => {
+    saveImage(taskListRef);
+  };
 
-  const captureImagesHandler = useCallback(async () => {
-    if (!taskListRef.current) {
-      dispatch(
-        errorAlertIsOpen('작업 목록이 없어 이미지를 저장할 수 없습니다.')
-      );
-      return;
-    }
-    setIsLoading(true);
-    try {
-      const { paddedCanvas, fileName } = await captureImages(taskListRef);
-
-      await new Promise<void>((resolve, reject) => {
-        paddedCanvas.toBlob((blob) => {
-          if (blob) {
-            saveAs(blob, fileName);
-            resolve();
-          } else {
-            reject(dispatch(errorAlertIsOpen('이미지 변환에 실패했습니다.')));
-          }
-        });
-      });
-    } catch (error) {
-      dispatch(errorAlertIsOpen('이미지 저장에 실패했습니다.'));
-    } finally {
-      setIsLoading(false);
-    }
-  }, [taskListRef, dispatch]);
+  const disabled = isDisabled || isLoading;
 
   return (
     <ButtonWrapper
-      onClick={captureImagesHandler}
-      $isDisabled={isDisabled || isLoading}
+      onClick={disabled ? undefined : handleSaveImage}
+      $isDisabled={disabled}
     >
       <button
         type='button'
-        disabled={isDisabled || isLoading}
+        disabled={disabled}
         title='이미지 저장'
         aria-label={
           isDisabled
@@ -60,7 +34,7 @@ const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
             : '작업 목록을 이미지로 저장'
         }
       >
-        {isLoading ? '저장 중' : '이미지 저장'}
+        {isLoading ? '저장 중...' : '이미지 저장'}
       </button>
       <GiSaveArrow aria-hidden />
     </ButtonWrapper>
@@ -69,27 +43,27 @@ const SaveBtn = ({ taskListRef, isDisabled }: BtnSaveProps) => {
 
 export default memo(SaveBtn);
 
+// 저장 버튼 래퍼 스타일 (개선된 버전)
 const ButtonWrapper = styled.div<{
   $isDisabled: boolean;
 }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   width: 100%;
-  padding: 0.5rem 1rem;
-
+  padding: ${BUTTON_STYLES.padding};
   background-color: ${({ theme, $isDisabled }) =>
     $isDisabled ? theme.commonColors.gray : theme.colors.important};
-  border: 0.1rem solid
-    ${({ theme, $isDisabled }) =>
-      $isDisabled ? theme.commonColors.gray : theme.colors.important};
+  border: ${({ theme, $isDisabled }) =>
+    `${BUTTON_STYLES.border} ${
+      $isDisabled ? theme.commonColors.gray : theme.colors.important
+    }`};
   border-radius: 1rem;
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.6 : 1)};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
 
   button {
-    font-size: 0.8rem;
+    font-size: ${BUTTON_STYLES.fontSize};
     color: ${({ $isDisabled }) => ($isDisabled ? '#666' : '#fff')};
   }
 
@@ -98,23 +72,24 @@ const ButtonWrapper = styled.div<{
   }
 
   &:hover,
-  :active {
-    background-color: ${({ $isDisabled }) => ($isDisabled ? '' : '#fff')};
+  &:active {
+    background-color: ${({ $isDisabled }) =>
+      $isDisabled ? undefined : '#fff'};
     transition: ${({ $isDisabled }) =>
-      $isDisabled ? '' : 'background-color 0.2s ease-in-out'};
+      $isDisabled ? undefined : BUTTON_STYLES.transition};
 
     button {
       color: ${({ theme, $isDisabled }) =>
         $isDisabled ? '#666' : theme.commonColors.black};
       transition: ${({ $isDisabled }) =>
-        $isDisabled ? '' : 'color 0.2s ease-in-out'};
+        $isDisabled ? undefined : BUTTON_STYLES.transition};
     }
 
     svg {
       color: ${({ theme, $isDisabled }) =>
         $isDisabled ? '#666' : theme.colors.important};
       transition: ${({ $isDisabled }) =>
-        $isDisabled ? '' : 'color 0.2s ease-in-out'};
+        $isDisabled ? undefined : BUTTON_STYLES.transition};
     }
   }
 `;

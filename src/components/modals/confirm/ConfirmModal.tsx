@@ -30,7 +30,7 @@ const ConfirmModal = ({
       <AlertDesc>{modalDesc}</AlertDesc>
       <BtnWrapper>
         <RejectBtnWrapper onClick={closeHandler}>
-          <Btn type='button' text='취소' isEmpty />
+          <Btn type='button' text='취소' variant='outline' />
         </RejectBtnWrapper>
         <ConfrimBtnWrapper onClick={confirmHandler}>
           <Btn type='button' text='확인' />

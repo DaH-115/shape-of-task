@@ -21,11 +21,7 @@ const MainPage = () => {
       <Wrapper>
         <TodaysQuote />
         {!isDesktop && (
-          <Btn
-            type={'button'}
-            text={'일정 추가하기'}
-            onClickFn={navigateHandler}
-          >
+          <Btn type={'button'} text={'일정 추가하기'} onClick={navigateHandler}>
             <StyledAddIcon aria-hidden />
           </Btn>
         )}

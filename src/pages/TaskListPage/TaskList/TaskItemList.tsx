@@ -81,16 +81,16 @@ const TaskItemList = ({ processTask }: { processTask: TaskTypes }) => {
           <Btn
             type='button'
             text='수정'
-            isEmpty
-            onClickFn={updateConfirmOpenHandler}
+            variant='outline'
+            onClick={updateConfirmOpenHandler}
           >
             <UpdateIcon aria-hidden />
           </Btn>
           <Btn
             type='button'
             text='삭제'
-            isEmpty
-            onClickFn={removeConfirmOpenHandler}
+            variant='outline'
+            onClick={removeConfirmOpenHandler}
           >
             <RemoveIcon aria-hidden />
           </Btn>
