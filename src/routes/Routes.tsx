@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import MainPage from 'pages/MainPage';
-import TaskListPage from 'pages/TaskListPage';
-import ShapeListPage from 'pages/ShapeListPage';
+import TaskListPage from 'pages/taskListPage';
+import ShapeListPage from 'pages/shapeListPage';
 
 const RoutesComponent = () => {
   return (

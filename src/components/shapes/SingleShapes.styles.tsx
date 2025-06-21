@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { ReactComponent as Circle } from 'assets/Circle.svg';
-import { ReactComponent as Square } from 'assets/Square.svg';
-import { ReactComponent as Triangle } from 'assets/Triangle.svg';
+import Circle from 'assets/icons/Circle.svg?react';
+import Square from 'assets/icons/Square.svg?react';
+import Triangle from 'assets/icons/Triangle.svg?react';
 
 export const ShapeWrapper = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ export const StyledCircle = styled(Circle)<{
   fill: ${({ theme, $shapeName, $isCountTask }) =>
     $shapeName === 'circle' && $isCountTask
       ? theme.colors.anytime
-      : theme.commonColors.light_gray};
+      : theme.commonColors.medium_gray};
 `;
 
 export const StyledSquare = styled(Square)<{
@@ -32,7 +32,7 @@ export const StyledSquare = styled(Square)<{
   fill: ${({ theme, $shapeName, $isCountTask }) =>
     $shapeName === 'square' && $isCountTask
       ? theme.colors.remember
-      : theme.commonColors.light_gray};
+      : theme.commonColors.medium_gray};
 `;
 
 export const StyledTriangle = styled(Triangle)<{
@@ -44,5 +44,5 @@ export const StyledTriangle = styled(Triangle)<{
   fill: ${({ theme, $shapeName, $isCountTask }) =>
     $shapeName === 'triangle' && $isCountTask
       ? theme.colors.important
-      : theme.commonColors.light_gray};
+      : theme.commonColors.medium_gray};
 `;

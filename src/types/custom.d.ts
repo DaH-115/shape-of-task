@@ -1,15 +1,19 @@
 declare module '*.svg' {
-  import React = require('react');
-
-  export const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>;
   const src: string;
   export default src;
 }
 
-// 환경 변수 타입 정의
-declare namespace NodeJS {
-  interface ProcessEnv {
-    NODE_ENV: 'development' | 'production' | 'test';
-    REACT_APP_API_NINJAS_KEY: string;
-  }
+declare module '*.svg?react' {
+  import { FC, SVGProps } from 'react';
+  const ReactComponent: FC<SVGProps<SVGSVGElement>>;
+  export default ReactComponent;
+}
+
+interface ImportMetaEnv {
+  readonly VITE_APP_API_NINJAS_KEY: string;
+  readonly DEV: boolean;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
 }

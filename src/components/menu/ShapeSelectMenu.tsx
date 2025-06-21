@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import StyledShapes from 'components/shapes/SingleShapes';
-import { ShapeName } from 'store/taskListSlice';
+import { ShapeName } from 'types/task';
 import SingleShapes from 'components/shapes/SingleShapes';
 
 interface ShapeSelectMenuProps {
@@ -19,8 +19,10 @@ const ShapeSelectMenu = ({
 }: ShapeSelectMenuProps) => {
   const getShapeHandler = useCallback(
     (event: React.MouseEvent<HTMLUListElement>) => {
-      const shapeItem = event.target as HTMLElement;
-      const shapeName = shapeItem.getAttribute('data-shape');
+      const target = event.target as HTMLElement;
+      // 클릭된 요소나 그 부모에서 data-shape 찾기
+      const shapeItem = target.closest('[data-shape]') as HTMLElement;
+      const shapeName = shapeItem?.getAttribute('data-shape');
 
       if (shapeName && isShapeName(shapeName)) {
         getShape(shapeName);
@@ -38,17 +40,17 @@ const ShapeSelectMenu = ({
   return (
     <SelectMenuWrapper id={id} $isToggle={isToggle} role='listbox'>
       <SelectMenuList onClick={getShapeHandler}>
-        <SelectMenuItem>
+        <SelectMenuItem data-shape='triangle'>
           <SingleShapes shapeName='triangle' />
-          <ShapeDesc data-shape='triangle'>{'중요해요'}</ShapeDesc>
+          <ShapeDesc>{'중요해요'}</ShapeDesc>
         </SelectMenuItem>
-        <SelectMenuItem>
+        <SelectMenuItem data-shape='square'>
           <StyledShapes shapeName='square' />
-          <ShapeDesc data-shape='square'>{'기억해 두세요'}</ShapeDesc>
+          <ShapeDesc>{'기억해 두세요'}</ShapeDesc>
         </SelectMenuItem>
-        <SelectMenuItem>
+        <SelectMenuItem data-shape='circle'>
           <StyledShapes shapeName='circle' />
-          <ShapeDesc data-shape='circle'>{'언제든지 해요'}</ShapeDesc>
+          <ShapeDesc>{'언제든지 해요'}</ShapeDesc>
         </SelectMenuItem>
       </SelectMenuList>
     </SelectMenuWrapper>
@@ -105,8 +107,9 @@ const SelectMenuList = styled.ul`
 const SelectMenuItem = styled.li`
   display: flex;
   align-items: center;
-
   padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 
   &:hover,
   &:active {
@@ -118,6 +121,4 @@ const ShapeDesc = styled.p`
   width: 100%;
   font-size: 0.9rem;
   margin-left: 0.4rem;
-
-  cursor: pointer;
 `;

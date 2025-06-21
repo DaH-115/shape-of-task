@@ -5,7 +5,7 @@ import {
   StyledSquare,
   StyledTriangle,
 } from 'components/shapes/SingleShapes.styles';
-import { ShapeName } from 'store/taskListSlice';
+import { ShapeName } from 'types/task';
 
 interface MultipleShapesProps {
   shape: ShapeName;

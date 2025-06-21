@@ -1,25 +1,26 @@
 import { useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { confirmClose } from 'store/modalSlice';
+import { useAppDispatch } from 'store/hooks';
 import ConfirmModal from 'components/modals/confirm/ConfirmModal';
 import { removeTask } from 'store/taskListSlice';
 
-const RemoveConfirmModal = () => {
+interface RemoveConfirmModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const RemoveConfirmModal = ({ isOpen, onClose }: RemoveConfirmModalProps) => {
   const dispatch = useAppDispatch();
-  const removeModalOpen = useAppSelector(
-    (state) => state.modal.confirmState.removeModalOpen
-  );
 
   const confirmHandler = useCallback(() => {
     dispatch(removeTask());
-    dispatch(confirmClose());
   }, [dispatch]);
 
   return (
     <ConfirmModal
-      isOpen={removeModalOpen}
+      isOpen={isOpen}
       modalDesc='삭제 하시겠어요?'
-      confirmHandler={confirmHandler}
+      onConfirm={confirmHandler}
+      onClose={onClose}
     />
   );
 };

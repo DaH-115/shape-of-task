@@ -1,31 +1,37 @@
 import { memo, useCallback } from 'react';
 import { styled } from 'styled-components';
 import { useAppDispatch } from 'store/hooks';
-import { confirmClose } from 'store/modalSlice';
 import Modal from 'components/modals/Modal';
-import Btn from 'components/Button/Btn';
+import Btn from 'components/buttons/Btn';
 import { editingTaskReset } from 'store/taskListSlice';
 
 interface ConfirmModalProps {
   isOpen: boolean;
   modalDesc: string;
-  confirmHandler: () => void;
+  onConfirm: () => void;
+  onClose: () => void;
 }
 
 const ConfirmModal = ({
   isOpen,
   modalDesc,
-  confirmHandler,
+  onConfirm,
+  onClose,
 }: ConfirmModalProps) => {
   const dispatch = useAppDispatch();
 
   const closeHandler = useCallback(() => {
-    dispatch(confirmClose());
+    onClose();
     dispatch(editingTaskReset());
-  }, [dispatch]);
+  }, [onClose, dispatch]);
+
+  const confirmHandler = useCallback(() => {
+    onConfirm();
+    onClose();
+  }, [onConfirm, onClose]);
 
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} onClose={closeHandler}>
       <AlertTitle>알림</AlertTitle>
       <AlertDesc>{modalDesc}</AlertDesc>
       <BtnWrapper>

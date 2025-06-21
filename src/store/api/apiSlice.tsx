@@ -1,16 +1,16 @@
-// features/api/apiSlice.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-interface NinjasQuote {
+// 명언 데이터 타입
+interface QuoteData {
   quote: string;
   author: string;
   category: string;
 }
 
 // 개발 환경에서만 에러 로깅
-const logError = (message: string, data?: any) => {
-  if (process.env.NODE_ENV === 'development') {
-    console.error(message, data);
+const logError = (message: string, data?: unknown) => {
+  if (import.meta.env.DEV) {
+    console.error(`[API Error] ${message}`, data);
   }
 };
 
@@ -19,32 +19,47 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.api-ninjas.com/v1',
     prepareHeaders: (headers) => {
-      headers.set('X-Api-Key', process.env.REACT_APP_API_NINJAS_KEY!);
+      const apiKey = import.meta.env.VITE_APP_API_NINJAS_KEY;
+      if (apiKey) {
+        headers.set('X-Api-Key', apiKey);
+      }
       return headers;
     },
+    timeout: 10000,
   }),
+  // 캐시 5분
+  keepUnusedDataFor: 300,
   endpoints: (builder) => ({
-    getQuote: builder.query<NinjasQuote, string | void>({
+    getQuote: builder.query<QuoteData, string | void>({
       query: (category) => ({
         url: '/quotes',
         params: category ? { category } : undefined,
       }),
-      transformResponse: (response: NinjasQuote[]) => {
+      transformResponse: (response: QuoteData[]): QuoteData => {
         const quoteData = response[0];
 
-        if (!quoteData || !quoteData.quote || !quoteData.author) {
-          logError('Invalid quote data received:', quoteData);
-          throw new Error('필수 데이터가 누락되었습니다');
+        // 기본 검증만
+        if (!quoteData?.quote || !quoteData?.author) {
+          logError('Invalid quote data:', quoteData);
+          throw new Error('명언 데이터를 불러올 수 없습니다.');
         }
 
-        return quoteData;
-      },
-      transformErrorResponse: (error: any) => {
-        logError('API Error:', error);
         return {
-          status: error.status,
-          message: 'API 호출 중 에러가 발생했습니다.',
+          quote: quoteData.quote.trim(),
+          author: quoteData.author.trim(),
+          category: quoteData.category || 'general',
         };
+      },
+      transformErrorResponse: (error) => {
+        logError('API request failed:', error);
+        return {
+          status: error.status || 500,
+          message: '명언을 불러오는데 실패했습니다.',
+        };
+      },
+      // 재시도 1번만
+      extraOptions: {
+        maxRetries: 1,
       },
     }),
   }),

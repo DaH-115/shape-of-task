@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { modalIsClose } from 'store/modalSlice';
+import { notificationCloseHandler } from 'store/modalSlice';
 import { fadeSlideIn, fadeSlideOut } from 'styles/animation-setting';
 import PortalComponents from 'components/modals/PortalComponents';
 import { MdArrowForwardIos } from 'react-icons/md';
@@ -10,15 +10,13 @@ import { MdArrowForwardIos } from 'react-icons/md';
 const Notification = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isOpen = useAppSelector(
-    (state) => state.modal.notificationState.isOpen
-  );
+  const isOpen = useAppSelector((state) => state.modal.notification.isOpen);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 
     if (isOpen) {
-      timeout = setTimeout(() => dispatch(modalIsClose()), 2000);
+      timeout = setTimeout(() => dispatch(notificationCloseHandler()), 2000);
     }
 
     return () => clearTimeout(timeout);
@@ -52,6 +50,7 @@ const NoteWrapper = styled.div<{ $isOpen: boolean }>`
 
   width: 100%;
   padding: 1rem;
+  z-index: 100; /* 헤더(z-index: 50)보다 높게 설정 */
 
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
   animation: ${({ $isOpen }) => ($isOpen ? fadeSlideIn : fadeSlideOut)} 0.4s
@@ -60,7 +59,7 @@ const NoteWrapper = styled.div<{ $isOpen: boolean }>`
 
   cursor: pointer;
 
-  ${({ theme }) => theme.device.tablet} {
+  ${({ theme }) => theme.device.md} {
     max-width: ${({ theme }) => theme.size.mobile};
   }
 `;
@@ -97,7 +96,7 @@ const IconWrapper = styled.div`
   color: ${({ theme }) => theme.colors.important};
   margin-right: 0.5rem;
 
-  ${({ theme }) => theme.device.tablet} {
+  ${({ theme }) => theme.device.md} {
     display: none;
   }
 `;

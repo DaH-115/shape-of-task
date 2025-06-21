@@ -9,23 +9,22 @@ export const fadeSlideIn = keyframes`
   to {
     transform: translateY(0);
     opacity: 1;
-    pointer-events: none;
   }
 `;
 
 export const fadeSlideOut = keyframes`
   from {
-      transform: translateY(0);
-      opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
   }
   to {
-      transform: translateY(-100%);
-      opacity: 0;
+    transform: translateY(-100%);
+    opacity: 0;
   }
 `;
 
 export const fadeIn = keyframes`
-  from{
+  from {
     opacity: 0;
   }
   to {
@@ -34,7 +33,7 @@ export const fadeIn = keyframes`
 `;
 
 export const fadeOut = keyframes`
-  from{
+  from {
     opacity: 1;
   }
   to {

@@ -1,22 +1,22 @@
 import { useCallback } from 'react';
 import { styled } from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { modalIsClose } from 'store/modalSlice';
+import { errorAlertCloseHandler } from 'store/modalSlice';
 import Modal from 'components/modals/Modal';
-import Btn from 'components/Button/Btn';
+import Btn from 'components/buttons/Btn';
 
 const ErrorAlert = () => {
   const dispatch = useAppDispatch();
-  const { alertOpen, message: alertMessage } = useAppSelector(
-    (state) => state.modal.alertState.errorAlert
+  const { isOpen: alertOpen, message: alertMessage } = useAppSelector(
+    (state) => state.modal.errorAlert
   );
 
   const alertCloseHandler = useCallback(() => {
-    dispatch(modalIsClose());
+    dispatch(errorAlertCloseHandler());
   }, [dispatch]);
 
   return (
-    <Modal isOpen={alertOpen}>
+    <Modal isOpen={alertOpen} onClose={alertCloseHandler}>
       <AlertTitle>알림</AlertTitle>
       <AlertDesc>{alertMessage}</AlertDesc>
       <ConfrimBtnWrapper onClick={alertCloseHandler}>

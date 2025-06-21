@@ -1,5 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useGetQuoteQuery } from 'store/api/apiSlice';
+import {
+  getFromLocalStorage,
+  saveToLocalStorage,
+  STORAGE_KEYS,
+} from 'utils/localStorage';
 
 interface QuoteType {
   quote: string;
@@ -7,13 +12,11 @@ interface QuoteType {
   category?: string;
 }
 
-// localStorage에 저장되는 상태 타입
 interface SavedQuoteState {
   savedPinned: boolean;
   savedQuote: QuoteType | null;
 }
 
-// 커스텀 훅의 반환 타입
 interface UseTodaysQuoteReturn {
   isPinned: boolean;
   isLoading: boolean;
@@ -24,68 +27,76 @@ interface UseTodaysQuoteReturn {
   displayedQuote: QuoteType | null;
 }
 
+/**
+ * 오늘의 명언을 관리하는 커스텀 훅
+ */
 const useTodaysQuote = (): UseTodaysQuoteReturn => {
+  // localStorage에서 초기값 가져오기
+  const savedState = getFromLocalStorage<SavedQuoteState>(
+    STORAGE_KEYS.QUOTE_STATE,
+    {
+      savedPinned: false,
+      savedQuote: null,
+    }
+  );
+
+  // 상태 관리
+  const [isPinned, setIsPinned] = useState(savedState.savedPinned);
+  const [pinnedQuote, setPinnedQuote] = useState<QuoteType | null>(
+    savedState.savedQuote
+  );
   const [storageError, setStorageError] = useState<string | null>(null);
 
-  const getInitialState = (): SavedQuoteState => {
-    try {
-      const savedState = localStorage.getItem('quoteState');
-      if (savedState) {
-        return JSON.parse(savedState);
-      }
-    } catch (error) {
-      setStorageError('저장된 설정을 불러오는데 실패했습니다.');
-    }
-
-    return { savedPinned: false, savedQuote: null };
-  };
-
-  const { savedPinned, savedQuote } = useMemo(() => getInitialState(), []);
-  const [isPinned, setIsPinned] = useState(savedPinned);
-  const [pinnedQuote, setPinnedQuote] = useState<QuoteType | null>(savedQuote);
+  // API 데이터
   const { data: quoteData, isLoading, isError, refetch } = useGetQuoteQuery();
 
+  /**
+   * 명언 새로고침 핸들러 (고정되지 않은 경우에만)
+   */
   const refetchHandler = useCallback(() => {
-    if (!isPinned) refetch();
+    if (!isPinned) {
+      refetch();
+    }
   }, [isPinned, refetch]);
 
-  const savePinnedQuote = useCallback(() => {
-    if (quoteData) {
-      setPinnedQuote(quoteData);
-    }
-  }, [quoteData]);
-
-  const clearPinnedQuote = useCallback(() => {
-    setPinnedQuote(null);
-  }, []);
-
+  /**
+   * 명언 고정/해제 토글 핸들러
+   */
   const pinSaveHandler = useCallback(() => {
     if (isPinned) {
-      clearPinnedQuote();
+      // 고정 해제
+      setPinnedQuote(null);
       setIsPinned(false);
     } else {
-      savePinnedQuote();
-      setIsPinned(true);
+      // 고정 설정
+      if (quoteData) {
+        setPinnedQuote(quoteData);
+        setIsPinned(true);
+      }
     }
-  }, [isPinned, clearPinnedQuote, savePinnedQuote]);
+  }, [isPinned, quoteData]);
 
+  /**
+   * localStorage에 상태 저장 (상태 변경 시마다)
+   */
   useEffect(() => {
-    try {
-      const stateSave = {
-        savedPinned: isPinned,
-        savedQuote: isPinned ? pinnedQuote : null,
-      };
-      localStorage.setItem('quoteState', JSON.stringify(stateSave));
-    } catch (error) {
-      setStorageError('설정을 저장하는데 실패했습니다.');
-      localStorage.setItem(
-        'quoteState',
-        JSON.stringify({ savedPinned: false, savedQuote: null })
-      );
+    const success = saveToLocalStorage(STORAGE_KEYS.QUOTE_STATE, {
+      savedPinned: isPinned,
+      savedQuote: isPinned ? pinnedQuote : null,
+    });
+
+    // 저장 실패시 에러 표시
+    if (!success) {
+      setStorageError('저장에 실패했습니다.');
+    } else {
+      setStorageError(null);
     }
   }, [isPinned, pinnedQuote]);
 
-  const displayedQuote = isPinned ? pinnedQuote : quoteData ?? null;
+  /**
+   * 표시할 명언 결정 (고정된 명언 우선, 그 다음 API 데이터)
+   */
+  const displayedQuote = isPinned ? pinnedQuote : quoteData || null;
 
   return {
     isPinned,

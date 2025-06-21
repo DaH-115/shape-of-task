@@ -1,5 +1,4 @@
 import { useAppDispatch } from 'store/hooks';
-import { InputModalOpen } from 'store/modalSlice';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { useCallback } from 'react';
 import Btn from './Btn';
@@ -7,14 +6,23 @@ import { ButtonContainer } from './styles/common';
 import styled from 'styled-components';
 import { ICON_STYLES } from './styles/constants';
 
+interface AddBtnProps {
+  onAddClick?: () => void;
+}
+
 // 일정 추가 버튼 컴포넌트
-const AddBtn = () => {
+const AddBtn = ({ onAddClick }: AddBtnProps) => {
   const dispatch = useAppDispatch();
 
   // 모달 열기 핸들러
   const modalOpenHandler = useCallback(() => {
-    dispatch(InputModalOpen());
-  }, [dispatch]);
+    if (onAddClick) {
+      onAddClick();
+    } else {
+      // 기본 동작 - TODO: 모달 상태 관리 구현 필요
+      console.log('Add button clicked');
+    }
+  }, [onAddClick]);
 
   return (
     <ButtonContainer onClick={modalOpenHandler}>

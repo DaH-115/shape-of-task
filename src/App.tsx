@@ -5,15 +5,15 @@ import GlobalStyle from 'styles/global-style';
 import { defaultTheme } from 'styles/theme-device';
 import { themeColors } from 'styles/theme-colors';
 import RoutesComponent from 'routes/Routes';
-import Header from 'layout/Header';
-import Footer from 'layout/Footer';
-import ErrorAlert from 'components/modals/ErrorAlert';
+import Header from 'layout/header';
+import Footer from 'layout/footer';
+import { ErrorAlert } from 'components/modals';
 import MainPage from 'pages/MainPage';
-import { useBreakpoint } from 'hooks/useBreakpoint';
+import { useBreakpoint } from 'hooks';
 import Loading from 'layout/Loading';
 
-const TaskListPage = lazy(() => import('pages/TaskListPage'));
-const ShapeListPage = lazy(() => import('pages/ShapeListPage'));
+const TaskListPage = lazy(() => import('pages/taskListPage'));
+const ShapeListPage = lazy(() => import('pages/shapeListPage'));
 
 const App = () => {
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
@@ -24,26 +24,30 @@ const App = () => {
     }),
     [paletteName]
   );
-  const isDesktop = useBreakpoint(768);
+  const { isAboveBreakpoint: isDesktop } = useBreakpoint({ breakpoint: 768 });
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Header />
-      {isDesktop ? (
-        <DesktopContainer>
-          <MainPage />
-          <Suspense fallback={<Loading />}>
-            <TaskListPage />
-            <ShapeListPage />
-          </Suspense>
-        </DesktopContainer>
-      ) : (
-        <MobileContainer>
-          <RoutesComponent />
-        </MobileContainer>
-      )}
-      <Footer />
+      <AppContainer>
+        <Header />
+        <MainContent>
+          {isDesktop ? (
+            <DesktopContainer>
+              <MainPage />
+              <Suspense fallback={<Loading />}>
+                <TaskListPage />
+                <ShapeListPage />
+              </Suspense>
+            </DesktopContainer>
+          ) : (
+            <MobileContainer>
+              <RoutesComponent />
+            </MobileContainer>
+          )}
+        </MainContent>
+        <Footer />
+      </AppContainer>
       <ErrorAlert />
     </ThemeProvider>
   );
@@ -51,25 +55,45 @@ const App = () => {
 
 export default App;
 
+const AppContainer = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const MainContent = styled.main`
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* flexbox에서 overflow 처리를 위해 필요 */
+`;
+
 const DesktopContainer = styled.div`
   display: none;
-
   width: 100%;
-  height: 100dvh;
+  height: 100%;
+  flex: 1;
   background-color: ${({ theme }) => theme.commonColors.light_gray};
+  gap: 1rem;
+  min-width: 768px; /* 최소 너비를 줄여서 가로 스크롤 방지 */
+  padding: 1rem;
 
-  ${({ theme }) => theme.device.tablet} {
+  ${({ theme }) => theme.device.md} {
     display: flex;
   }
 `;
 
 const MobileContainer = styled.div`
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
-  height: 100dvh;
+  flex: 1;
+  min-height: 0; /* flexbox에서 overflow 처리를 위해 필요 */
 
-  ${({ theme }) => theme.device.tablet} {
+  ${({ theme }) => theme.device.md} {
     display: none;
   }
 `;

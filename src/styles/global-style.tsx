@@ -10,14 +10,19 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    font-family: 'Roboto','Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    font-family: 'Roboto', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
       'Helvetica Neue', sans-serif;
     letter-spacing: -0.05rem;
-    font-size: 20px;
+    font-size: 20px; /* 1rem = 20px로 계산 용이성 */
     color: #141414;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    line-height: 1.6;
+    overflow-x: hidden;
   }
 
   a {
@@ -37,24 +42,28 @@ const GlobalStyle = createGlobalStyle`
     border: 0;
 
     &:focus {
-      outline: none;
-      box-shadow: none;
+      outline: 2px solid #007acc;
+      outline-offset: 2px;
     }
+
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+  }
+
+  button {
+    background: inherit;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    overflow: visible;
+    cursor: pointer;
   }
 
   a,
   button {
     cursor: pointer;
-  }
-
-  button {
-    background: inherit; 
-    border:none; 
-    box-shadow:none; 
-    border-radius:0; 
-    padding:0; 
-    overflow:visible; 
-    cursor:pointer;
   }
 
   ul,
@@ -65,6 +74,14 @@ const GlobalStyle = createGlobalStyle`
 
   address {
     font-style: normal;
+  }
+
+  /* 스크롤바 완전히 숨기기 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+
+  ::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Webkit 브라우저 */
   }
 `;
 

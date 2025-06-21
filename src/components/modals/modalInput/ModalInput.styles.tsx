@@ -46,33 +46,43 @@ export const BtnWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
-  padding-top: 0.5rem;
+  padding-top: 1rem;
 `;
 
 export const SelectShapesWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 160px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
 
-  ${({ theme }) => theme.device.tablet} {
-    width: 50%;
+  &:hover {
+    background-color: ${({ theme }) => theme.commonColors.light_gray};
   }
 `;
 
 export const ToggleBtn = styled.button`
-  padding: 0.5rem;
+  padding: 0.3rem;
+  margin-left: 0.5rem;
 
   svg {
     font-size: 1rem;
+    color: ${({ theme }) => theme.commonColors.gray};
+  }
+
+  &:hover {
+    svg {
+      color: ${({ theme }) => theme.colors.important};
+    }
   }
 `;
 
 export const SubmitBtnWrapper = styled.div`
-  width: 100%;
-  margin-left: 0.5rem;
-
-  ${({ theme }) => theme.device.tablet} {
-    width: 20%;
-  }
+  width: 160px;
+  flex-shrink: 0;
 `;

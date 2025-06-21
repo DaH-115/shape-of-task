@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { ShapeName } from 'store/taskListSlice';
+import { ShapeName } from 'types/task';
 import {
   ShapeWrapper,
   StyledCircle,
@@ -14,7 +14,7 @@ interface SingleShapesProps {
 
 const SingleShapes = ({ shapeName, isCountTask = true }: SingleShapesProps) => {
   // 도형 타입에 따른 컴포넌트 매핑
-  const Components = {
+  const Components: Record<ShapeName, typeof StyledCircle> = {
     circle: StyledCircle,
     square: StyledSquare,
     triangle: StyledTriangle,

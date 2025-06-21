@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { IoMdSettings } from 'react-icons/io';
-import SettingMenu from 'components/menu/Setting/SettingMenu';
+import SettingMenu from 'components/menu/settingMenu/SettingMenu';
 import { IconButtonWrapper } from './styles/common';
 
 // 설정 버튼 컴포넌트
@@ -30,7 +30,7 @@ export default SettingBtn;
 const BtnWrapper = styled.div`
   width: 100%;
 
-  ${({ theme }) => theme.device.tablet} {
+  ${({ theme }) => theme.device.md} {
     padding: 0 1rem;
   }
 `;

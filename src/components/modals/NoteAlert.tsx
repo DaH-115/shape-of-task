@@ -1,24 +1,27 @@
 import { useCallback } from 'react';
 import { styled } from 'styled-components';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { modalIsClose } from 'store/modalSlice';
 import Modal from 'components/modals/Modal';
-import Btn from 'components/Button/Btn';
+import Btn from 'components/buttons/Btn';
 
-const NoteAlert = () => {
-  const dispatch = useAppDispatch();
-  const isOpen = useAppSelector(
-    (state) => state.modal.alertState.noteAlertOpen
-  );
+interface NoteAlertProps {
+  isOpen: boolean;
+  onClose: () => void;
+  message?: string;
+}
 
+const NoteAlert = ({
+  isOpen,
+  onClose,
+  message = '등록되었습니다',
+}: NoteAlertProps) => {
   const alertCloseHandler = useCallback(() => {
-    dispatch(modalIsClose());
-  }, [dispatch]);
+    onClose();
+  }, [onClose]);
 
   return (
     <Modal isOpen={isOpen}>
       <AlertTitle>알림</AlertTitle>
-      <AlertDesc>등록되었습니다</AlertDesc>
+      <AlertDesc>{message}</AlertDesc>
       <ConfrimBtnWrapper onClick={alertCloseHandler}>
         <Btn type='button' text='확인' />
       </ConfrimBtnWrapper>
