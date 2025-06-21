@@ -123,14 +123,15 @@ const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
 
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
-  height: auto;
+  height: 100vh;
   background-color: #fff;
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
   padding: 1rem;
   padding-bottom: 2rem;
+  overflow-y: auto;
 
   transform: ${({ $isOpen }) =>
-    $isOpen ? 'translateY(0)' : 'translateY(-100%)'};
+    $isOpen ? 'translateX(0)' : 'translateX(100%)'};
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
@@ -143,8 +144,8 @@ const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   }
 
   ${({ theme }) => theme.device.md} {
-    width: 20rem;
-    padding: 2.5rem 2rem 1rem 2rem;
+    width: 24rem;
+    max-width: 90vw;
     padding-bottom: 2rem;
   }
 `;

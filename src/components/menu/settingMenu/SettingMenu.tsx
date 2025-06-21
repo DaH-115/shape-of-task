@@ -30,7 +30,11 @@ const SettingMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
 export default memo(SettingMenu);
 
 const BtnWrapper = styled.div`
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  ${({ theme }) => theme.device.md} {
+    margin-top: 1.5rem;
+  }
 `;
