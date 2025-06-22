@@ -76,7 +76,7 @@ const PaletteWrapper = styled.div<{ $isSelected: boolean }>`
   cursor: pointer;
   gap: 0.4rem;
   padding: 0.6rem;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   transition: all 0.2s ease-in-out;
   transform: ${({ $isSelected }) => ($isSelected ? 'scale(1.02)' : 'scale(1)')};
 

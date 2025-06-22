@@ -12,7 +12,7 @@ export const DropdownButton = styled.button`
   /* 모바일 우선: 기본적으로 큰 크기 */
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: ${({ theme }) => (theme.device.md ? '2rem' : '1.25rem')};
+  border-radius: 1rem;
   color: ${({ theme }) => theme.commonColors.gray};
   transition: all 0.2s ease-in-out;
 
@@ -45,7 +45,7 @@ export const DropdownMenu = styled.div<{ $isOpen: boolean }>`
 
   background-color: #ffffff;
   border: 1px solid ${({ theme }) => theme.commonColors.gray};
-  border-radius: 0.75rem;
+  border-radius: 1rem;
 
   /* 모바일 우선: 기본적으로 큰 크기 */
   padding: 0.75rem;
@@ -62,7 +62,7 @@ export const DropdownMenu = styled.div<{ $isOpen: boolean }>`
   ${({ theme }) => theme.device.md} {
     padding: 0.5rem;
     min-width: 8rem;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
   }
 `;
 
@@ -78,7 +78,7 @@ export const MenuItem = styled.button<{ $isActive?: boolean }>`
     $isActive ? theme.commonColors.light_gray : 'transparent'};
   text-align: left;
   cursor: pointer;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   color: ${({ theme }) => theme.commonColors.black};
   font-size: 16px;
   min-height: 44px; /* iOS 권장 터치 영역 크기 */
@@ -98,7 +98,7 @@ export const MenuItem = styled.button<{ $isActive?: boolean }>`
     padding: 8px 12px;
     font-size: 14px;
     gap: 8px;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     min-height: auto;
   }
 

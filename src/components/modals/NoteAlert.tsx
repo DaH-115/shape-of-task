@@ -19,7 +19,7 @@ const NoteAlert = ({
   }, [onClose]);
 
   return (
-    <Modal isOpen={isOpen} size='small'>
+    <Modal isOpen={isOpen} small>
       <AlertTitle>Success</AlertTitle>
       <AlertDesc>{message}</AlertDesc>
       <ConfrimBtnWrapper onClick={alertCloseHandler}>
@@ -34,12 +34,13 @@ export default NoteAlert;
 const AlertTitle = styled.div`
   font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 `;
 
 const AlertDesc = styled.p`
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
+  padding: 0.5rem 0;
 `;
 
 const ConfrimBtnWrapper = styled.div`

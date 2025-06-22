@@ -16,7 +16,7 @@ const ErrorAlert = () => {
   }, [dispatch]);
 
   return (
-    <Modal isOpen={alertOpen} onClose={alertCloseHandler} size='small'>
+    <Modal isOpen={alertOpen} onClose={alertCloseHandler}>
       <AlertTitle>Error</AlertTitle>
       <AlertDesc>{alertMessage}</AlertDesc>
       <ConfrimBtnWrapper onClick={alertCloseHandler}>

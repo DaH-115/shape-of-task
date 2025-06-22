@@ -7,14 +7,14 @@ interface ModalProps {
   children: React.ReactNode;
   isOpen: boolean;
   onClose?: () => void;
-  size?: 'small' | 'medium' | 'large';
+  small?: boolean;
 }
 
-const Modal = ({ children, isOpen, onClose, size = 'medium' }: ModalProps) => {
+const Modal = ({ children, isOpen, onClose, small = false }: ModalProps) => {
   return (
     <PortalComponents>
       <Backdrop isOpen={isOpen} onClose={onClose} />
-      <ModalWrapper $modalToggle={isOpen} $size={size}>
+      <ModalWrapper $modalToggle={isOpen} $small={small}>
         {children}
       </ModalWrapper>
     </PortalComponents>
@@ -47,34 +47,16 @@ const slideDown = keyframes`
 
 const ModalWrapper = styled.div<{
   $modalToggle: boolean;
-  $size: 'small' | 'medium' | 'large';
+  $small: boolean;
 }>`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1001; /* 헤더(50), 백드롭(1000)보다 높게 설정 */
+  z-index: 1001;
 
-  width: ${({ $size }) => {
-    switch ($size) {
-      case 'small':
-        return '90%';
-      case 'large':
-        return '98%';
-      default:
-        return '95%';
-    }
-  }};
-  max-width: ${({ $size }) => {
-    switch ($size) {
-      case 'small':
-        return '320px';
-      case 'large':
-        return '800px';
-      default:
-        return '100%';
-    }
-  }};
+  width: 90%;
+  max-width: ${({ $small }) => ($small ? '12rem' : '20rem')};
   padding: 0.8rem;
 
   border-radius: 1rem;
@@ -86,97 +68,11 @@ const ModalWrapper = styled.div<{
   animation: ${({ $modalToggle }) => ($modalToggle ? slideUp : slideDown)} 0.25s
     ease-out forwards;
 
-  /* 반응형 스타일 */
-  ${({ theme, $size }) => theme.device.sm} {
-    width: ${({ $size }) => {
-      switch ($size) {
-        case 'small':
-          return '80%';
-        case 'large':
-          return '90%';
-        default:
-          return '85%';
-      }
-    }};
-    max-width: ${({ $size }) => {
-      switch ($size) {
-        case 'small':
-          return '350px';
-        case 'large':
-          return '700px';
-        default:
-          return '420px';
-      }
-    }};
-    padding: 1rem;
+  ${({ theme }) => theme.device.sm} {
+    max-width: ${({ $small }) => ($small ? '13rem' : '22rem')};
   }
 
-  ${({ theme, $size }) => theme.device.md} {
-    width: ${({ $size }) => {
-      switch ($size) {
-        case 'small':
-          return '60%';
-        case 'large':
-          return '85%';
-        default:
-          return '75%';
-      }
-    }};
-    max-width: ${({ $size }) => {
-      switch ($size) {
-        case 'small':
-          return '380px';
-        case 'large':
-          return '650px';
-        default:
-          return '480px';
-      }
-    }};
-  }
-
-  ${({ theme, $size }) => theme.device.lg} {
-    width: ${({ $size }) => {
-      switch ($size) {
-        case 'small':
-          return '45%';
-        case 'large':
-          return '80%';
-        default:
-          return '60%';
-      }
-    }};
-    max-width: ${({ $size }) => {
-      switch ($size) {
-        case 'small':
-          return '400px';
-        case 'large':
-          return '750px';
-        default:
-          return '520px';
-      }
-    }};
-  }
-
-  ${({ theme, $size }) => theme.device.xl} {
-    width: ${({ $size }) => {
-      switch ($size) {
-        case 'small':
-          return '35%';
-        case 'large':
-          return '70%';
-        default:
-          return '50%';
-      }
-    }};
-    max-width: ${({ $size }) => {
-      switch ($size) {
-        case 'small':
-          return '420px';
-        case 'large':
-          return '800px';
-        default:
-          return '560px';
-      }
-    }};
+  ${({ theme }) => theme.device.md} {
+    max-width: ${({ $small }) => ($small ? '14rem' : '24rem')};
   }
 `;

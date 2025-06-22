@@ -59,7 +59,7 @@ const ButtonWrapper = styled.div<{
     `${BUTTON_STYLES.border} ${
       $isDisabled ? theme.commonColors.gray : theme.colors.important
     }`};
-  border-radius: 1rem;
+  border-radius: ${BUTTON_STYLES.borderRadius};
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.6 : 1)};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
 

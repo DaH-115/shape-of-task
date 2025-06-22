@@ -93,4 +93,5 @@ export const SaveBtnWrapper = styled.div`
   justify-content: center;
   border-top: 1px solid ${({ theme }) => theme.commonColors.light_gray};
   flex-shrink: 0;
+  margin-top: 1rem;
 `;

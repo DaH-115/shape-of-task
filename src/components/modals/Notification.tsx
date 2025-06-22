@@ -76,7 +76,7 @@ const MessageWrapper = styled.div`
 
   background-color: #fff;
   border: 0.1rem solid ${({ theme }) => theme.colors.important};
-  border-radius: 1.5rem;
+  border-radius: 1rem;
 
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
 `;

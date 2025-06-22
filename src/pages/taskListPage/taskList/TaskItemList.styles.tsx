@@ -10,7 +10,7 @@ export const TaskList = styled.ul`
 export const TaskItem = styled.li<{ $isDone?: boolean }>`
   background-color: ${({ $isDone }) => ($isDone ? '#f8f9fa' : '#fff')};
   border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 1.2rem;
+  border-radius: 1rem;
   padding: 1.25rem;
   margin-bottom: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
@@ -156,7 +156,7 @@ export const TaskDate = styled.p`
   font-weight: 500;
   background: rgba(0, 0, 0, 0.03);
   padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   font-size: 0.8rem;
 `;
 

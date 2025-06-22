@@ -56,7 +56,7 @@ export const PinIcon = styled.div<{ $isPinned: boolean }>`
     $isPinned ? theme.colors.important : theme.commonColors.black};
 `;
 
-export const QuoteText = styled.strong`
+export const QuoteText = styled.p`
   display: block;
   width: 100%;
   margin-bottom: 0.5rem;
@@ -66,11 +66,6 @@ export const QuoteText = styled.strong`
   color: ${({ theme }) => theme.commonColors.black};
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   letter-spacing: -0.02em;
-
-  ${({ theme }) => theme.device.md} {
-    font-size: 1.4rem;
-    line-height: 1.6;
-  }
 `;
 
 export const QuoteAuthor = styled.p`

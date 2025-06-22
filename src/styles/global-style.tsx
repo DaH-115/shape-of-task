@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
       'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
       'Helvetica Neue', sans-serif;
     letter-spacing: -0.05rem;
-    font-size: 20px; /* 1rem = 20px로 계산 용이성 */
+    font-size: 18px; /* 1rem = 18px, 90% 줌 크기와 유사 */
     color: #141414;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
