@@ -16,5 +16,8 @@ export * from './taskListCount';
 // 오늘의 명언 컴포넌트
 export * from './todaysQuote';
 
+// 공통 컴포넌트들
+export * from './common';
+
 // 기타 컴포넌트들
 export { default as TitleComponent } from './TitleComponent';

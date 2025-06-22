@@ -31,7 +31,7 @@ const ConfirmModal = ({
   }, [onConfirm, onClose]);
 
   return (
-    <Modal isOpen={isOpen} onClose={closeHandler}>
+    <Modal isOpen={isOpen} onClose={closeHandler} size='small'>
       <AlertTitle>알림</AlertTitle>
       <AlertDesc>{modalDesc}</AlertDesc>
       <BtnWrapper>

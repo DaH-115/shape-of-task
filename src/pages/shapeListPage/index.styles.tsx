@@ -29,20 +29,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const MessageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 0 2rem;
-`;
-
-export const BlankMessage = styled.p`
-  font-size: 0.8rem;
-  text-align: center;
-  color: ${({ theme }) => theme.commonColors.gray};
-`;
-
 export const ShapeListHeader = styled.div`
   display: flex;
   justify-content: space-between;

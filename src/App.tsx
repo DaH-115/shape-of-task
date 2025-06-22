@@ -10,7 +10,7 @@ import Footer from 'layout/footer';
 import { ErrorAlert } from 'components/modals';
 import MainPage from 'pages/MainPage';
 import { useBreakpoint } from 'hooks';
-import Loading from 'layout/Loading';
+import { Loading } from 'components/common';
 
 const TaskListPage = lazy(() => import('pages/taskListPage'));
 const ShapeListPage = lazy(() => import('pages/shapeListPage'));

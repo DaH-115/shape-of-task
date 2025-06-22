@@ -1,14 +1,15 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
 const Loading = () => {
   return (
-    <LoadingWrapper role='status'>
+    <LoadingWrapper role='status' aria-label='로딩 중'>
       <LoadingSpinner aria-hidden />
     </LoadingWrapper>
   );
 };
 
-export default Loading;
+export default memo(Loading);
 
 const LoadingWrapper = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ const LoadingWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  min-height: 3rem;
 `;
 
 const LoadingSpinner = styled.div`
@@ -25,6 +27,7 @@ const LoadingSpinner = styled.div`
   width: 30px;
   height: 30px;
   animation: spin 0.8s linear infinite;
+
   @keyframes spin {
     0% {
       transform: rotate(0deg);

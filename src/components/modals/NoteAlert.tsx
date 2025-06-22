@@ -19,7 +19,7 @@ const NoteAlert = ({
   }, [onClose]);
 
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} size='small'>
       <AlertTitle>알림</AlertTitle>
       <AlertDesc>{message}</AlertDesc>
       <ConfrimBtnWrapper onClick={alertCloseHandler}>

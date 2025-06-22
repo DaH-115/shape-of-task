@@ -10,12 +10,11 @@ import {
   UpdateConfirmModal,
   RemoveConfirmModal,
   NoteAlert,
+  EmptyState,
 } from '@/components';
 import {
-  BlankMessage,
   Container,
   Wrapper,
-  MessageWrapper,
   SortButton,
   TaskListHeader,
   TasksHeaderBtns,
@@ -165,9 +164,7 @@ const TaskListPage = () => {
               />
             ))
           ) : (
-            <MessageWrapper>
-              <BlankMessage>오늘의 일정을 추가해 보세요</BlankMessage>
-            </MessageWrapper>
+            <EmptyState message='오늘의 일정을 추가해 보세요' />
           )}
         </TaskListContainer>
       </Wrapper>

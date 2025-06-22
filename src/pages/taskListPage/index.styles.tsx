@@ -52,18 +52,6 @@ export const SortButton = styled.button<{ $isActived: boolean }>`
   }
 `;
 
-export const MessageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const BlankMessage = styled.p`
-  color: ${({ theme }) => theme.commonColors.gray};
-  font-size: 1.2rem;
-  margin-top: 2rem;
-`;
-
 export const TasksHeaderBtns = styled.div`
   display: flex;
   align-items: center;

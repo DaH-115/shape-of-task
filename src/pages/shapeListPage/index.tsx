@@ -1,7 +1,6 @@
 import React, { useMemo, useRef } from 'react';
 import { useAppSelector } from 'store/hooks';
 import {
-  BlankMessage,
   Container,
   Wrapper,
   ShapeList,
@@ -12,6 +11,7 @@ import {
 import ShapeListItem from 'pages/shapeListPage/ShapeListItem';
 import SaveBtn from 'components/buttons/SaveBtn';
 import Title from 'components/TitleComponent';
+import { EmptyState } from 'components';
 
 const ShapeListPage = () => {
   const taskListRef = useRef<HTMLUListElement>(null);
@@ -36,7 +36,7 @@ const ShapeListPage = () => {
               ))}
             </ShapeList>
           ) : (
-            <BlankMessage>오늘의 형태를 만들어 보세요</BlankMessage>
+            <EmptyState message='오늘의 형태를 만들어 보세요' />
           )}
         </ShapeListContainer>
         <SaveBtnWrapper>

@@ -1,12 +1,6 @@
 import { BsChatQuote } from 'react-icons/bs';
 import styled, { css, keyframes } from 'styled-components';
 
-export const ErrorMessage = styled.div`
-  color: ${({ theme }) => theme.colors.important};
-  text-align: center;
-  padding: 1rem 0;
-`;
-
 export const QuoteContainer = styled.div`
   width: 100%;
 `;

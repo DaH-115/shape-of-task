@@ -3,7 +3,6 @@ import { BsPinAngleFill } from 'react-icons/bs';
 import { BsPinAngle } from 'react-icons/bs';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import {
-  ErrorMessage,
   IconsWrapper,
   PinIcon,
   QuoteAuthor,
@@ -14,7 +13,7 @@ import {
   QutoeTitleHeader,
 } from 'components/todaysQuote/TodaysQuote.styles';
 import useTodaysQuote from 'hooks/useTodaysQuote';
-import Loading from 'layout/Loading';
+import { Loading, ErrorMessage } from 'components/common';
 
 const TodaysQuote = () => {
   const {
@@ -57,9 +56,7 @@ const TodaysQuote = () => {
       {isLoading ? (
         <Loading />
       ) : !isLoading && isError ? (
-        <ErrorMessage>
-          문제가 생겼어요. 잠시 후 다시 시도해 주세요.
-        </ErrorMessage>
+        <ErrorMessage message='문제가 생겼어요. 잠시 후 다시 시도해 주세요.' />
       ) : displayedQuote ? (
         <>
           <QuoteText>{displayedQuote.quote}</QuoteText>
