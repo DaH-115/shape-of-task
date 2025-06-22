@@ -35,8 +35,8 @@ const TaskListCount = () => {
     <Container>
       <TotalCountMessage>
         {totalCount === 0
-          ? '모든 할 일을 완료했어요! 🎉'
-          : `총 ${totalCount}개의 할 일이 남아있어요`}
+          ? 'All tasks completed! 🎉'
+          : `${totalCount} task${totalCount > 1 ? 's' : ''} remaining`}
       </TotalCountMessage>
       <TaskListCountItem
         count={triangleValue}

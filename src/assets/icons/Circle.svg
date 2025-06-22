@@ -8,7 +8,7 @@
 
   <title id="title">동그라미(Circle)</title>
   <desc id="desc">
-    우선순위 중요해요라는 의미를 가진 동그라미(Circle)입니다.
+    우선순위 Anytime라는 의미를 가진 동그라미(Circle)입니다.
   </desc>
 
 <circle cx="50" cy="50" r="49" fill="current"/>

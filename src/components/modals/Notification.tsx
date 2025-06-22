@@ -30,8 +30,8 @@ const Notification = () => {
     <PortalComponents>
       <NoteWrapper $isOpen={isOpen}>
         <MessageWrapper>
-          <NoteTitle>알림</NoteTitle>
-          <NoteDesc>할 일 끝! 도형이 추가되었습니다</NoteDesc>
+          <NoteTitle>Notice</NoteTitle>
+          <NoteDesc>Task completed! Shape added</NoteDesc>
           <IconWrapper onClick={onNavgateHandler}>
             <MdArrowForwardIos aria-hidden />
           </IconWrapper>

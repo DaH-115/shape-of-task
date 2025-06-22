@@ -26,7 +26,7 @@ const AddBtn = ({ onAddClick }: AddBtnProps) => {
 
   return (
     <ButtonContainer onClick={modalOpenHandler}>
-      <Btn type={'button'} text={'일정 추가'} onClick={modalOpenHandler}>
+      <Btn type={'button'} text={'Add Task'} onClick={modalOpenHandler}>
         <StyledAddIcon aria-hidden />
       </Btn>
     </ButtonContainer>

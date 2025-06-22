@@ -119,21 +119,23 @@ const TaskListPage = () => {
     isNaN(new Date(task.date).getTime())
   );
   if (hasInvalidDates) {
-    dispatch(errorAlertOpenHandler('날짜 형식이 잘못되었습니다'));
+    dispatch(errorAlertOpenHandler('Invalid date format'));
   }
 
   return (
     <Container>
       <Wrapper>
         <TaskListHeader>
-          <Title title='Tasks' desc='오늘의 일정' />
+          <Title title='Tasks' desc="Today's Tasks" />
           <TasksHeaderBtns>
             <SortButton
               onClick={hideCompletedToggleHandler}
               $isActived={!hideCompleted}
-              title={hideCompleted ? '완료된 일정 표시' : '완료된 일정 숨기기'}
+              title={
+                hideCompleted ? 'Show Completed Tasks' : 'Hide Completed Tasks'
+              }
               aria-label={
-                hideCompleted ? '완료된 일정 표시' : '완료된 일정 숨기기'
+                hideCompleted ? 'Show Completed Tasks' : 'Hide Completed Tasks'
               }
             >
               {hideCompleted ? (
@@ -164,7 +166,7 @@ const TaskListPage = () => {
               />
             ))
           ) : (
-            <EmptyState message='오늘의 일정을 추가해 보세요' />
+            <EmptyState message='Add some tasks!' />
           )}
         </TaskListContainer>
       </Wrapper>

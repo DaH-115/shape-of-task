@@ -3,7 +3,7 @@ export const BUTTON_STYLES = {
   padding: '0.5rem 1rem',
   fontSize: '0.8rem',
   transition: 'all 0.2s ease-in-out',
-  border: '0.1rem solid',
+  border: '1px solid',
 } as const;
 
 export const BUTTON_COLORS = {

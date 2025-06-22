@@ -1,8 +1,7 @@
 import { memo, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
-import StyledShapes from 'components/shapes/SingleShapes';
-import { ShapeName } from 'types/task';
 import SingleShapes from 'components/shapes/SingleShapes';
+import { ShapeName } from 'types/task';
 
 interface ShapeSelectMenuProps {
   id: string;
@@ -42,15 +41,15 @@ const ShapeSelectMenu = ({
       <SelectMenuList onClick={getShapeHandler}>
         <SelectMenuItem data-shape='triangle'>
           <SingleShapes shapeName='triangle' />
-          <ShapeDesc>{'중요해요'}</ShapeDesc>
+          <ShapeDesc>{'Important'}</ShapeDesc>
         </SelectMenuItem>
         <SelectMenuItem data-shape='square'>
-          <StyledShapes shapeName='square' />
-          <ShapeDesc>{'기억해 두세요'}</ShapeDesc>
+          <SingleShapes shapeName='square' />
+          <ShapeDesc>{'Remember'}</ShapeDesc>
         </SelectMenuItem>
         <SelectMenuItem data-shape='circle'>
-          <StyledShapes shapeName='circle' />
-          <ShapeDesc>{'언제든지 해요'}</ShapeDesc>
+          <SingleShapes shapeName='circle' />
+          <ShapeDesc>{'Anytime'}</ShapeDesc>
         </SelectMenuItem>
       </SelectMenuList>
     </SelectMenuWrapper>

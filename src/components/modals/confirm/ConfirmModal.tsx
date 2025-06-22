@@ -32,14 +32,14 @@ const ConfirmModal = ({
 
   return (
     <Modal isOpen={isOpen} onClose={closeHandler} size='small'>
-      <AlertTitle>알림</AlertTitle>
+      <AlertTitle>Confirm</AlertTitle>
       <AlertDesc>{modalDesc}</AlertDesc>
       <BtnWrapper>
         <RejectBtnWrapper onClick={closeHandler}>
-          <Btn type='button' text='취소' variant='outline' />
+          <Btn type='button' text='Cancel' variant='outline' />
         </RejectBtnWrapper>
         <ConfrimBtnWrapper onClick={confirmHandler}>
-          <Btn type='button' text='확인' />
+          <Btn type='button' text='Confirm' />
         </ConfrimBtnWrapper>
       </BtnWrapper>
     </Modal>

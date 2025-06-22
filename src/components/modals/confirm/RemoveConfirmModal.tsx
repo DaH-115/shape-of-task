@@ -18,7 +18,7 @@ const RemoveConfirmModal = ({ isOpen, onClose }: RemoveConfirmModalProps) => {
   return (
     <ConfirmModal
       isOpen={isOpen}
-      modalDesc='삭제 하시겠어요?'
+      modalDesc='Do you want to delete this task?'
       onConfirm={confirmHandler}
       onClose={onClose}
     />

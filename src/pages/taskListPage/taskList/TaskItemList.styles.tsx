@@ -7,8 +7,8 @@ export const TaskList = styled.ul`
   margin-bottom: 0.5rem;
 `;
 
-export const TaskItem = styled.li`
-  background-color: #fff;
+export const TaskItem = styled.li<{ $isDone?: boolean }>`
+  background-color: ${({ $isDone }) => ($isDone ? '#f8f9fa' : '#fff')};
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 1.2rem;
   padding: 1.25rem;
@@ -18,6 +18,10 @@ export const TaskItem = styled.li`
   cursor: pointer;
   position: relative;
   overflow: hidden;
+
+  ${({ theme }) => theme.device.sm} {
+    padding: 1rem;
+  }
 
   &::before {
     content: '';
@@ -74,11 +78,11 @@ export const DoneButton = styled.button<{
     // 중요도별 색상 매핑
     switch ($priority) {
       case 1:
-        return theme.colors.important; // 중요함 - 빨간색 계열
+        return theme.colors.important; // Important - 빨간색 계열
       case 2:
-        return theme.colors.remember; // 기억할 것 - 노란색 계열
+        return theme.colors.remember; // Remember - 노란색 계열
       case 3:
-        return theme.colors.anytime; // 언제든지 - 파란색 계열
+        return theme.colors.anytime; // Anytime - 파란색 계열
       default:
         return theme.colors.important;
     }
@@ -131,6 +135,20 @@ export const ContentBottom = styled.div`
   padding: 0.75rem 0 0.5rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   margin-bottom: 0.75rem;
+
+  ${({ theme }) => theme.device.sm} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0.5rem 0 0.4rem 0;
+    margin-bottom: 0.5rem;
+  }
+
+  ${({ theme }) => theme.device.md} {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+  }
 `;
 
 export const TaskDate = styled.p`
@@ -152,18 +170,25 @@ export const ShapeDesc = styled.p`
 
 export const BtnWrapper = styled.div`
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
   justify-content: flex-end;
 
+  ${({ theme }) => theme.device.sm} {
+    gap: 0.4rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   ${({ theme }) => theme.device.md} {
+    flex-direction: row;
     width: 100%;
     justify-content: center;
+    gap: 0.75rem;
   }
 `;
 
 const IconStyles = css`
   font-size: 0.9rem;
-  color: #fff;
 
   ${({ theme }) => theme.device.md} {
     font-size: 0.8rem;

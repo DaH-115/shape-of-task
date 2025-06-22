@@ -73,6 +73,7 @@ const TaskItemList = ({
         aria-checked={done}
         tabIndex={0}
         onKeyDown={handleKeyDown}
+        $isDone={done}
       >
         <ContentHeader>
           <SingleShapes shapeName={shape} />
@@ -92,7 +93,7 @@ const TaskItemList = ({
         <BtnWrapper onClick={handleButtonAreaClick}>
           <Btn
             type='button'
-            text='수정'
+            text='Edit'
             variant='outline'
             onClick={handleUpdateBtnClick}
           >
@@ -100,7 +101,7 @@ const TaskItemList = ({
           </Btn>
           <Btn
             type='button'
-            text='삭제'
+            text='Delete'
             variant='outline'
             onClick={handleRemoveBtnClick}
           >

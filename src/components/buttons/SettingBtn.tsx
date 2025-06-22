@@ -17,7 +17,7 @@ const SettingBtn = () => {
     <BtnWrapper>
       <IconButtonWrapper onClick={menuToggleHandler}>
         <IoMdSettings aria-hidden />
-        <button type='button'>설정</button>
+        <button type='button'>Settings</button>
       </IconButtonWrapper>
       <SettingMenu isOpen={isToggle} sideMenuHandler={menuToggleHandler} />
     </BtnWrapper>

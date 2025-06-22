@@ -43,7 +43,7 @@ const SortDropdown = ({
     <DropdownContainer>
       <DropdownButton
         onClick={dropdownToggleHandler}
-        title='정렬 및 필터 옵션'
+        title='Sort and Filter Options'
         aria-expanded={isOpen}
         aria-haspopup='true'
       >
@@ -52,25 +52,25 @@ const SortDropdown = ({
 
       <DropdownMenu $isOpen={isOpen}>
         <MenuSection>
-          <MenuLabel>정렬</MenuLabel>
+          <MenuLabel>Sort</MenuLabel>
           <MenuItem
             $isActive={sortType === 'priority'}
             onClick={() => sortChangeHandler('priority')}
           >
-            중요도순 정렬
+            By Priority
           </MenuItem>
           <MenuItem
             $isActive={sortType === 'created'}
             onClick={() => sortChangeHandler('created')}
           >
-            등록순 정렬
+            By Created Date
           </MenuItem>
         </MenuSection>
 
         <MenuDivider />
 
         <MenuSection>
-          <MenuLabel>중요도 필터</MenuLabel>
+          <MenuLabel>Priority Filter</MenuLabel>
           <MenuItem
             $isActive={priorityFilter === 1}
             onClick={() => {
@@ -79,7 +79,7 @@ const SortDropdown = ({
             }}
           >
             <StyledShapes shapeName='triangle' />
-            중요한 일정만
+            Important
           </MenuItem>
           <MenuItem
             $isActive={priorityFilter === 2}
@@ -89,7 +89,7 @@ const SortDropdown = ({
             }}
           >
             <StyledShapes shapeName='square' />
-            기억할 일정만
+            Remember
           </MenuItem>
           <MenuItem
             $isActive={priorityFilter === 3}
@@ -99,7 +99,7 @@ const SortDropdown = ({
             }}
           >
             <StyledShapes shapeName='circle' />
-            일반 일정만
+            Anytime
           </MenuItem>
         </MenuSection>
       </DropdownMenu>

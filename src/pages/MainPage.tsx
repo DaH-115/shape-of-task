@@ -25,7 +25,7 @@ const MainPage = () => {
       </QuoteSection>
       {/* 일정 추가 버튼 */}
       <ButtonSection $isVisible={!isDesktop}>
-        <Btn type={'button'} text={'일정 추가하기'} onClick={navigateHandler}>
+        <Btn type={'button'} text={'Add Task'} onClick={navigateHandler}>
           <StyledAddIcon aria-hidden />
         </Btn>
       </ButtonSection>

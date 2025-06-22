@@ -20,10 +20,10 @@ const NoteAlert = ({
 
   return (
     <Modal isOpen={isOpen} size='small'>
-      <AlertTitle>알림</AlertTitle>
+      <AlertTitle>Success</AlertTitle>
       <AlertDesc>{message}</AlertDesc>
       <ConfrimBtnWrapper onClick={alertCloseHandler}>
-        <Btn type='button' text='확인' />
+        <Btn type='button' text='OK' />
       </ConfrimBtnWrapper>
     </Modal>
   );

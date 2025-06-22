@@ -19,7 +19,7 @@ const UpdateConfirmModal = ({
   return (
     <ConfirmModal
       isOpen={isOpen}
-      modalDesc='수정 하시겠어요?'
+      modalDesc='Do you want to edit this task?'
       onConfirm={confirmHandler}
       onClose={onClose}
     />

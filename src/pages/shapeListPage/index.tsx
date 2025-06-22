@@ -26,7 +26,7 @@ const ShapeListPage = () => {
     <Container>
       <Wrapper>
         <ShapeListHeader>
-          <Title title='My Shapes' desc='완료된 일' />
+          <Title title='My Shapes' desc='Completed Tasks' />
         </ShapeListHeader>
         <ShapeListContainer>
           {completedTakList.length > 0 ? (
@@ -36,7 +36,7 @@ const ShapeListPage = () => {
               ))}
             </ShapeList>
           ) : (
-            <EmptyState message='오늘의 형태를 만들어 보세요' />
+            <EmptyState message='Create some shapes!' />
           )}
         </ShapeListContainer>
         <SaveBtnWrapper>

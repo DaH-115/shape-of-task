@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// 명언 데이터 타입
 interface QuoteData {
   quote: string;
   author: string;
@@ -38,10 +37,10 @@ export const apiSlice = createApi({
       transformResponse: (response: QuoteData[]): QuoteData => {
         const quoteData = response[0];
 
-        // 기본 검증만
+        // 기본 검증
         if (!quoteData?.quote || !quoteData?.author) {
           logError('Invalid quote data:', quoteData);
-          throw new Error('명언 데이터를 불러올 수 없습니다.');
+          throw new Error('Unable to load quote data.');
         }
 
         return {
@@ -54,12 +53,8 @@ export const apiSlice = createApi({
         logError('API request failed:', error);
         return {
           status: error.status || 500,
-          message: '명언을 불러오는데 실패했습니다.',
+          message: 'Failed to load quote.',
         };
-      },
-      // 재시도 1번만
-      extraOptions: {
-        maxRetries: 1,
       },
     }),
   }),

@@ -28,13 +28,12 @@ const SideMenu = ({ isOpen, children, sideMenuHandler }: SideMenuProps) => {
       // 현재 포커스된 요소 저장
       previousFocusRef.current = document.activeElement as HTMLElement;
 
-      // 메뉴가 열리면 첫 번째 포커스 가능한 요소에 포커스
+      // 메뉴가 열리면 스크롤을 맨 위로
       setTimeout(() => {
-        const firstFocusableElement = menuRef.current?.querySelector(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        ) as HTMLElement;
-        firstFocusableElement?.focus();
-      }, 100);
+        if (menuRef.current) {
+          menuRef.current.scrollTop = 0;
+        }
+      }, 0);
     } else {
       // 메뉴가 닫히면 이전 포커스 복원
       previousFocusRef.current?.focus();
@@ -137,6 +136,9 @@ const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
     visibility 0.3s ease-in-out;
   z-index: 200;
+
+  /* 메뉴가 열릴 때마다 스크롤을 맨 위로 강제 설정 */
+  ${({ $isOpen }) => $isOpen && `scroll-behavior: auto;`}
 
   /* 포커스 스타일 개선 */
   &:focus {

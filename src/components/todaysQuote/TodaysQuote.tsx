@@ -1,6 +1,5 @@
 import Title from 'components/TitleComponent';
-import { BsPinAngleFill } from 'react-icons/bs';
-import { BsPinAngle } from 'react-icons/bs';
+import { BsPinAngleFill, BsPinAngle } from 'react-icons/bs';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import {
   IconsWrapper,
@@ -51,12 +50,12 @@ const TodaysQuote = () => {
         </PinIcon>
       </IconsWrapper>
       <QutoeTitleHeader>
-        <Title title='Todays Quote' desc='오늘의 명언' />
+        <Title title='Todays Quote' desc='Daily Inspiration' />
       </QutoeTitleHeader>
       {isLoading ? (
         <Loading />
       ) : !isLoading && isError ? (
-        <ErrorMessage message='문제가 생겼어요. 잠시 후 다시 시도해 주세요.' />
+        <ErrorMessage message='Something went wrong. Please try again later.' />
       ) : displayedQuote ? (
         <>
           <QuoteText>{displayedQuote.quote}</QuoteText>

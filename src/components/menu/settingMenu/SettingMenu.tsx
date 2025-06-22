@@ -12,7 +12,7 @@ const SettingMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
 
   return (
     <SideMenu isOpen={isOpen} sideMenuHandler={sideMenuHandler}>
-      <Title title='Setting' desc='색상 설정' />
+      <Title title='Setting' desc='Color Settings' />
       {themePalettes.map((item, index) => (
         <ColorPalette
           key={index}
@@ -21,7 +21,7 @@ const SettingMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
         />
       ))}
       <BtnWrapper onClick={sideMenuHandler}>
-        <Btn type='button' text='적용' variant='outline' />
+        <Btn type='button' text='Apply' variant='outline' />
       </BtnWrapper>
     </SideMenu>
   );
@@ -33,8 +33,4 @@ const BtnWrapper = styled.div`
   margin-top: 1.2rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-
-  ${({ theme }) => theme.device.md} {
-    margin-top: 1.5rem;
-  }
 `;

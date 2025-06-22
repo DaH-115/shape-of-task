@@ -25,16 +25,16 @@ const SaveBtn = ({ taskListRef, isDisabled }: SaveBtnProps) => {
       <button
         type='button'
         disabled={disabled}
-        title='이미지 저장'
+        title='Save Image'
         aria-label={
           isDisabled
-            ? '완료된 작업이 없어 저장할 수 없습니다'
+            ? 'No completed tasks to save'
             : isLoading
-            ? '이미지 저장 중'
-            : '작업 목록을 이미지로 저장'
+            ? 'Saving image'
+            : 'Save task list as image'
         }
       >
-        {isLoading ? '저장 중...' : '이미지 저장'}
+        {isLoading ? 'Saving...' : 'Save Image'}
       </button>
       <GiSaveArrow aria-hidden />
     </ButtonWrapper>
@@ -52,6 +52,7 @@ const ButtonWrapper = styled.div<{
   align-items: center;
   width: 100%;
   padding: ${BUTTON_STYLES.padding};
+  margin-top: 1rem;
   background-color: ${({ theme, $isDisabled }) =>
     $isDisabled ? theme.commonColors.gray : theme.colors.important};
   border: ${({ theme, $isDisabled }) =>
@@ -64,32 +65,33 @@ const ButtonWrapper = styled.div<{
 
   button {
     font-size: ${BUTTON_STYLES.fontSize};
-    color: ${({ $isDisabled }) => ($isDisabled ? '#666' : '#fff')};
+    color: ${({ $isDisabled, theme }) =>
+      $isDisabled ? theme.commonColors.light_gray : '#fff'};
   }
 
   svg {
-    color: ${({ $isDisabled }) => ($isDisabled ? '#666' : '#fff')};
+    color: ${({ $isDisabled, theme }) =>
+      $isDisabled ? theme.commonColors.light_gray : '#fff'};
   }
 
-  &:hover,
-  &:active {
-    background-color: ${({ $isDisabled }) =>
-      $isDisabled ? undefined : '#fff'};
-    transition: ${({ $isDisabled }) =>
-      $isDisabled ? undefined : BUTTON_STYLES.transition};
+  /* 활성화 상태일 때만 호버 효과 적용 */
+  ${({ $isDisabled, theme }) =>
+    !$isDisabled &&
+    `
+    &:hover,
+    &:active {
+      background-color: #fff;
+      transition: ${BUTTON_STYLES.transition};
 
-    button {
-      color: ${({ theme, $isDisabled }) =>
-        $isDisabled ? '#666' : theme.commonColors.black};
-      transition: ${({ $isDisabled }) =>
-        $isDisabled ? undefined : BUTTON_STYLES.transition};
-    }
+      button {
+        color: ${theme.commonColors.black};
+        transition: ${BUTTON_STYLES.transition};
+      }
 
-    svg {
-      color: ${({ theme, $isDisabled }) =>
-        $isDisabled ? '#666' : theme.colors.important};
-      transition: ${({ $isDisabled }) =>
-        $isDisabled ? undefined : BUTTON_STYLES.transition};
+      svg {
+        color: ${theme.colors.important};
+        transition: ${BUTTON_STYLES.transition};
+      }
     }
-  }
+  `}
 `;

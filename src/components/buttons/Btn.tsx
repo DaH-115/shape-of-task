@@ -28,7 +28,6 @@ const Btn = ({
 
 export default memo(Btn);
 
-// ButtonWrapper (variant와 disabled 상태 지원)
 export const ButtonWrapper = styled.div<{
   $variant: 'filled' | 'outline';
   $disabled: boolean;
@@ -50,19 +49,19 @@ export const ButtonWrapper = styled.div<{
   border-radius: ${BUTTON_STYLES.borderRadius};
   overflow: hidden;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
-  opacity: ${({ $disabled }) => ($disabled ? 0.6 : 1)};
 
   button {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    min-height: 2.5rem;
     color: ${({ theme, $variant, $disabled }) => {
       if ($disabled) return theme.commonColors.gray;
       return $variant === 'outline' ? theme.commonColors.gray : '#fff';
     }};
     font-size: ${BUTTON_STYLES.fontSize};
-    padding: 0.4rem;
+    padding: ${BUTTON_STYLES.padding};
   }
 
   svg {

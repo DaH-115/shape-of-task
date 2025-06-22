@@ -60,7 +60,6 @@ export const TasksHeaderBtns = styled.div`
 export const AddBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
   flex-shrink: 0;
 `;
 

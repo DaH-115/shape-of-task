@@ -3,12 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  max-height: 100vh; /* 전체 뷰포트 높이를 초과하지 않도록 제한 */
+  max-height: 100vh;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* flexbox에서 overflow 처리를 위해 필요 */
-  overflow: hidden; /* 컨테이너 자체는 스크롤 없이 */
+  min-height: 0;
+  overflow: hidden;
 `;
 
 export const Wrapper = styled.div`
@@ -20,8 +20,8 @@ export const Wrapper = styled.div`
   box-shadow: none;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* flexbox에서 overflow 처리를 위해 필요 */
-  overflow: hidden; /* 자식 요소가 넘치지 않도록 */
+  min-height: 0;
+  overflow: hidden;
 
   ${({ theme }) => theme.device.md} {
     box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
@@ -34,11 +34,11 @@ export const ShapeListHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 0.75rem; /* 하단 마진을 줄여서 더 컴팩트하게 */
+  margin-bottom: 0.75rem;
   flex-shrink: 0;
 
   ${({ theme }) => theme.device.md} {
-    margin-bottom: 1rem; /* 데스크톱에서는 기존 여백 유지 */
+    margin-bottom: 1rem;
   }
 `;
 
@@ -57,7 +57,6 @@ export const ShapeListContainer = styled.div`
   max-height: 75vh;
   padding: 0 1rem;
 
-  /* 모바일에서는 스크롤 인디케이터 표시 */
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 
@@ -72,11 +71,6 @@ export const ShapeListContainer = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 2px;
-  }
-
-  /* 매우 작은 화면에서는 더 제한적으로 */
-  @media (max-height: 600px) {
-    max-height: 60vh;
   }
 
   /* 데스크톱에서는 스크롤바 숨기고 flex로 남은 공간 모두 사용 */
@@ -97,11 +91,6 @@ export const ShapeListContainer = styled.div`
 export const SaveBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 0.75rem 0; /* 상하 패딩을 줄여서 더 컴팩트하게 */
   border-top: 1px solid ${({ theme }) => theme.commonColors.light_gray};
   flex-shrink: 0;
-
-  ${({ theme }) => theme.device.md} {
-    padding: 1rem 0; /* 데스크톱에서는 조금 더 여유 있게 */
-  }
 `;

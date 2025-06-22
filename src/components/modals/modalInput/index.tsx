@@ -69,9 +69,9 @@ const ModalInput = ({ isOpen, onClose, onSuccess }: ModalInputProps) => {
 
   const getPriority = useCallback((shape: ShapeName) => {
     const priorityObj: { [key: string]: { number: number; desc: string } } = {
-      triangle: { number: 1, desc: '중요해요' },
-      square: { number: 2, desc: '기억해 두세요' },
-      circle: { number: 3, desc: '언제든지 해요' },
+      triangle: { number: 1, desc: 'Important' },
+      square: { number: 2, desc: 'Remember' },
+      circle: { number: 3, desc: 'Anytime' },
       default: { number: 0, desc: '' },
     };
     return priorityObj[shape] || priorityObj.default;
@@ -156,7 +156,7 @@ const ModalInput = ({ isOpen, onClose, onSuccess }: ModalInputProps) => {
 
   const getShapeHandler = useCallback((shapeName: ShapeName) => {
     setShape(shapeName);
-    setToggle(false); // 도형 선택 후 드롭다운 닫기
+    setToggle(false);
   }, []);
 
   const shapeSelectMenuToggle = useCallback(() => {

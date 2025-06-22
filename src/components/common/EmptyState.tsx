@@ -26,6 +26,6 @@ const MessageWrapper = styled.div`
 const BlankMessage = styled.p`
   color: ${({ theme }) => theme.commonColors.medium_gray};
   font-size: 1.2rem;
-  margin-top: 2rem;
+  margin: 2rem 0;
   text-align: center;
 `;

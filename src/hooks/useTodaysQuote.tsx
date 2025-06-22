@@ -87,7 +87,7 @@ const useTodaysQuote = (): UseTodaysQuoteReturn => {
 
     // 저장 실패시 에러 표시
     if (!success) {
-      setStorageError('저장에 실패했습니다.');
+      setStorageError('Failed to save.');
     } else {
       setStorageError(null);
     }

@@ -14,7 +14,7 @@ const captureImages = async (
   taskListRef: RefObject<HTMLUListElement | null>
 ): Promise<CaptureResult> => {
   if (!taskListRef.current) {
-    throw new Error('저장할 이미지가 없습니다.');
+    throw new Error('No image to save.');
   }
 
   const taskList = taskListRef.current;
@@ -56,7 +56,7 @@ const captureImages = async (
     if (error instanceof Error) {
       throw error;
     }
-    throw new Error('이미지 캡처에 실패했습니다.');
+    throw new Error('Failed to capture image.');
   }
 };
 

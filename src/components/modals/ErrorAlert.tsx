@@ -17,10 +17,10 @@ const ErrorAlert = () => {
 
   return (
     <Modal isOpen={alertOpen} onClose={alertCloseHandler} size='small'>
-      <AlertTitle>알림</AlertTitle>
+      <AlertTitle>Error</AlertTitle>
       <AlertDesc>{alertMessage}</AlertDesc>
       <ConfrimBtnWrapper onClick={alertCloseHandler}>
-        <Btn type='button' text='확인' />
+        <Btn type='button' text='OK' />
       </ConfrimBtnWrapper>
     </Modal>
   );
