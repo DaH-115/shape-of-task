@@ -23,9 +23,8 @@ const captureImages = async (
     // HTML을 캔버스로 변환
     const taskListImg = await html2canvas(taskList, {
       scale: 2,
-      useCORS: true,
       logging: false,
-      allowTaint: true,
+      imageTimeout: 15000, // 15초 타임아웃
     });
 
     // 패딩이 있는 새 캔버스 생성
@@ -38,7 +37,7 @@ const captureImages = async (
     // 캔버스에 그리기
     const ctx = paddedCanvas.getContext('2d');
     if (!ctx) {
-      throw new Error('캔버스 생성에 실패했습니다.');
+      throw new Error('Failed to create canvas context.');
     }
 
     ctx.fillStyle = 'white';
@@ -56,7 +55,7 @@ const captureImages = async (
     if (error instanceof Error) {
       throw error;
     }
-    throw new Error('Failed to capture image.');
+    throw new Error('Failed to capture image. Please try again.');
   }
 };
 
