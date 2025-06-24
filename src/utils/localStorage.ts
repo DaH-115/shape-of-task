@@ -1,15 +1,9 @@
-/**
- * 간단한 localStorage 유틸리티
- */
-
 // 저장할 키 이름들
 export const STORAGE_KEYS = {
   QUOTE_STATE: 'quoteState',
 } as const;
 
-/**
- * localStorage에서 데이터 가져오기
- */
+// localStorage에서 데이터 가져오기
 export const getFromLocalStorage = <T>(key: string, defaultValue: T): T => {
   try {
     const saved = localStorage.getItem(key);
@@ -19,9 +13,7 @@ export const getFromLocalStorage = <T>(key: string, defaultValue: T): T => {
   }
 };
 
-/**
- * localStorage에 데이터 저장하기
- */
+// localStorage에 데이터 저장하기
 export const saveToLocalStorage = <T>(key: string, value: T): boolean => {
   try {
     localStorage.setItem(key, JSON.stringify(value));

@@ -17,7 +17,7 @@ import { Loading, ErrorMessage } from 'components/common';
 const TodaysQuote = () => {
   const {
     displayedQuote,
-    isError,
+    error,
     isLoading,
     pinSaveHandler,
     refetchHandler,
@@ -54,8 +54,8 @@ const TodaysQuote = () => {
       </QutoeTitleHeader>
       {isLoading ? (
         <Loading />
-      ) : !isLoading && isError ? (
-        <ErrorMessage message='Something went wrong. Please try again later.' />
+      ) : error ? (
+        <ErrorMessage message={error} />
       ) : displayedQuote ? (
         <>
           <QuoteText>{displayedQuote.quote}</QuoteText>
