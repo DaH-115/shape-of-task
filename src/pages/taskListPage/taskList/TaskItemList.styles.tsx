@@ -5,11 +5,26 @@ import { css } from 'styled-components';
 export const TaskList = styled.ul`
   width: 100%;
   margin-bottom: 0.5rem;
+  padding-top: 1rem;
 `;
 
-export const TaskItem = styled.li<{ $isDone?: boolean }>`
+export const TaskItem = styled.li<{ $isDone?: boolean; $priority?: number }>`
   background-color: ${({ $isDone }) => ($isDone ? '#f8f9fa' : '#fff')};
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 2px solid
+    ${({ theme, $priority, $isDone }) => {
+      if ($isDone) return 'rgba(0, 0, 0, 0.06)';
+
+      switch ($priority) {
+        case 1:
+          return theme.colors.important;
+        case 2:
+          return theme.colors.remember;
+        case 3:
+          return theme.colors.anytime;
+        default:
+          return 'rgba(0, 0, 0, 0.06)';
+      }
+    }};
   border-radius: 1rem;
   padding: 1.25rem;
   margin-bottom: 1rem;
@@ -43,7 +58,20 @@ export const TaskItem = styled.li<{ $isDone?: boolean }>`
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-    border-color: rgba(0, 0, 0, 0.08);
+    border-color: ${({ theme, $priority, $isDone }) => {
+      if ($isDone) return 'rgba(0, 0, 0, 0.08)';
+
+      switch ($priority) {
+        case 1:
+          return theme.colors.important;
+        case 2:
+          return theme.colors.remember;
+        case 3:
+          return theme.colors.anytime;
+        default:
+          return 'rgba(0, 0, 0, 0.08)';
+      }
+    }};
 
     &::before {
       opacity: 1;

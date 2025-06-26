@@ -74,6 +74,7 @@ const TaskItemList = ({
         tabIndex={0}
         onKeyDown={handleKeyDown}
         $isDone={done}
+        $priority={priority}
       >
         <ContentHeader>
           <SingleShapes shapeName={shape} />

@@ -4,7 +4,6 @@ import { BUTTON_STYLES } from './constants';
 // 버튼 컨테이너 공통 스타일
 export const ButtonContainer = styled.div`
   width: 100%;
-  margin-bottom: 1rem;
 `;
 
 // 아이콘이 있는 버튼의 공통 래퍼

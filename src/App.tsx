@@ -76,9 +76,7 @@ const DesktopContainer = styled.div`
   height: 100%;
   flex: 1;
   background-color: ${({ theme }) => theme.commonColors.light_gray};
-  gap: 1rem;
   min-width: 768px; /* 최소 너비를 줄여서 가로 스크롤 방지 */
-  padding: 1rem;
 
   ${({ theme }) => theme.device.md} {
     display: flex;

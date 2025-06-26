@@ -17,6 +17,7 @@ export interface PaletteTypes {
 interface ThemeType {
   [key: string]: PaletteTypes;
 }
+
 export const commonColors: CommonColorsTypes = {
   black: '#171717',
   dark_gray: '#404040',
@@ -65,6 +66,7 @@ const colorPalette_4: PaletteTypes = {
   anytime: '#D1D5DB',
 };
 
+// 배열 형태 (UI에서 리스트로 보여줄 때 사용)
 export const themePalettes: PaletteTypes[] = [
   originalColors,
   colorPalette_1,
@@ -73,6 +75,7 @@ export const themePalettes: PaletteTypes[] = [
   colorPalette_4,
 ];
 
+// 객체 형태 (특정 테마를 바로 찾을 때 사용)
 export const themeColors: ThemeType = {
   originalColors,
   colorPalette_1,

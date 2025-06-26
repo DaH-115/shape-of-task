@@ -2,26 +2,35 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* flexbox에서 overflow 처리를 위해 필요 */
+  min-height: 100vh;
+
+  /* 데스크톱에서는 원래 설정으로 복원 */
+  ${({ theme }) => theme.device.md} {
+    height: 100%;
+    padding-bottom: 1rem;
+    min-height: 0;
+  }
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   background-color: #fff;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* flexbox에서 overflow 처리를 위해 필요 */
-  overflow: hidden; /* 자식 요소가 넘치지 않도록 */
+  min-height: 0;
+  overflow: visible;
 
   ${({ theme }) => theme.device.md} {
+    height: 100%;
     padding: 1rem;
     box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
+    overflow: hidden;
   }
 `;
 
@@ -37,8 +46,8 @@ export const SortButton = styled.button<{ $isActived: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 1rem;
   color: ${({ theme, $isActived }) =>
     $isActived ? theme.colors.important : theme.commonColors.gray};
@@ -57,43 +66,72 @@ export const TasksHeaderBtns = styled.div`
   align-items: center;
 `;
 
-export const AddBtnWrapper = styled.div`
+export const AddBtnWrapper = styled.div<{ $isScrolledDown?: boolean }>`
+  position: fixed;
+  bottom: ${({ $isScrolledDown }) =>
+    $isScrolledDown
+      ? 'calc(6rem + env(safe-area-inset-bottom))'
+      : 'calc(1rem + env(safe-area-inset-bottom))'};
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
   display: flex;
   justify-content: center;
-  flex-shrink: 0;
+  width: 60%;
+  max-width: 11.25rem;
+  transition: bottom 0.3s ease-out;
+
+  /* 버튼 자체 크기 */
+  button {
+    min-height: 2.8rem;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.4rem;
+  }
+
+  /* 아이콘 크기 */
+  svg {
+    font-size: 1.1rem;
+    margin-left: 0.4rem;
+  }
+
+  /* 데스크톱에서는 원래 위치로 복원 */
+  ${({ theme }) => theme.device.md} {
+    position: static;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    z-index: auto;
+    flex-shrink: 0;
+    width: auto;
+    max-width: none;
+    transition: none;
+
+    /* 데스크톱에서 버튼 크기 원래대로 */
+    button {
+      min-height: 2.5rem;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+    }
+
+    /* 데스크톱에서 아이콘 크기 원래대로 */
+    svg {
+      font-size: 1.2rem;
+      margin-left: 0.3rem;
+    }
+  }
 `;
 
 export const TaskListContainer = styled.div`
-  flex: 1;
-  overflow-y: auto;
-  min-height: 15rem;
-  max-height: 60vh; /* 모바일에서 조금 더 여유있게 */
+  flex: none;
+  overflow: visible;
+  padding-bottom: 2rem; /* 모바일에서 Add Task 버튼 공간 확보 */
 
-  /* 모바일에서는 스크롤 인디케이터 표시 */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 2px;
-  }
-
-  /* 매우 작은 화면에서는 더 제한적으로 */
-  @media (max-height: 600px) {
-    max-height: 45vh;
-  }
-
-  /* 데스크톱에서는 스크롤바 숨기고 더 넉넉하게 */
+  /* 데스크톱에서는 기존 스크롤 설정 유지 */
   ${({ theme }) => theme.device.md} {
+    flex: 1;
+    overflow-y: auto;
     padding: 0 0 1rem;
+    padding-bottom: 1rem;
     min-height: 20rem;
     max-height: 60vh;
 

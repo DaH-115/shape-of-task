@@ -22,11 +22,19 @@ const TitleWrapper = styled.div`
 `;
 
 const ContentsTitle = styled.h1`
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: bold;
+
+  ${({ theme }) => theme.device.md} {
+    font-size: 1rem;
+  }
 `;
 
 const ContentsTitleDesc = styled.p`
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: ${({ theme }) => theme.commonColors.medium_gray};
+
+  ${({ theme }) => theme.device.md} {
+    font-size: 0.9rem;
+  }
 `;
