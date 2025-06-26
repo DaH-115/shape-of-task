@@ -83,15 +83,15 @@ export const AddBtnWrapper = styled.div<{ $isScrolledDown?: boolean }>`
 
   /* 버튼 자체 크기 */
   button {
-    min-height: 2.8rem !important;
-    font-size: 0.9rem !important;
-    padding: 0.8rem 1.4rem !important;
+    min-height: 2.8rem;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.4rem;
   }
 
   /* 아이콘 크기 */
   svg {
-    font-size: 1.1rem !important;
-    margin-left: 0.4rem !important;
+    font-size: 1.1rem;
+    margin-left: 0.4rem;
   }
 
   /* 데스크톱에서는 원래 위치로 복원 */
@@ -108,15 +108,15 @@ export const AddBtnWrapper = styled.div<{ $isScrolledDown?: boolean }>`
 
     /* 데스크톱에서 버튼 크기 원래대로 */
     button {
-      min-height: 2.5rem !important;
-      font-size: 1rem !important;
-      padding: 0.5rem 1rem !important;
+      min-height: 2.5rem;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
     }
 
     /* 데스크톱에서 아이콘 크기 원래대로 */
     svg {
-      font-size: 1.2rem !important;
-      margin-left: 0.3rem !important;
+      font-size: 1.2rem;
+      margin-left: 0.3rem;
     }
   }
 `;

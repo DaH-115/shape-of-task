@@ -1,5 +1,5 @@
 export const BUTTON_STYLES = {
-  borderRadius: '50px',
+  borderRadius: '3.125rem',
   padding: '0.5rem 1rem',
   fontSize: '0.8rem',
   transition: 'all 0.2s ease-in-out',

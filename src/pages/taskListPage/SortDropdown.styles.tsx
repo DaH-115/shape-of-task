@@ -105,23 +105,23 @@ export const MenuItem = styled.button<{ $isActive?: boolean }>`
   /* 드롭다운 메뉴 내부의 도형 크기 조정 */
   > div:first-child {
     /* 모바일 우선: 기본적으로 큰 크기 */
-    width: 1.2rem !important;
-    height: 1.2rem !important;
+    width: 1.2rem;
+    height: 1.2rem;
     flex-shrink: 0;
 
     svg {
-      width: 1rem !important;
-      height: 1rem !important;
+      width: 1rem;
+      height: 1rem;
     }
 
     /* 데스크톱에서만 작게 */
     ${({ theme }) => theme.device.md} {
-      width: 1rem !important;
-      height: 1rem !important;
+      width: 1rem;
+      height: 1rem;
 
       svg {
-        width: 0.8rem !important;
-        height: 0.8rem !important;
+        width: 0.8rem;
+        height: 0.8rem;
       }
     }
   }
