@@ -16,16 +16,14 @@ export const Wrapper = styled.div`
   height: 100%;
   background-color: #fff;
   border-radius: 1rem;
-  border: none;
-  box-shadow: none;
   display: flex;
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
 
   ${({ theme }) => theme.device.md} {
-    box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
     padding: 1rem;
+    box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
   }
 `;
 

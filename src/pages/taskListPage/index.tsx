@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { editingTask } from '@/store/taskListSlice';
 import { errorAlertOpenHandler } from '@/store/modalSlice';
@@ -45,6 +45,25 @@ const TaskListPage = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
   // 중요도 필터
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(0);
+  // 스크롤 상태 (스크롤을 내렸는지 여부)
+  const [isScrolledDown, setIsScrolledDown] = useState(false);
+
+  // 페이지 전체 스크롤 감지
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = document.documentElement.clientHeight;
+
+      // 스크롤이 끝까지 도달했는지 확인 (50px 여유분)
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 50;
+      setIsScrolledDown(isAtBottom);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const sortTypeChangeHandler = useCallback((type: SortType) => {
     setSortType(type);
@@ -152,7 +171,7 @@ const TaskListPage = () => {
             />
           </TasksHeaderBtns>
         </TaskListHeader>
-        <AddBtnWrapper>
+        <AddBtnWrapper $isScrolledDown={isScrolledDown}>
           <AddBtn onAddClick={inputModal.openHandler} />
         </AddBtnWrapper>
         <TaskListContainer>

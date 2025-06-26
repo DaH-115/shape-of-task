@@ -1,4 +1,3 @@
-import { useAppDispatch } from 'store/hooks';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { useCallback } from 'react';
 import Btn from './Btn';
@@ -12,15 +11,10 @@ interface AddBtnProps {
 
 // 일정 추가 버튼 컴포넌트
 const AddBtn = ({ onAddClick }: AddBtnProps) => {
-  const dispatch = useAppDispatch();
-
   // 모달 열기 핸들러
   const modalOpenHandler = useCallback(() => {
     if (onAddClick) {
       onAddClick();
-    } else {
-      // 기본 동작 - TODO: 모달 상태 관리 구현 필요
-      console.log('Add button clicked');
     }
   }, [onAddClick]);
 
