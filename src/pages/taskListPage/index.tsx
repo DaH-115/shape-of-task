@@ -133,13 +133,15 @@ const TaskListPage = () => {
       });
   }, [taskList, sortType, hideCompleted, priorityFilter]);
 
-  // 잘못된 날짜 형식 체크
-  const hasInvalidDates = taskList.some((task) =>
-    isNaN(new Date(task.date).getTime())
-  );
-  if (hasInvalidDates) {
-    dispatch(errorAlertOpenHandler('Invalid date format'));
-  }
+  // 잘못된 날짜 형식 체크 (렌더 중 side effect 방지를 위해 useEffect 사용)
+  useEffect(() => {
+    const hasInvalidDates = taskList.some((task) =>
+      isNaN(new Date(task.date).getTime())
+    );
+    if (hasInvalidDates) {
+      dispatch(errorAlertOpenHandler('Invalid date format'));
+    }
+  }, [taskList, dispatch]);
 
   return (
     <Container>
