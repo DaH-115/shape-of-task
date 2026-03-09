@@ -1,10 +1,8 @@
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import MainPage from 'pages/MainPage';
-import { Loading } from 'components/common';
-
-const TaskListPage = lazy(() => import('pages/taskListPage'));
-const ShapeListPage = lazy(() => import('pages/shapeListPage'));
+import MainPage from '@/pages/MainPage';
+import { Loading } from '@/components/common';
+import { TaskListPage, ShapeListPage } from '@/pages';
 
 const RoutesComponent = () => {
   return (
