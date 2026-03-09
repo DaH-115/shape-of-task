@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { TaskTypes, TaskListState } from 'types/task';
+import { TaskTypes, TaskListState } from '@/types/task';
 
 // localStorage 관련 유틸리티 함수들
 const getStoredTaskList = (): TaskTypes[] => {

@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
-import LinkBtn from 'components/buttons/LinkBtn';
-import SideMenu, { MenuProps } from 'components/menu/sideMenu/SideMenu';
+import LinkBtn from '@/components/buttons/LinkBtn';
+import SideMenu, { MenuProps } from '@/components/menu/sideMenu/SideMenu';
 import { BsX } from 'react-icons/bs';
 
 const NavMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {

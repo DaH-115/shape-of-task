@@ -1,8 +1,8 @@
 import React, { memo, useCallback } from 'react';
-import { toggleTask } from 'store/taskListSlice';
-import { TaskTypes } from 'types/task';
-import { notificationOpenHandler } from 'store/modalSlice';
-import { useAppDispatch } from 'store/hooks';
+import { toggleTask } from '@/store/taskListSlice';
+import { TaskTypes } from '@/types/task';
+import { notificationOpenHandler } from '@/store/modalSlice';
+import { useAppDispatch } from '@/store/hooks';
 import {
   BtnWrapper,
   ContentBottom,
@@ -21,8 +21,8 @@ import {
   IoIosCheckmarkCircle,
 } from 'react-icons/io';
 
-import SingleShapes from 'components/shapes/SingleShapes';
-import Btn from 'components/buttons/Btn';
+import SingleShapes from '@/components/shapes/SingleShapes';
+import Btn from '@/components/buttons/Btn';
 
 interface TaskItemListProps {
   processTask: TaskTypes;

@@ -1,9 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { apiSlice } from 'store/api/apiSlice';
-
-import taskListSlice from 'store/taskListSlice';
-import themeChangeSlice from 'store/themeChangeSlice';
-import modalSlice from 'store/modalSlice';
+import { apiSlice } from '@/store/api/apiSlice';
+import taskListSlice from '@/store/taskListSlice';
+import themeChangeSlice from '@/store/themeChangeSlice';
+import modalSlice from '@/store/modalSlice';
 
 const rootReducers = combineReducers({
   taskList: taskListSlice.reducer,

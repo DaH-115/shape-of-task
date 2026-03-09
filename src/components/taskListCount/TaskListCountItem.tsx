@@ -3,10 +3,10 @@ import {
   PriorityText,
   ShapesWrapper,
   TaskItemWrapper,
-} from 'components/taskListCount/TaskListCountItem.styles';
-import SingleShapes from 'components/shapes/SingleShapes';
+} from '@/components/taskListCount/TaskListCountItem.styles';
+import SingleShapes from '@/components/shapes/SingleShapes';
 import { memo } from 'react';
-import { ShapeName } from 'types/task';
+import { ShapeName } from '@/types/task';
 
 interface TaskListCountItemProps {
   priority: string;

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { styled } from 'styled-components';
-import Modal from 'components/modals/Modal';
-import Btn from 'components/buttons/Btn';
+import Modal from '@/components/modals/Modal';
+import Btn from '@/components/buttons/Btn';
 
 interface NoteAlertProps {
   isOpen: boolean;

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { useAppDispatch } from 'store/hooks';
-import ConfirmModal from 'components/modals/confirm/ConfirmModal';
-import { removeTask } from 'store/taskListSlice';
+import { useAppDispatch } from '@/store/hooks';
+import ConfirmModal from '@/components/modals/confirm/ConfirmModal';
+import { removeTask } from '@/store/taskListSlice';
 
 interface RemoveConfirmModalProps {
   isOpen: boolean;

@@ -1,9 +1,9 @@
 import { memo, useCallback } from 'react';
 import { styled } from 'styled-components';
-import { useAppDispatch } from 'store/hooks';
-import Modal from 'components/modals/Modal';
-import Btn from 'components/buttons/Btn';
-import { editingTaskReset } from 'store/taskListSlice';
+import { useAppDispatch } from '@/store/hooks';
+import Modal from '@/components/modals/Modal';
+import Btn from '@/components/buttons/Btn';
+import { editingTaskReset } from '@/store/taskListSlice';
 
 interface ConfirmModalProps {
   isOpen: boolean;

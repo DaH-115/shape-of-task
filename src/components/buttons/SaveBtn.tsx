@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 import { GiSaveArrow } from 'react-icons/gi';
-import { useSaveImage } from 'hooks/useSaveImage';
+import { useSaveImage } from '@/hooks/useSaveImage';
 import { SaveBtnProps } from './types';
 import { BUTTON_STYLES } from './styles/constants';
 

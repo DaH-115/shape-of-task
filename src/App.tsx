@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { useAppSelector } from 'store/hooks';
-import GlobalStyle from 'styles/global-style';
-import { defaultTheme } from 'styles/theme-device';
-import { themeColors } from 'styles/theme-colors';
-import Header from 'layout/header';
-import Footer from 'layout/footer';
-import ResponsiveLayout from 'layout/ResponsiveLayout';
-import { ErrorAlert } from 'components/modals';
+import { useAppSelector } from '@/store/hooks';
+import GlobalStyle from '@/styles/global-style';
+import { defaultTheme } from '@/styles/theme-device';
+import { themeColors } from '@/styles/theme-colors';
+import Header from '@/layout/header';
+import Footer from '@/layout/footer';
+import ResponsiveLayout from '@/layout/ResponsiveLayout';
+import { ErrorAlert } from '@/components/modals';
 
 const App = () => {
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);

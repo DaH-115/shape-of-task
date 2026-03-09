@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useState } from 'react';
 import { BiSortAlt2 } from 'react-icons/bi';
-import StyledShapes from 'components/shapes/SingleShapes';
+import StyledShapes from '@/components/shapes/SingleShapes';
 import {
   DropdownButton,
   DropdownContainer,
@@ -9,8 +9,8 @@ import {
   MenuItem,
   MenuLabel,
   MenuSection,
-} from 'pages/taskListPage/SortDropdown.styles';
-import { PriorityFilter, SortType } from 'pages/taskListPage';
+} from '@/pages/taskListPage/SortDropdown.styles';
+import { PriorityFilter, SortType } from '@/pages/taskListPage';
 
 interface SortDropdownProps {
   sortType: SortType;

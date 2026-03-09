@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ShapeName } from 'types/task';
+import { ShapeName } from '@/types/task';
 
 export const ShapesWrapper = styled.div`
   display: flex;

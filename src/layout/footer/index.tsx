@@ -6,7 +6,7 @@ import {
   FooterWrapper,
   GitHubIcon,
   HomeIcon,
-} from 'layout/footer/index.styles';
+} from '@/layout/footer/index.styles';
 
 const Footer = () => {
   return (

@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
-import { useAppSelector } from 'store/hooks';
-import { TaskTypes } from 'types/task';
-import TaskListCountItem from 'components/taskListCount/TaskListCountItem';
+import { useAppSelector } from '@/store/hooks';
+import { TaskTypes } from '@/types/task';
+import TaskListCountItem from '@/components/taskListCount/TaskListCountItem';
 
 const TaskListCount = () => {
   const taskList = useAppSelector((state) => state.taskList.taskList);

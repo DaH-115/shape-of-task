@@ -1,4 +1,4 @@
-import Title from 'components/TitleComponent';
+import Title from '@/components/TitleComponent';
 import { BsPinAngleFill, BsPinAngle } from 'react-icons/bs';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import {
@@ -10,9 +10,9 @@ import {
   QuoteText,
   RefreshIcon,
   QutoeTitleHeader,
-} from 'components/todaysQuote/TodaysQuote.styles';
-import useTodaysQuote from 'hooks/useTodaysQuote';
-import { Loading, ErrorMessage } from 'components/common';
+} from '@/components/todaysQuote/TodaysQuote.styles';
+import useTodaysQuote from '@/hooks/useTodaysQuote';
+import { Loading, ErrorMessage } from '@/components/common';
 
 const TodaysQuote = () => {
   const {

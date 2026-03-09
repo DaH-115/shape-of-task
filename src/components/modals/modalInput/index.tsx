@@ -7,9 +7,9 @@ import {
   ChangeEvent,
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { addTask, editingTaskReset, updateTask } from 'store/taskListSlice';
-import { ShapeName } from 'types/task';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { addTask, editingTaskReset, updateTask } from '@/store/taskListSlice';
+import { ShapeName } from '@/types/task';
 import {
   ModalHeader,
   InputLabel,
@@ -22,11 +22,11 @@ import {
   ErrorMsg,
 } from './ModalInput.styles';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import Title from 'components/TitleComponent';
-import Modal from 'components/modals/Modal';
-import MultipleShapes from 'components/shapes/MultipleShapes';
-import ShapeSelectMenu from 'components/menu/ShapeSelectMenu';
-import Btn from 'components/buttons/Btn';
+import Title from '@/components/TitleComponent';
+import Modal from '@/components/modals/Modal';
+import MultipleShapes from '@/components/shapes/MultipleShapes';
+import ShapeSelectMenu from '@/components/menu/ShapeSelectMenu';
+import Btn from '@/components/buttons/Btn';
 
 interface ModalInputProps {
   isOpen: boolean;

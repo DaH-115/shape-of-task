@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 import styled from 'styled-components';
-import { fadeIn, fadeOut } from 'styles/animation-setting';
+import { fadeIn, fadeOut } from '@/styles/animation-setting';
 
 interface BackdropProps {
   isOpen: boolean;

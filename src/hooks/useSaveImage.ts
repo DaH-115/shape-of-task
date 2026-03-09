@@ -1,7 +1,7 @@
 import { useCallback, useState, RefObject } from 'react';
-import { useAppDispatch } from 'store/hooks';
-import { errorAlertOpenHandler } from 'store/modalSlice';
-import captureImages from 'utils/captureImages';
+import { useAppDispatch } from '@/store/hooks';
+import { errorAlertOpenHandler } from '@/store/modalSlice';
+import captureImages from '@/utils/captureImages';
 import saveAs from 'file-saver';
 
 // 에러 메시지 상수

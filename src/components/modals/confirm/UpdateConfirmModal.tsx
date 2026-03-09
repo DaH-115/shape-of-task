@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import ConfirmModal from 'components/modals/confirm/ConfirmModal';
+import ConfirmModal from '@/components/modals/confirm/ConfirmModal';
 
 interface UpdateConfirmModalProps {
   isOpen: boolean;

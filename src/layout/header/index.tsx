@@ -8,10 +8,10 @@ import {
   StyledLogo,
   Wrapper,
   HeaderSettingBtn,
-} from 'layout/header/index.styles';
-import NavMenu from 'components/menu/sideMenu/NavMenu';
-import SettingBtn from 'components/buttons/SettingBtn';
-import { useBreakpoint } from 'hooks/useBreakpoint';
+} from '@/layout/header/index.styles';
+import NavMenu from '@/components/menu/sideMenu/NavMenu';
+import SettingBtn from '@/components/buttons/SettingBtn';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 const Header = () => {
   const [isToggle, setIsToggle] = useState(false);

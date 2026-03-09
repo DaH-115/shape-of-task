@@ -1,8 +1,8 @@
 import { memo, useCallback } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch } from 'store/hooks';
-import { themeChange } from 'store/themeChangeSlice';
-import { themeColors } from 'styles/theme-colors';
+import { useAppDispatch } from '@/store/hooks';
+import { themeChange } from '@/store/themeChangeSlice';
+import { themeColors } from '@/styles/theme-colors';
 
 interface ColorPaletteProps {
   name: string;

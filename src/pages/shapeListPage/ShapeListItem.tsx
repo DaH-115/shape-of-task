@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
-import StyledShapes from 'components/shapes/SingleShapes';
-import { ShapeName } from 'types/task';
+import StyledShapes from '@/components/shapes/SingleShapes';
+import { ShapeName } from '@/types/task';
 
 const ShapeListItem = ({ shape }: { shape: ShapeName }) => {
   return (

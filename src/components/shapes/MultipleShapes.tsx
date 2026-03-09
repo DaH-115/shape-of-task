@@ -4,8 +4,8 @@ import {
   StyledCircle,
   StyledSquare,
   StyledTriangle,
-} from 'components/shapes/SingleShapes.styles';
-import { ShapeName } from 'types/task';
+} from '@/components/shapes/SingleShapes.styles';
+import { ShapeName } from '@/types/task';
 
 interface MultipleShapesProps {
   shape: ShapeName;

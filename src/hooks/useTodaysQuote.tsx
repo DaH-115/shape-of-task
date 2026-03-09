@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useGetQuoteQuery } from 'store/api/apiSlice';
+import { useGetQuoteQuery } from '@/store/api/apiSlice';
 import {
   getFromLocalStorage,
   saveToLocalStorage,
   STORAGE_KEYS,
-} from 'utils/localStorage';
+} from '@/utils/localStorage';
 
 interface QuoteType {
   quote: string;

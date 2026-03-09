@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { themePalettes } from 'styles/theme-colors';
-import { useAppSelector } from 'store/hooks';
-import SideMenu, { MenuProps } from 'components/menu/sideMenu/SideMenu';
-import ColorPalette from 'components/menu/settingMenu/ColorPalette';
-import Title from 'components/TitleComponent';
-import Btn from 'components/buttons/Btn';
+import { themePalettes } from '@/styles/theme-colors';
+import { useAppSelector } from '@/store/hooks';
+import SideMenu, { MenuProps } from '@/components/menu/sideMenu/SideMenu';
+import ColorPalette from '@/components/menu/settingMenu/ColorPalette';
+import Title from '@/components/TitleComponent';
+import Btn from '@/components/buttons/Btn';
 
 const SettingMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);

@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { styled } from 'styled-components';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { errorAlertCloseHandler } from 'store/modalSlice';
-import Modal from 'components/modals/Modal';
-import Btn from 'components/buttons/Btn';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { errorAlertCloseHandler } from '@/store/modalSlice';
+import Modal from '@/components/modals/Modal';
+import Btn from '@/components/buttons/Btn';
 
 const ErrorAlert = () => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { IoMenu } from 'react-icons/io5';
-import Logo from 'assets/icons/Logo.svg?react';
+import Logo from '@/assets/icons/Logo.svg?react';
 
 export const SideMenuBtn = styled.button`
   display: flex;

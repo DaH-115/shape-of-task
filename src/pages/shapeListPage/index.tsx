@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from 'react';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from '@/store/hooks';
 import {
   Container,
   Wrapper,
@@ -7,11 +7,11 @@ import {
   ShapeListHeader,
   ShapeListContainer,
   SaveBtnWrapper,
-} from 'pages/shapeListPage/index.styles';
-import ShapeListItem from 'pages/shapeListPage/ShapeListItem';
-import SaveBtn from 'components/buttons/SaveBtn';
-import Title from 'components/TitleComponent';
-import { EmptyState } from 'components';
+} from '@/pages/shapeListPage/index.styles';
+import ShapeListItem from '@/pages/shapeListPage/ShapeListItem';
+import SaveBtn from '@/components/buttons/SaveBtn';
+import Title from '@/components/TitleComponent';
+import { EmptyState } from '@/components';
 
 const ShapeListPage = () => {
   const taskListRef = useRef<HTMLUListElement>(null);

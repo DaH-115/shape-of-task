@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
-import SingleShapes from 'components/shapes/SingleShapes';
-import { ShapeName } from 'types/task';
+import SingleShapes from '@/components/shapes/SingleShapes';
+import { ShapeName } from '@/types/task';
 
 interface ShapeSelectMenuProps {
   id: string;

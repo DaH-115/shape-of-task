@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Circle from 'assets/icons/Circle.svg?react';
-import Square from 'assets/icons/Square.svg?react';
-import Triangle from 'assets/icons/Triangle.svg?react';
+import Circle from '@/assets/icons/Circle.svg?react';
+import Square from '@/assets/icons/Square.svg?react';
+import Triangle from '@/assets/icons/Triangle.svg?react';
 
 export const ShapeWrapper = styled.div`
   display: flex;

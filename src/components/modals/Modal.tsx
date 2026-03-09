@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled, { keyframes } from 'styled-components';
-import PortalComponents from 'components/modals/PortalComponents';
-import Backdrop from 'components/modals/Backdrop';
+import PortalComponents from '@/components/modals/PortalComponents';
+import Backdrop from '@/components/modals/Backdrop';
 
 interface ModalProps {
   children: React.ReactNode;

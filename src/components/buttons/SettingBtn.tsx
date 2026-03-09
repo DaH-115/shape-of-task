@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { IoMdSettings } from 'react-icons/io';
-import SettingMenu from 'components/menu/settingMenu/SettingMenu';
+import SettingMenu from '@/components/menu/settingMenu/SettingMenu';
 import { IconButtonWrapper } from './styles/common';
 
 // 설정 버튼 컴포넌트

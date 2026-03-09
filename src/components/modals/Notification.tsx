@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { notificationCloseHandler } from 'store/modalSlice';
-import { fadeSlideIn, fadeSlideOut } from 'styles/animation-setting';
-import PortalComponents from 'components/modals/PortalComponents';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { notificationCloseHandler } from '@/store/modalSlice';
+import { fadeSlideIn, fadeSlideOut } from '@/styles/animation-setting';
+import PortalComponents from '@/components/modals/PortalComponents';
 import { MdArrowForwardIos } from 'react-icons/md';
 
 const Notification = () => {

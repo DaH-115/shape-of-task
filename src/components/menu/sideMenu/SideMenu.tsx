@@ -1,6 +1,6 @@
 import { memo, ReactNode, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import PortalComponents from 'components/modals/PortalComponents';
+import PortalComponents from '@/components/modals/PortalComponents';
 
 export interface MenuProps {
   isOpen: boolean;

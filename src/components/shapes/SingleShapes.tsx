@@ -1,11 +1,11 @@
 import { memo } from 'react';
-import { ShapeName } from 'types/task';
+import { ShapeName } from '@/types/task';
 import {
   ShapeWrapper,
   StyledCircle,
   StyledSquare,
   StyledTriangle,
-} from 'components/shapes/SingleShapes.styles';
+} from '@/components/shapes/SingleShapes.styles';
 
 interface SingleShapesProps {
   shapeName: ShapeName;
