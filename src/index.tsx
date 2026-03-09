@@ -10,12 +10,7 @@ const rootNode = document.getElementById('root')!;
 
 ReactDOM.createRoot(rootNode).render(
   <React.StrictMode>
-    <BrowserRouter
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
-      }}
-    >
+    <BrowserRouter>
       <HelmetProvider>
         <Provider store={store}>
           <App />
