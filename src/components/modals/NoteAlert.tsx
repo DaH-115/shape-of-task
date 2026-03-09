@@ -22,9 +22,9 @@ const NoteAlert = ({
     <Modal isOpen={isOpen} onClose={alertCloseHandler} small>
       <AlertTitle>Success</AlertTitle>
       <AlertDesc>{message}</AlertDesc>
-      <ConfrimBtnWrapper onClick={alertCloseHandler}>
+      <ConfirmBtnWrapper onClick={alertCloseHandler}>
         <Btn type='button' text='OK' />
-      </ConfrimBtnWrapper>
+      </ConfirmBtnWrapper>
     </Modal>
   );
 };
@@ -43,7 +43,7 @@ const AlertDesc = styled.p`
   padding: 0.5rem 0;
 `;
 
-const ConfrimBtnWrapper = styled.div`
+const ConfirmBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;

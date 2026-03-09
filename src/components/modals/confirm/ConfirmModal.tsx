@@ -38,9 +38,9 @@ const ConfirmModal = ({
         <RejectBtnWrapper onClick={closeHandler}>
           <Btn type='button' text='Cancel' variant='outline' />
         </RejectBtnWrapper>
-        <ConfrimBtnWrapper onClick={confirmHandler}>
+        <ConfirmBtnWrapper onClick={confirmHandler}>
           <Btn type='button' text='Confirm' />
-        </ConfrimBtnWrapper>
+        </ConfirmBtnWrapper>
       </BtnWrapper>
     </Modal>
   );
@@ -65,7 +65,7 @@ const BtnWrapper = styled.div`
   width: 100%;
 `;
 
-const ConfrimBtnWrapper = styled.div`
+const ConfirmBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;

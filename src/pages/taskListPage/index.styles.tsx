@@ -42,15 +42,15 @@ export const TaskListHeader = styled.div`
   flex-shrink: 0;
 `;
 
-export const SortButton = styled.button<{ $isActived: boolean }>`
+export const SortButton = styled.button<{ $isActive: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 2rem;
   height: 2rem;
   border-radius: 1rem;
-  color: ${({ theme, $isActived }) =>
-    $isActived ? theme.colors.important : theme.commonColors.gray};
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.important : theme.commonColors.gray};
   font-size: 1.2rem;
 
   &:hover,

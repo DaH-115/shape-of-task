@@ -19,9 +19,9 @@ const ErrorAlert = () => {
     <Modal isOpen={alertOpen} onClose={alertCloseHandler}>
       <AlertTitle>Error</AlertTitle>
       <AlertDesc>{alertMessage}</AlertDesc>
-      <ConfrimBtnWrapper onClick={alertCloseHandler}>
+      <ConfirmBtnWrapper onClick={alertCloseHandler}>
         <Btn type='button' text='OK' />
-      </ConfrimBtnWrapper>
+      </ConfirmBtnWrapper>
     </Modal>
   );
 };
@@ -39,7 +39,7 @@ const AlertDesc = styled.p`
   margin-bottom: 1rem;
 `;
 
-const ConfrimBtnWrapper = styled.div`
+const ConfirmBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;

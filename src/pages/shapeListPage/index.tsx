@@ -16,11 +16,11 @@ import { EmptyState } from 'components';
 const ShapeListPage = () => {
   const taskListRef = useRef<HTMLUListElement>(null);
   const taskList = useAppSelector((state) => state.taskList.taskList);
-  const completedTakList = useMemo(
+  const completedTaskList = useMemo(
     () => taskList.filter((task) => task.done === true),
     [taskList]
   );
-  const isDisabled = completedTakList.length === 0;
+  const isDisabled = completedTaskList.length === 0;
 
   return (
     <Container>
@@ -29,9 +29,9 @@ const ShapeListPage = () => {
           <Title title='My Shapes' desc='Completed Tasks' />
         </ShapeListHeader>
         <ShapeListContainer>
-          {completedTakList.length > 0 ? (
+          {completedTaskList.length > 0 ? (
             <ShapeList ref={taskListRef}>
-              {completedTakList.map((task) => (
+              {completedTaskList.map((task) => (
                 <ShapeListItem key={task.id} shape={task.shape} />
               ))}
             </ShapeList>

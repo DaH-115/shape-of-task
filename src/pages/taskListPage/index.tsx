@@ -151,7 +151,7 @@ const TaskListPage = () => {
           <TasksHeaderBtns>
             <SortButton
               onClick={hideCompletedToggleHandler}
-              $isActived={!hideCompleted}
+              $isActive={!hideCompleted}
               title={
                 hideCompleted ? 'Show Completed Tasks' : 'Hide Completed Tasks'
               }
