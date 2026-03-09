@@ -9,6 +9,12 @@ export const Container = styled.div`
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
+
+  /* 데스크톱: 부모(DesktopColumn) 높이를 꽉 채우도록 */
+  ${({ theme }) => theme.device.md} {
+    flex: 1;
+    max-height: none;
+  }
 `;
 
 export const Wrapper = styled.div`

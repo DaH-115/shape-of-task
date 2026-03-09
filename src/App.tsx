@@ -1,19 +1,13 @@
-import { lazy, Suspense, useMemo } from 'react';
+import { useMemo } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useAppSelector } from 'store/hooks';
 import GlobalStyle from 'styles/global-style';
 import { defaultTheme } from 'styles/theme-device';
 import { themeColors } from 'styles/theme-colors';
-import RoutesComponent from 'routes/Routes';
 import Header from 'layout/header';
 import Footer from 'layout/footer';
+import ResponsiveLayout from 'layout/ResponsiveLayout';
 import { ErrorAlert } from 'components/modals';
-import MainPage from 'pages/MainPage';
-import { useBreakpoint } from 'hooks';
-import { Loading } from 'components/common';
-
-const TaskListPage = lazy(() => import('pages/taskListPage'));
-const ShapeListPage = lazy(() => import('pages/shapeListPage'));
 
 const App = () => {
   const paletteName = useAppSelector((state) => state.themeChange.paletteName);
@@ -24,7 +18,6 @@ const App = () => {
     }),
     [paletteName]
   );
-  const { isAboveBreakpoint: isDesktop } = useBreakpoint({ breakpoint: 768 });
 
   return (
     <ThemeProvider theme={theme}>
@@ -32,19 +25,7 @@ const App = () => {
       <AppContainer>
         <Header />
         <MainContent>
-          {isDesktop ? (
-            <DesktopContainer>
-              <MainPage />
-              <Suspense fallback={<Loading />}>
-                <TaskListPage />
-                <ShapeListPage />
-              </Suspense>
-            </DesktopContainer>
-          ) : (
-            <MobileContainer>
-              <RoutesComponent />
-            </MobileContainer>
-          )}
+          <ResponsiveLayout />
         </MainContent>
         <Footer />
       </AppContainer>
@@ -68,30 +49,4 @@ const MainContent = styled.main`
   display: flex;
   flex-direction: column;
   min-height: 0; /* flexbox에서 overflow 처리를 위해 필요 */
-`;
-
-const DesktopContainer = styled.div`
-  display: none;
-  width: 100%;
-  height: 100%;
-  flex: 1;
-  background-color: ${({ theme }) => theme.commonColors.light_gray};
-  min-width: 768px; /* 최소 너비를 줄여서 가로 스크롤 방지 */
-
-  ${({ theme }) => theme.device.md} {
-    display: flex;
-  }
-`;
-
-const MobileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-width: ${({ theme }) => theme.size.mobile};
-  flex: 1;
-  min-height: 0; /* flexbox에서 overflow 처리를 위해 필요 */
-
-  ${({ theme }) => theme.device.md} {
-    display: none;
-  }
 `;

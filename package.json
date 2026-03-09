@@ -22,7 +22,11 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "serve": "vite preview",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "update:browserslist": "update-browserslist-db"
+  },
+  "resolutions": {
+    "caniuse-lite": "^1.0.30001777"
   },
   "browserslist": {
     "production": [
@@ -47,12 +51,14 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.5.2",
+    "browserslist": "^4.24.0",
     "eslint": "^9.15.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "file-saver": "^2.0.5",
     "typescript": "^5.9.0",
     "typescript-eslint": "^8.18.0",
+    "update-browserslist-db": "^1.2.3",
     "vite": "^6.3.5",
     "vite-plugin-svgr": "^4.3.0"
   }

@@ -44,17 +44,21 @@ const SideMenu = ({ isOpen, children, sideMenuHandler }: SideMenuProps) => {
     };
   }, [isOpen, sideMenuHandler]);
 
-  // 스크롤 방지 처리
+  // 스크롤 방지 처리 (스크롤바 숨김 시 레이아웃 시프트 방지)
   useEffect(() => {
     if (isOpen) {
       // 현재 스크롤 위치 저장
       const scrollY = window.scrollY;
+      // 스크롤바 폭 계산 (overflow hidden 시 화면 크기 변화 방지용)
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
 
       // body 스크롤 방지
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
 
       return () => {
         // 메뉴가 닫힐 때 스크롤 복원
@@ -62,6 +66,7 @@ const SideMenu = ({ isOpen, children, sideMenuHandler }: SideMenuProps) => {
         document.body.style.top = '';
         document.body.style.width = '';
         document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
         window.scrollTo(0, scrollY);
       };
     }

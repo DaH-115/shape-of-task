@@ -43,6 +43,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-height: 0;
+
+  /* 데스크톱: flex 자식으로 균등 분배되도록 min-width 제거 */
+  ${({ theme }) => theme.device.md} {
+    min-width: 0;
+  }
 `;
 
 const QuoteSection = styled.div`
@@ -51,6 +57,8 @@ const QuoteSection = styled.div`
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
   padding: 1rem;
   flex: 1;
+  min-height: 0; /* flex overflow 허용 */
+  overflow-y: auto; /* 명언이 길어지면 내부 스크롤 */
 
   ${({ theme }) => theme.device.md} {
     padding: 1.5rem;

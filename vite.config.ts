@@ -41,5 +41,16 @@ export default defineConfig({
   build: {
     outDir: 'build',
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          'redux': ['@reduxjs/toolkit', 'react-redux'],
+          'styled': ['styled-components'],
+          'icons': ['react-icons'],
+          'capture': ['html2canvas', 'file-saver'],
+        },
+      },
+    },
   },
 });

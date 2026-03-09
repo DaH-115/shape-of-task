@@ -28,10 +28,15 @@ const rotateAnimation = keyframes`
 `;
 
 export const RefreshIcon = styled.div<{ disabled: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.2rem;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   color: ${({ theme, disabled }) =>
     disabled ? theme.commonColors.gray : theme.commonColors.black};
+  /* 회전 시 아이콘 중심축 기준으로 회전하도록 설정 */
+  transform-origin: center;
 
   &:active,
   &:hover {
