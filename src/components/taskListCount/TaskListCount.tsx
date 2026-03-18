@@ -1,24 +1,24 @@
-import { useCallback, useMemo } from 'react';
-import styled from 'styled-components';
-import { useAppSelector } from '@/store/hooks';
-import { TaskTypes } from '@/types/task';
-import TaskListCountItem from '@/components/taskListCount/TaskListCountItem';
+import { useCallback, useMemo } from "react";
+import styled from "styled-components";
+import { useAppSelector } from "store/hooks";
+import { TaskTypes } from "types/task";
+import TaskListCountItem from "components/taskListCount/TaskListCountItem";
 
 const TaskListCount = () => {
   const taskList = useAppSelector((state) => state.taskList.taskList);
   const countTaskHandler = useCallback(
     (taskList: TaskTypes[], shape: string): number => {
       return taskList.filter(
-        (item: TaskTypes) => item.shape === shape && item.done === false
+        (item: TaskTypes) => item.shape === shape && item.done === false,
       ).length;
     },
-    []
+    [],
   );
   const shapeCounts = useMemo(() => {
     return {
-      triangle: countTaskHandler(taskList, 'triangle'),
-      square: countTaskHandler(taskList, 'square'),
-      circle: countTaskHandler(taskList, 'circle'),
+      triangle: countTaskHandler(taskList, "triangle"),
+      square: countTaskHandler(taskList, "square"),
+      circle: countTaskHandler(taskList, "circle"),
     };
   }, [taskList, countTaskHandler]);
   const {
@@ -35,23 +35,23 @@ const TaskListCount = () => {
     <Container>
       <TotalCountMessage>
         {totalCount === 0
-          ? 'All tasks completed! 🎉'
-          : `${totalCount} task${totalCount > 1 ? 's' : ''} remaining`}
+          ? "All tasks completed! 🎉"
+          : `${totalCount} task${totalCount > 1 ? "s" : ""} remaining`}
       </TotalCountMessage>
       <TaskListCountItem
         count={triangleValue}
-        priority={'Important'}
-        shape={'triangle'}
+        priority={"Important"}
+        shape={"triangle"}
       />
       <TaskListCountItem
         count={squareValue}
-        priority={'Remember'}
-        shape={'square'}
+        priority={"Remember"}
+        shape={"square"}
       />
       <TaskListCountItem
         count={circleValue}
-        priority={'Anytime'}
-        shape={'circle'}
+        priority={"Anytime"}
+        shape={"circle"}
       />
     </Container>
   );
