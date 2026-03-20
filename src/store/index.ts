@@ -3,8 +3,9 @@ import { apiSlice } from '@/store/api/apiSlice';
 import taskListSlice from '@/store/taskListSlice';
 import themeChangeSlice from '@/store/themeChangeSlice';
 import modalSlice from '@/store/modalSlice';
+import { taskListPersistMiddleware } from '@/store/taskListPersistMiddleware';
 
-const rootReducers = combineReducers({
+const rootReducer = combineReducers({
   taskList: taskListSlice.reducer,
   modal: modalSlice.reducer,
   themeChange: themeChangeSlice.reducer,
@@ -12,9 +13,11 @@ const rootReducers = combineReducers({
 });
 
 const store = configureStore({
-  reducer: rootReducers,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware()
+      .concat(apiSlice.middleware)
+      .concat(taskListPersistMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 // 글로벌하게 관리가 필요한 알림만 남김
 interface GlobalAlertState {
@@ -14,7 +14,7 @@ interface GlobalAlertState {
 const initialState: GlobalAlertState = {
   errorAlert: {
     isOpen: false,
-    message: '',
+    message: "문제가 발생했습니다. 잠시 후에 다시 시도해주세요.",
   },
   notification: {
     isOpen: false,
@@ -22,7 +22,7 @@ const initialState: GlobalAlertState = {
 };
 
 const modalSlice = createSlice({
-  name: 'modal',
+  name: "modal",
   initialState,
   reducers: {
     // 에러 알림 (전역에서 발생할 수 있음)
@@ -32,7 +32,7 @@ const modalSlice = createSlice({
     },
     errorAlertCloseHandler: (state) => {
       state.errorAlert.isOpen = false;
-      state.errorAlert.message = '';
+      state.errorAlert.message = "";
     },
 
     // 알림 (전역 상태 변화 알림)
