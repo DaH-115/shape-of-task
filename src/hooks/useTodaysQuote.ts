@@ -9,7 +9,6 @@ import {
 interface QuoteType {
   quote: string;
   author: string;
-  category?: string;
 }
 
 interface SavedQuoteState {

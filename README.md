@@ -89,7 +89,6 @@ Shape of Task는 사용자의 할 일 상태를 도형으로 시각화하여 직
 - **React Router**: SPA 라우팅
 - **React Icons**: 아이콘 시스템
 - **html2canvas**: 이미지 캡처 및 다운로드
-- **React Helmet Async**: SEO 최적화
 
 ## 🎯 주요 기능
 
