@@ -39,19 +39,23 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getQuote: builder.query<QuoteData, void>({
       query: () => ({ url: "/quoteoftheday" }),
-      transformResponse: (response: QuoteOfTheDayResponse): QuoteData => {
-        // 기본 검증
-        if (!response?.quote || !response?.author) {
+      transformResponse: (
+        response: QuoteOfTheDayResponse | QuoteOfTheDayResponse[]
+      ): QuoteData => {
+        // API v2는 배열 [{quote, author, ...}] 형태로 반환
+        const data = Array.isArray(response) ? response[0] : response;
+
+        if (!data?.quote || !data?.author) {
           logError("Invalid quote data:", response);
           throw new Error("Unable to load quote data.");
         }
 
         const category =
-          response.categories?.[0] ?? response.work ?? "general";
+          data.categories?.[0] ?? data.work ?? "general";
 
         return {
-          quote: response.quote.trim(),
-          author: response.author.trim(),
+          quote: data.quote.trim(),
+          author: data.author.trim(),
           category,
         };
       },
