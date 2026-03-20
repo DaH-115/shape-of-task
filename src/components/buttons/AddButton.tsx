@@ -7,7 +7,7 @@ interface AddButtonProps {
 
 const AddButton = ({ onAddClick }: AddButtonProps) => {
   return (
-    <Button type={"button"} text={"Add Task"} onClick={onAddClick}>
+    <Button type={"button"} text={"일정 추가"} onClick={onAddClick}>
       <IoIosAddCircleOutline aria-hidden />
     </Button>
   );

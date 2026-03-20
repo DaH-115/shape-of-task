@@ -17,7 +17,7 @@ const ShapeListPage = () => {
   const taskListRef = useRef<HTMLUListElement>(null);
   const taskList = useAppSelector((state) => state.taskList.taskList);
   const completedTaskIdsInOrder = useAppSelector(
-    (state) => state.taskList.completedTaskIdsInOrder
+    (state) => state.taskList.completedTaskIdsInOrder,
   );
   const completedTaskList = useMemo(() => {
     const taskMap = new Map(taskList.map((t) => [t.id, t]));
@@ -31,7 +31,7 @@ const ShapeListPage = () => {
     <Container>
       <Wrapper>
         <ShapeListHeader>
-          <Title title="My Shapes" desc="Completed Tasks" />
+          <Title title="오늘의 모양" desc="완성된 오늘의 모양을 감상해보세요" />
         </ShapeListHeader>
         <ShapeListContainer>
           {completedTaskList.length > 0 ? (
@@ -41,7 +41,7 @@ const ShapeListPage = () => {
               ))}
             </ShapeList>
           ) : (
-            <EmptyState message="Create some shapes!" />
+            <EmptyState message="오늘의 모양을 만들어보세요!" />
           )}
         </ShapeListContainer>
         <SaveButtonWrapper>

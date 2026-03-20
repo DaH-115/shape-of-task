@@ -117,25 +117,23 @@ const TaskListPage = () => {
     <Container>
       <Wrapper>
         <TaskListHeader>
-          <Title title="Tasks" desc="Today's Tasks" />
+          <Title title="오늘의 일정" desc="일정을 잊지말고 완료해보세요" />
           <HeaderProgressWrapper>
-            {taskList.length > 0 && (
-              <TaskProgressWrapper>
-                <ProgressBarTrack
-                  role="progressbar"
-                  aria-valuenow={taskProgress.percentage}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-label="태스크 완료 진행률"
-                >
-                  <ProgressBarFill $percentage={taskProgress.percentage} />
-                </ProgressBarTrack>
-                <TaskProgressText>
-                  {taskProgress.completed}/{taskProgress.total} (
-                  {taskProgress.percentage}%)
-                </TaskProgressText>
-              </TaskProgressWrapper>
-            )}
+            <TaskProgressWrapper>
+              <ProgressBarTrack
+                role="progressbar"
+                aria-valuenow={taskProgress.percentage}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="태스크 완료 진행률"
+              >
+                <ProgressBarFill $percentage={taskProgress.percentage} />
+              </ProgressBarTrack>
+              <TaskProgressText>
+                {taskProgress.completed}/{taskProgress.total} (
+                {taskProgress.percentage}%)
+              </TaskProgressText>
+            </TaskProgressWrapper>
             <TasksHeaderBtns>
               <SortButton
                 onClick={onHideCompletedToggle}
@@ -180,7 +178,7 @@ const TaskListPage = () => {
               onRemoveClick={handleRemoveClick}
             />
           ) : (
-            <EmptyState message="Add some tasks!" />
+            <EmptyState message="일정을 추가해보세요!" />
           )}
         </TaskListContainer>
       </Wrapper>

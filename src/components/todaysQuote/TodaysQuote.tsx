@@ -13,13 +13,8 @@ import useTodaysQuote from "@/hooks/useTodaysQuote";
 import { Loading, ErrorMessage } from "@/components/common";
 
 const TodaysQuote = () => {
-  const {
-    displayedQuote,
-    error,
-    isLoading,
-    pinSaveHandler,
-    isPinned,
-  } = useTodaysQuote();
+  const { displayedQuote, error, isLoading, pinSaveHandler, isPinned } =
+    useTodaysQuote();
 
   return (
     <QuoteContainer>
@@ -39,7 +34,7 @@ const TodaysQuote = () => {
       </IconsWrapper>
       <QutoeTitleHeader>
         <QuoteIcon aria-hidden />
-        <Title title="Todays Quote" desc="Daily Inspiration" />
+        <Title title="오늘의 한 마디" desc="오늘의 영감을 일깨워주는 명언" />
       </QutoeTitleHeader>
       {isLoading ? (
         <Loading />

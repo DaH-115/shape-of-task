@@ -19,10 +19,10 @@ const SaveButton = ({ taskListRef, isDisabled }: SaveButtonProps) => {
       type="button"
       text={
         isDisabled || isLoading
-          ? "No completed tasks to save"
+          ? "완료된 일정이 없습니다"
           : isLoading
-            ? "Saving..."
-            : "Save Image"
+            ? "저장 중..."
+            : "이미지 저장"
       }
       onClick={disabled ? undefined : handleSaveImage}
       disabled={disabled || isLoading}

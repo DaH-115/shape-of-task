@@ -122,16 +122,16 @@ const TaskFormModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalHeader>
-        <Title title={"New Task"} desc={formatDateToKorean(todayDateStr)} />
+        <Title title={"새로운 일정"} desc={formatDateToKorean(todayDateStr)} />
       </ModalHeader>
 
-      <InputLabel htmlFor="task-input">Task Input</InputLabel>
+      <InputLabel htmlFor="task-input">일정 입력</InputLabel>
       <InputForm id="task-input" onSubmit={submitHandler}>
         <Textarea
           value={text}
           onChange={onChangeHandler}
           ref={textareaRef}
-          placeholder="오늘의 할 일은 무엇인가요?"
+          placeholder="오늘의 일정은 무엇인가요?"
         />
         {isErrors.textError && <ErrorMsg>{isErrors.textError}</ErrorMsg>}
         {isErrors.shapeError && <ErrorMsg>{isErrors.shapeError}</ErrorMsg>}
@@ -142,7 +142,7 @@ const TaskFormModal = ({
               id="shape-select-menu"
               isToggle={toggle}
               onSelect={handleShapeSelect}
-              aria-label="중요도 선택"
+              aria-label="모양 선택"
             />
             <ToggleButton
               type="button"
@@ -150,7 +150,7 @@ const TaskFormModal = ({
               aria-expanded={toggle}
               aria-controls="shape-select-menu"
               aria-label={
-                toggle ? "중요도 선택 메뉴 닫기" : "중요도 선택 메뉴 열기"
+                toggle ? "모양 선택 메뉴 닫기" : "모양 선택 메뉴 열기"
               }
             >
               {toggle ? (
