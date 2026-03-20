@@ -1,24 +1,18 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { mixins } from "@/styles/theme-mixins";
 
 export const ErrorMsg = styled.p`
   color: red;
-  font-size: 0.8rem;
-  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const ModalHeader = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const InputLabel = styled.label`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+  ${mixins.visuallyHidden}
 `;
 
 export const InputForm = styled.form`
@@ -33,7 +27,7 @@ export const Textarea = styled.textarea`
   font-size: 1rem;
 
   &:focus {
-    outline: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
+    outline: 0.1rem solid ${({ theme }) => theme.commonColors.gray_border};
     border-radius: 0.4rem;
   }
 
@@ -46,19 +40,22 @@ export const BtnWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  border-top: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
-  padding-top: 1rem;
+  gap: 0.75rem;
+  min-width: 0; /* flex 자식이 부모보다 줄어들 수 있도록 */
+  border-top: 0.1rem solid ${({ theme }) => theme.commonColors.gray_border};
+  padding-top: 0.75rem;
 `;
 
 export const SelectShapesWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 160px;
-  flex-shrink: 0;
+  flex: 0 1 auto; /* 콘텐츠 크기만 차지, 필요 시 축소 */
+  min-width: 0;
+  max-width: 10rem; /* 과도하게 커지지 않도록 제한 */
+  overflow: hidden;
   cursor: pointer;
-  border-radius: 1rem;
-  padding: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.35rem 0.5rem;
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
@@ -66,9 +63,10 @@ export const SelectShapesWrapper = styled.div`
   }
 `;
 
-export const ToggleBtn = styled.button`
-  padding: 0.3rem;
-  margin-left: 0.5rem;
+export const ToggleButton = styled.button`
+  flex-shrink: 0;
+  padding: 0.25rem;
+  margin-left: 0.25rem;
 
   svg {
     font-size: 1rem;
@@ -82,7 +80,7 @@ export const ToggleBtn = styled.button`
   }
 `;
 
-export const SubmitBtnWrapper = styled.div`
-  width: 160px;
+export const SubmitButtonWrapper = styled.div`
   flex-shrink: 0;
+  min-width: 4rem; /* 등록 버튼 최소 너비 */
 `;
