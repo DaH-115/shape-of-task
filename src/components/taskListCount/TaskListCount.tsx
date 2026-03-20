@@ -27,17 +27,8 @@ const TaskListCount = () => {
     circle: circleValue,
   } = shapeCounts;
 
-  const totalCount = useMemo(() => {
-    return triangleValue + squareValue + circleValue;
-  }, [triangleValue, squareValue, circleValue]);
-
   return (
     <Container>
-      <TotalCountMessage>
-        {totalCount === 0
-          ? "All tasks completed! 🎉"
-          : `${totalCount} task${totalCount > 1 ? "s" : ""} remaining`}
-      </TotalCountMessage>
       <TaskListCountItem
         count={triangleValue}
         priority={"Important"}
@@ -61,15 +52,4 @@ export default TaskListCount;
 
 const Container = styled.div`
   width: 100%;
-`;
-
-const TotalCountMessage = styled.div`
-  text-align: center;
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.commonColors.medium_gray};
-  margin-bottom: 1rem;
-
-  ${({ theme }) => theme.device.md} {
-    font-size: 1rem;
-  }
 `;

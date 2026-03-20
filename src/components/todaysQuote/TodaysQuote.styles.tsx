@@ -34,10 +34,9 @@ export const PinIcon = styled.div<{ $isPinned: boolean }>`
 export const QuoteText = styled.p`
   display: block;
   width: 100%;
-  margin-bottom: 0.5rem;
-  line-height: 1.4;
+  margin-bottom: 2rem;
+  line-height: 1.6;
   color: ${({ theme }) => theme.commonColors.black};
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export const QuoteAuthor = styled.p`
