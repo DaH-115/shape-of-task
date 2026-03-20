@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { notificationCloseHandler } from '@/store/modalSlice';
-import { fadeSlideIn, fadeSlideOut } from '@/styles/animation-setting';
-import PortalComponents from '@/components/modals/PortalComponents';
-import { MdArrowForwardIos } from 'react-icons/md';
+import { useCallback, useEffect } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { notificationCloseHandler } from "@/store/modalSlice";
+import { fadeSlideIn, fadeSlideOut } from "@/styles/animation-setting";
+import Portal from "@/components/modals/PortalComponent";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const Notification = () => {
   const navigate = useNavigate();
@@ -23,11 +23,11 @@ const Notification = () => {
   }, [dispatch, isOpen]);
 
   const onNavgateHandler = useCallback(() => {
-    navigate('/shape-list');
+    navigate("/shape-list");
   }, [navigate]);
 
   return (
-    <PortalComponents>
+    <Portal>
       <NoteWrapper $isOpen={isOpen}>
         <MessageWrapper>
           <NoteTitle>Notice</NoteTitle>
@@ -37,7 +37,7 @@ const Notification = () => {
           </IconWrapper>
         </MessageWrapper>
       </NoteWrapper>
-    </PortalComponents>
+    </Portal>
   );
 };
 
@@ -52,7 +52,7 @@ const NoteWrapper = styled.div<{ $isOpen: boolean }>`
   padding: 1rem;
   z-index: 100; /* 헤더(z-index: 50)보다 높게 설정 */
 
-  visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
+  visibility: ${({ $isOpen }) => ($isOpen ? "visible" : "hidden")};
   animation: ${({ $isOpen }) => ($isOpen ? fadeSlideIn : fadeSlideOut)} 0.4s
     ease-in-out;
   transition: visibility 0.4s ease-in-out;
@@ -70,12 +70,11 @@ const MessageWrapper = styled.div`
 
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
-  font-size: 0.9rem;
   text-align: center;
-  padding: 1rem 0.5rem;
+  padding: 1rem;
 
   background-color: #fff;
-  border: 0.1rem solid ${({ theme }) => theme.colors.important};
+  border: 0.1rem solid ${({ theme }) => theme.commonColors.gray_border};
   border-radius: 1rem;
 
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);

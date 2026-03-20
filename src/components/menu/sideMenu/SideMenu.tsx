@@ -1,6 +1,6 @@
 import { memo, ReactNode, useEffect, useRef } from "react";
 import styled from "styled-components";
-import PortalComponents from "@/components/modals/PortalComponents";
+import Portal from "@/components/modals/PortalComponent";
 
 export interface MenuProps {
   isOpen: boolean;
@@ -101,7 +101,7 @@ const SideMenu = ({ isOpen, children, sideMenuHandler }: SideMenuProps) => {
   };
 
   return (
-    <PortalComponents>
+    <Portal>
       <SideBackdrop $isOpen={isOpen} onClick={sideMenuHandler} />
       <SideMenuContainer
         ref={menuRef}
@@ -114,7 +114,7 @@ const SideMenu = ({ isOpen, children, sideMenuHandler }: SideMenuProps) => {
       >
         {children}
       </SideMenuContainer>
-    </PortalComponents>
+    </Portal>
   );
 };
 

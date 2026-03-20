@@ -4,7 +4,7 @@ export { default as Backdrop } from "./Backdrop";
 export { default as ErrorAlert } from "./ErrorAlert";
 export { default as NoteAlert } from "./NoteAlert";
 export { default as Notification } from "./Notification";
-export { default as PortalComponents } from "./PortalComponents";
+export { default as Portal } from "./PortalComponent";
 
 // 확인 모달들
 export { default as ConfirmModal } from "./confirm/ConfirmModal";
