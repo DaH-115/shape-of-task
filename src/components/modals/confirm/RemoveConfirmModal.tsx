@@ -21,8 +21,8 @@ const RemoveConfirmModal = ({
     if (taskIdToRemove) {
       dispatch(removeTask(taskIdToRemove));
     }
-    // ConfirmModal이 onClose를 호출하므로 여기서는 호출하지 않음
-  }, [dispatch, taskIdToRemove]);
+    onClose();
+  }, [dispatch, taskIdToRemove, onClose]);
 
   return (
     <ConfirmModal

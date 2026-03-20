@@ -1,7 +1,7 @@
 import { useState, useRef, useMemo, useEffect, ChangeEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { addTask, editingTaskReset, updateTask } from "@/store/taskListSlice";
+import { addTask, updateTask } from "@/store/taskListSlice";
 import { formatDateToKorean, getTodayISOString } from "@/utils/dateFormat";
 import { ShapeName } from "@/types/task";
 import {
@@ -30,10 +30,24 @@ interface TaskFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess?: () => void;
+  /** 수정 모드일 때 편집 중인 태스크 ID (없으면 추가 모드) */
+  editingTaskId?: string | null;
 }
 
-const TaskFormModal = ({ isOpen, onClose, onSuccess }: TaskFormModalProps) => {
-  const editingTask = useAppSelector((state) => state.taskList.editingTask);
+const TaskFormModal = ({
+  isOpen,
+  onClose,
+  onSuccess,
+  editingTaskId = null,
+}: TaskFormModalProps) => {
+  const taskList = useAppSelector((state) => state.taskList.taskList);
+  const editingTask = useMemo(
+    () =>
+      editingTaskId
+        ? (taskList.find((t) => t.id === editingTaskId) ?? null)
+        : null,
+    [taskList, editingTaskId],
+  );
   const [text, setText] = useState("");
   const [shape, setShape] = useState<ShapeName>("circle");
   const [toggle, setToggle] = useState(false);
@@ -45,14 +59,10 @@ const TaskFormModal = ({ isOpen, onClose, onSuccess }: TaskFormModalProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
 
-  // 모달 열림/닫힘에 따른 폼 상태 동기화
+  // 모달 열릴 때 폼 상태 동기화 (수정 모드면 editingTask 기준, 아니면 기본값)
   useEffect(() => {
-    if (!isOpen) {
-      dispatch(editingTaskReset());
-      return;
-    }
+    if (!isOpen) return;
 
-    // 열릴 때: 수정 모드면 editingTask 기준, 아니면 기본값
     if (editingTask?.id) {
       setText(editingTask.text);
       setShape(editingTask.shape);
@@ -62,7 +72,7 @@ const TaskFormModal = ({ isOpen, onClose, onSuccess }: TaskFormModalProps) => {
     }
     setToggle(false);
     setIsErrors({ textError: "", shapeError: "" });
-  }, [isOpen, editingTask, dispatch]);
+  }, [isOpen, editingTask]);
 
   const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const text = event.target.value;
@@ -83,11 +93,12 @@ const TaskFormModal = ({ isOpen, onClose, onSuccess }: TaskFormModalProps) => {
       text,
       shape,
       id: editingTask?.id ?? uuidv4(),
-      date: todayDateStr,
+      date: editingTask?.date ?? todayDateStr,
     });
 
     if (editingTask?.id) {
-      dispatch(updateTask(task));
+      // 수정 시 기존 done 상태 유지
+      dispatch(updateTask({ ...task, done: editingTask.done }));
     } else {
       dispatch(addTask(task));
     }

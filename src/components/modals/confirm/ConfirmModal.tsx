@@ -1,9 +1,7 @@
 import { memo, useCallback } from "react";
 import { styled } from "styled-components";
-import { useAppDispatch } from "@/store/hooks";
 import Modal from "@/components/modals/Modal";
 import Button from "@/components/buttons/Button";
-import { editingTaskReset } from "@/store/taskListSlice";
 
 interface ConfirmModalProps {
   isOpen: boolean;
@@ -18,17 +16,13 @@ const ConfirmModal = ({
   onConfirm,
   onClose,
 }: ConfirmModalProps) => {
-  const dispatch = useAppDispatch();
-
   const closeHandler = useCallback(() => {
     onClose();
-    dispatch(editingTaskReset());
-  }, [onClose, dispatch]);
+  }, [onClose]);
 
   const confirmHandler = useCallback(() => {
     onConfirm();
-    onClose();
-  }, [onConfirm, onClose]);
+  }, [onConfirm]);
 
   return (
     <Modal isOpen={isOpen} onClose={closeHandler}>
