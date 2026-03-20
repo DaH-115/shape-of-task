@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { IoMenu } from 'react-icons/io5';
-import Logo from '@/assets/icons/Logo.svg?react';
+import styled from "styled-components";
+import { IoMenu } from "react-icons/io5";
+import Logo from "@/assets/icons/Logo.svg?react";
 
-export const SideMenuBtn = styled.button`
+export const SideMenuButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,7 +52,6 @@ export const HeaderWrapper = styled.div`
   position: relative;
   width: 100%;
   background-color: #ffffff;
-  border-bottom: 1px solid ${({ theme }) => theme.commonColors.light_gray};
   z-index: 50;
 `;
 
