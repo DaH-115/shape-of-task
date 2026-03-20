@@ -130,7 +130,7 @@ const SideMenuContainer = styled.div<{ $isOpen: boolean }>`
   height: 100vh;
   background-color: #fff;
   box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   overflow-y: auto;
 
   transform: ${({ $isOpen }) =>

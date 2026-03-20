@@ -76,7 +76,7 @@ export const ToggleButton = styled.button`
 
   &:hover {
     svg {
-      color: ${({ theme }) => theme.colors.important};
+      color: ${({ theme }) => theme.colors.priority1};
     }
   }
 `;

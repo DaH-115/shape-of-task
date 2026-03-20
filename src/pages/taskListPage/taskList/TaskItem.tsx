@@ -1,6 +1,8 @@
 import React, { memo, useCallback, useState, useRef, useEffect } from "react";
 import { toggleTask } from "@/store/taskListSlice";
 import { TaskTypes } from "@/types/task";
+import { useAppSelector } from "@/store/hooks";
+import { getPriorityLabel } from "@/store/priorityLabelsSlice";
 import { notificationOpenHandler } from "@/store/modalSlice";
 import { useAppDispatch } from "@/store/hooks";
 import {
@@ -40,8 +42,10 @@ const TaskItem = ({
   onUpdateClick,
   onRemoveClick,
 }: TaskItemProps) => {
-  const { id, text, shape, priorityDesc, date, done, priority } = processTask;
+  const { id, text, shape, date, done, priority } = processTask;
   const dispatch = useAppDispatch();
+  const priorityLabels = useAppSelector((state) => state.priorityLabels);
+  const priorityDesc = getPriorityLabel(priorityLabels, priority as 1 | 2 | 3);
 
   const toggleTaskHandler = useCallback(() => {
     dispatch(toggleTask(id));

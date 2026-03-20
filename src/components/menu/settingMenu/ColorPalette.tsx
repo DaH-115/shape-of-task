@@ -12,7 +12,7 @@ interface ColorPaletteProps {
 const ColorPalette = ({ themeKey, isSelected }: ColorPaletteProps) => {
   const dispatch = useAppDispatch();
   const palette = themeColors[themeKey];
-  const { displayName, important, remember, anytime } = palette;
+  const { displayName, priority1, priority2, priority3 } = palette;
 
   const themeChangeHandler = useCallback(() => {
     dispatch(themeChange(themeKey));
@@ -22,9 +22,9 @@ const ColorPalette = ({ themeKey, isSelected }: ColorPaletteProps) => {
     <Container>
       <PaletteName $isSelected={isSelected}>{displayName}</PaletteName>
       <PaletteWrapper onClick={themeChangeHandler} $isSelected={isSelected}>
-        <PaletteColors $themeColor={important} $isSelected={isSelected} />
-        <PaletteColors $themeColor={remember} $isSelected={isSelected} />
-        <PaletteColors $themeColor={anytime} $isSelected={isSelected} />
+        <PaletteColors $themeColor={priority1} $isSelected={isSelected} />
+        <PaletteColors $themeColor={priority2} $isSelected={isSelected} />
+        <PaletteColors $themeColor={priority3} $isSelected={isSelected} />
       </PaletteWrapper>
     </Container>
   );
@@ -42,9 +42,9 @@ const Container = styled.div`
 
 const PaletteName = styled.p<{ $isSelected: boolean }>`
   color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.important : theme.commonColors.gray};
+    $isSelected ? theme.colors.priority1 : theme.commonColors.gray};
   margin-bottom: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: ${({ $isSelected }) => ($isSelected ? "600" : "400")};
   text-align: left;
   transition: all 0.2s ease-in-out;

@@ -2,6 +2,8 @@ import { memo } from "react";
 import styled, { keyframes } from "styled-components";
 import SingleShapes from "@/components/shapes/SingleShapes";
 import { ShapeName, SHAPE_OPTIONS } from "@/types/task";
+import { useAppSelector } from "@/store/hooks";
+import { getPriorityLabel } from "@/store/priorityLabelsSlice";
 
 interface ShapeSelectMenuProps {
   id: string;
@@ -16,6 +18,8 @@ const ShapeSelectMenu = ({
   onSelect,
   "aria-label": ariaLabel = "중요도 선택",
 }: ShapeSelectMenuProps) => {
+  const priorityLabels = useAppSelector((state) => state.priorityLabels);
+
   const handleItemClick = (event: React.MouseEvent<HTMLUListElement>) => {
     // 클릭한 요소의 데이터-shape 속성 값을 가져옴
     const shapeItem = (event.target as HTMLElement).closest(
@@ -38,10 +42,12 @@ const ShapeSelectMenu = ({
       aria-label={ariaLabel}
     >
       <SelectMenuList onClick={handleItemClick}>
-        {SHAPE_OPTIONS.map(({ shape, desc }) => (
+        {SHAPE_OPTIONS.map(({ shape, priority }) => (
           <SelectMenuItem key={shape} data-shape={shape}>
             <SingleShapes shapeName={shape} />
-            <ShapeDesc>{desc}</ShapeDesc>
+            <ShapeDesc>
+              {getPriorityLabel(priorityLabels, priority as 1 | 2 | 3)}
+            </ShapeDesc>
           </SelectMenuItem>
         ))}
       </SelectMenuList>

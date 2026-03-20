@@ -1,5 +1,7 @@
 import { memo, useCallback, useState } from "react";
 import { BiSortAlt2, BiReset } from "react-icons/bi";
+import { useAppSelector } from "@/store/hooks";
+import { getPriorityLabel } from "@/store/priorityLabelsSlice";
 import StyledShapes from "@/components/shapes/SingleShapes";
 import {
   DropdownButton,
@@ -28,6 +30,7 @@ const SortDropdown = ({
   onFiltersReset,
 }: SortDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const priorityLabels = useAppSelector((state) => state.priorityLabels);
 
   const sortChangeHandler = useCallback(
     (newSortType: SortType) => {
@@ -81,7 +84,7 @@ const SortDropdown = ({
             }}
           >
             <StyledShapes shapeName="triangle" />
-            Important
+            {getPriorityLabel(priorityLabels, 1)}
           </MenuItem>
           <MenuItem
             $isActive={priorityFilter === 2}
@@ -91,7 +94,7 @@ const SortDropdown = ({
             }}
           >
             <StyledShapes shapeName="square" />
-            Remember
+            {getPriorityLabel(priorityLabels, 2)}
           </MenuItem>
           <MenuItem
             $isActive={priorityFilter === 3}
@@ -101,7 +104,7 @@ const SortDropdown = ({
             }}
           >
             <StyledShapes shapeName="circle" />
-            Anytime
+            {getPriorityLabel(priorityLabels, 3)}
           </MenuItem>
         </MenuSection>
 

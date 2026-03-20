@@ -19,7 +19,7 @@ export const StyledCircle = styled(Circle)<{
   height: 100%;
   fill: ${({ theme, $shapeName, $isCountTask }) =>
     $shapeName === "circle" && $isCountTask
-      ? theme.colors.anytime
+      ? theme.colors.priority3
       : theme.commonColors.medium_gray};
 `;
 
@@ -31,7 +31,7 @@ export const StyledSquare = styled(Square)<{
   height: 110%;
   fill: ${({ theme, $shapeName, $isCountTask }) =>
     $shapeName === "square" && $isCountTask
-      ? theme.colors.remember
+      ? theme.colors.priority2
       : theme.commonColors.medium_gray};
 `;
 
@@ -43,6 +43,6 @@ export const StyledTriangle = styled(Triangle)<{
   height: 100%;
   fill: ${({ theme, $shapeName, $isCountTask }) =>
     $shapeName === "triangle" && $isCountTask
-      ? theme.colors.important
+      ? theme.colors.priority1
       : theme.commonColors.medium_gray};
 `;

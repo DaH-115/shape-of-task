@@ -28,7 +28,7 @@ export const PinIcon = styled.div<{ $isPinned: boolean }>`
   font-size: 1.2rem;
   cursor: pointer;
   color: ${({ theme, $isPinned }) =>
-    $isPinned ? theme.colors.important : theme.commonColors.black};
+    $isPinned ? theme.colors.priority1 : theme.commonColors.black};
 `;
 
 export const QuoteText = styled.p`

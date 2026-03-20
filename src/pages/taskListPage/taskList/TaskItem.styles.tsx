@@ -27,11 +27,11 @@ export const TaskItem = styled.li<{ $isDone?: boolean; $priority?: number }>`
 
       switch ($priority) {
         case 1:
-          return theme.colors.important;
+          return theme.colors.priority1;
         case 2:
-          return theme.colors.remember;
+          return theme.colors.priority2;
         case 3:
-          return theme.colors.anytime;
+          return theme.colors.priority3;
         default:
           return "rgba(0, 0, 0, 0.08)";
       }
@@ -72,13 +72,13 @@ export const DoneButton = styled.button<{
 
     switch ($priority) {
       case 1:
-        return theme.colors.important;
+        return theme.colors.priority1;
       case 2:
-        return theme.colors.remember;
+        return theme.colors.priority2;
       case 3:
-        return theme.colors.anytime;
+        return theme.colors.priority3;
       default:
-        return theme.colors.important;
+        return theme.colors.priority1;
     }
   }};
   transition: all 0.25s ease-in-out;
@@ -94,12 +94,12 @@ export const DoneButton = styled.button<{
     `
     filter: drop-shadow(0 0 6px ${
       $priority === 1
-        ? theme.colors.important
+        ? theme.colors.priority1
         : $priority === 2
-          ? theme.colors.remember
+          ? theme.colors.priority2
           : $priority === 3
-            ? theme.colors.anytime
-            : theme.colors.important
+            ? theme.colors.priority3
+            : theme.colors.priority1
     }30);
     transform: scale(1.05);
   `}
@@ -160,7 +160,7 @@ export const ActionDropdownButton = styled.button`
 
   &:hover,
   &:active {
-    color: ${({ theme }) => theme.colors.important};
+    color: ${({ theme }) => theme.colors.priority1};
     background-color: ${({ theme }) => theme.commonColors.light_gray};
   }
 

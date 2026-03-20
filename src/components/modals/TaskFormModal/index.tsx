@@ -1,6 +1,8 @@
 import { useState, useRef, useMemo, useEffect, ChangeEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { getPriorityLabel } from "@/store/priorityLabelsSlice";
+import { getPriority } from "@/components/modals/TaskFormModal/TaskFormModal.utils";
 import { addTask, updateTask } from "@/store/taskListSlice";
 import { formatDateToKorean, getTodayISOString } from "@/utils/dateFormat";
 import { ShapeName } from "@/types/task";
@@ -41,6 +43,7 @@ const TaskFormModal = ({
   editingTaskId = null,
 }: TaskFormModalProps) => {
   const taskList = useAppSelector((state) => state.taskList.taskList);
+  const priorityLabels = useAppSelector((state) => state.priorityLabels);
   const editingTask = useMemo(
     () =>
       editingTaskId
@@ -89,11 +92,17 @@ const TaskFormModal = ({
       return;
     }
 
+    const { number: priorityNumber } = getPriority(shape);
+    const priorityDesc = getPriorityLabel(
+      priorityLabels,
+      priorityNumber as 1 | 2 | 3
+    );
     const task = createTaskFromValues({
       text,
       shape,
       id: editingTask?.id ?? uuidv4(),
       date: editingTask?.date ?? todayDateStr,
+      priorityDesc,
     });
 
     if (editingTask?.id) {

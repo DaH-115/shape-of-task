@@ -14,7 +14,7 @@ export const FooterWrapper = styled.footer`
   padding: 1rem;
   padding-bottom: 1.2rem;
   color: #fff;
-  background-color: ${({ theme }) => theme.colors.anytime};
+  background-color: ${({ theme }) => theme.colors.priority3};
 
   ${({ theme }) => theme.device.md} {
     padding: 1.5rem 2rem;

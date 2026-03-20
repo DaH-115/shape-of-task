@@ -17,7 +17,7 @@ export const DropdownButton = styled.button`
 
   &:hover,
   &:active {
-    color: ${({ theme }) => theme.colors.important};
+    color: ${({ theme }) => theme.colors.priority1};
     background-color: ${({ theme }) => theme.commonColors.light_gray};
   }
 

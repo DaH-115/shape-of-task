@@ -12,7 +12,7 @@ const SettingMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
 
   return (
     <SideMenu isOpen={isOpen} sideMenuHandler={sideMenuHandler}>
-      <Title title="Setting" desc="Color Settings" />
+      <Title title="설정" desc="색상 설정" />
       {themePalettes.map((item, index) => (
         <ColorPalette
           key={index}
@@ -21,7 +21,7 @@ const SettingMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
         />
       ))}
       <ButtonWrapper onClick={sideMenuHandler}>
-        <Button type="button" text="Apply" variant="outline" />
+        <Button type="button" text="적용" variant="outline" />
       </ButtonWrapper>
     </SideMenu>
   );

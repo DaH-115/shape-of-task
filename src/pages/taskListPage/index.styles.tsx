@@ -72,7 +72,7 @@ export const ProgressBarTrack = styled.div`
 export const ProgressBarFill = styled.div<{ $percentage: number }>`
   height: 100%;
   width: ${({ $percentage }) => $percentage}%;
-  background-color: ${({ theme }) => theme.colors.important};
+  background-color: ${({ theme }) => theme.colors.priority1};
   border-radius: 1rem;
   transition: width 0.3s ease-in-out;
 `;
@@ -90,13 +90,13 @@ export const SortButton = styled.button<{ $isActive: boolean }>`
   height: 2rem;
   border-radius: 1rem;
   color: ${({ theme, $isActive }) =>
-    $isActive ? theme.colors.important : theme.commonColors.gray};
+    $isActive ? theme.colors.priority1 : theme.commonColors.gray};
   font-size: 1.2rem;
 
   &:hover,
   &:active {
     background-color: #ffffff;
-    color: ${({ theme }) => theme.colors.important};
+    color: ${({ theme }) => theme.colors.priority1};
     transition: color 0.2s ease-in-out;
   }
 `;

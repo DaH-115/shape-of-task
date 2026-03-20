@@ -85,14 +85,14 @@ const NoteDesc = styled.p`
 `;
 
 const NoteTitle = styled.h1`
-  color: ${({ theme }) => theme.colors.important};
+  color: ${({ theme }) => theme.colors.priority1};
   font-size: 1rem;
   font-weight: 700;
   margin-left: 0.5rem;
 `;
 
 const IconWrapper = styled.div`
-  color: ${({ theme }) => theme.colors.important};
+  color: ${({ theme }) => theme.colors.priority1};
   margin-right: 0.5rem;
 
   ${({ theme }) => theme.device.md} {

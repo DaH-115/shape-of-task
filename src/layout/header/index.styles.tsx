@@ -22,7 +22,7 @@ export const SideMenuButton = styled.button`
   }
 
   &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.important};
+    outline: 2px solid ${({ theme }) => theme.colors.priority1};
     outline-offset: 2px;
   }
 

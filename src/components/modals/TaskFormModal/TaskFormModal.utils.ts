@@ -12,6 +12,8 @@ export interface CreateTaskParams {
   shape: ShapeName;
   id: string;
   date: string;
+  /** 중요도 라벨 (미전달 시 SHAPE_OPTIONS 기본값 사용) */
+  priorityDesc?: string;
 }
 
 /**
@@ -50,6 +52,7 @@ export const createTaskFromValues = ({
   shape,
   id,
   date,
+  priorityDesc: priorityDescOverride,
 }: CreateTaskParams): TaskTypes => {
   const { desc, number } = getPriority(shape);
   return {
@@ -58,7 +61,7 @@ export const createTaskFromValues = ({
     text,
     shape,
     priority: number,
-    priorityDesc: desc,
+    priorityDesc: priorityDescOverride ?? desc,
     done: false,
   };
 };

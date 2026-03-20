@@ -40,6 +40,7 @@ export const ButtonWrapper = styled.div<{
     border-radius: 2rem;
     border: 1px solid transparent;
     padding: 0.6rem 1rem;
+    font-size: 1rem;
 
     color: ${({ theme, $variant, $disabled }) => {
       if ($disabled) return theme.commonColors.gray;
@@ -47,7 +48,7 @@ export const ButtonWrapper = styled.div<{
     }};
     background-color: ${({ theme, $variant, $disabled }) => {
       if ($disabled) return theme.commonColors.light_gray;
-      return $variant === "outline" ? "#fff" : theme.colors.important;
+      return $variant === "outline" ? "#fff" : theme.colors.priority1;
     }};
     cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
     transition: all 0.2s ease-in-out;
@@ -57,7 +58,7 @@ export const ButtonWrapper = styled.div<{
       border: 1px solid
         ${({ theme, $variant, $disabled }) => {
           if ($disabled) return theme.commonColors.light_gray;
-          return $variant === "outline" ? "#fff" : theme.colors.important;
+          return $variant === "outline" ? "#fff" : theme.colors.priority1;
         }};
       color: ${({ theme, $variant, $disabled }) => {
         if ($disabled) return theme.commonColors.gray;
@@ -65,7 +66,7 @@ export const ButtonWrapper = styled.div<{
       }};
       background-color: ${({ theme, $variant, $disabled }) => {
         if ($disabled) return theme.commonColors.light_gray;
-        return $variant === "outline" ? theme.colors.important : "#fff";
+        return $variant === "outline" ? theme.colors.priority1 : "#fff";
       }};
       transition: all 0.2s ease-in-out;
 

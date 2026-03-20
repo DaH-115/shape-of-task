@@ -1,11 +1,11 @@
 /** Zinc 기반 회색 스케일 (Tailwind/디자인 시스템 표준) */
 export interface CommonColorsTypes {
   black: string;
-  dark_gray: string; // zinc-700: 강조 텍스트
-  gray: string; // zinc-500: 본문, 비활성화
-  medium_gray: string; // zinc-400: 보조 텍스트
-  gray_border: string; // zinc-200: 테두리
-  light_gray: string; // zinc-100: 배경
+  dark_gray: string; // 강조 텍스트
+  gray: string; //  본문, 비활성화
+  medium_gray: string; // 보조 텍스트
+  gray_border: string; // 테두리
+  light_gray: string; // 배경
 }
 
 /** 테마 키 타입 - themeColors 객체의 키 */
@@ -20,9 +20,9 @@ export type ThemeKey =
 export interface PaletteTypes {
   key: ThemeKey;
   displayName: string;
-  important: string;
-  remember: string;
-  anytime: string;
+  priority1: string;
+  priority2: string;
+  priority3: string;
 }
 
 /** 기본 테마 키 (폴백용) */
@@ -39,42 +39,42 @@ export const commonColors: CommonColorsTypes = {
 
 const originalColors: PaletteTypes = {
   key: "originalColors",
-  displayName: "Ocean Sunset",
-  important: "#FF8C00",
-  remember: "#FFD700",
-  anytime: "#1E90FF",
+  displayName: "바다 석양",
+  priority1: "#FF8C00",
+  priority2: "#FFD700",
+  priority3: "#1E90FF",
 };
 
 const colorPalette_1: PaletteTypes = {
   key: "colorPalette_1",
-  displayName: "Rose Garden",
-  important: "#BE185D",
-  remember: "#EC4899",
-  anytime: "#F9A8D4",
+  displayName: "장미 정원",
+  priority1: "#BE185D",
+  priority2: "#EC4899",
+  priority3: "#F9A8D4",
 };
 
 const colorPalette_2: PaletteTypes = {
   key: "colorPalette_2",
-  displayName: "Deep Ocean",
-  important: "#1E3A8A",
-  remember: "#3B82F6",
-  anytime: "#93C5FD",
+  displayName: "깊은 바다",
+  priority1: "#1E3A8A",
+  priority2: "#3B82F6",
+  priority3: "#93C5FD",
 };
 
 const colorPalette_3: PaletteTypes = {
   key: "colorPalette_3",
-  displayName: "Forest Breeze",
-  important: "#B91C1C",
-  remember: "#D97706",
-  anytime: "#059669",
+  displayName: "숲의 바람",
+  priority1: "#B91C1C",
+  priority2: "#D97706",
+  priority3: "#059669",
 };
 
 const colorPalette_4: PaletteTypes = {
   key: "colorPalette_4",
-  displayName: "Modern Gray",
-  important: "#374151",
-  remember: "#6B7280",
-  anytime: "#D1D5DB",
+  displayName: "모던 그레이",
+  priority1: "#374151",
+  priority2: "#6B7280",
+  priority3: "#D1D5DB",
 };
 
 // 배열 형태 (UI에서 리스트로 보여줄 때 사용)

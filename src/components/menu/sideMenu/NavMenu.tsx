@@ -54,7 +54,7 @@ const CloseButton = styled.button`
   outline: none;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.important};
+    background-color: ${({ theme }) => theme.colors.priority1};
     color: white;
     transform: scale(1.1);
   }
@@ -64,7 +64,7 @@ const CloseButton = styled.button`
   }
 
   &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.important};
+    outline: 2px solid ${({ theme }) => theme.colors.priority1};
     outline-offset: 2px;
   }
 
