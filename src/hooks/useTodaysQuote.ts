@@ -21,7 +21,6 @@ interface UseTodaysQuoteReturn {
   isPinned: boolean;
   isLoading: boolean;
   error: string | null;
-  refetchHandler: () => void;
   pinSaveHandler: () => void;
   displayedQuote: QuoteType | null;
 }
@@ -44,12 +43,11 @@ const useTodaysQuote = (): UseTodaysQuoteReturn => {
   );
   const [error, setError] = useState<string | null>(null);
 
-  // RTK Query: 자동 캐싱 및 로딩 상태 관리 (고정 시 API 호출 생략)
+  // RTK Query: 오늘의 명언 (하루에 한 번 업데이트, 고정 시 API 호출 생략)
   const {
     data: quoteData,
     isLoading,
     isError,
-    refetch,
   } = useGetQuoteQuery(undefined, {
     skip: isPinned, // 명언이 고정되어 있으면 API 호출하지 않음
   });
@@ -62,18 +60,6 @@ const useTodaysQuote = (): UseTodaysQuoteReturn => {
       );
     }
   }, [isError, isPinned]);
-
-  // 명언 새로고침 핸들러
-  const refetchHandler = useCallback(() => {
-    try {
-      // 새로고침 시 에러 초기화
-      setError(null);
-      refetch();
-    } catch (error) {
-      console.error('Quote refresh failed:', error);
-      setError('Failed to refresh quote. Please try again.');
-    }
-  }, [refetch]);
 
   // 명언 고정/해제 토글 핸들러
   const pinSaveHandler = useCallback(() => {
@@ -90,7 +76,7 @@ const useTodaysQuote = (): UseTodaysQuoteReturn => {
         setPinnedQuote(quoteData);
         setIsPinned(true);
       } else {
-        setError('No quote available to pin. Please refresh and try again.');
+        setError('No quote available to pin. Please try again later.');
       }
     }
   }, [isPinned, quoteData]);
@@ -124,7 +110,6 @@ const useTodaysQuote = (): UseTodaysQuoteReturn => {
     isPinned,
     isLoading,
     error,
-    refetchHandler,
     pinSaveHandler,
     displayedQuote,
   };

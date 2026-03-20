@@ -1,6 +1,5 @@
-import Title from '@/components/TitleComponent';
-import { BsPinAngleFill, BsPinAngle } from 'react-icons/bs';
-import { HiOutlineRefresh } from 'react-icons/hi';
+import Title from "@/components/TitleComponent";
+import { BsPinAngleFill, BsPinAngle } from "react-icons/bs";
 import {
   IconsWrapper,
   PinIcon,
@@ -8,11 +7,10 @@ import {
   QuoteContainer,
   QuoteIcon,
   QuoteText,
-  RefreshIcon,
   QutoeTitleHeader,
-} from '@/components/todaysQuote/TodaysQuote.styles';
-import useTodaysQuote from '@/hooks/useTodaysQuote';
-import { Loading, ErrorMessage } from '@/components/common';
+} from "@/components/todaysQuote/TodaysQuote.styles";
+import useTodaysQuote from "@/hooks/useTodaysQuote";
+import { Loading, ErrorMessage } from "@/components/common";
 
 const TodaysQuote = () => {
   const {
@@ -20,25 +18,15 @@ const TodaysQuote = () => {
     error,
     isLoading,
     pinSaveHandler,
-    refetchHandler,
     isPinned,
   } = useTodaysQuote();
 
   return (
     <QuoteContainer>
       <IconsWrapper>
-        <RefreshIcon
-          title='새로고침 하기'
-          aria-label='명언을 새로고침 하기'
-          onClick={refetchHandler}
-          disabled={isPinned}
-        >
-          <HiOutlineRefresh aria-hidden />
-        </RefreshIcon>
-        <QuoteIcon aria-hidden />
         <PinIcon
-          title='게시글 고정하기'
-          aria-label='현재 명언을 고정하기'
+          title="게시글 고정하기"
+          aria-label="현재 명언을 고정하기"
           onClick={pinSaveHandler}
           $isPinned={isPinned}
         >
@@ -50,7 +38,8 @@ const TodaysQuote = () => {
         </PinIcon>
       </IconsWrapper>
       <QutoeTitleHeader>
-        <Title title='Todays Quote' desc='Daily Inspiration' />
+        <QuoteIcon aria-hidden />
+        <Title title="Todays Quote" desc="Daily Inspiration" />
       </QutoeTitleHeader>
       {isLoading ? (
         <Loading />

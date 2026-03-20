@@ -1,5 +1,5 @@
-import { BsChatQuote } from 'react-icons/bs';
-import styled, { css, keyframes } from 'styled-components';
+import { BsChatQuote } from "react-icons/bs";
+import styled from "styled-components";
 
 export const QuoteContainer = styled.div`
   width: 100%;
@@ -12,40 +12,10 @@ export const QutoeTitleHeader = styled.div`
 
 export const IconsWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   margin-bottom: 1rem;
-`;
-
-const rotateAnimation = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(180deg);
-  }
-`;
-
-export const RefreshIcon = styled.div<{ disabled: boolean }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  color: ${({ theme, disabled }) =>
-    disabled ? theme.commonColors.gray : theme.commonColors.black};
-  /* 회전 시 아이콘 중심축 기준으로 회전하도록 설정 */
-  transform-origin: center;
-
-  &:active,
-  &:hover {
-    animation: ${({ disabled }) =>
-      !disabled &&
-      css`
-        ${rotateAnimation} 0.5s ease-in-out
-      `};
-  }
 `;
 
 export const QuoteIcon = styled(BsChatQuote)`
@@ -65,12 +35,9 @@ export const QuoteText = styled.p`
   display: block;
   width: 100%;
   margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: 700;
   line-height: 1.4;
   color: ${({ theme }) => theme.commonColors.black};
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  letter-spacing: -0.02em;
 `;
 
 export const QuoteAuthor = styled.p`
@@ -78,8 +45,4 @@ export const QuoteAuthor = styled.p`
   font-style: italic;
   text-align: right;
   width: 100%;
-
-  ${({ theme }) => theme.device.md} {
-    font-size: 0.9rem;
-  }
 `;
