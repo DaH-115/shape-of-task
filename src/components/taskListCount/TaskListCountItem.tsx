@@ -3,10 +3,10 @@ import {
   PriorityText,
   ShapesWrapper,
   TaskItemWrapper,
-} from '@/components/taskListCount/TaskListCountItem.styles';
-import SingleShapes from '@/components/shapes/SingleShapes';
-import { memo } from 'react';
-import { ShapeName } from '@/types/task';
+} from "@/components/taskListCount/TaskListCountItem.styles";
+import SingleShapes from "@/components/shapes/SingleShapes";
+import { memo } from "react";
+import { ShapeName } from "@/types/task";
 
 interface TaskListCountItemProps {
   priority: string;
@@ -25,7 +25,7 @@ const TaskListCountItem = ({
         <SingleShapes shapeName={shape} isCountTask={count > 0} />
       </ShapesWrapper>
       <PriorityText>{priority}</PriorityText>
-      <CountNumber $shape={shape}>{count}</CountNumber>
+      <CountNumber>{count}</CountNumber>
     </TaskItemWrapper>
   );
 };
