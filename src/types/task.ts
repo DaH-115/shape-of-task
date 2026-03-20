@@ -19,6 +19,6 @@ export interface TaskTypes {
 
 export interface TaskListState {
   taskList: TaskTypes[];
-  selectedTaskId: string;
-  editingTask: TaskTypes | null;
+  /** 완료된 순서대로 정렬된 태스크 ID 목록 (맨 뒤에 추가, 미완료 시 제거) */
+  completedTaskIdsInOrder: string[];
 }

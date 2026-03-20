@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 export const TaskList = styled.ul`
   width: 100%;
-  height: auto;
+  height: 100%;
   overflow-y: scroll;
-  margin-bottom: 0.5rem;
-  padding-top: 1rem;
+  padding: 1rem; /* 웹/모바일 동일 - 아이템 그림자 표시 공간 */
 
   ${({ theme }) => theme.device.md} {
     height: 65vh;

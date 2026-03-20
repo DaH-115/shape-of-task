@@ -45,8 +45,11 @@ const TaskItem = ({
 
   const toggleTaskHandler = useCallback(() => {
     dispatch(toggleTask(id));
-    dispatch(notificationOpenHandler());
-  }, [dispatch, id]);
+    // 완료 시에만 알림 표시 (취소 시에는 표시하지 않음)
+    if (!done) {
+      dispatch(notificationOpenHandler());
+    }
+  }, [dispatch, id, done]);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);

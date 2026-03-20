@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: auto;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -11,7 +10,7 @@ export const Container = styled.div`
   /* 데스크톱에서는 원래 설정으로 복원 */
   ${({ theme }) => theme.device.md} {
     height: 100%;
-    padding-bottom: 1rem;
+    padding: 1rem 0;
     min-height: 0;
   }
 `;
@@ -28,15 +27,21 @@ export const Wrapper = styled.div`
 
   ${({ theme }) => theme.device.md} {
     height: 100%;
-    padding: 1rem;
     box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
     overflow: hidden;
   }
 `;
 
 export const TaskListHeader = styled.div`
+  padding: 0 2rem;
+
   margin-bottom: 1rem;
   flex-shrink: 0;
+
+  ${({ theme }) => theme.device.md} {
+    padding: 1rem;
+    padding-bottom: 0;
+  }
 `;
 
 /** 프로그레스바 영역 */
@@ -101,15 +106,24 @@ export const TasksHeaderBtns = styled.div`
   align-items: center;
 `;
 
+export const AddButtonWrapper = styled.div`
+  padding: 0 2rem;
+
+  ${({ theme }) => theme.device.md} {
+    padding: 1rem;
+  }
+`;
+
 export const TaskListContainer = styled.div`
   flex: none;
   overflow: visible;
-  padding-bottom: 2rem; /* 모바일에서 Add Task 버튼 공간 확보 */
+  padding-top: 1.2rem;
 
   /* 데스크톱에서는 기존 스크롤 설정 유지 */
   ${({ theme }) => theme.device.md} {
     flex: 1;
     overflow-y: auto;
-    padding: 0.5rem 1rem 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 `;

@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setEditingTask } from "@/store/taskListSlice";
 import { errorAlertOpenHandler } from "@/store/modalSlice";
 import {
-  TitleComponent as Title,
   ModalInput,
   Notification,
   AddButton,
@@ -24,23 +22,28 @@ import {
   ProgressBarFill,
   TaskProgressText,
   HeaderProgressWrapper,
-} from "./index.styles";
-import TaskList from "./taskList/TaskList";
-import SortDropdown from "./SortDropdown";
-import { useModal } from "@/hooks";
-import { useTaskListFilters, useTaskListProcessed } from "./hooks";
+  AddButtonWrapper,
+} from "@/pages/taskListPage/index.styles";
+import TaskList from "@/pages/taskListPage/taskList/TaskList";
+import SortDropdown from "@/pages/taskListPage/SortDropdown";
+import {
+  useTaskListFilters,
+  useTaskListProcessed,
+} from "@/pages/taskListPage/hooks";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+import Title from "@/components/TitleComponent";
 
-export type { SortType, PriorityFilter } from "./hooks";
+export type { SortType, PriorityFilter } from "@/pages/taskListPage/hooks";
 
 const TaskListPage = () => {
   const taskList = useAppSelector((state) => state.taskList.taskList);
   const dispatch = useAppDispatch();
 
-  const inputModal = useModal();
-  const noteAlert = useModal();
-  const updateConfirmModal = useModal();
-  const removeConfirmModal = useModal();
+  const [isInputOpen, setIsInputOpen] = useState(false);
+  const [isNoteOpen, setIsNoteOpen] = useState(false);
+  const [isUpdateConfirmOpen, setIsUpdateConfirmOpen] = useState(false);
+  const [isRemoveConfirmOpen, setIsRemoveConfirmOpen] = useState(false);
+  const [taskIdToEdit, setTaskIdToEdit] = useState<string | null>(null);
   const [taskIdToRemove, setTaskIdToRemove] = useState<string>("");
   const {
     sortType,
@@ -49,6 +52,7 @@ const TaskListPage = () => {
     onSortChange,
     onPriorityFilterChange,
     onHideCompletedToggle,
+    onFiltersReset,
   } = useTaskListFilters();
   const processTaskList = useTaskListProcessed({
     taskList,
@@ -64,28 +68,42 @@ const TaskListPage = () => {
     return { completed, total, percentage };
   }, [taskList]);
 
-  const handleUpdateClick = useCallback(
-    (taskId: string) => {
-      dispatch(setEditingTask(taskId));
-      updateConfirmModal.openHandler();
-    },
-    [dispatch, updateConfirmModal],
-  );
+  const handleUpdateClick = useCallback((taskId: string) => {
+    setTaskIdToEdit(taskId);
+    setIsUpdateConfirmOpen(true);
+  }, []);
 
-  const handleRemoveClick = useCallback(
-    (taskId: string) => {
-      setTaskIdToRemove(taskId);
-      removeConfirmModal.openHandler();
-    },
-    [removeConfirmModal],
-  );
+  const handleRemoveClick = useCallback((taskId: string) => {
+    setTaskIdToRemove(taskId);
+    setIsRemoveConfirmOpen(true);
+  }, []);
 
   const handleRemoveModalClose = useCallback(() => {
     setTaskIdToRemove("");
-    removeConfirmModal.closeHandler();
-  }, [removeConfirmModal]);
+    setIsRemoveConfirmOpen(false);
+  }, []);
 
-  // 잘못된 날짜 형식 체크 (렌더 중 side effect 방지를 위해 useEffect 사용)
+  const handleUpdateConfirm = useCallback(() => {
+    setIsUpdateConfirmOpen(false);
+    setIsInputOpen(true);
+  }, []);
+
+  const handleInputModalClose = useCallback(() => {
+    setIsInputOpen(false);
+    setTaskIdToEdit(null);
+  }, []);
+
+  const handleAddClick = useCallback(() => setIsInputOpen(true), []);
+
+  const handleInputSuccess = useCallback(() => setIsNoteOpen(true), []);
+
+  const handleUpdateConfirmModalClose = useCallback(() => {
+    setIsUpdateConfirmOpen(false);
+    setTaskIdToEdit(null);
+  }, []);
+
+  const handleNoteClose = useCallback(() => setIsNoteOpen(false), []);
+
   useEffect(() => {
     const hasInvalidDates = taskList.some((task) =>
       isNaN(new Date(task.date).getTime()),
@@ -144,12 +162,15 @@ const TaskListPage = () => {
                 priorityFilter={priorityFilter}
                 onSortChange={onSortChange}
                 onPriorityFilterChange={onPriorityFilterChange}
+                onFiltersReset={onFiltersReset}
               />
             </TasksHeaderBtns>
           </HeaderProgressWrapper>
         </TaskListHeader>
 
-        <AddButton onAddClick={inputModal.openHandler} />
+        <AddButtonWrapper>
+          <AddButton onAddClick={handleAddClick} />
+        </AddButtonWrapper>
 
         <TaskListContainer>
           {taskList.length > 0 ? (
@@ -164,22 +185,23 @@ const TaskListPage = () => {
         </TaskListContainer>
       </Wrapper>
       <ModalInput
-        isOpen={inputModal.isOpen}
-        onClose={inputModal.closeHandler}
-        onSuccess={noteAlert.openHandler}
+        isOpen={isInputOpen}
+        onClose={handleInputModalClose}
+        onSuccess={handleInputSuccess}
+        editingTaskId={taskIdToEdit}
       />
       <UpdateConfirmModal
-        isOpen={updateConfirmModal.isOpen}
-        onClose={updateConfirmModal.closeHandler}
-        onConfirm={inputModal.openHandler}
+        isOpen={isUpdateConfirmOpen}
+        onClose={handleUpdateConfirmModalClose}
+        onConfirm={handleUpdateConfirm}
       />
       <RemoveConfirmModal
-        isOpen={removeConfirmModal.isOpen}
+        isOpen={isRemoveConfirmOpen}
         onClose={handleRemoveModalClose}
         taskIdToRemove={taskIdToRemove}
       />
       <Notification />
-      <NoteAlert isOpen={noteAlert.isOpen} onClose={noteAlert.closeHandler} />
+      <NoteAlert isOpen={isNoteOpen} onClose={handleNoteClose} />
     </Container>
   );
 };

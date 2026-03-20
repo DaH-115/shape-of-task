@@ -25,8 +25,13 @@ export const taskListPersistMiddleware: Middleware =
         ? (action as { type: string }).type
         : "";
     if (TASK_LIST_PERSIST_ACTIONS.has(actionType)) {
-      const state = store.getState() as { taskList: { taskList: TaskTypes[] } };
-      saveTaskList(state.taskList.taskList);
+      const state = store.getState() as {
+        taskList: { taskList: TaskTypes[]; completedTaskIdsInOrder: string[] };
+      };
+      saveTaskList(
+        state.taskList.taskList,
+        state.taskList.completedTaskIdsInOrder
+      );
     }
 
     return result;

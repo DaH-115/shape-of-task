@@ -1,48 +1,55 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TaskTypes, TaskListState } from '@/types/task';
-import { getStoredTaskList } from './taskListStorage';
+import {
+  getStoredTaskList,
+  getStoredCompletedTaskIdsInOrder,
+} from './taskListStorage';
 
 const initialState: TaskListState = {
   taskList: getStoredTaskList(),
-  selectedTaskId: '',
-  editingTask: null,
+  completedTaskIdsInOrder: getStoredCompletedTaskIdsInOrder(),
 };
 
 const taskListSlice = createSlice({
   name: 'taskList',
   initialState,
   reducers: {
+    /** 새 태스크 추가 (맨 앞에) */
     addTask: (state, action: PayloadAction<TaskTypes>) => {
-      state.taskList = [...state.taskList, action.payload];
+      state.taskList = [action.payload, ...state.taskList];
     },
+    /** 태스크 삭제 (taskList, completedTaskIdsInOrder에서 제거) */
     removeTask: (state, action: PayloadAction<string>) => {
-      state.taskList = state.taskList.filter(
-        (task) => task.id !== action.payload
+      const id = action.payload;
+      state.taskList = state.taskList.filter((task) => task.id !== id);
+      state.completedTaskIdsInOrder = state.completedTaskIdsInOrder.filter(
+        (taskId) => taskId !== id
       );
     },
+    /** 태스크 완료 토글 (완료 시 맨 뒤에 추가, 미완료 시 제거) */
     toggleTask: (state, action: PayloadAction<string>) => {
       const selectedId = action.payload;
-      state.taskList = state.taskList.map((task) =>
-        task.id === selectedId ? { ...task, done: !task.done } : task
+      const task = state.taskList.find((t) => t.id === selectedId);
+      if (!task) return;
+
+      const nextDone = !task.done;
+      state.taskList = state.taskList.map((t) =>
+        t.id === selectedId ? { ...t, done: nextDone } : t
       );
+
+      if (nextDone) {
+        state.completedTaskIdsInOrder.push(selectedId);
+      } else {
+        state.completedTaskIdsInOrder = state.completedTaskIdsInOrder.filter(
+          (id) => id !== selectedId
+        );
+      }
     },
-    setEditingTask: (state, action: PayloadAction<string>) => {
-      state.selectedTaskId = action.payload;
-      const foundTask = state.taskList.find(
-        (task) => task.id === action.payload
-      );
-      state.editingTask = foundTask ?? null;
-    },
+    /** 태스크 수정 */
     updateTask: (state, action: PayloadAction<TaskTypes>) => {
       state.taskList = state.taskList.map((task) =>
         task.id === action.payload.id ? { ...task, ...action.payload } : task
       );
-      state.selectedTaskId = '';
-      state.editingTask = null;
-    },
-    editingTaskReset: (state) => {
-      state.selectedTaskId = '';
-      state.editingTask = null;
     },
   },
 });
@@ -52,7 +59,5 @@ export const {
   addTask,
   removeTask,
   toggleTask,
-  setEditingTask,
   updateTask,
-  editingTaskReset,
 } = taskListSlice.actions;
