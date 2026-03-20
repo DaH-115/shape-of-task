@@ -1,24 +1,24 @@
-import React, { useMemo, useRef } from 'react';
-import { useAppSelector } from '@/store/hooks';
+import { useMemo, useRef } from "react";
+import { useAppSelector } from "@/store/hooks";
 import {
   Container,
   Wrapper,
   ShapeList,
   ShapeListHeader,
   ShapeListContainer,
-  SaveBtnWrapper,
-} from '@/pages/shapeListPage/index.styles';
-import ShapeListItem from '@/pages/shapeListPage/ShapeListItem';
-import SaveBtn from '@/components/buttons/SaveBtn';
-import Title from '@/components/TitleComponent';
-import { EmptyState } from '@/components';
+  SaveButtonWrapper,
+} from "@/pages/shapeListPage/index.styles";
+import ShapeListItem from "@/pages/shapeListPage/ShapeListItem";
+import SaveBtn from "@/components/buttons/SaveButton";
+import Title from "@/components/TitleComponent";
+import { EmptyState } from "@/components";
 
 const ShapeListPage = () => {
   const taskListRef = useRef<HTMLUListElement>(null);
   const taskList = useAppSelector((state) => state.taskList.taskList);
   const completedTaskList = useMemo(
     () => taskList.filter((task) => task.done === true),
-    [taskList]
+    [taskList],
   );
   const isDisabled = completedTaskList.length === 0;
 
@@ -26,7 +26,7 @@ const ShapeListPage = () => {
     <Container>
       <Wrapper>
         <ShapeListHeader>
-          <Title title='My Shapes' desc='Completed Tasks' />
+          <Title title="My Shapes" desc="Completed Tasks" />
         </ShapeListHeader>
         <ShapeListContainer>
           {completedTaskList.length > 0 ? (
@@ -36,12 +36,12 @@ const ShapeListPage = () => {
               ))}
             </ShapeList>
           ) : (
-            <EmptyState message='Create some shapes!' />
+            <EmptyState message="Create some shapes!" />
           )}
         </ShapeListContainer>
-        <SaveBtnWrapper>
+        <SaveButtonWrapper>
           <SaveBtn taskListRef={taskListRef} isDisabled={isDisabled} />
-        </SaveBtnWrapper>
+        </SaveButtonWrapper>
       </Wrapper>
     </Container>
   );

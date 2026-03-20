@@ -1,6 +1,6 @@
-import React, { memo, useCallback, useState } from 'react';
-import { BiSortAlt2 } from 'react-icons/bi';
-import StyledShapes from '@/components/shapes/SingleShapes';
+import { memo, useCallback, useState } from "react";
+import { BiSortAlt2 } from "react-icons/bi";
+import StyledShapes from "@/components/shapes/SingleShapes";
 import {
   DropdownButton,
   DropdownContainer,
@@ -9,8 +9,8 @@ import {
   MenuItem,
   MenuLabel,
   MenuSection,
-} from '@/pages/taskListPage/SortDropdown.styles';
-import { PriorityFilter, SortType } from '@/pages/taskListPage';
+} from "@/pages/taskListPage/SortDropdown.styles";
+import { PriorityFilter, SortType } from "@/pages/taskListPage";
 
 interface SortDropdownProps {
   sortType: SortType;
@@ -32,7 +32,7 @@ const SortDropdown = ({
       onSortChange(newSortType);
       setIsOpen(false);
     },
-    [onSortChange]
+    [onSortChange],
   );
 
   const dropdownToggleHandler = useCallback(() => {
@@ -43,9 +43,9 @@ const SortDropdown = ({
     <DropdownContainer>
       <DropdownButton
         onClick={dropdownToggleHandler}
-        title='Sort and Filter Options'
+        title="Sort and Filter Options"
         aria-expanded={isOpen}
-        aria-haspopup='true'
+        aria-haspopup="true"
       >
         <BiSortAlt2 aria-hidden />
       </DropdownButton>
@@ -54,14 +54,14 @@ const SortDropdown = ({
         <MenuSection>
           <MenuLabel>Sort</MenuLabel>
           <MenuItem
-            $isActive={sortType === 'priority'}
-            onClick={() => sortChangeHandler('priority')}
+            $isActive={sortType === "priority"}
+            onClick={() => sortChangeHandler("priority")}
           >
             By Priority
           </MenuItem>
           <MenuItem
-            $isActive={sortType === 'created'}
-            onClick={() => sortChangeHandler('created')}
+            $isActive={sortType === "created"}
+            onClick={() => sortChangeHandler("created")}
           >
             By Created Date
           </MenuItem>
@@ -78,7 +78,7 @@ const SortDropdown = ({
               setIsOpen(false);
             }}
           >
-            <StyledShapes shapeName='triangle' />
+            <StyledShapes shapeName="triangle" />
             Important
           </MenuItem>
           <MenuItem
@@ -88,7 +88,7 @@ const SortDropdown = ({
               setIsOpen(false);
             }}
           >
-            <StyledShapes shapeName='square' />
+            <StyledShapes shapeName="square" />
             Remember
           </MenuItem>
           <MenuItem
@@ -98,7 +98,7 @@ const SortDropdown = ({
               setIsOpen(false);
             }}
           >
-            <StyledShapes shapeName='circle' />
+            <StyledShapes shapeName="circle" />
             Anytime
           </MenuItem>
         </MenuSection>
