@@ -25,6 +25,7 @@ const ShapeSelectMenu = ({
 
     // 중요도 옵션 배열에 클릭한 요소의 데이터-shape 속성 값이 있는지 확인
     if (shapeName && SHAPE_OPTIONS.some((opt) => opt.shape === shapeName)) {
+      event.stopPropagation(); // 부모 SelectShapesWrapper의 toggleHandler 실행 방지
       onSelect(shapeName);
     }
   };

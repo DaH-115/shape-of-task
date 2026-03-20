@@ -10,6 +10,7 @@ interface UseTaskListFiltersReturn {
   onSortChange: (type: SortType) => void;
   onPriorityFilterChange: (priority: PriorityFilter) => void;
   onHideCompletedToggle: () => void;
+  onFiltersReset: () => void;
 }
 
 export const useTaskListFilters = (): UseTaskListFiltersReturn => {
@@ -29,6 +30,11 @@ export const useTaskListFilters = (): UseTaskListFiltersReturn => {
     setHideCompleted((prev) => !prev);
   }, []);
 
+  const onFiltersReset = useCallback(() => {
+    setSortType('created');
+    setPriorityFilter(0);
+  }, []);
+
   return {
     sortType,
     priorityFilter,
@@ -36,5 +42,6 @@ export const useTaskListFilters = (): UseTaskListFiltersReturn => {
     onSortChange,
     onPriorityFilterChange,
     onHideCompletedToggle,
+    onFiltersReset,
   };
 };

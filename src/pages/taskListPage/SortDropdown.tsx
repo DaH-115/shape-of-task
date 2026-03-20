@@ -1,5 +1,5 @@
 import { memo, useCallback, useState } from "react";
-import { BiSortAlt2 } from "react-icons/bi";
+import { BiSortAlt2, BiReset } from "react-icons/bi";
 import StyledShapes from "@/components/shapes/SingleShapes";
 import {
   DropdownButton,
@@ -17,6 +17,7 @@ interface SortDropdownProps {
   priorityFilter: PriorityFilter;
   onSortChange: (type: SortType) => void;
   onPriorityFilterChange: (priority: PriorityFilter) => void;
+  onFiltersReset: () => void;
 }
 
 const SortDropdown = ({
@@ -24,6 +25,7 @@ const SortDropdown = ({
   priorityFilter,
   onSortChange,
   onPriorityFilterChange,
+  onFiltersReset,
 }: SortDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -102,6 +104,20 @@ const SortDropdown = ({
             Anytime
           </MenuItem>
         </MenuSection>
+
+        <MenuDivider />
+
+        <MenuItem
+          onClick={() => {
+            onFiltersReset();
+            setIsOpen(false);
+          }}
+          title="정렬 설정 초기화"
+          aria-label="정렬 설정 초기화"
+        >
+          <BiReset aria-hidden />
+          Reset
+        </MenuItem>
       </DropdownMenu>
     </DropdownContainer>
   );
