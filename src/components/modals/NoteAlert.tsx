@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
-import { styled } from 'styled-components';
-import Modal from '@/components/modals/Modal';
-import Btn from '@/components/buttons/Btn';
+import { useCallback } from "react";
+import { styled } from "styled-components";
+import Modal from "@/components/modals/Modal";
+import Button from "@/components/buttons/Button";
 
 interface NoteAlertProps {
   isOpen: boolean;
@@ -12,7 +12,7 @@ interface NoteAlertProps {
 const NoteAlert = ({
   isOpen,
   onClose,
-  message = '등록되었습니다',
+  message = "등록되었습니다",
 }: NoteAlertProps) => {
   const alertCloseHandler = useCallback(() => {
     onClose();
@@ -23,7 +23,7 @@ const NoteAlert = ({
       <AlertTitle>Success</AlertTitle>
       <AlertDesc>{message}</AlertDesc>
       <ConfirmBtnWrapper onClick={alertCloseHandler}>
-        <Btn type='button' text='OK' />
+        <Button type="button" text="OK" />
       </ConfirmBtnWrapper>
     </Modal>
   );

@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
-import styled from 'styled-components';
-import LinkBtn from '@/components/buttons/LinkBtn';
-import SideMenu, { MenuProps } from '@/components/menu/sideMenu/SideMenu';
-import { BsX } from 'react-icons/bs';
+import React, { memo } from "react";
+import styled from "styled-components";
+import LinkButton from "@/components/buttons/LinkButton";
+import SideMenu, { MenuProps } from "@/components/menu/sideMenu/SideMenu";
+import { BsX } from "react-icons/bs";
 
 const NavMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
   return (
@@ -10,22 +10,22 @@ const NavMenu = ({ isOpen, sideMenuHandler }: MenuProps) => {
       <HeaderWrapper>
         <CloseButton
           onClick={sideMenuHandler}
-          aria-label='메뉴 닫기'
-          type='button'
+          aria-label="메뉴 닫기"
+          type="button"
         >
-          <CloseIcon aria-hidden='true' />
+          <CloseIcon aria-hidden="true" />
         </CloseButton>
       </HeaderWrapper>
-      <MenuTitle>메뉴</MenuTitle>
+      <MenuTitle>Menu</MenuTitle>
       <SideMenuBtnWrapper>
         <MenuItemWrapper onClick={sideMenuHandler}>
-          <LinkBtn linkTo={'/'} text={'Home'} />
+          <LinkButton linkTo={"/"} text={"Home"} />
         </MenuItemWrapper>
         <MenuItemWrapper onClick={sideMenuHandler}>
-          <LinkBtn linkTo={'/task-list'} text={'Task List'} />
+          <LinkButton linkTo={"/task-list"} text={"Task List"} />
         </MenuItemWrapper>
         <MenuItemWrapper onClick={sideMenuHandler}>
-          <LinkBtn linkTo={'/shape-list'} text={'Shape List'} />
+          <LinkButton linkTo={"/shape-list"} text={"Shape List"} />
         </MenuItemWrapper>
       </SideMenuBtnWrapper>
     </SideMenu>
@@ -38,7 +38,6 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  margin-bottom: 1rem;
 `;
 
 const CloseButton = styled.button`
@@ -93,10 +92,10 @@ const CloseIcon = styled(BsX)`
 `;
 
 const MenuTitle = styled.h2`
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: ${({ theme }) => theme.commonColors.black};
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   text-align: center;
 `;
 
@@ -108,5 +107,6 @@ const SideMenuBtnWrapper = styled.nav`
 `;
 
 const MenuItemWrapper = styled.div`
-  /* 클릭 영역만 제공 */
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 `;

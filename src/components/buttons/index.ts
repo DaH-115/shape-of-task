@@ -1,13 +1,9 @@
 // Button 컴포넌트들 통합 export
-export { default as Btn } from './Btn';
-export { default as AddBtn } from './AddBtn';
-export { default as SaveBtn } from './SaveBtn';
-export { default as SettingBtn } from './SettingBtn';
-export { default as LinkBtn } from './LinkBtn';
+export { default as Btn } from "@/components/buttons/Button";
+export { default as AddButton } from "@/components/buttons/AddButton";
+export { default as SaveButton } from "@/components/buttons/SaveButton";
+export { default as SettingButton } from "@/components/buttons/SettingButton";
+export { default as LinkButton } from "@/components/buttons/LinkButton";
 
-// 타입들도 함께 export
-export type { BtnProps, SaveBtnProps, LinkBtnProps } from './types';
-
-// 스타일 상수들도 export (필요한 경우)
-export { BUTTON_STYLES, BUTTON_COLORS, ICON_STYLES } from './styles/constants';
-export { ButtonContainer, IconButtonWrapper } from './styles/common';
+// 타입
+export type { ButtonProps, LinkButtonProps } from "@/components/buttons/types";

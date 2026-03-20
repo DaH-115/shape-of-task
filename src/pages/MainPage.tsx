@@ -1,33 +1,33 @@
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { TodaysQuote, TaskListCount, Btn } from '@/components';
-import { StyledAddIcon } from '@/components/buttons/AddBtn';
-import { useBreakpoint } from '@/hooks';
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { TodaysQuote, TaskListCount } from "@/components";
+import AddButton from "@/components/buttons/AddButton";
+import { useBreakpoint } from "@/hooks";
 
 const MainPage = () => {
   const { isAboveBreakpoint: isDesktop } = useBreakpoint({ breakpoint: 768 });
   const navigate = useNavigate();
 
   const navigateHandler = useCallback(() => {
-    navigate('/task-list');
+    navigate("/task-list");
   }, [navigate]);
 
   return (
     <Container>
-      {/* 일정 통계 섹션 */}
-      <StatsSection>
-        <TaskListCount />
-      </StatsSection>
       {/* 명언 섹션 */}
       <QuoteSection>
         <TodaysQuote />
       </QuoteSection>
+
+      {/* 일정 통계 섹션 */}
+      <StatsSection>
+        <TaskListCount />
+      </StatsSection>
+
       {/* 일정 추가 버튼 */}
       <ButtonSection $isVisible={!isDesktop}>
-        <Btn type={'button'} text={'Add Task'} onClick={navigateHandler}>
-          <StyledAddIcon aria-hidden />
-        </Btn>
+        <AddButton onAddClick={navigateHandler} />
       </ButtonSection>
     </Container>
   );
@@ -38,14 +38,13 @@ export default MainPage;
 const Container = styled.div`
   width: 100%;
   min-width: ${({ theme }) => theme.size.mobile};
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  min-height: 0;
 
-  /* 데스크톱: flex 자식으로 균등 분배되도록 min-width 제거 */
   ${({ theme }) => theme.device.md} {
     min-width: 0;
   }
@@ -81,6 +80,6 @@ const StatsSection = styled.div`
 `;
 
 const ButtonSection = styled.div<{ $isVisible: boolean }>`
-  display: ${({ $isVisible }) => ($isVisible ? 'block' : 'none')};
+  display: ${({ $isVisible }) => ($isVisible ? "block" : "none")};
   flex-shrink: 0;
 `;

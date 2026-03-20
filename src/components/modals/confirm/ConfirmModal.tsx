@@ -1,9 +1,9 @@
-import { memo, useCallback } from 'react';
-import { styled } from 'styled-components';
-import { useAppDispatch } from '@/store/hooks';
-import Modal from '@/components/modals/Modal';
-import Btn from '@/components/buttons/Btn';
-import { editingTaskReset } from '@/store/taskListSlice';
+import { memo, useCallback } from "react";
+import { styled } from "styled-components";
+import { useAppDispatch } from "@/store/hooks";
+import Modal from "@/components/modals/Modal";
+import Button from "@/components/buttons/Button";
+import { editingTaskReset } from "@/store/taskListSlice";
 
 interface ConfirmModalProps {
   isOpen: boolean;
@@ -34,14 +34,14 @@ const ConfirmModal = ({
     <Modal isOpen={isOpen} onClose={closeHandler}>
       <AlertTitle>Confirm</AlertTitle>
       <AlertDesc>{modalDesc}</AlertDesc>
-      <BtnWrapper>
+      <ButtonWrapper>
         <RejectBtnWrapper onClick={closeHandler}>
-          <Btn type='button' text='Cancel' variant='outline' />
+          <Button type="button" text="Cancel" variant="outline" />
         </RejectBtnWrapper>
         <ConfirmBtnWrapper onClick={confirmHandler}>
-          <Btn type='button' text='Confirm' />
+          <Button type="button" text="Confirm" />
         </ConfirmBtnWrapper>
-      </BtnWrapper>
+      </ButtonWrapper>
     </Modal>
   );
 };
@@ -59,7 +59,7 @@ const AlertDesc = styled.p`
   margin-bottom: 1rem;
 `;
 
-const BtnWrapper = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
