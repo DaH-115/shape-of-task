@@ -1,56 +1,48 @@
-import { memo, useCallback } from 'react';
-import styled, { keyframes } from 'styled-components';
-import SingleShapes from '@/components/shapes/SingleShapes';
-import { ShapeName } from '@/types/task';
+import { memo } from "react";
+import styled, { keyframes } from "styled-components";
+import SingleShapes from "@/components/shapes/SingleShapes";
+import { ShapeName, SHAPE_OPTIONS } from "@/types/task";
 
 interface ShapeSelectMenuProps {
   id: string;
   isToggle: boolean;
-  getShape: (shapeName: ShapeName) => void;
-  onToggle: () => void;
+  onSelect: (shapeName: ShapeName) => void;
+  "aria-label"?: string;
 }
 
 const ShapeSelectMenu = ({
   id,
   isToggle,
-  getShape,
-  onToggle,
+  onSelect,
+  "aria-label": ariaLabel = "중요도 선택",
 }: ShapeSelectMenuProps) => {
-  const getShapeHandler = useCallback(
-    (event: React.MouseEvent<HTMLUListElement>) => {
-      const target = event.target as HTMLElement;
-      // 클릭된 요소나 그 부모에서 data-shape 찾기
-      const shapeItem = target.closest('[data-shape]') as HTMLElement;
-      const shapeName = shapeItem?.getAttribute('data-shape');
+  const handleItemClick = (event: React.MouseEvent<HTMLUListElement>) => {
+    // 클릭한 요소의 데이터-shape 속성 값을 가져옴
+    const shapeItem = (event.target as HTMLElement).closest(
+      "[data-shape]",
+    ) as HTMLElement;
+    const shapeName = shapeItem?.getAttribute("data-shape") as ShapeName;
 
-      if (shapeName && isShapeName(shapeName)) {
-        getShape(shapeName);
-        onToggle();
-      }
-    },
-    [getShape, onToggle]
-  );
-
-  // ShapeName 타입 가드 함수
-  const isShapeName = (value: string): value is ShapeName => {
-    return ['triangle', 'square', 'circle'].includes(value);
+    // 중요도 옵션 배열에 클릭한 요소의 데이터-shape 속성 값이 있는지 확인
+    if (shapeName && SHAPE_OPTIONS.some((opt) => opt.shape === shapeName)) {
+      onSelect(shapeName);
+    }
   };
 
   return (
-    <SelectMenuWrapper id={id} $isToggle={isToggle} role='listbox'>
-      <SelectMenuList onClick={getShapeHandler}>
-        <SelectMenuItem data-shape='triangle'>
-          <SingleShapes shapeName='triangle' />
-          <ShapeDesc>{'Important'}</ShapeDesc>
-        </SelectMenuItem>
-        <SelectMenuItem data-shape='square'>
-          <SingleShapes shapeName='square' />
-          <ShapeDesc>{'Remember'}</ShapeDesc>
-        </SelectMenuItem>
-        <SelectMenuItem data-shape='circle'>
-          <SingleShapes shapeName='circle' />
-          <ShapeDesc>{'Anytime'}</ShapeDesc>
-        </SelectMenuItem>
+    <SelectMenuWrapper
+      id={id}
+      $isToggle={isToggle}
+      role="listbox"
+      aria-label={ariaLabel}
+    >
+      <SelectMenuList onClick={handleItemClick}>
+        {SHAPE_OPTIONS.map(({ shape, desc }) => (
+          <SelectMenuItem key={shape} data-shape={shape}>
+            <SingleShapes shapeName={shape} />
+            <ShapeDesc>{desc}</ShapeDesc>
+          </SelectMenuItem>
+        ))}
       </SelectMenuList>
     </SelectMenuWrapper>
   );
@@ -58,7 +50,7 @@ const ShapeSelectMenu = ({
 
 export default memo(ShapeSelectMenu);
 
-// Animation Setting
+// 애니메이션 설정
 const fadeSlideIn = keyframes`
   from {
     transform: translateY(10%);
@@ -88,14 +80,14 @@ const SelectMenuWrapper = styled.div<{ $isToggle: boolean }>`
   bottom: 4rem;
   left: 0.5rem;
 
-  visibility: ${({ $isToggle }) => ($isToggle ? 'visible' : 'hidden')};
+  visibility: ${({ $isToggle }) => ($isToggle ? "visible" : "hidden")};
   animation: ${({ $isToggle }) => ($isToggle ? fadeSlideIn : fadeSlideOut)} 0.3s
     ease-in-out;
   transition: visibility 0.3s ease-in-out;
 `;
 
 const SelectMenuList = styled.ul`
-  border: 0.1rem solid ${({ theme }) => theme.commonColors.light_gray};
+  border: 0.1rem solid ${({ theme }) => theme.commonColors.gray_border};
   border-radius: 1rem;
   overflow: hidden;
 

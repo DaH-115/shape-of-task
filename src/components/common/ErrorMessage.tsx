@@ -1,22 +1,28 @@
-import { memo } from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface ErrorMessageProps {
   message: string;
-  className?: string;
 }
 
-const ErrorMessage = ({ message, className }: ErrorMessageProps) => {
+const ErrorMessage = ({ message }: ErrorMessageProps) => {
   return (
-    <ErrorMessageWrapper className={className}>{message}</ErrorMessageWrapper>
+    <ErrorMessageWrapper>
+      <ErrorMessageText>{message}</ErrorMessageText>
+    </ErrorMessageWrapper>
   );
 };
 
-export default memo(ErrorMessage);
+export default ErrorMessage;
 
 const ErrorMessageWrapper = styled.div`
-  color: ${({ theme }) => theme.colors.important};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+const ErrorMessageText = styled.p`
+  color: ${({ theme }) => theme.commonColors.dark_gray};
   text-align: center;
-  padding: 1rem 0;
-  font-size: 0.9rem;
+  margin: 2rem 0;
 `;

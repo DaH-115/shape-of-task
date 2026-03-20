@@ -1,15 +1,14 @@
-import { memo } from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Loading = () => {
   return (
-    <LoadingWrapper role='status' aria-label='로딩 중'>
+    <LoadingWrapper role="status" aria-label="로딩 중">
       <LoadingSpinner aria-hidden />
     </LoadingWrapper>
   );
 };
 
-export default memo(Loading);
+export default Loading;
 
 const LoadingWrapper = styled.div`
   display: flex;
@@ -17,11 +16,10 @@ const LoadingWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  min-height: 3rem;
 `;
 
 const LoadingSpinner = styled.div`
-  border: 3px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid ${({ theme }) => theme.commonColors.medium_gray};
   border-top: 3px solid #000;
   border-radius: 50%;
   width: 30px;

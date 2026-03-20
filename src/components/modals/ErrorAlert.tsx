@@ -1,14 +1,14 @@
-import { useCallback } from 'react';
-import { styled } from 'styled-components';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { errorAlertCloseHandler } from '@/store/modalSlice';
-import Modal from '@/components/modals/Modal';
-import Btn from '@/components/buttons/Btn';
+import { useCallback } from "react";
+import { styled } from "styled-components";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { errorAlertCloseHandler } from "@/store/modalSlice";
+import Modal from "@/components/modals/Modal";
+import Btn from "@/components/buttons/Button";
 
 const ErrorAlert = () => {
   const dispatch = useAppDispatch();
   const { isOpen: alertOpen, message: alertMessage } = useAppSelector(
-    (state) => state.modal.errorAlert
+    (state) => state.modal.errorAlert,
   );
 
   const alertCloseHandler = useCallback(() => {
@@ -20,7 +20,7 @@ const ErrorAlert = () => {
       <AlertTitle>Error</AlertTitle>
       <AlertDesc>{alertMessage}</AlertDesc>
       <ConfirmBtnWrapper onClick={alertCloseHandler}>
-        <Btn type='button' text='OK' />
+        <Btn type="button" text="OK" />
       </ConfirmBtnWrapper>
     </Modal>
   );

@@ -1,31 +1,28 @@
-import { memo } from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface EmptyStateProps {
   message: string;
-  className?: string;
 }
 
-const EmptyState = ({ message, className }: EmptyStateProps) => {
+const EmptyState = ({ message }: EmptyStateProps) => {
   return (
-    <MessageWrapper className={className}>
-      <BlankMessage>{message}</BlankMessage>
-    </MessageWrapper>
+    <EmptyStateWrapper>
+      <EmptyStateText>{message}</EmptyStateText>
+    </EmptyStateWrapper>
   );
 };
 
-export default memo(EmptyState);
+export default EmptyState;
 
-const MessageWrapper = styled.div`
+const EmptyStateWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
 `;
 
-const BlankMessage = styled.p`
+const EmptyStateText = styled.p`
   color: ${({ theme }) => theme.commonColors.medium_gray};
-  font-size: 1.2rem;
   margin: 2rem 0;
   text-align: center;
 `;
