@@ -1,15 +1,15 @@
 import { useCallback, useState, RefObject } from "react";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { errorAlertOpenHandler } from "@/store/modalSlice";
 import captureImages from "@/utils/captureImages";
 import saveAs from "file-saver";
 
 // 에러 메시지 상수
 const ERROR_MESSAGES = {
-  NO_TASK_LIST: "No task list available to save as image.",
-  CONVERT_FAILED: "Failed to convert image.",
-  SAVE_FAILED: "Failed to save image.",
-  UNKNOWN_ERROR: "An unknown error occurred.",
+  NO_TASK_LIST: "이미지로 저장할 할 일 목록이 없습니다.",
+  CONVERT_FAILED: "이미지 변환에 실패했습니다.",
+  SAVE_FAILED: "이미지 저장에 실패했습니다.",
+  UNKNOWN_ERROR: "알 수 없는 오류가 발생했습니다.",
 } as const;
 
 // 훅 반환 타입
@@ -34,6 +34,7 @@ const canvasToBlob = (canvas: HTMLCanvasElement): Promise<Blob> =>
 export const useSaveImage = (): UseSaveImageReturn => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const isDarkMode = useAppSelector((state) => state.themeChange.isDarkMode);
 
   // 이미지 저장 핸들러
   const saveImage = useCallback(
@@ -57,7 +58,10 @@ export const useSaveImage = (): UseSaveImageReturn => {
 
       // 이미지 캡처 및 저장
       try {
-        const { paddedCanvas, fileName } = await captureImages(taskListElement);
+        const { paddedCanvas, fileName } = await captureImages(
+          taskListElement,
+          isDarkMode,
+        );
         const blob = await canvasToBlob(paddedCanvas);
 
         try {
@@ -71,7 +75,7 @@ export const useSaveImage = (): UseSaveImageReturn => {
         setIsLoading(false);
       }
     },
-    [dispatch],
+    [dispatch, isDarkMode],
   );
 
   return {
