@@ -6,29 +6,31 @@ export const Container = styled.div`
   width: 100%;
   flex: 1;
   min-height: 0;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   overflow: hidden;
-
-  ${({ theme }) => theme.device.md} {
-    height: 100%;
-  }
 `;
 
-export const Wrapper = styled.div`
+export const WrapperOuter = styled.div`
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  box-shadow: ${({ theme }) => theme.shadows.elevated};
+  overflow: visible;
+`;
+
+export const WrapperInner = styled.div`
   width: 100%;
   flex: 1;
   min-height: 0;
   padding: 1rem;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.commonColors.surface};
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
-  ${({ theme }) => theme.device.md} {
-    height: 100%;
-    border-radius: 1rem;
-    box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
-  }
+  border-radius: 1rem;
 `;
 
 export const ShapeListHeader = styled.div`
@@ -36,12 +38,8 @@ export const ShapeListHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   flex-shrink: 0;
-
-  ${({ theme }) => theme.device.md} {
-    margin-bottom: 1rem;
-  }
 `;
 
 export const ShapeList = styled.ul`

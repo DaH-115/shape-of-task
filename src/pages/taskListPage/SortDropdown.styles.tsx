@@ -20,8 +20,6 @@ export const DropdownButton = styled.button`
     color: ${({ theme }) => theme.colors.priority1};
     background-color: ${({ theme }) => theme.commonColors.light_gray};
   }
-
-  }
 `;
 
 export const DropdownMenu = styled.div<{ $isOpen: boolean }>`
@@ -29,13 +27,13 @@ export const DropdownMenu = styled.div<{ $isOpen: boolean }>`
   top: calc(100% + 0.25rem);
   right: 0;
 
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.commonColors.surface};
   border: 1px solid ${({ theme }) => theme.commonColors.gray_border};
   border-radius: 1rem;
   padding: 0.5rem;
   min-width: 8rem;
 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: ${({ theme }) => theme.shadows.dropdown};
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
   visibility: ${({ $isOpen }) => ($isOpen ? "visible" : "hidden")};
   transform: translateY(${({ $isOpen }) => ($isOpen ? "0" : "-0.4rem")});

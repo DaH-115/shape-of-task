@@ -60,11 +60,8 @@ const ModalWrapper = styled.div<{
   padding: 0.8rem;
 
   border-radius: 1rem;
-  background-color: #fff;
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.02),
-    0 4px 8px rgba(0, 0, 0, 0.04),
-    0 8px 16px rgba(0, 0, 0, 0.06);
+  background-color: ${({ theme }) => theme.commonColors.surface};
+  box-shadow: ${({ theme }) => theme.shadows.modal};
 
   visibility: ${({ $modalToggle }) => ($modalToggle ? "visible" : "hidden")};
   animation: ${({ $modalToggle }) => ($modalToggle ? slideUp : slideDown)} 0.25s

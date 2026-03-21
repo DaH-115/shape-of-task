@@ -1,8 +1,12 @@
 import { memo, useCallback } from "react";
 import styled from "styled-components";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { themeChange } from "@/store/themeChangeSlice";
-import { themeColors, type ThemeKey } from "@/styles/theme-colors";
+import {
+  themeColors,
+  resolvePaletteColors,
+  type ThemeKey,
+} from "@/styles/theme-colors";
 
 interface ColorPaletteProps {
   themeKey: ThemeKey;
@@ -11,8 +15,12 @@ interface ColorPaletteProps {
 
 const ColorPalette = ({ themeKey, isSelected }: ColorPaletteProps) => {
   const dispatch = useAppDispatch();
-  const palette = themeColors[themeKey];
-  const { displayName, priority1, priority2, priority3 } = palette;
+  const isDarkMode = useAppSelector((s) => s.themeChange.isDarkMode);
+  const source = themeColors[themeKey];
+  const { displayName, priority1, priority2, priority3 } = resolvePaletteColors(
+    source,
+    isDarkMode,
+  );
 
   const themeChangeHandler = useCallback(() => {
     dispatch(themeChange(themeKey));
@@ -22,9 +30,9 @@ const ColorPalette = ({ themeKey, isSelected }: ColorPaletteProps) => {
     <Container>
       <PaletteName $isSelected={isSelected}>{displayName}</PaletteName>
       <PaletteWrapper onClick={themeChangeHandler} $isSelected={isSelected}>
-        <PaletteColors $themeColor={priority1} $isSelected={isSelected} />
-        <PaletteColors $themeColor={priority2} $isSelected={isSelected} />
-        <PaletteColors $themeColor={priority3} $isSelected={isSelected} />
+        <PaletteColor $themeColor={priority1} $isSelected={isSelected} />
+        <PaletteColor $themeColor={priority2} $isSelected={isSelected} />
+        <PaletteColor $themeColor={priority3} $isSelected={isSelected} />
       </PaletteWrapper>
     </Container>
   );
@@ -50,19 +58,13 @@ const PaletteName = styled.p<{ $isSelected: boolean }>`
   transition: all 0.2s ease-in-out;
 `;
 
-const PaletteColors = styled.div<{ $themeColor: string; $isSelected: boolean }>`
-  width: 1.5rem;
-  height: 1.5rem;
+const PaletteColor = styled.div<{ $themeColor: string; $isSelected: boolean }>`
+  width: 2rem;
+  height: 2rem;
   border-radius: 100%;
   background-color: ${({ $themeColor }) => $themeColor};
-  transition: all 0.2s ease-in-out;
-  border: 1px solid
-    ${({ $isSelected }) => ($isSelected ? "#fff" : "transparent")};
-
-  ${({ theme }) => theme.device.md} {
-    width: 2rem;
-    height: 2rem;
-  }
+  transform: ${({ $isSelected }) => ($isSelected ? "scale(1.1)" : "scale(1)")};
+  transition: transform 0.2s ease-in-out;
 `;
 
 const PaletteWrapper = styled.div<{ $isSelected: boolean }>`
@@ -77,12 +79,12 @@ const PaletteWrapper = styled.div<{ $isSelected: boolean }>`
   transform: ${({ $isSelected }) => ($isSelected ? "scale(1.02)" : "scale(1)")};
 
   &:hover {
+    padding: 1rem;
     background-color: ${({ theme }) => theme.commonColors.light_gray};
     transform: scale(1.02);
 
-    ${PaletteColors} {
+    ${PaletteColor} {
       transform: scale(1.1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
   }
 `;

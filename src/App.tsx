@@ -10,7 +10,11 @@ import { ErrorAlert } from '@/components/modals';
 
 const App = () => {
   const themeKey = useAppSelector((state) => state.themeChange.themeKey);
-  const theme = useMemo(() => createTheme(themeKey), [themeKey]);
+  const isDarkMode = useAppSelector((state) => state.themeChange.isDarkMode);
+  const theme = useMemo(
+    () => createTheme(themeKey, isDarkMode),
+    [themeKey, isDarkMode],
+  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -42,4 +46,6 @@ const MainContent = styled.main`
   display: flex;
   flex-direction: column;
   min-height: 0; /* flexbox에서 overflow 처리를 위해 필요 */
+  /* 모바일 라우트 영역은 상위에 캔버스 배경이 없어 기본(흰색)이 비침 — 데스크톱 DesktopContainer와 동일 토큰 */
+  background-color: ${({ theme }) => theme.commonColors.light_gray};
 `;

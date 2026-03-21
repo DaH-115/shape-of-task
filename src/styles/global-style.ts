@@ -22,7 +22,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: var(--font-family-base);
     letter-spacing: -0.05rem;
     font-size: 16px; /* 1rem = 16px */
-    color: #121212;
+    color: ${({ theme }) => theme.commonColors.black};
+    background-color: ${({ theme }) => theme.commonColors.light_gray};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     /* 스크롤바 완전히 숨기기 */
@@ -32,6 +33,11 @@ const GlobalStyle = createGlobalStyle`
 
   html ::-webkit-scrollbar {
     display: none; /* Chrome/Safari/Webkit 브라우저 */
+  }
+
+  body {
+    background-color: ${({ theme }) => theme.commonColors.light_gray};
+    color: ${({ theme }) => theme.commonColors.black};
   }
 
   a {

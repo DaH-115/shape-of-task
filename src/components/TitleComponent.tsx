@@ -23,8 +23,9 @@ const TitleWrapper = styled.div`
 
 const ContentsTitle = styled.h1`
   font-size: 1.4rem;
-  font-weight: bold;
+  font-weight: ${({ theme }) => (theme.isDarkMode ? 400 : 700)};
   margin-bottom: 0.2rem;
+  color: ${({ theme }) => theme.commonColors.black};
 `;
 
 const ContentsTitleDesc = styled.p`

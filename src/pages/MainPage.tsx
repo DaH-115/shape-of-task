@@ -6,12 +6,12 @@ import AddButton from "@/components/buttons/AddButton";
 import { useBreakpoint } from "@/hooks";
 
 const MainPage = () => {
-  const { isAboveBreakpoint: isDesktop } = useBreakpoint({ breakpoint: 768 });
   const navigate = useNavigate();
-
-  const navigateHandler = useCallback(() => {
-    navigate("/task-list");
-  }, [navigate]);
+  const { isAboveBreakpoint: isDesktop } = useBreakpoint({ breakpoint: 768 });
+  const navigateHandler = useCallback(
+    () => (isDesktop ? () => navigate("/task-list") : () => null),
+    [isDesktop, navigate],
+  );
 
   return (
     <Container>
@@ -25,10 +25,9 @@ const MainPage = () => {
         <TaskListCount />
       </StatsSection>
 
-      {/* 일정 추가 버튼 */}
-      <ButtonSection $isVisible={!isDesktop}>
+      <AddButtonWrapper>
         <AddButton onAddClick={navigateHandler} />
-      </ButtonSection>
+      </AddButtonWrapper>
     </Container>
   );
 };
@@ -40,7 +39,7 @@ const Container = styled.div`
   min-width: ${({ theme }) => theme.size.mobile};
   flex: 1;
   min-height: 0;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -51,10 +50,10 @@ const Container = styled.div`
 `;
 
 const QuoteSection = styled.div`
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.commonColors.surface};
   border-radius: 1rem;
-  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
-  padding: 1rem;
+  box-shadow: ${({ theme }) => theme.shadows.elevated};
+  padding: 2rem;
   flex: 1;
   min-height: 0; /* flex overflow 허용 */
   overflow-y: auto; /* 명언이 길어지면 내부 스크롤 */
@@ -69,17 +68,12 @@ const StatsSection = styled.div`
   display: flex;
   flex-direction: column;
 
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.commonColors.surface};
   border-radius: 1rem;
-  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
-  padding: 1rem;
-
-  ${({ theme }) => theme.device.md} {
-    padding: 1.5rem;
-  }
+  box-shadow: ${({ theme }) => theme.shadows.elevated};
+  padding: 2rem;
 `;
 
-const ButtonSection = styled.div<{ $isVisible: boolean }>`
-  display: ${({ $isVisible }) => ($isVisible ? "block" : "none")};
-  flex-shrink: 0;
+const AddButtonWrapper = styled.div`
+  padding: 1rem 0;
 `;

@@ -3,13 +3,12 @@ import styled from "styled-components";
 import { css } from "styled-components";
 
 export const TaskItem = styled.li<{ $isDone?: boolean; $priority?: number }>`
-  background-color: ${({ $isDone }) => ($isDone ? "#f8f9fa" : "#fff")};
+  background-color: ${({ theme, $isDone }) =>
+    $isDone ? theme.commonColors.surfaceMuted : theme.commonColors.surface};
   border: 1px solid ${({ theme }) => theme.commonColors.gray_border};
   border-radius: 1rem;
   margin-bottom: 1rem;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.04),
-    0 1px 2px rgba(0, 0, 0, 0.02);
+  box-shadow: ${({ theme }) => theme.shadows.card};
   transition: all 0.25s ease-in-out;
   cursor: pointer;
   position: relative;
@@ -19,11 +18,9 @@ export const TaskItem = styled.li<{ $isDone?: boolean; $priority?: number }>`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.08),
-      0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: ${({ theme }) => theme.shadows.cardHover};
     border-color: ${({ theme, $priority, $isDone }) => {
-      if ($isDone) return "rgba(0, 0, 0, 0.08)";
+      if ($isDone) return theme.commonColors.gray_border;
 
       switch ($priority) {
         case 1:
@@ -53,7 +50,6 @@ export const ContentHeader = styled.div`
   justify-content: space-between;
   width: 100%;
   gap: 1rem;
-  margin-bottom: 1rem;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -108,7 +104,7 @@ export const DoneButton = styled.button<{
 export const ContentText = styled.p<{ $isDone: boolean }>`
   width: 100%;
   padding: 0;
-  margin-bottom: 1rem;
+  padding: 2rem 0;
   color: ${({ theme, $isDone }) =>
     $isDone ? theme.commonColors.gray : theme.commonColors.black};
   text-decoration: ${({ $isDone }) => ($isDone ? "line-through" : "none")};
@@ -174,13 +170,13 @@ export const ActionDropdownMenu = styled.div<{ $isOpen: boolean }>`
   top: calc(100% + 0.25rem);
   right: 0;
 
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.commonColors.surface};
   border: 1px solid ${({ theme }) => theme.commonColors.gray_border};
   border-radius: 1rem;
   padding: 0.5rem;
   min-width: 8rem;
 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: ${({ theme }) => theme.shadows.dropdown};
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
   visibility: ${({ $isOpen }) => ($isOpen ? "visible" : "hidden")};
   transform: translateY(${({ $isOpen }) => ($isOpen ? "0" : "-0.4rem")});

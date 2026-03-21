@@ -1,6 +1,7 @@
 import 'styled-components';
 import { DeviceTypes, SizeTypes } from '@/styles/theme-device';
 import { CommonColorsTypes, PaletteTypes } from '@/styles/theme-colors';
+import type { ThemeShadows } from '@/styles/theme-shadows';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -15,6 +16,12 @@ declare module 'styled-components' {
 
     // 테마별 색상 팔레트
     colors: PaletteTypes;
+
+    // 그림자·스크림 (라이트/다크 전환)
+    shadows: ThemeShadows;
+
+    // 다크 모드 여부 (스타일 분기용)
+    isDarkMode: boolean;
 
     // CSS 믹스인 (재사용 가능한 스타일)
     mixins: {

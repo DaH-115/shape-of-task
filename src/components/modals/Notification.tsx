@@ -30,8 +30,8 @@ const Notification = () => {
     <Portal>
       <NoteWrapper $isOpen={isOpen}>
         <MessageWrapper>
-          <NoteTitle>Notice</NoteTitle>
-          <NoteDesc>Task completed! Shape added</NoteDesc>
+          <NoteTitle>알림</NoteTitle>
+          <NoteDesc>오늘의 모양이 추가되었습니다</NoteDesc>
           <IconWrapper onClick={onNavgateHandler}>
             <MdArrowForwardIos aria-hidden />
           </IconWrapper>
@@ -73,11 +73,11 @@ const MessageWrapper = styled.div`
   text-align: center;
   padding: 1rem;
 
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.commonColors.surface};
   border: 0.1rem solid ${({ theme }) => theme.commonColors.gray_border};
   border-radius: 1rem;
 
-  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
+  box-shadow: ${({ theme }) => theme.shadows.elevated};
 `;
 
 const NoteDesc = styled.p`

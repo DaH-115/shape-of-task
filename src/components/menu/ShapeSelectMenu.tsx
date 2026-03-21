@@ -98,8 +98,8 @@ const SelectMenuList = styled.ul`
   border-radius: 1rem;
   overflow: hidden;
 
-  background-color: #fff;
-  box-shadow: 0 0.2rem 2rem rgba(177, 177, 177, 0.25);
+  background-color: ${({ theme }) => theme.commonColors.surface};
+  box-shadow: ${({ theme }) => theme.shadows.elevated};
 `;
 
 const SelectMenuItem = styled.li`

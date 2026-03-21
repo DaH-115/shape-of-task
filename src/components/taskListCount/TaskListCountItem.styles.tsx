@@ -64,4 +64,5 @@ export const CountNumber = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${({ theme }) => theme.commonColors.dark_gray};
 `;

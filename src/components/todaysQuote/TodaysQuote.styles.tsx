@@ -7,7 +7,7 @@ export const QuoteContainer = styled.div`
 
 export const QutoeTitleHeader = styled.div`
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 `;
 
 export const IconsWrapper = styled.div`
@@ -15,7 +15,6 @@ export const IconsWrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  margin-bottom: 1rem;
 `;
 
 export const QuoteIcon = styled(BsChatQuote)`
@@ -34,14 +33,18 @@ export const PinIcon = styled.div<{ $isPinned: boolean }>`
 export const QuoteText = styled.p`
   display: block;
   width: 100%;
+  font-size: 1.4rem;
   margin-bottom: 2rem;
-  line-height: 1.6;
+  line-height: 1.4;
   color: ${({ theme }) => theme.commonColors.black};
+  overflow-wrap: break-word;
+  word-break: keep-all;
 `;
 
 export const QuoteAuthor = styled.p`
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-style: italic;
   text-align: right;
   width: 100%;
+  color: ${({ theme }) => theme.commonColors.gray};
 `;

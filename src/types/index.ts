@@ -1,4 +1,4 @@
-export type { ShapeName, TaskTypes, TaskListState } from './task';
+export type { ShapeName, TaskTypes, TaskListState } from "@/types/task";
 
 export interface ApiResponse<T = unknown> {
   data: T;

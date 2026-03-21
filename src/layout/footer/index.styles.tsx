@@ -1,20 +1,12 @@
-import styled, { css } from 'styled-components';
-import { FaGithub, FaHome } from 'react-icons/fa';
-
-export const Copyright = styled.p`
-  font-size: 0.6rem;
-  text-align: center;
-  margin-top: 0.5rem;
-`;
+import styled, { css } from "styled-components";
+import { FaGithub, FaHome } from "react-icons/fa";
 
 export const FooterWrapper = styled.footer`
   width: 100%;
-  text-align: center;
   min-width: ${({ theme }) => theme.size.mobile};
-  padding: 1rem;
-  padding-bottom: 1.2rem;
-  color: #fff;
-  background-color: ${({ theme }) => theme.colors.priority3};
+  padding: 2rem 1.5rem;
+  background-color: ${({ theme }) =>
+    theme.isDarkMode ? theme.commonColors.light_gray : theme.colors.priority1};
 
   ${({ theme }) => theme.device.md} {
     padding: 1.5rem 2rem;
@@ -22,13 +14,22 @@ export const FooterWrapper = styled.footer`
 `;
 
 export const FooterTitle = styled.p`
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  color: ${({ theme }) =>
+    theme.isDarkMode ? theme.commonColors.gray : theme.commonColors.black};
+`;
+
+export const Copyright = styled.p`
   font-size: 0.8rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
+  color: ${({ theme }) =>
+    theme.isDarkMode ? theme.commonColors.gray : theme.commonColors.black};
 `;
 
 export const FooterIconWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -45,7 +46,8 @@ export const FooterLinkBtn = styled.a`
 `;
 
 const ButtonIconStyles = css`
-  color: #fff;
+  color: ${({ theme }) =>
+    theme.isDarkMode ? theme.commonColors.gray : theme.commonColors.black};
 `;
 
 export const GitHubIcon = styled(FaGithub)`

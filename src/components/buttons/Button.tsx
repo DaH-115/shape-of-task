@@ -39,7 +39,7 @@ export const ButtonWrapper = styled.div<{
     width: 100%;
     border-radius: 2rem;
     border: 1px solid transparent;
-    padding: 0.6rem 1rem;
+    padding: 1rem;
     font-size: 1rem;
 
     color: ${({ theme, $variant, $disabled }) => {
@@ -48,7 +48,9 @@ export const ButtonWrapper = styled.div<{
     }};
     background-color: ${({ theme, $variant, $disabled }) => {
       if ($disabled) return theme.commonColors.light_gray;
-      return $variant === "outline" ? "#fff" : theme.colors.priority1;
+      return $variant === "outline"
+        ? theme.commonColors.surface
+        : theme.colors.priority1;
     }};
     cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
     transition: all 0.2s ease-in-out;
@@ -58,7 +60,9 @@ export const ButtonWrapper = styled.div<{
       border: 1px solid
         ${({ theme, $variant, $disabled }) => {
           if ($disabled) return theme.commonColors.light_gray;
-          return $variant === "outline" ? "#fff" : theme.colors.priority1;
+          return $variant === "outline"
+            ? theme.commonColors.surface
+            : theme.colors.priority1;
         }};
       color: ${({ theme, $variant, $disabled }) => {
         if ($disabled) return theme.commonColors.gray;
@@ -66,7 +70,9 @@ export const ButtonWrapper = styled.div<{
       }};
       background-color: ${({ theme, $variant, $disabled }) => {
         if ($disabled) return theme.commonColors.light_gray;
-        return $variant === "outline" ? theme.colors.priority1 : "#fff";
+        return $variant === "outline"
+          ? theme.colors.priority1
+          : theme.commonColors.surface;
       }};
       transition: all 0.2s ease-in-out;
 
@@ -77,6 +83,10 @@ export const ButtonWrapper = styled.div<{
         }};
         transition: all 0.2s ease-in-out;
       }
+    }
+
+    ${({ theme }) => theme.device.md} {
+      padding: 0.8rem 1rem;
     }
   }
 `;
