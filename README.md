@@ -1,232 +1,107 @@
-# SHAPE OF TASK
+# Shape of Task
 
-> 할 일의 중요도를 도형으로 시각화하여 관리하는 일정 관리 애플리케이션
+할 일의 중요도를 도형(삼각형·사각형·원)으로 표현하고, 완료한 일정을 한 화면에서 모아 보는 일정 관리 웹 앱입니다.
 
-## 🔗 링크
+## 링크
 
-- [Website](https://shape-of-task.vercel.app/)
+- [배포 사이트](https://shape-of-task.vercel.app/)
 - [GitHub](https://github.com/DaH-115/shape-of-task)
 
-## 👨‍💻 개발 정보
+## 빠른 시작
 
-- 개발 기간: 2022 - 2026
-- 개발 형태: 단독 개발
-- 배포 환경: Vercel 호스팅
+### 요구 사항
 
-## 🚀 빠른 시작
-
-### 요구사항
-
-- Node.js 18+
-- Yarn 또는 npm
+- Node.js 18 이상 권장
+- Yarn (패키지 매니저)
 
 ### 설치 및 실행
 
 ```bash
-# 저장소 클론
 git clone https://github.com/DaH-115/shape-of-task.git
-
-# 의존성 설치
+cd shape-of-task
 yarn install
-
-# 개발 서버 실행
 yarn dev
-
-# 프로덕션 빌드
-yarn build
-
-# 빌드 결과 미리보기
-yarn preview
 ```
 
-## 📌 프로젝트 개요
+개발 서버는 기본적으로 `http://localhost:3000`에서 열립니다.
 
-Shape of Task는 사용자의 할 일 상태를 도형으로 시각화하여 직관적인 task 관리를 제공하는 웹 애플리케이션입니다.
+### 스크립트
 
-**핵심 특징:**
+| 명령                          | 설명                                             |
+| ----------------------------- | ------------------------------------------------ |
+| `yarn dev`                    | 개발 서버 (HMR)                                  |
+| `yarn build`                  | TypeScript 검사(`tsc --noEmit`) 후 프로덕션 빌드 |
+| `yarn preview` / `yarn serve` | 빌드 결과 미리보기                               |
+| `yarn lint`                   | ESLint (`src` 대상)                              |
 
-- 🔺🔲⭕ **도형 기반 시각화**: 할 일의 중요도를 직관적인 도형으로 표현
-- ⚡ **빠른 성능**: Vite 기반 모던 빌드 시스템으로 최적화된 사용자 경험
-- 💾 **오프라인 지원**: localStorage를 활용한 데이터 지속성
-- 🎨 **커스터마이징**: 다양한 테마 컬러 시스템
-- 📱 **반응형 디자인**: 모든 디바이스에서 최적화된 UI/UX
+## 주요 기능
 
-## 🛠 기술 스택
+### 페이지 구성
 
-### 🏗 빌드 도구
+| 경로          | 설명                                                        |
+| ------------- | ----------------------------------------------------------- |
+| `/`           | 메인 — 오늘의 명언, 모양별 미완료 일정 수, 일정 추가로 이동 |
+| `/task-list`  | 일정 목록 — 추가·수정·삭제·완료 토글, 정렬·필터, 진행률     |
+| `/shape-list` | 오늘의 모양 — 완료된 일정만 모아 도형 나열, PNG 저장        |
 
-- **Vite 6.x**
-  - ⚡ 번개같이 빠른 개발 서버 (HMR 지원)
-  - 📦 최적화된 프로덕션 빌드 (Rollup 기반)
-  - 🔧 제로 설정으로 TypeScript 지원
+### 일정(Task)
 
-### 🎯 Frontend 핵심
+- 중요도를 도형으로 선택(높음·보통·낮음에 대응).
+- 생성일 기준 정렬 또는 중요도 정렬, 중요도·완료 숨김 필터.
+- 완료한 항목은 목록에서 아래쪽으로 정렬되어 표시.
+- 데이터는 **localStorage**에 저장되며, Redux 미들웨어로 동기화합니다.
 
-- **React 18**
-  - 컴포넌트 기반 아키텍처
-  - Concurrent Features 활용
-- **TypeScript 5.x**
-  - 정적 타입 시스템으로 런타임 에러 방지
-  - 개발 도구 지원 강화
-  - 코드 자동완성 및 리팩토링 지원
+### 오늘의 명언
 
-### 🗂 상태 관리
+- **API Ninjas** `quoteoftheday` 연동([RTK Query](https://redux-toolkit.js.org/rtk-query/overview)로 캐싱·재요청 제어).
+- 필요 시 **한국어 번역**(클라이언트는 `/api/translate` 호출 — 배포 환경에서는 Vercel Serverless 등에서 DeepL 키로 처리).
+- 명언 **고정(pin)** 시 선택한 문구를 유지하고, 상태는 localStorage에 저장합니다.
 
-- **Redux Toolkit**
-  - 중앙 집중식 상태 관리
-  - RTK Query로 API 상태 관리
-  - DevTools 지원으로 디버깅 편의성
+### 설정·테마
 
-### 🎨 스타일링
+- 사이드 메뉴에서 **테마 팔레트** 변경.
+- 메인 화면에서 **모양 라벨**(중요도 설명 문구) 편집·초기화.
 
-- **Styled-components**
-  - CSS-in-JS로 스타일 충돌 방지
-  - 동적 테마 시스템 구현
-  - 컴포넌트 기반 스타일 관리
+### 기타
 
-### 📦 주요 라이브러리
+- 반응형 레이아웃(헤더·사이드 메뉴·본문).
+- 알림·확인·입력 모달, 에러 알림.
+- `html2canvas` + `file-saver`로 완료 도형 영역 캡처 저장.
 
-- **React Router**: SPA 라우팅
-- **React Icons**: 아이콘 시스템
-- **html2canvas**: 이미지 캡처 및 다운로드
+## 기술 스택
 
-## 🎯 주요 기능
+| 구분   | 사용 기술                                                     |
+| ------ | ------------------------------------------------------------- |
+| UI     | React 19, TypeScript, styled-components 6, react-icons        |
+| 빌드   | Vite 6, `@vitejs/plugin-react`, vite-plugin-svgr              |
+| 상태   | Redux Toolkit, React-Redux, **RTK Query**(명언 API)           |
+| 라우팅 | React Router 7                                                |
+| 저장소 | 브라우저 localStorage + RTK slice / 미들웨어 영속화           |
+| 품질   | ESLint 9(flat config), Vitest·Testing Library·Playwright(dev) |
 
-### 1. 📋 스마트 Task 관리
+번역 개발 편의를 위해 Vite 플러그인(`vite-plugin-translate-api.ts`)이 로컬에서 `/api/translate`를 흉내 냅니다. 프로덕션에서는 별도 서버리스 엔드포인트와 `deepl-node` 등이 사용됩니다.
 
-- 도형 기반 중요도 선택 (삼각형: 높음, 사각형: 보통, 원형: 낮음)
-- 실시간 진행률 추적
-- 우선순위별 정렬 및 필터링
-
-### 2. 🎨 시각화 시스템
-
-- 완료된 할 일을 도형 패턴으로 변환
-- 커스텀 테마 컬러 적용
-- PNG 이미지 다운로드 지원
-
-### 3. 💡 동기부여 시스템
-
-- Random Quotes API 연동
-- 실시간 명언 업데이트
-- 사용자 인터랙션 기반 새로고침
-
-### 4. 📱 사용자 경험
-
-- 반응형 디자인 (모바일/태블릿/데스크톱)
-- 오프라인 데이터 저장
-
-## 🏗 프로젝트 구조
+## 프로젝트 구조(요약)
 
 ```
 src/
-├── components/          # 재사용 가능한 UI 컴포넌트
-│   ├── buttons/        # 버튼 컴포넌트들
-│   ├── menu/           # 메뉴 관련 컴포넌트
-│   ├── modals/         # 모달 컴포넌트들
-│   ├── shapes/         # 도형 렌더링 컴포넌트
-│   └── ...
-├── pages/              # 페이지 레벨 컴포넌트
-├── store/              # Redux 상태 관리
-├── hooks/              # 커스텀 훅
-├── utils/              # 유틸리티 함수
-├── types/              # TypeScript 타입 정의
-├── styles/             # 글로벌 스타일 및 테마
-└── assets/             # 정적 자원 (SVG, 이미지)
+├── assets/           # SVG 아이콘 등
+├── components/       # 공통 UI (버튼, 모달, 도형, 명언, 메뉴 …)
+├── hooks/            # useBreakpoint, useTodaysQuote 등
+├── layout/           # Header, Footer, ResponsiveLayout
+├── pages/            # MainPage, TaskListPage, ShapeListPage
+├── routes/           # React Router 정의
+├── store/            # slices, RTK Query(apiSlice), persist 미들웨어
+├── services/         # translateApi 등 외부 연동 클라이언트
+├── styles/           # 글로벌 스타일, 테마
+├── types/, utils/
+api/                  # Vercel 등에서 쓰는 translate 핸들러(Web Request/Response)
 ```
 
-## 🔧 개발 스크립트
+## 배포
 
-```bash
-# 개발 서버 실행 (localhost:5173)
-yarn dev
+- Vercel
 
-# TypeScript 타입 체크 + 프로덕션 빌드
-yarn build
+## 라이선스·기록
 
-# 빌드 결과 미리보기
-yarn preview
-
-# ESLint 코드 검사
-yarn lint
-```
-
-## 🚀 배포
-
-이 프로젝트는 Vercel에 자동 배포됩니다:
-
-- **main** 브랜치 푸시 시 자동 배포
-- PR 생성 시 프리뷰 배포
-- 환경별 최적화된 빌드 설정
-
-## 🔍 핵심 기술적 성과
-
-### ⚡ 성능 최적화
-
-- Vite의 ES 모듈 기반 개발 서버로 즉시 시작
-- 코드 스플리팅으로 초기 로딩 시간 단축
-- Tree-shaking으로 불필요한 코드 제거
-
-### 🛡 타입 안전성
-
-- 100% TypeScript 적용으로 런타임 에러 최소화
-- Redux 상태의 완전한 타입 추론
-- 컴포넌트 props 타입 안전성 보장
-
-### 🎨 모듈화된 디자인 시스템
-
-- 재사용 가능한 styled-components 라이브러리
-- 일관된 테마 시스템 적용
-- 반응형 디자인 패턴 구현
-
-### 💾 효율적인 데이터 관리
-
-- localStorage 기반 오프라인 지원
-- Redux Toolkit으로 예측 가능한 상태 변화
-- RTK Query로 API 캐싱 및 동기화
-
-## 📄 라이선스
-
-이 프로젝트는 개인 포트폴리오 목적으로 제작되었습니다.
-
-### 버전 기록
-
-#### Version 2.0.0 (2025.06)
-
-- **모던 빌드 시스템 도입**
-  - Vite 6.x로 마이그레이션하여 개발 서버 성능 대폭 향상
-  - 번들 크기 최적화 및 빌드 속도 개선
-- **코드 품질 향상**
-  - 모든 import 경로 대소문자 일관성 확보
-  - 타입 안전성 강화 및 에러 해결
-  - ESLint 설정 업데이트
-
-#### Version 1.5.0 (2025.01)
-
-- 전반적인 UI/UX 개선 및 성능 최적화
-
-#### Version 1.2.0 (2023.12)
-
-- 프로젝트명 'SHAPE OF TASK'로 리브랜딩
-- 브랜드 아이덴티티 강화를 위한 디자인 시스템 개선
-
-#### Version 1.1.0 (2023.08)
-
-- TypeScript 마이그레이션 완료
-- 정적 타입 시스템 도입으로 코드 안정성 강화
-- 컴포넌트 및 상태 관리 타입 정의 구현
-
-#### Version 1.0.1 (2023.08)
-
-- React 18 버전으로 업그레이드
-
-#### Version 1.0.0 (2023.12)
-
-- 서비스 첫 출시 및 Vercel 배포
-- 기본 기능 구현:
-  - 도형 기반 Task 시각화 시스템
-  - Random Quotes API 연동
-  - Redux Toolkit 기반 상태 관리
-  - html2canvas를 활용한 도형 이미지 생성 및 다운로드 기능
-  - 커스텀 테마 컬러 시스템 도입
-  - 디바이스별 반응형 디자인 적용 강화
-  - localStorage를 활용한 데이터 저장
+개인 포트폴리오·학습 목적의 프로젝트입니다.

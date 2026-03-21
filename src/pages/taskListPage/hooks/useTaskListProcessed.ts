@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import type { TaskTypes } from '@/types/task';
-import type { SortType, PriorityFilter } from './useTaskListFilters';
+import type { SortType, PriorityFilter } from "@/pages/taskListPage/hooks/useTaskListFilters";
 
 const isValidDate = (dateStr: string): boolean =>
   !isNaN(new Date(dateStr).getTime());

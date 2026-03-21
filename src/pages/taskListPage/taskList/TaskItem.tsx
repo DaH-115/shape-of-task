@@ -1,7 +1,7 @@
-import React, { memo, useCallback, useState, useRef, useEffect } from "react";
+import { memo, useCallback, useState, useRef, useEffect } from "react";
 import { toggleTask } from "@/store/taskListSlice";
 import { TaskTypes } from "@/types/task";
-import { useAppSelector } from "@/store/hooks";
+import { PriorityLabelsState } from "@/store/priorityLabelsStorage";
 import { getPriorityLabel } from "@/store/priorityLabelsSlice";
 import { notificationOpenHandler } from "@/store/modalSlice";
 import { useAppDispatch } from "@/store/hooks";
@@ -21,7 +21,7 @@ import {
   TaskDate,
   TaskItem as TaskItemStyled,
   UpdateIcon,
-} from "./TaskItem.styles";
+} from "@/pages/taskListPage/taskList/TaskItem.styles";
 import {
   IoIosCheckmarkCircleOutline,
   IoIosCheckmarkCircle,
@@ -33,18 +33,19 @@ import { formatDateToKorean } from "@/utils/dateFormat";
 
 interface TaskItemProps {
   processTask: TaskTypes;
+  priorityLabels: PriorityLabelsState;
   onUpdateClick: (taskId: string) => void;
   onRemoveClick: (taskId: string) => void;
 }
 
 const TaskItem = ({
   processTask,
+  priorityLabels,
   onUpdateClick,
   onRemoveClick,
 }: TaskItemProps) => {
   const { id, text, shape, date, done, priority } = processTask;
   const dispatch = useAppDispatch();
-  const priorityLabels = useAppSelector((state) => state.priorityLabels);
   const priorityDesc = getPriorityLabel(priorityLabels, priority as 1 | 2 | 3);
 
   const toggleTaskHandler = useCallback(() => {

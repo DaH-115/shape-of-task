@@ -2,8 +2,8 @@ import { Middleware } from "@reduxjs/toolkit";
 import {
   savePriorityLabels,
   PriorityLabelsState,
-} from "./priorityLabelsStorage";
-import { updatePriorityLabel, resetPriorityLabels } from "./priorityLabelsSlice";
+} from "@/store/priorityLabelsStorage";
+import { updatePriorityLabel, resetPriorityLabels } from "@/store/priorityLabelsSlice";
 
 const PRIORITY_LABELS_ACTIONS = new Set<string>([
   updatePriorityLabel.type,

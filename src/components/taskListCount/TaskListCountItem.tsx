@@ -16,7 +16,6 @@ import {
   updatePriorityLabel,
 } from "@/store/priorityLabelsSlice";
 import { BsPencil } from "react-icons/bs";
-import Title from "@/components/TitleComponent";
 
 interface TaskListCountItemProps {
   /** 중요도 번호 (1: triangle, 2: square, 3: circle) */

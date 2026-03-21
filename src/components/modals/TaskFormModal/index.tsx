@@ -1,4 +1,11 @@
-import { useState, useRef, useMemo, useEffect, ChangeEvent } from "react";
+import {
+  useState,
+  useRef,
+  useMemo,
+  useEffect,
+  useCallback,
+  ChangeEvent,
+} from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { getPriorityLabel } from "@/store/priorityLabelsSlice";
@@ -32,7 +39,6 @@ interface TaskFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess?: () => void;
-  /** 수정 모드일 때 편집 중인 태스크 ID (없으면 추가 모드) */
   editingTaskId?: string | null;
 }
 
@@ -77,56 +83,71 @@ const TaskFormModal = ({
     setIsErrors({ textError: "", shapeError: "" });
   }, [isOpen, editingTask]);
 
-  const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const text = event.target.value;
-    setText(text);
-  };
+  const onChangeHandler = useCallback(
+    (event: ChangeEvent<HTMLTextAreaElement>) => {
+      const text = event.target.value;
+      setText(text);
+    },
+    [],
+  );
 
-  const submitHandler: React.SubmitEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
+  const submitHandler = useCallback<React.SubmitEventHandler<HTMLFormElement>>(
+    (event) => {
+      event.preventDefault();
 
-    const errors = validateTaskForm(text, shape);
-    if (errors.textError || errors.shapeError) {
-      setIsErrors(errors);
-      textareaRef.current?.focus();
-      return;
-    }
+      const errors = validateTaskForm(text, shape);
+      if (errors.textError || errors.shapeError) {
+        setIsErrors(errors);
+        textareaRef.current?.focus();
+        return;
+      }
 
-    const { number: priorityNumber } = getPriority(shape);
-    const priorityDesc = getPriorityLabel(
-      priorityLabels,
-      priorityNumber as 1 | 2 | 3
-    );
-    const task = createTaskFromValues({
+      const { number: priorityNumber } = getPriority(shape);
+      const priorityDesc = getPriorityLabel(
+        priorityLabels,
+        priorityNumber as 1 | 2 | 3,
+      );
+      const task = createTaskFromValues({
+        text,
+        shape,
+        id: editingTask?.id ?? uuidv4(),
+        date: editingTask?.date ?? todayDateStr,
+        priorityDesc,
+      });
+
+      if (editingTask?.id) {
+        // 수정 시 기존 done 상태 유지
+        dispatch(updateTask({ ...task, done: editingTask.done }));
+      } else {
+        dispatch(addTask(task));
+      }
+
+      setText("");
+      setShape("circle");
+      onClose();
+      onSuccess?.();
+    },
+    [
       text,
       shape,
-      id: editingTask?.id ?? uuidv4(),
-      date: editingTask?.date ?? todayDateStr,
-      priorityDesc,
-    });
+      editingTask,
+      priorityLabels,
+      todayDateStr,
+      dispatch,
+      onClose,
+      onSuccess,
+    ],
+  );
 
-    if (editingTask?.id) {
-      // 수정 시 기존 done 상태 유지
-      dispatch(updateTask({ ...task, done: editingTask.done }));
-    } else {
-      dispatch(addTask(task));
-    }
-
-    setText("");
-    setShape("circle");
-    onClose();
-    onSuccess?.();
-  };
-
-  const toggleHandler = (e: React.MouseEvent) => {
+  const toggleHandler = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     setToggle((prev) => !prev);
-  };
+  }, []);
 
-  const handleShapeSelect = (shapeName: ShapeName) => {
+  const handleShapeSelect = useCallback((shapeName: ShapeName) => {
     setShape(shapeName);
     setToggle(false);
-  };
+  }, []);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

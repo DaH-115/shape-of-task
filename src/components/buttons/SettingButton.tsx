@@ -7,7 +7,7 @@ interface SettingButtonProps {
 
 const SettingButton = ({ onClick }: SettingButtonProps) => {
   return (
-    <Button type="button" text="Settings" onClick={onClick} variant="outline">
+    <Button type="button" text="설정" onClick={onClick} variant="outline">
       <IoMdSettings aria-hidden />
     </Button>
   );

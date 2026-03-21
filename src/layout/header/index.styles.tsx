@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IoMenu } from "react-icons/io5";
+import { IoMdSettings } from "react-icons/io";
 import Logo from "@/assets/icons/Logo.svg?react";
 
 export const SideMenuButton = styled.button`
@@ -48,10 +49,18 @@ export const SideMenuIcon = styled(IoMenu)`
   color: ${({ theme }) => theme.commonColors.black};
 `;
 
+/** 모바일 전용 설정 버튼 */
+export const MobileSettingButton = styled(SideMenuButton)``;
+
+export const MobileSettingIcon = styled(IoMdSettings)`
+  font-size: 1.35rem;
+  color: ${({ theme }) => theme.commonColors.black};
+`;
+
 export const HeaderWrapper = styled.div`
   position: relative;
   width: 100%;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.commonColors.surface};
   z-index: 50;
 `;
 
@@ -85,7 +94,15 @@ export const HeaderSettingBtn = styled.div`
   ${({ theme }) => theme.device.md} {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
   }
+`;
+
+/** 로고와 분리해 설정·햄버거를 한 덩어리로 묶음 */
+export const HeaderTrailing = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 `;
 
 export const Wrapper = styled.div`

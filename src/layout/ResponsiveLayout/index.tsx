@@ -8,6 +8,7 @@ import {
   DesktopContainer,
   DesktopColumn,
   MobileContainer,
+  MobileRoutesStretch,
 } from '@/layout/ResponsiveLayout/index.styles';
 
 /**
@@ -38,7 +39,9 @@ const ResponsiveLayout = () => {
 
   return (
     <MobileContainer>
-      <RoutesComponent />
+      <MobileRoutesStretch>
+        <RoutesComponent />
+      </MobileRoutesStretch>
     </MobileContainer>
   );
 };

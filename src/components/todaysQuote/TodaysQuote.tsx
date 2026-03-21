@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Title from "@/components/TitleComponent";
 import { BsPinAngleFill, BsPinAngle } from "react-icons/bs";
 import {
@@ -12,7 +13,7 @@ import {
 import useTodaysQuote from "@/hooks/useTodaysQuote";
 import { Loading, ErrorMessage } from "@/components/common";
 
-const TodaysQuote = () => {
+const TodaysQuote = memo(function TodaysQuote() {
   const { displayedQuote, error, isLoading, pinSaveHandler, isPinned } =
     useTodaysQuote();
 
@@ -48,6 +49,6 @@ const TodaysQuote = () => {
       ) : null}
     </QuoteContainer>
   );
-};
+});
 
 export default TodaysQuote;

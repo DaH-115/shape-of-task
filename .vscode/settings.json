@@ -1,0 +1,5 @@
+{
+  // 자동 완성·자동 import 시 tsconfig paths(@/) 우선 (상대경로 대신)
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative"
+}

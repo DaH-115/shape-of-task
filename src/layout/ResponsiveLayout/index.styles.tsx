@@ -34,3 +34,12 @@ export const MobileContainer = styled.div`
     display: none;
   }
 `;
+
+/** 모바일 라우트 페이지가 세로로 꽉 차게 — 데스크톱 컬럼과 동일한 flex 체인 */
+export const MobileRoutesStretch = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+`;

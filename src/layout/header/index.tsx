@@ -8,6 +8,9 @@ import {
   StyledLogo,
   Wrapper,
   HeaderSettingBtn,
+  HeaderTrailing,
+  MobileSettingButton,
+  MobileSettingIcon,
 } from "@/layout/header/index.styles";
 import NavMenu from "@/components/menu/sideMenu/NavMenu";
 import SettingMenu from "@/components/menu/settingMenu/SettingMenu";
@@ -43,18 +46,29 @@ const Header = () => {
         <LogoWrapper onClick={onMoveToMainHandler}>
           <StyledLogo />
         </LogoWrapper>
-        {isDesktop && (
-          <HeaderSettingBtn>
-            <SettingButton onClick={settingMenuHandler} />
-          </HeaderSettingBtn>
-        )}
-        <SideMenuButton
-          onClick={sideMenuHandler}
-          aria-label="사이드 메뉴"
-          aria-expanded={isToggle}
-        >
-          <SideMenuIcon aria-hidden />
-        </SideMenuButton>
+        <HeaderTrailing>
+          {isDesktop ? (
+            <HeaderSettingBtn>
+              <SettingButton onClick={settingMenuHandler} />
+            </HeaderSettingBtn>
+          ) : (
+            <MobileSettingButton
+              type="button"
+              onClick={settingMenuHandler}
+              aria-label="설정"
+              aria-expanded={isSettingOpen}
+            >
+              <MobileSettingIcon aria-hidden />
+            </MobileSettingButton>
+          )}
+          <SideMenuButton
+            onClick={sideMenuHandler}
+            aria-label="사이드 메뉴"
+            aria-expanded={isToggle}
+          >
+            <SideMenuIcon aria-hidden />
+          </SideMenuButton>
+        </HeaderTrailing>
       </Wrapper>
       <NavMenu isOpen={isToggle} sideMenuHandler={sideMenuHandler} />
       <SettingMenu

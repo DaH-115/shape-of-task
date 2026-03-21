@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { errorAlertOpenHandler } from "@/store/modalSlice";
 import {
-  ModalInput,
+  TaskFormModal,
   Notification,
   AddButton,
   UpdateConfirmModal,
@@ -12,7 +12,8 @@ import {
 } from "@/components";
 import {
   Container,
-  Wrapper,
+  WrapperOuter,
+  WrapperInner,
   SortButton,
   TaskListHeader,
   TasksHeaderBtns,
@@ -37,6 +38,7 @@ export type { SortType, PriorityFilter } from "@/pages/taskListPage/hooks";
 
 const TaskListPage = () => {
   const taskList = useAppSelector((state) => state.taskList.taskList);
+  const priorityLabels = useAppSelector((state) => state.priorityLabels);
   const dispatch = useAppDispatch();
 
   const [isInputOpen, setIsInputOpen] = useState(false);
@@ -115,7 +117,8 @@ const TaskListPage = () => {
 
   return (
     <Container>
-      <Wrapper>
+      <WrapperOuter>
+        <WrapperInner>
         <TaskListHeader>
           <Title title="오늘의 일정" desc="일정을 잊지말고 완료해보세요" />
           <HeaderProgressWrapper>
@@ -174,6 +177,7 @@ const TaskListPage = () => {
           {taskList.length > 0 ? (
             <TaskList
               tasks={processTaskList}
+              priorityLabels={priorityLabels}
               onUpdateClick={handleUpdateClick}
               onRemoveClick={handleRemoveClick}
             />
@@ -181,8 +185,9 @@ const TaskListPage = () => {
             <EmptyState message="일정을 추가해보세요!" />
           )}
         </TaskListContainer>
-      </Wrapper>
-      <ModalInput
+        </WrapperInner>
+      </WrapperOuter>
+      <TaskFormModal
         isOpen={isInputOpen}
         onClose={handleInputModalClose}
         onSuccess={handleInputSuccess}

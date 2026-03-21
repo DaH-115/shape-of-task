@@ -3,7 +3,7 @@ import { TaskTypes, TaskListState } from '@/types/task';
 import {
   getStoredTaskList,
   getStoredCompletedTaskIdsInOrder,
-} from './taskListStorage';
+} from "@/store/taskListStorage";
 
 const initialState: TaskListState = {
   taskList: getStoredTaskList(),

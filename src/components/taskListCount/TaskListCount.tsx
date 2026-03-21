@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { TaskTypes } from "types/task";
@@ -7,7 +7,7 @@ import Title from "@/components/TitleComponent";
 import { resetPriorityLabels } from "@/store/priorityLabelsSlice";
 import { BsArrowCounterclockwise } from "react-icons/bs";
 
-const TaskListCount = () => {
+const TaskListCount = memo(function TaskListCount() {
   const dispatch = useAppDispatch();
   const taskList = useAppSelector((state) => state.taskList.taskList);
   const priorityLabels = useAppSelector((state) => state.priorityLabels);
@@ -70,7 +70,7 @@ const TaskListCount = () => {
       </TaskListCountWrapper>
     </Container>
   );
-};
+});
 
 export default TaskListCount;
 
@@ -82,8 +82,9 @@ const TitleHeader = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 1rem;
   width: 100%;
+  margin-bottom: 1.5rem;
 `;
 
 const ResetButton = styled.button`
@@ -110,5 +111,4 @@ const ResetButton = styled.button`
 const TaskListCountWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
 `;

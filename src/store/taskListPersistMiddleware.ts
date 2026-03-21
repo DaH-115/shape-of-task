@@ -1,7 +1,7 @@
 import { Middleware } from "@reduxjs/toolkit";
 import { TaskTypes } from "@/types/task";
-import { saveTaskList } from "./taskListStorage";
-import { addTask, removeTask, toggleTask, updateTask } from "./taskListSlice";
+import { saveTaskList } from "@/store/taskListStorage";
+import { addTask, removeTask, toggleTask, updateTask } from "@/store/taskListSlice";
 
 /** taskList를 변경하는 액션들 - slice에서 가져와 단일 출처 유지 */
 const TASK_LIST_PERSIST_ACTIONS: Set<string> = new Set([

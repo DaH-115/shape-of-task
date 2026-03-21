@@ -2,7 +2,8 @@ import { useMemo, useRef } from "react";
 import { useAppSelector } from "@/store/hooks";
 import {
   Container,
-  Wrapper,
+  WrapperOuter,
+  WrapperInner,
   ShapeList,
   ShapeListHeader,
   ShapeListContainer,
@@ -29,7 +30,8 @@ const ShapeListPage = () => {
 
   return (
     <Container>
-      <Wrapper>
+      <WrapperOuter>
+        <WrapperInner>
         <ShapeListHeader>
           <Title title="오늘의 모양" desc="완성된 오늘의 모양을 감상해보세요" />
         </ShapeListHeader>
@@ -47,7 +49,8 @@ const ShapeListPage = () => {
         <SaveButtonWrapper>
           <SaveBtn taskListRef={taskListRef} isDisabled={isDisabled} />
         </SaveButtonWrapper>
-      </Wrapper>
+        </WrapperInner>
+      </WrapperOuter>
     </Container>
   );
 };

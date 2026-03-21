@@ -1,20 +1,20 @@
 // 버튼 컴포넌트들
-export * from "./buttons";
+export * from "@/components/buttons";
 
 // 모달 컴포넌트들
-export * from "./modals";
+export * from "@/components/modals";
 
 // 메뉴 컴포넌트들
-export * from "./menu";
+export * from "@/components/menu";
 
 // 도형 컴포넌트들
-export * from "./shapes";
+export * from "@/components/shapes";
 
 // Task 카운트 컴포넌트들
-export * from "./taskListCount";
+export * from "@/components/taskListCount";
 
 // 오늘의 명언 컴포넌트
-export * from "./todaysQuote";
+export * from "@/components/todaysQuote";
 
 // 공통 컴포넌트들
-export * from "./common";
+export * from "@/components/common";
