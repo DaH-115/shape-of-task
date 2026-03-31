@@ -5,14 +5,15 @@ import {
   FooterTitle,
   FooterWrapper,
   GitHubIcon,
-  HomeIcon,
 } from "@/layout/footer/index.styles";
 
 const Footer = () => {
   return (
     <FooterWrapper>
       <FooterTitle>{"SHAPE OF TASK"}</FooterTitle>
-      <Copyright>{`ⓒGWAK DA HYUN 2022 - ${new Date().getFullYear()}`}</Copyright>
+      <Copyright>
+        © GWAK DAHYUN {new Date().getFullYear()} All rights reserved.
+      </Copyright>
       <FooterIconWrapper>
         <FooterLinkBtn
           href="https://github.com/DaH-115/shape-of-task"
@@ -21,14 +22,6 @@ const Footer = () => {
           aria-label="GitHub 저장소로 이동"
         >
           <GitHubIcon aria-hidden />
-        </FooterLinkBtn>
-        <FooterLinkBtn
-          href="https://www.notion.so/bab771634f4b4f78b8872aa4195e0b16"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Notion 페이지로 이동"
-        >
-          <HomeIcon aria-hidden />
         </FooterLinkBtn>
       </FooterIconWrapper>
     </FooterWrapper>
