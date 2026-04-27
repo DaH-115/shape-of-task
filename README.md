@@ -167,6 +167,15 @@ yarn install
 yarn dev
 ```
 
+## 빌드 및 미리보기
+
+```bash
+yarn build
+yarn serve
+```
+
+`yarn start`도 빌드 결과 미리보기(`vite preview`)와 동일하게 동작합니다.
+
 ---
 
 ## 8) 환경 변수

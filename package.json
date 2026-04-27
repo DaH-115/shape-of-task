@@ -8,27 +8,28 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.0",
-    "deepl-node": "^1.24.0",
+    "deepl-node": "^1.26.0",
     "html2canvas": "^1.4.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "react-icons": "^5.4.0",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^7.0.0",
-    "styled-components": "^6.3.11",
+    "react-router-dom": "^7.14.2",
+    "styled-components": "^6.4.1",
     "styled-reset": "4.5.2",
     "uuid": "^11.0.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "start": "vite preview",
     "preview": "vite preview",
     "serve": "vite preview",
     "lint": "eslint src",
     "update:browserslist": "update-browserslist-db"
   },
   "resolutions": {
-    "caniuse-lite": "^1.0.30001777"
+    "caniuse-lite": "^1.0.30001791"
   },
   "browserslist": {
     "production": [
@@ -44,7 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.0",
+    "@babel/preset-env": "^7.29.2",
     "@babel/preset-react": "^7.28.5",
     "@eslint/js": "^9.15.0",
     "@testing-library/dom": "^10.4.0",
@@ -52,23 +53,23 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.5.0",
     "@types/file-saver": "^2.0.5",
-    "@types/node": "^24.0.0",
+    "@types/node": "^24.12.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.5.2",
-    "@vitest/browser-playwright": "^4.0.18",
-    "@vitest/coverage-v8": "^4.0.18",
-    "browserslist": "^4.24.0",
+    "@vitest/browser-playwright": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.5",
+    "browserslist": "^4.28.2",
     "eslint": "^9.15.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "file-saver": "^2.0.5",
-    "playwright": "^1.58.2",
+    "playwright": "^1.59.1",
     "typescript": "^5.9.0",
-    "typescript-eslint": "^8.18.0",
+    "typescript-eslint": "^8.59.0",
     "update-browserslist-db": "^1.2.3",
-    "vite": "^6.3.5",
+    "vite": "^6.4.2",
     "vite-plugin-svgr": "^4.3.0",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.5"
   }
 }
