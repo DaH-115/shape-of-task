@@ -76,4 +76,8 @@ const StatsSection = styled.div`
 
 const AddButtonWrapper = styled.div`
   padding: 1rem 0;
+
+  ${({ theme }) => theme.device.md} {
+    display: none;
+  }
 `;

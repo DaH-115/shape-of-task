@@ -3,8 +3,10 @@ import styled from 'styled-components';
 export const DesktopContainer = styled.div`
   display: none;
   width: 100%;
+  max-width: ${({ theme }) => theme.size.xl};
   height: 100%;
   flex: 1;
+  margin: 0 auto;
   background-color: ${({ theme }) => theme.commonColors.light_gray};
   min-width: 768px;
 
